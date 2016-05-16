@@ -262,11 +262,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               on-tap="_toggleDrawer"
               aria-label="Categories">
           </paper-icon-button>
-          <a class="back-btn" href="/list/[[categoryName]]" tabindex="-1">
+          <a class="back-btn" href$="/list/[[categoryName]]" tabindex="-1">
             <paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>
           </a>
         </div>
-        <div class="logo" title><a href="/" aria-label="SHOP Home">SHOP</a></div>
+        <div class="logo" title><a href$="/" aria-label="SHOP Home">SHOP</a></div>
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="shopping-cart" aria-label$="Shopping cart: [[_getPluralizedQuantity(numItems)]]"></paper-icon-button>
@@ -283,7 +283,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               attr-for-selected="name">
             <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
               <shop-tab name="[[category.name]]">
-                <a href="/list/[[category.name]]">[[category.title]]</a>
+                <a href$="/list/[[category.name]]">[[category.title]]</a>
               </shop-tab>
             </template>
           </shop-tabs>
@@ -297,7 +297,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
         <iron-selector role="navigation" class="drawer-list" selected="[[categoryName]]" attr-for-selected="name">
           <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
-            <a name="[[category.name]]" href="/list/[[category.name]]">[[category.title]]</a>
+            <a name="[[category.name]]" href$="/list/[[category.name]]">[[category.title]]</a>
           </template>
         </iron-selector>
       </app-drawer>
