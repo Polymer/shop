@@ -453,7 +453,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.categoryName = detail.category || '';
         // Announce the page's title
         if (detail.title) {
-          this._announce(detail.title);
+          this._announce('the page has changed to: ' + detail.title);
         }
       },
 
