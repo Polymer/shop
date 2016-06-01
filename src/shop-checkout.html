@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="shop-button.html">
 <link rel="import" href="shop-common-styles.html">
 <link rel="import" href="shop-form-styles.html">
@@ -395,7 +396,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Error message UI -->
         <header state="error">
-          <h1>We couldn&acute;t process your order</h1>
+          <h1>We couldn't process your order</h1>
           <p id="errorMessage">[[response.errorMessage]]</p>
           <shop-button responsive>
             <a href="/checkout">Try again</a>

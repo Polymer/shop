@@ -16,9 +16,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
+<link rel="import" href="shop-pages.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
@@ -171,7 +171,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         z-index: 3;
       }
 
-      iron-pages {
+      shop-pages {
         max-width: 1440px;
         margin: 0 auto;
       }
@@ -290,7 +290,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
     </template>
 
-    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+    <shop-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
       <!-- home view -->
       <shop-home name="home" categories="[[categories]]"></shop-home>
       <!-- list view of items in a category -->
@@ -301,7 +301,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
-    </iron-pages>
+    </shop-pages>
 
     <footer>
       <a href="https://www.polymer-project.org/1.0/toolbox/">Made by Polymer</a>
@@ -326,7 +326,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: {
           type: String,
           reflectToAttribute: true,
-          observer: '_pageChanged'
+          // observer: '_pageChanged'
         },
 
         numItems: {
@@ -357,7 +357,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'clear-cart': '_onClearCart',
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
-        'dom-change': '_domChange'
+        'dom-change': '_domChange',
+        'shop-page-loaded': '_pageLoaded'
       },
 
       created: function() {
@@ -383,31 +384,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.drawerOpened = false;
       },
 
-      _pageChanged: function(page, oldPage) {
-        if (page != null) {
-          // home route is eagerly loaded
-          if (page == 'home') {
-            this._pageLoaded(Boolean(oldPage));
-          // other routes are lazy loaded
-          } else {
-            this.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              function() {
-                this._pageLoaded(Boolean(oldPage));
-              }, null, true);
-          }
-        }
-      },
+      // _pageChanged: function(page, oldPage) {
+      //   if (page != null) {
+      //     // home route is eagerly loaded
+      //     if (page == 'home') {
+      //       this._pageLoaded(Boolean(oldPage));
+      //     // other routes are lazy loaded
+      //     } else {
+      //       this.importHref(
+      //         this.resolveUrl('shop-' + page + '.html'),
+      //         function() {
+      //           this._pageLoaded(Boolean(oldPage));
+      //         }, null, true);
+      //     }
+      //   }
+      // },
 
-      _pageLoaded: function(shouldResetLayout) {
+      _pageLoaded: function(event) {
+        console.log('_pageLoaded')
         this._ensureLazyLoaded();
-        if (shouldResetLayout) {
+        // if (!!event.detail.oldPage) {
           // The size of the header depends on the page (e.g. on some pages the tabs
           // do not appear), so reset the header's layout only when switching pages.
           this.async(function() {
             this.$.header.resetLayout();
           }, 1);
-        }
+        // }
       },
 
       _ensureLazyLoaded: function() {
