@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="shop-icon-button.html">
 <link rel="import" href="shop-icons.html">
 <link rel="import" href="shop-image.html">
 <link rel="import" href="shop-select.html">
@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <template strip-whitespace>
 
-    <style include="shop-select">
+    <style include="shop-select shop-icon-button">
 
       :host {
         @apply(--layout-horizontal);
@@ -87,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 160px;
       }
 
-      .delete-button {
+      .delete-btn {
         width: 34px;
         height: 34px;
         color: var(--app-secondary-color);
@@ -132,7 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           width: auto;
         }
 
-        .delete-button {
+        .delete-btn {
           top: 8px;
         }
       }
@@ -150,7 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin-top: 0;
         }
 
-        .delete-button {
+        .delete-btn {
           top: -6px;
         }
 
@@ -198,11 +198,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="size">Size: <span>[[entry.size]]</span></div>
         <div class="price">[[_formatPrice(entry.item.price)]]</div>
 
-        <!--
-          Use on-click instead of on-tap to prevent the next cart item to be focused
-        -->
-        <paper-icon-button class="delete-button" icon="close" aria-label$="Delete item [[entry.item.title]]"
-            on-click="_removeItem"></paper-icon-button>
+        <a href class="shop-icon-button delete-btn" on-click="_removeItem" aria-label$="Delete item [[entry.item.title]]">
+          <iron-icon icon="close"></iron-icon>
+        </a>
       </div>
     </div>
   </template>
