@@ -10,15 +10,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="shop-button.html">
+<link rel="import" href="shop-icon-button.html">
 
 <dom-module id="shop-cart-modal">
 
   <template>
 
-    <style include="shop-button">
+    <style include="shop-button shop-icon-button">
 
       :host {
         display: block;
@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         padding: 8px 24px;
       }
 
-      #closeBtn {
+      .close-btn {
         position: absolute;
         right: 5px;
         top: 5px;
@@ -100,7 +100,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </shop-button>
     </div>
 
-    <paper-icon-button icon="close" id="closeBtn" aria-label="Close dialog" on-tap="close"></paper-icon-button>
+    <button class="shop-icon-button close-btn" on-click="close" aria-label="Close dialog">
+      <iron-icon icon="close"></iron-icon>
+    </button>
 
   </template>
 

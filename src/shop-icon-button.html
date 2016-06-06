@@ -1,0 +1,88 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="shop-icon-button">
+  <template>
+    <style>
+
+      :host-context(html.focus-by-mouse) .shop-icon-button {
+        outline: none;
+      }
+
+      .shop-icon-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        box-sizing: border-box;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        color: var(--app-primary-color);
+        background: none;
+        border: none;
+      }
+
+      .shop-icon-button iron-icon {
+        width: 100%;
+        height: 100%;
+      }
+
+      .shop-icon-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--app-accent-color);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.2s;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+        will-change: opacity, transform;
+      }
+
+      .shop-icon-button:active::before {
+        opacity: 0.2;
+        -webkit-animation: grow-ripple 0.2s;
+        animation: grow-ripple 0.2s;
+      }
+
+      @-webkit-keyframes grow-ripple {
+        0% { -webkit-transform: scale3d(0, 0, 1) }
+        to { -webkit-transform: scale3d(1, 1, 1) }
+      }
+
+      @keyframes grow-ripple {
+        0% { transform: scale3d(0, 0, 1) }
+        to { transform: scale3d(1, 1, 1) }
+      }
+
+    </style>
+  </template>
+
+  <script>
+
+    // Install global event handlers which toggle a class on <html> that all instances
+    // of shop-icon-button use for toggling the focus ring.
+    document.addEventListener('keydown', function() {
+      document.documentElement.classList.remove('focus-by-mouse');
+    });
+
+    document.addEventListener('mousedown', function() {
+      document.documentElement.classList.add('focus-by-mouse');
+    });
+
+  </script>
+</dom-module>

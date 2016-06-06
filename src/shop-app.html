@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
+<link rel="import" href="shop-icon-button.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
@@ -26,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <template>
 
-    <style>
+    <style include="shop-icon-button">
 
       :host {
         display: block;
@@ -38,7 +39,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         --app-secondary-color: #757575;
         --app-accent-color: #172C50;
         --paper-button-ink-color: var(--app-accent-color);
-        --paper-icon-button-ink-color: var(--app-accent-color);
         --paper-spinner-color: var(--app-accent-color);
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         color: var(--app-primary-color);
@@ -53,10 +53,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: 10px;
           bottom: -10px;
         };
-      }
-
-      paper-icon-button {
-        color: var(--app-primary-color);
       }
 
       .logo {
@@ -74,23 +70,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pointer-events: auto;
       }
 
-      .left-bar-item {
+      .icon-button-container {
+        position: relative;
         width: 40px;
       }
 
       .menu-btn {
         display: none;
-      }
-
-      .cart-btn-container {
-        position: relative;
-        width: 40px;
-      }
-
-      .announcer {
-        position: fixed;
-        height: 0;
-        overflow: hidden;
       }
 
       :host(:not([page=detail])) .back-btn {
@@ -195,6 +181,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-decoration: underline;
       }
 
+      .announcer {
+        position: fixed;
+        height: 0;
+        overflow: hidden;
+      }
+
       /* small screen */
       @media (max-width: 767px) {
         :host {
@@ -202,7 +194,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         .menu-btn {
-          display: block;
+          display: inline-flex;
         }
 
         :host([page=detail]) .menu-btn {
@@ -242,21 +234,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
       <app-toolbar>
-        <div class="left-bar-item">
-          <paper-icon-button
-              class="menu-btn"
-              icon="menu"
-              on-tap="_toggleDrawer"
-              aria-label="Categories">
-          </paper-icon-button>
-          <a class="back-btn" href="/list/[[categoryName]]" tabindex="-1">
-            <paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>
+        <div class="icon-button-container">
+          <button class="shop-icon-button menu-btn" on-click="_toggleDrawer" aria-label="Categories">
+            <iron-icon icon="menu"></iron-icon>
+          </button>
+          <a href="/list/[[categoryName]]" class="shop-icon-button back-btn" aria-label="Go back">
+            <iron-icon icon="arrow-back"></iron-icon>
           </a>
         </div>
         <div class="logo" title><a href="/" aria-label="SHOP Home">SHOP</a></div>
-        <div class="cart-btn-container">
-          <a href="/cart" tabindex="-1">
-            <paper-icon-button icon="shopping-cart" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
+        <div class="icon-button-container">
+          <a href="/cart" class="shop-icon-button" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]">
+            <iron-icon icon="shopping-cart"></iron-icon>
           </a>
           <div class="cart-badge" aria-hidden="true" hidden$="[[!numItems]]">[[numItems]]</div>
         </div>
