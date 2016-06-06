@@ -198,9 +198,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="size">Size: <span>[[entry.size]]</span></div>
         <div class="price">[[_formatPrice(entry.item.price)]]</div>
 
-        <a href class="shop-icon-button delete-btn" on-click="_removeItem" aria-label$="Delete item [[entry.item.title]]">
+        <button class="shop-icon-button delete-btn" on-click="_removeItem" aria-label$="Delete item [[entry.item.title]]">
           <iron-icon icon="close"></iron-icon>
-        </a>
+        </button>
       </div>
     </div>
   </template>
