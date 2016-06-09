@@ -43,7 +43,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <script>
 
-    Polymer({
+    Polymer.ShopImage = Polymer({
 
       is: 'shop-image',
 
@@ -59,15 +59,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         placeholderImg: {
           type: String,
           observer: '_placeholderImgChanged'
-        }
+        },
 
+        inViewport: {
+          type: Boolean
+        }
+      },
+
+      observers: [
+        '_inViewportChanged(src, inViewport)'
+      ],
+
+      attached: function() {
+        Polymer.ShopImage.observe(this);
+      },
+
+      detached: function() {
+        Polymer.ShopImage.unobserve(this);
       },
 
       _srcChanged: function(src) {
         this.$.img.removeAttribute('src');
         this.$.img.style.transition = '';
         this.$.img.style.opacity = 0;
-        if (src) {
+        if (src && !Polymer.ShopImage.isIOSuported()) {
           this.$.img.src = src;
         }
       },
@@ -85,9 +100,51 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _placeholderImgChanged: function(placeholder) {
         this.style.backgroundImage = 'url(\'' + placeholder + '\')';
+      },
+
+
+      _inViewportChanged: function(src, inViewport) {
+        if (src && inViewport) {
+          this.$.img.src = src + '?' + Math.random();
+        }
       }
 
     });
+
+    Polymer.ShopImage.isIOSuported = function() {
+      return window.IntersectionObserver != null;
+    }
+
+    Polymer.ShopImage.computeIntersectionRatio = function(change) {
+      return (change.intersectionRect.width * change.intersectionRect.height) /
+          (change.boundingClientRect.width * change.boundingClientRect.height);
+    };
+
+    Polymer.ShopImage.getObserver = function() {
+      var ctxt = Polymer.ShopImage;
+      if (!ctxt._observer) {
+        ctxt._observer = new IntersectionObserver(function(changes) {
+          changes.forEach(function(change) {
+            var intersectionRatio = change.intersectionRatio != null ?
+                change.intersectionRatio : Polymer.ShopImage.computeIntersectionRatio();
+            change.target.inViewport = intersectionRatio > 0;
+          });
+        });
+      }
+      return ctxt._observer;
+    }
+
+    Polymer.ShopImage.observe = function(image) {
+      if (Polymer.ShopImage.isIOSuported) {
+        Polymer.ShopImage.getObserver().observe(image);
+      }
+    }
+
+    Polymer.ShopImage.unobserve = function(image) {
+      if (Polymer.ShopImage.isIOSuported) {
+        Polymer.ShopImage.getObserver().unobserve(image);
+      }
+    }
 
   </script>
 

@@ -112,7 +112,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._getResource({
           url: '/data/' + category.name + '.json',
           onLoad: function(e) {
-            this.set('category.items', JSON.parse(e.target.responseText));
+            var items = JSON.parse(e.target.responseText);
+
+            items = items.concat(items).concat(items).concat(items).concat(items).concat(items).concat(items);
+
+            this.set('category.items', items);
           },
           onError: function(e) {
             this._setFailure(true);
