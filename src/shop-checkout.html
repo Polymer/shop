@@ -452,7 +452,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /**
          * An array containing the items in the cart.
          */
-        cart: Array,
+        cart: {
+          type: Array,
+          observer: '_cartChanged'
+        },
 
         /**
          * The server's response.
@@ -490,6 +493,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         _hasItems: {
           type: Boolean,
           computed: '_computeHasItem(cart.length)'
+        }
+      },
+
+      _cartChanged: function() {
+        if ('PaymentRequest' in window && this.cart && this.cart.length > 0) {
+          this.fire('buy-cart');
         }
       },
 
