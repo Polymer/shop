@@ -155,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         if (this.opened) {
           this._finishRenderOpened();
-          this.fire('announce', 'Item added to the cart');
+          this.fire('announce', 'Order successful');
         } else {
           this._finishRenderClosed();
           this.backdropElement.style.display = '';
@@ -163,7 +163,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       get _focusableNodes() {
-        return [this.$.viewCartAnchor, this.$.closeBtn];
+        return [this.$.goHomeAnchor, this.$.closeBtn];
       },
 
       refit: Function(),
