@@ -4,6 +4,8 @@ runtime: go
 api_version: go1
 
 handlers:
+# match requests to the static files that are served by
+# the appengine frontend edge cache (like a CDN)
 - url: /bower_components
   static_dir: static/bower_components
   secure: always
@@ -31,6 +33,8 @@ handlers:
   upload: static/manifest.json
   secure: always
 
+# all other requests are handled by the go app which will
+# serve out the index.html page rendered with added metadata 
 - url: /.*
   script: _go_app
   secure: always
