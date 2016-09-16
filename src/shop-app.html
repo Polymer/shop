@@ -291,7 +291,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- Lazy-create the drawer for small screen sizes. -->
     <template is="dom-if" if="[[_shouldRenderDrawer]]">
       <!-- Two-way bind `drawerOpened` since app-drawer can update `opened` itself. -->
-      <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
+      <app-drawer opened="{{drawerOpened}}" swipe-open no-focus-trap on-opened-changed="_updateBlockingElements">
         <iron-selector role="navigation" class="drawer-list" selected="[[categoryName]]" attr-for-selected="name">
           <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
             <a name="[[category.name]]" href="/list/[[category.name]]">[[category.title]]</a>
@@ -472,6 +472,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _onAddCartItem: function(event) {
         if (!this._cartModal) {
           this._cartModal = document.createElement('shop-cart-modal');
+          this._cartModal.addEventListener('opened-changed', this._updateBlockingElements.bind(this));
           Polymer.dom(this.root).appendChild(this._cartModal);
         }
         this.$.cart.addItem(event.detail);
@@ -532,6 +533,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _computePluralizedQuantity: function(quantity) {
         return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
+      },
+
+      _updateBlockingElements: function(event) {
+        var opened = event.detail.value;
+        var element = event.target;
+        if (opened) {
+          document.$blockingElements.push(element);
+        } else {
+          document.$blockingElements.remove(element);
+        }
       }
 
     });

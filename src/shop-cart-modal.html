@@ -114,13 +114,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         Polymer.IronOverlayBehaviorImpl
       ],
 
-      properties: {
-        withBackdrop: {
-          type: Boolean,
-          value: true
-        }
-      },
-
       hostAttributes: {
         role: 'dialog',
         'aria-modal': 'true'
@@ -133,7 +126,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _renderOpened: function() {
         this.restoreFocusOnClose = true;
-        this.backdropElement.style.display = 'none';
         this.classList.add('opened');
       },
 
@@ -157,7 +149,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.fire('announce', 'Item added to the cart');
         } else {
           this._finishRenderClosed();
-          this.backdropElement.style.display = '';
         }
       },
 
