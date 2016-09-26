@@ -77,23 +77,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.cart = [];
       },
 
-      getPrDetails: function() {
-        var items = [];
-
-        if (this.cart) {
-          for (var i = 0; i < this.cart.length; ++i) {
-            var entry = this.cart[i];
-            var itemCost = entry.quantity * entry.item.price;
-            items.push({
-              label: entry.item.title + ' ' + entry.size + ' x' + entry.quantity,
-              amount: {currency: 'USD', value: itemCost.toFixed(2)}
-            });
-          }
-        }
-
-        return items;
-      },
-
       _computeNumItems: function() {
         if (this.cart) {
           return this.cart.reduce(function(total, entry) {

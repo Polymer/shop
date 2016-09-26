@@ -1,0 +1,282 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="shop-payment-request">
+
+  <template>
+      <shop-cart-data
+        id="cart"
+        cart="{{cart}}"
+        num-items="{{numItems}}"
+        total="{{total}}"></shop-cart-data>
+  </template>
+
+  <script>
+
+    Polymer({
+      is: 'shop-payment-request',
+
+      properties: {
+        page: String,
+
+        cart: Array,
+
+        currency: {
+          type: String,
+          value: "USD"
+        },
+
+        supportedMethods: {
+          type: Array,
+          value: function() { return []; }
+        },
+
+        requestPayerPhone: {
+          type: Boolean,
+          value: false
+        },
+
+        requestPayerEmail: {
+          type: Boolean,
+          value: false
+        },
+
+        androidPay: {
+          type: Object,
+          value: function() { return {}; }
+        },
+
+        summaryLabel: {
+          type: String,
+          value: "Total"
+        },
+
+        _paymentTypesSupported: {
+          computed: '_computePaymentTypesSupported(supportedMethods, androidPay)'
+        }
+      },
+
+      ready: function() {
+        this.listen(window, 'buy-cart', '_onBuyCart');
+        this.listen(window, 'buy-item', '_onBuyItem');
+      },
+
+      _onBuyItem: function(event) {
+        var item = event.detail.item;
+        var itemCost = event.detail.quantity * item.price;
+        var itemDetails = [{
+          label: item.title + ' ' + event.detail.size + ' x' + event.detail.quantity,
+          amount: {currency: this.currency, value: itemCost.toFixed(2)}
+        }];
+
+        this._buyItems(itemDetails, itemCost);
+      },
+
+      _onBuyCart: function(event) {
+        if ('PaymentRequest' in window) {
+          var itemDetails = this._computeItemDetails();
+          this._buyItems(itemDetails, this.$.cart.total);
+        } else {
+          this._redirectToCheckout();
+          return;
+        }
+      },
+
+      _buyItems: function(itemDetails, totalCost) {
+        var details = {
+          total: { label: this.summaryLabel, amount:
+            { currency: this.currency, value: totalCost.toFixed(2) }
+          },
+          displayItems: itemDetails
+        };
+
+        // Collect a shipping address, and honor client's other options.
+        var options = {
+          requestShipping: true,
+          requestPayerEmail: this.requestPayerEmail,
+          requestPayerPhone: this.requestPayerPhone
+        };
+
+        try {
+          var request = new PaymentRequest(this._paymentTypesSupported, details, options);
+
+          var that = this;
+
+          // Handle changing shipping options
+          request.addEventListener('shippingoptionchange', function(e) {
+              e.updateWith(new Promise(function(resolve) {
+                  that._updateShippingOptions(details, request.shippingOption, resolve);
+              }));
+          });
+
+          // Handle selecting/changing the shipping address
+          request.addEventListener('shippingaddresschange', function(e) {
+            e.updateWith(new Promise(function(resolve) {
+                that._updateShippingAddress(details, request.shippingAddress, resolve);
+            }));
+          });
+
+          request
+            .show()
+            .then(function(instrumentResponse) {
+              that.fire('process-payment', instrumentResponse);
+            })
+            .catch(function(err) {
+              if (err === 'Request cancelled') {
+                // Do nothing
+              } else if (err.name === 'NotSupportedError') {
+                that._redirectToCheckout();
+              } else {
+                console.error('Error while handling PaymentRequest.show(): ' + err);
+              }
+            });
+        } catch (e) {
+          this._redirectToCheckout();
+          return;
+        }
+      },
+
+      _updateShippingAddress: function(details, addr, resolve) {
+          // If there's no shipping options for the address, it will be rejected on an empty array
+          details.shippingOptions = [];
+
+          var oldShipping;
+          // find previously selected shipping info, if any
+          details.displayItems.forEach( function(item) {
+            if (item.selected === true && item.id) {
+              oldShipping = item;
+            }
+          });
+
+          if (addr.country === 'US') {
+            if (addr.region === 'CA') {
+                // Free standard shipping in CA; default
+               var shippingOption = {
+                   id: 'ca',
+                   label: 'Free shipping in California',
+                   amount: {currency: this.currency, value: '0.00'},
+                   selected: true
+               };
+
+               details.shippingOptions.push(shippingOption);
+               this._updateTotal(details, shippingOption, oldShipping);
+
+               // Express shipping in CA for $5
+               details.shippingOptions.push({
+                   id: 'ca_express',
+                   label: 'Express shipping in California',
+                   amount: {currency: this.currency, value: '5.00'}
+               });
+            } else {
+                // Shipping $10 to the rest of the US
+                var shippingOption = {
+                    id: 'us_standard',
+                    label: 'Standard shipping in the US',
+                    amount: {currency: this.currency, value: '10.00'},
+                    selected: true
+                };
+
+                details.shippingOptions.push(shippingOption);
+                this._updateTotal(details, shippingOption, oldShipping);
+            }
+           }
+          resolve(details);
+      },
+
+      _updateShippingOptions: function(details, shippingOptionId, resolve) {
+          // Find the newly and previously selected shipping options
+          var newShippingOption, oldShippingOption;
+          details.shippingOptions.forEach( function(shippingOption) {
+              if (shippingOption.id === shippingOptionId) {
+                  newShippingOption = shippingOption;
+              } if (shippingOption.selected === true) {
+                  oldShippingOption = shippingOption;
+              }
+          });
+          // Select the new, deselect the old
+          oldShippingOption.selected = false; // Do this first, in case the same one is selected
+          newShippingOption.selected = true;
+          // Update the total cost and line items
+          this._updateTotal(details, newShippingOption, oldShippingOption);
+
+          resolve(details);
+      },
+
+      // Updates the total order cost to include shipping
+      // If shipping has already been added, it must be subtracted and the line item removed
+      _updateTotal: function(details, newShippingOption, oldShippingOption) {
+          var oldShippingCost = 0;
+          if (oldShippingOption) {
+              // Remove from the line items; it should be on the end
+              // TODO: explicitly remove the item by its id?
+              details.displayItems.pop();
+
+              // Deduct the cost of the old shipping
+              oldShippingCost = Number(oldShippingOption.amount.value);
+          }
+
+          var shippingCost = Number(newShippingOption.amount.value);
+          var currentTotal = Number(details.total.amount.value);
+          details.total.amount.value = (currentTotal + shippingCost - oldShippingCost).toFixed(2);
+          // Place the shipping price at the end of the line items
+          details.displayItems.splice(details.displayItems.length, 0, newShippingOption);
+      },
+
+      _computePaymentTypesSupported: function(supportedMethods, androidPay) {
+        var paymentTypes = [];
+
+        if (supportedMethods.length > 0) {
+          paymentTypes.push({
+            supportedMethods: supportedMethods
+          });
+        }
+
+        if (androidPay && androidPay != {}) {
+          paymentTypes.push({
+            supportedMethods: ['https://android.com/pay'],
+            data: androidPay
+          });
+        }
+
+        return paymentTypes;
+      },
+
+      _computeItemDetails: function() {
+        var items = [];
+
+        if (this.cart) {
+          for (var i = 0; i < this.cart.length; ++i) {
+            var entry = this.cart[i];
+            var itemCost = entry.quantity * entry.item.price;
+            items.push({
+              label: entry.item.title + ' ' + entry.size + ' x' + entry.quantity,
+              amount: {currency: this.currency, value: itemCost.toFixed(2)}
+            });
+          }
+        }
+
+        return items;
+      },
+
+      _redirectToCheckout: function() {
+        // prevent reload loop if we're already on /checkout.
+        if (this.page !== 'checkout') {
+          location.href = '/checkout';
+          return;
+        }
+      }
+
+    });
+
+  </script>
+
+</dom-module>
