@@ -146,50 +146,55 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _updateShippingAddress: function(details, addr, resolve) {
-          // If there's no shipping options for the address, it will be rejected on an empty array
-          details.shippingOptions = [];
+        // If there's no shipping options for the address, it will be rejected on an empty array
+        details.shippingOptions = [];
 
-          var oldShipping;
-          // find previously selected shipping info, if any
-          details.displayItems.forEach( function(item) {
-            if (item.selected === true && item.id) {
-              oldShipping = item;
-            }
+        var oldShipping;
+        // find previously selected shipping info, if any
+        details.displayItems.forEach( function(item) {
+          if (item.selected === true && item.id) {
+            oldShipping = item;
+          }
+        });
+
+        if (addr.country === 'US' && addr.region === 'CA') {
+          // Free standard shipping in CA; default
+          var shippingOption = {
+              id: 'ca',
+              label: 'Free shipping in California',
+              amount: {currency: this.currency, value: '0.00'},
+              selected: true
+          };
+
+          details.shippingOptions.push(shippingOption);
+          this._updateTotal(details, shippingOption, oldShipping);
+
+          // Express shipping in CA for $5
+          details.shippingOptions.push({
+              id: 'ca_express',
+              label: 'Express shipping in California',
+              amount: {currency: this.currency, value: '5.00'}
           });
+        } else {
+          // Standard shipping to anywhere for $10
+          var shippingOption = {
+              id: 'standard',
+              label: 'Standard shipping',
+              amount: {currency: this.currency, value: '10.00'},
+              selected: true
+          };
 
-          if (addr.country === 'US') {
-            if (addr.region === 'CA') {
-                // Free standard shipping in CA; default
-               var shippingOption = {
-                   id: 'ca',
-                   label: 'Free shipping in California',
-                   amount: {currency: this.currency, value: '0.00'},
-                   selected: true
-               };
+          details.shippingOptions.push(shippingOption);
+          this._updateTotal(details, shippingOption, oldShipping);
 
-               details.shippingOptions.push(shippingOption);
-               this._updateTotal(details, shippingOption, oldShipping);
-
-               // Express shipping in CA for $5
-               details.shippingOptions.push({
-                   id: 'ca_express',
-                   label: 'Express shipping in California',
-                   amount: {currency: this.currency, value: '5.00'}
-               });
-            } else {
-                // Shipping $10 to the rest of the US
-                var shippingOption = {
-                    id: 'us_standard',
-                    label: 'Standard shipping in the US',
-                    amount: {currency: this.currency, value: '10.00'},
-                    selected: true
-                };
-
-                details.shippingOptions.push(shippingOption);
-                this._updateTotal(details, shippingOption, oldShipping);
-            }
-           }
-          resolve(details);
+          // Express shipping worldwide for $20
+          details.shippingOptions.push({
+              id: 'global_express',
+              label: 'Express shipping',
+              amount: {currency: this.currency, value: '20.00'}
+          });
+        }
+        resolve(details);
       },
 
       _updateShippingOptions: function(details, shippingOptionId, resolve) {
