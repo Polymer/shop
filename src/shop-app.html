@@ -257,6 +257,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <shop-payment-request
         page="[[page]]"
         cart="[[cart]]"
+        total="[[total]]"
         currency="USD"
         supported-methods='["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]'
         android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'>
@@ -515,7 +516,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // See the PaymentRequest integration guide for a typical flow:
         // https://developers.google.com/web/fundamentals/primers/payment-request/
 
-        var instrumentResponse = event.detail;
+        var instrumentResponse = event.detail.instrument;
+        var cartBuy = event.detail.cartBuy;
         var that = this;
         window.setTimeout(function() {
           instrumentResponse.complete('success')
@@ -526,7 +528,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               }
               that._orderSuccessModal.open();
               that._announce('Order processed successfully!');
-              that.fire('clear-cart');
+
+              if (cartBuy) {
+                that.fire('clear-cart');
+              }
             });
         }, 2000);
       },

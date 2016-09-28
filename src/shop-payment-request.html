@@ -11,15 +11,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <dom-module id="shop-payment-request">
-
-  <template>
-      <shop-cart-data
-        id="cart"
-        cart="{{cart}}"
-        num-items="{{numItems}}"
-        total="{{total}}"></shop-cart-data>
-  </template>
-
   <script>
 
     Polymer({
@@ -29,6 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         page: String,
 
         cart: Array,
+
+        total: Number,
 
         currency: {
           type: String,
@@ -78,20 +71,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           amount: {currency: this.currency, value: itemCost.toFixed(2)}
         }];
 
-        this._buyItems(itemDetails, itemCost);
+        this._buyItems(itemDetails, itemCost, false);
       },
 
       _onBuyCart: function(event) {
         if ('PaymentRequest' in window) {
           var itemDetails = this._computeItemDetails();
-          this._buyItems(itemDetails, this.$.cart.total);
+          this._buyItems(itemDetails, this.total, true);
         } else {
           this._redirectToCheckout();
           return;
         }
       },
 
-      _buyItems: function(itemDetails, totalCost) {
+      _buyItems: function(itemDetails, totalCost, cartBuy) {
         var details = {
           total: { label: this.summaryLabel, amount:
             { currency: this.currency, value: totalCost.toFixed(2) }
@@ -128,7 +121,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           request
             .show()
             .then(function(instrumentResponse) {
-              that.fire('process-payment', instrumentResponse);
+              that.fire('process-payment', {
+                'instrument': instrumentResponse,
+                'cartBuy': cartBuy
+              });
             })
             .catch(function(err) {
               if (err === 'Request cancelled') {
