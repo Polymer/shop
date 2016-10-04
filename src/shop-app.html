@@ -18,16 +18,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/lazy-imports/lazy-imports.html">
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
 <dom-module id="shop-app">
 
+  <link rel="lazy-import" href="shop-list.html" group="list">
+  <link rel="lazy-import" href="shop-detail.html" group="detail">
+  <link rel="lazy-import" href="shop-cart.html" group="cart">
+  <link rel="lazy-import" href="shop-checkout.html" group="checkout">
+  <link rel="lazy-import" href="lazy-resources.html" group="lazy">
   <template>
-
     <style>
-
       :host {
         display: block;
         position: relative;
@@ -371,6 +375,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'dom-change': '_domChange'
       },
 
+      behaviors: [LazyImportsBehavior],
+
       created: function() {
         window.performance && performance.mark && performance.mark('shop-app.created');
         // Custom elements polyfill safe way to indicate an element has been upgraded.
@@ -401,11 +407,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this._pageLoaded(Boolean(oldPage));
           // other routes are lazy loaded
           } else {
-            this.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              function() {
-                this._pageLoaded(Boolean(oldPage));
-              }, null, true);
+            this.activateImport(page).then(function(){
+              this._pageLoaded(Boolean(oldPage));
+            });
           }
         }
       },
@@ -425,7 +429,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // load lazy resources after render and set `loadComplete` when done.
         if (!this.loadComplete) {
           Polymer.RenderStatus.afterNextRender(this, function() {
-            this.importHref(this.resolveUrl('lazy-resources.html'), function() {
+            this.activateImport('lazy').then(function() {
               // Register service worker if supported.
               if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/service-worker.js');
