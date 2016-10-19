@@ -284,7 +284,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-toolbar>
 
       <!-- Lazy-create the tabs for larger screen sizes. -->
-      <div id="tabContainer" primary$="[[_shouldShowTabs]]" hidden$="[[!_shouldShowTabs]]">
+      <div id="tabContainer" sticky$="[[_shouldShowTabs]]" hidden$="[[!_shouldShowTabs]]">
         <template is="dom-if" if="[[_shouldRenderTabs]]">
           <shop-tabs
               selected="[[categoryName]]"
@@ -311,7 +311,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
     </template>
 
-    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible">
+    <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="404">
       <!-- home view -->
       <shop-home name="home" categories="[[categories]]"></shop-home>
       <!-- list view of items in a category -->
@@ -322,6 +322,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
+
+      <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
 
     <footer>
@@ -387,7 +389,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange',
-        'redirect-to': '_onRedirectTo'
+        'redirect-to': '_onRedirectTo',
+        'show-invalid-url-warning': '_onFallbackSelectionTriggered'
       },
 
       created: function() {
@@ -405,10 +408,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _routePageChanged: function(page) {
+        if (this.page === 'list') {
+          this._listScrollTop = window.pageYOffset;
+        }
+
         this.page = page || 'home';
-        // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
-        // with `behavior: 'silent'` to disable header scroll effects during the scroll.
-        Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
+
         // Close the drawer - in case the *route* change came from a link in the drawer.
         this.drawerOpened = false;
       },
@@ -420,11 +425,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this._pageLoaded(Boolean(oldPage));
           // other routes are lazy loaded
           } else {
+            // When a load failed, it triggered a 404 which means we need to
+            // eagerly load the 404 page definition
+            var cb = this._pageLoaded.bind(this, Boolean(oldPage));
             this.importHref(
               this.resolveUrl('shop-' + page + '.html'),
-              function() {
-                this._pageLoaded(Boolean(oldPage));
-              }, null, true);
+              cb, cb, true);
           }
         }
       },
@@ -480,7 +486,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // Response by a11y announcing the section and syncronizing the category.
       _onChangeSection: function(event) {
         var detail = event.detail;
+
+        // Scroll to the top of the page when navigating to a non-list page. For list view,
+        // scroll to the last saved position only if the category has not changed.
+        var scrollTop = 0;
+        if (this.page === 'list' && this.categoryName === detail.category) {
+          scrollTop = this._listScrollTop;
+        }
+        // Use `Polymer.AppLayout.scroll` with `behavior: 'silent'` to disable header scroll
+        // effects during the scroll.
+        Polymer.AppLayout.scroll({ top: scrollTop, behavior: 'silent' });
+
         this.categoryName = detail.category || '';
+
         // Announce the page's title
         if (detail.title) {
           document.title = detail.title + ' - SHOP';
@@ -604,6 +622,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             performance.mark(target.domHost.is + '.domChange');
           }
         }
+      },
+
+      _onFallbackSelectionTriggered: function() {
+        this.page = '404';
       },
 
       _computeShouldShowTabs: function(page, smallScreen) {
