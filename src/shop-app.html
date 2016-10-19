@@ -19,7 +19,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
-<link rel="import" href="shop-payment-request.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
@@ -255,11 +254,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       shop-payment-request provides the logic and hooks into the PaymentRequest API.
     -->
     <shop-payment-request
+        on-process-payment="_onProcessPayment"
         page="[[page]]"
         cart="[[cart]]"
         total="[[total]]"
         currency="USD"
-        supported-methods='["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]'
+        supported-methods='["visa", "mastercard"]'
         android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'>
     </shop-payment-request>
 
@@ -379,7 +379,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'add-cart-item': '_onAddCartItem',
         'set-cart-item': '_onSetCartItem',
         'clear-cart': '_onClearCart',
-        'process-payment': '_onProcessPayment',
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange'
