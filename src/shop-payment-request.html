@@ -17,15 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'shop-payment-request',
 
       properties: {
-        page: String,
-
-        cart: Array,
-
-        total: Number,
-
         currency: {
           type: String,
-          value: "USD"
+          value: 'USD'
         },
 
         supportedMethods: {
@@ -58,33 +52,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
 
-      ready: function() {
-        this.listen(window, 'buy-cart', '_onBuyCart');
-        this.listen(window, 'buy-item', '_onBuyItem');
-      },
-
-      _onBuyItem: function(event) {
-        var item = event.detail.item;
-        var itemCost = event.detail.quantity * item.price;
-        var itemDetails = [{
-          label: item.title + ' ' + event.detail.size + ' x' + event.detail.quantity,
-          amount: {currency: this.currency, value: itemCost.toFixed(2)}
-        }];
-
-        this._buyItems(itemDetails, itemCost, false);
-      },
-
-      _onBuyCart: function(event) {
-        if ('PaymentRequest' in window) {
-          var itemDetails = this._computeItemDetails();
-          this._buyItems(itemDetails, this.total, true);
-        } else {
+      request: function(itemDetails, totalCost, currency, clearCartOnSuccess) {
+        if (!'PaymentRequest' in window) {
           this._redirectToCheckout();
-          return;
         }
-      },
 
-      _buyItems: function(itemDetails, totalCost, cartBuy) {
+        this.currency = currency;
+
         var details = {
           total: { label: this.summaryLabel, amount:
             { currency: this.currency, value: totalCost.toFixed(2) }
@@ -123,20 +97,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             .then(function(instrumentResponse) {
               that.fire('process-payment', {
                 'instrument': instrumentResponse,
-                'cartBuy': cartBuy
+                'cartBuy': clearCartOnSuccess
               });
             })
             .catch(function(err) {
               if (err === 'Request cancelled') {
-                // Do nothing
+                that.fire('error', {error_code: 0, message: err});
+              } else if (err.name == 'NotSupportedError') {
+                that.fire('error', {error_code: 1, message: err.message});
+                that._redirectToCheckout();
               } else {
-                console.log('Error while handling PaymentRequest.show(): ' + err);
+                that.fire('error', {error_code: 2, message: 'Unknown Error calling PaymentRequest'});
                 that._redirectToCheckout();
               }
             });
         } catch (e) {
           this._redirectToCheckout();
-          return;
         }
       },
 
@@ -268,11 +244,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _redirectToCheckout: function() {
-        // prevent reload loop if we're already on /checkout.
-        if (this.page !== 'checkout') {
-          location.href = '/checkout';
-          return;
-        }
+        this.fire('redirect-to', '/checkout');
       }
 
     });

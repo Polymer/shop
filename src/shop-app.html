@@ -226,7 +226,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!--
       app-location and app-route elements provide the state of the URL for the app.
     -->
-    <app-location route="{{route}}"></app-location>
+    <app-location id="location" route="{{route}}"></app-location>
     <app-route
         route="{{route}}"
         pattern="/:page"
@@ -254,11 +254,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       shop-payment-request provides the logic and hooks into the PaymentRequest API.
     -->
     <shop-payment-request
+        id="payment"
         on-process-payment="_onProcessPayment"
-        page="[[page]]"
-        cart="[[cart]]"
-        total="[[total]]"
-        currency="USD"
+        on-error="_onPaymentError"
         supported-methods='["visa", "mastercard"]'
         android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'>
     </shop-payment-request>
@@ -358,6 +356,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 0
         },
 
+        currency: {
+          type: String,
+          value: 'USD',
+        },
+
         _shouldShowTabs: {
           computed: '_computeShouldShowTabs(page, smallScreen)'
         },
@@ -379,9 +382,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'add-cart-item': '_onAddCartItem',
         'set-cart-item': '_onSetCartItem',
         'clear-cart': '_onClearCart',
+        'buy-item': '_onBuyItem',
+        'buy-cart': '_onBuyCart',
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
-        'dom-change': '_domChange'
+        'dom-change': '_domChange',
+        'redirect-to': '_onRedirectTo'
       },
 
       created: function() {
@@ -507,6 +513,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._announce('Cart cleared');
       },
 
+      _onBuyItem: function(event) {
+        var item = event.detail.item;
+        var itemCost = event.detail.quantity * item.price;
+        var itemDetails = [{
+          label: item.title + ' ' + event.detail.size + ' x' + event.detail.quantity,
+          amount: {currency: this.currency, value: itemCost.toFixed(2)}
+        }];
+
+        this.$.payment.request(itemDetails, itemCost, this.currency, false);
+      },
+
+      _onBuyCart: function(event) {
+        if ('PaymentRequest' in window && this.cart && this.numItems > 0) {
+          var itemDetails = [];
+
+          for (var i = 0; i < this.cart.length; ++i) {
+            var entry = this.cart[i];
+            var itemCost = entry.quantity * entry.item.price;
+            itemDetails.push({
+              label: entry.item.title + ' ' + entry.size + ' x' + entry.quantity,
+              amount: {currency: this.currency, value: itemCost.toFixed(2)}
+            });
+          }
+
+          this.$.payment.request(itemDetails, this.total, this.currency, true);
+        } else {
+          this.fire('redirect-to', '/checkout');
+        }
+      },
+
       _onProcessPayment: function(event) {
         // This is normally where you'd send instrumentResponse to your backend
         // or payment processor. For this demo we don't actually do that,
@@ -533,6 +569,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               }
             });
         }, 2000);
+      },
+
+      _onPaymentError: function(event) {
+        var err = event.detail;
+
+        console.log("Got error calling PR: " + err.message);
+      },
+
+      _onRedirectTo: function(event) {
+        var destination = event.detail;
+        this.$.location.set('route.path', destination);
       },
 
       // Elements in the app can notify a change to be a11y announced.

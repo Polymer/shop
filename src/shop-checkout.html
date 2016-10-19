@@ -497,9 +497,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _cartChanged: function() {
-        if (this.cart && this.cart.length > 0) {
-          this.fire('buy-cart');
-        }
+        this.fire('buy-cart');
       },
 
       _submit: function(e) {
