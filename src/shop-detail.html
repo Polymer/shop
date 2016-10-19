@@ -23,11 +23,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <style include="shop-common-styles shop-button shop-select">
 
-      shop-button#buyNow > * {
+      #buyNow > button {
         width: 100%;
       }
 
-      #buyNow:not([visible]) {
+      [hidden] {
         display: none;
       }
 
@@ -217,7 +217,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <shop-button responsive id="addToCart" half-size$="[[_hasPaymentRequest()]]">
             <button on-tap="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
           </shop-button>
-          <shop-button responsive id="buyNow" visible$="[[_hasPaymentRequest()]]">
+          <shop-button responsive id="buyNow" hidden$="[[!_hasPaymentRequest()]]">
             <button on-tap="_buyNow" aria-label="Buy this item now">Buy Now</button>
           </shop-button>
         </div>
