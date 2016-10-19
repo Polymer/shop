@@ -30,7 +30,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         supportedMethods: {
           type: Array,
-          value: function() { return []; }
+          value: function() { return ["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]; }
         },
 
         requestPayerPhone: {
@@ -129,10 +129,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             .catch(function(err) {
               if (err === 'Request cancelled') {
                 // Do nothing
-              } else if (err.name === 'NotSupportedError') {
-                that._redirectToCheckout();
               } else {
-                console.error('Error while handling PaymentRequest.show(): ' + err);
+                console.log('Error while handling PaymentRequest.show(): ' + err);
+                that._redirectToCheckout();
               }
             });
         } catch (e) {
