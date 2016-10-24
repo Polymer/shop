@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       setProfile: function(profile) {
-        console.log('Set profile', profile);
+        // Set profile
         this.profile = {
           name:     profile.name,
           id:       profile.id,
@@ -64,7 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _initializeProfile: function() {
-        console.log("Init profile");
+        // Init profile
         this.profile = {
           name:     '',
           id:       '',
@@ -86,8 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               ]
             },
             unmediated: unmediated
-          })
-          .then(function (cred) {
+          }).then(function (cred) {
             // Ensure they're not empty
             if (!cred) {
               return Promise.resolve();
@@ -109,6 +108,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             that._initializeProfile();
             return Promise.reject();
           });
+        } else {
+          return Promise.resolve();
         }
       },
 
@@ -124,7 +125,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               id:       email,
               password: password
             });
-            console.log('Credential stored');
+            // Credential stored
             return navigator.credentials.store(cred);
          }
        });
@@ -142,7 +143,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               id:       email,
               password: password
             });
-            console.log('Credential stored');
+            // Credential stored
             return navigator.credentials.store(cred);
           }
         });
@@ -170,8 +171,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           if (profile) {
             that.setProfile(profile);
             if (navigator.credentials) {
-              console.log('Signed in with Google Account');
-
+              // Signed in with Google Account
               var cred = new FederatedCredential({
                 id:       profile.email,
                 name:     profile.name,
@@ -187,8 +187,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _loginWithServer: function(type, cred) {
         var opt, path;
-        console.log('Attempting sign in with Server');
-
+        // Attempting sign in with Server
         switch (type) {
           case GOOGLE:
             path = '/auth/google';
@@ -218,15 +217,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             credentials: cred
           }
         }
-        console.log(cred);
 
         return fetch(path, opt)
         .then(function(res) {
           if (res.status === 200) {
-            console.log('Server authentication succeeded');
+            // Server authentication succeeded
             return res.json();
           } else {
-            console.log('Server authentication failed');
+            // Server authentication failed
             return Promise.reject('Authentication failed');
           }
         });

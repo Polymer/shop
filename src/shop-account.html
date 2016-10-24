@@ -244,7 +244,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       ready: function() {
-        this.listen(window, 'account-ready', '_accountReady');
+        if (this.$.account.byKey('account')) {
+          this.accountData = this.$.account.byKey('account');
+        } else {
+          this.listen(window, 'account-ready', '_accountReady');
+        }
       },
 
       _accountReady: function() {
@@ -283,6 +287,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             path: '/home'
           });
         }, function(err) {
+          console.error(err);
+          that._setWaiting(false);
           that.fire('show-snackbar', {
             text: 'Sign-In failed'
           });
@@ -310,10 +316,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             path: '/home'
           });
         }).catch(function(err) {
+          that._setWaiting(false);
           that.fire('show-snackbar', {
             text: 'Sign-Up failed'
           });
-          that._setWaiting(false);
         });
       },
 

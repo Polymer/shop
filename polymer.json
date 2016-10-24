@@ -17,6 +17,7 @@
   ],
   "includeDependencies": [
     "manifest.json",
+    "bower_components/fetch/fetch.js",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
 }
