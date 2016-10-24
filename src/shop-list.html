@@ -178,7 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.debounce('change-section', function() {
               // Notify the category and the page's title
               this.fire('change-section', {
-                category: category.name,
+                selectedTab: category.name,
                 title: category.title
               });
             });

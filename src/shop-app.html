@@ -259,7 +259,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               on-click="_toggleDrawer"
               aria-label="Categories">
           </paper-icon-button>
-          <a class="back-btn" href="/list/[[categoryName]]" tabindex="-1">
+          <a class="back-btn" href="/list/[[selectedTab]]" tabindex="-1">
             <paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>
           </a>
         </div>
@@ -276,13 +276,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div id="tabContainer" sticky$="[[_shouldShowTabs]]" hidden$="[[!_shouldShowTabs]]">
         <template is="dom-if" if="[[_shouldRenderTabs]]">
           <shop-tabs
-              selected="[[categoryName]]"
+              selected="[[selectedTab]]"
               attr-for-selected="name">
             <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
               <shop-tab name="[[category.name]]">
                 <a href="/list/[[category.name]]">[[category.title]]</a>
               </shop-tab>
             </template>
+            <shop-tab name="about">
+              <a href="/about">About Shop</a>
+            </shop-tab>
           </shop-tabs>
         </template>
       </div>
@@ -292,10 +295,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <template is="dom-if" if="[[_shouldRenderDrawer]]">
       <!-- Two-way bind `drawerOpened` since app-drawer can update `opened` itself. -->
       <app-drawer opened="{{drawerOpened}}" swipe-open tabindex="0">
-        <iron-selector role="navigation" class="drawer-list" selected="[[categoryName]]" attr-for-selected="name">
+        <iron-selector role="navigation" class="drawer-list" selected="[[selectedTab]]" attr-for-selected="name">
           <template is="dom-repeat" items="[[categories]]" as="category" initial-count="4">
             <a name="[[category.name]]" href="/list/[[category.name]]">[[category.title]]</a>
           </template>
+          <a name="about" href="/about">About Shop</a>
         </iron-selector>
       </app-drawer>
     </template>
@@ -311,7 +315,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
-
+      <!-- about view -->
+      <shop-about name="about"></shop-about>
+      <!-- fallback view -->
       <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
 
@@ -471,14 +477,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Scroll to the top of the page when navigating to a non-list page. For list view,
         // scroll to the last saved position only if the category has not changed.
         var scrollTop = 0;
-        if (this.page === 'list' && this.categoryName === detail.category) {
+        if (this.page === 'list' && this.selectedTab === detail.selectedTab) {
           scrollTop = this._listScrollTop;
         }
         // Use `Polymer.AppLayout.scroll` with `behavior: 'silent'` to disable header scroll
         // effects during the scroll.
         Polymer.AppLayout.scroll({ top: scrollTop, behavior: 'silent' });
 
-        this.categoryName = detail.category || '';
+        this.selectedTab = detail.selectedTab || '';
 
         // Announce the page's title
         if (detail.title) {
@@ -541,7 +547,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _computeShouldShowTabs: function(page, smallScreen) {
-        return (page === 'home' || page === 'list' || page === 'detail') && !smallScreen;
+        return (['home', 'list', 'detail', 'about'].indexOf(page) !== -1) && !smallScreen;
       },
 
       _computeShouldRenderTabs: function(_shouldShowTabs, loadComplete) {
