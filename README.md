@@ -9,36 +9,34 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm install -g polymer-cli
 
+Install [Google Cloud SDK](https://cloud.google.com/sdk/) to use App Engine.
+
+Create a project in [Google API Console](https://console.developers.google.com/) following [these steps](https://developers.google.com/identity/sign-in/web/devconsole-project).
+Once it's done:
+* Download `client_secret_****.json`, rename it to `client_secrets.json`
+* Place `client_secrets.json` at root of this project
 
 ##### Setup
     # Using CLI
     mkdir shop
     cd shop
     polymer init shop
-    
+
     # Or cloning direct from GitHub
     git clone https://github.com/Polymer/shop.git
     cd shop
+
+    # Build
     bower install
+    git submodule init
+    git submodule update
+    pip install -t lib -r requirements.txt
+    polymer build
 
 ### Start the development server
 
-    polymer serve
-
-### Run web-component-tester tests
-
-    polymer test
+    dev_appserver.py .
 
 ### Build
 
     polymer build
-
-### Test the build
-
-This command serves the minified version of the app in an unbundled state, as it would be served by a push-compatible server:
-
-    polymer serve build/unbundled
-    
-This command serves the minified version of the app generated using fragment bundling:
-
-    polymer serve build/bundled

@@ -244,7 +244,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _redirectToCheckout: function() {
-        this.fire('redirect-to', '/checkout');
+        this.fire('route-change', {
+            path: '/checkout'
+          });
       }
 
     });

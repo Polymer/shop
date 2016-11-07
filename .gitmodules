@@ -1,0 +1,3 @@
+[submodule "lib/bcrypt"]
+	path = lib/bcrypt
+	url = https://github.com/erlichmen/py-bcrypt

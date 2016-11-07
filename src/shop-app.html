@@ -16,6 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-meta/iron-meta.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="shop-category-data.html">
@@ -205,6 +206,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         text-transform: uppercase;
       }
 
+      .account-btn-container paper-icon-button {
+        clip-path: circle(11px at center);
+      }
+
       /* small screen */
       @media (max-width: 767px) {
         :host {
@@ -234,6 +239,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
+    <iron-meta id="meta" type="account"></iron-meta>
 
     <!--
       shop-category-data provides the list of categories.
@@ -249,6 +255,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cart="{{cart}}"
         num-items="{{numItems}}"
         total="{{total}}"></shop-cart-data>
+
+    <!--
+      shop-account-data maintains the state of the user's account (in localstorage). Does not,
+      and should not, store password.
+    -->
+    <shop-account-data
+        id="account"
+        profile="{{profile}}"></shop-account-data>
 
     <!--
       shop-payment-request provides the logic and hooks into the PaymentRequest API.
@@ -275,6 +289,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </a>
         </div>
         <div class="logo" main-title><a href="/" aria-label="SHOP Home">SHOP</a></div>
+        <div class="account-btn-container">
+          <a href="/account" tabindex="-1">
+            <paper-icon-button
+              src="[[profile.iconURL]]"
+              icon="[[_computeProfileIcon(profile)]]"
+              aria-label="Account"
+              on-click="_onLogin"></paper-icon-button>
+          </a>
+        </div>
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="shopping-cart" aria-label$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
@@ -322,6 +345,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
+      <!-- account view -->
+      <shop-account name="account" profile="[[profile]]" route="[[subroute]]" prefilled-email="[[userEmail]]"></shop-account>
 
       <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
@@ -353,6 +378,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           observer: '_pageChanged'
         },
 
+        userEmail: {
+          type: String,
+          value: ''
+        },
+
         numItems: {
           type: Number,
           value: 0
@@ -373,6 +403,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         _shouldRenderDrawer: {
           computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
+        },
+
+        _accountIcon: {
+          computed: '_computeProfileIcon()'
         }
       },
 
@@ -389,8 +423,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         'change-section': '_onChangeSection',
         'announce': '_onAnnounce',
         'dom-change': '_domChange',
-        'redirect-to': '_onRedirectTo',
-        'show-invalid-url-warning': '_onFallbackSelectionTriggered'
+        'show-invalid-url-warning': '_onFallbackSelectionTriggered',
+        'show-snackbar': '_showSnackbar',
+        'logout': '_onLogout',
+        'route-change': '_onRouteChange'
       },
 
       created: function() {
@@ -400,10 +436,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       ready: function() {
+        this.payment = this.$.paymentRequest;
+        this.userEmail = '';
+
         // listen for online/offline
         Polymer.RenderStatus.afterNextRender(this, function() {
           this.listen(window, 'online', '_notifyNetworkStatus');
           this.listen(window, 'offline', '_notifyNetworkStatus');
+          this.listen(window, 'account-ready', '_autoLogin');
         });
       },
 
@@ -413,6 +453,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         this.page = page || 'home';
+
+        // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
+        // with `behavior: 'silent'` to disable header scroll effects during the scroll.
+        Polymer.AppLayout.scroll({ top: 0, behavior: 'silent' });
 
         // Close the drawer - in case the *route* change came from a link in the drawer.
         this.drawerOpened = false;
@@ -478,6 +522,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
 
+      _showSnackbar: function(e) {
+        if (!this._networkSnackbar) {
+          this._networkSnackbar = document.createElement('shop-snackbar');
+          Polymer.dom(this.root).appendChild(this._networkSnackbar);
+        }
+        Polymer.dom(this._networkSnackbar).innerHTML = e.detail.text;
+        this._networkSnackbar.open();
+      },
+
       _toggleDrawer: function() {
         this.drawerOpened = !this.drawerOpened;
       },
@@ -530,6 +583,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.cart.clearCart();
         this._announce('Cart cleared');
       },
+
 
       _onBuyItem: function(event) {
         var item = event.detail.item;
@@ -595,9 +649,58 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         console.log("Got error calling PR: " + err.message);
       },
 
-      _onRedirectTo: function(event) {
-        var destination = event.detail;
-        this.$.location.set('route.path', destination);
+      _autoLogin: function() {
+        var that = this;
+        this.accountData = this.$.meta.byKey('account');
+
+        // If already signed in, no need to auto sign-in.
+        if (this.accountData.isSignedIn()) return;
+
+        this.accountData.autoSignIn(true)
+        .then(function(profile) {
+          if (profile) {
+            that.fire('show-snackbar', {
+              text: 'You are signed in!'
+            });
+          } else {
+            console.log('No credentials found');
+          }
+        }, function(err) {
+          console.log('auto sign-in did not happen');
+        });
+      },
+
+      _onLogin: function(event) {
+        var that = this;
+        event.preventDefault();
+
+        if (this.accountData.isSignedIn()) {
+          that.set('route.path', '/account');
+          return;
+        }
+
+        this.accountData.autoSignIn(false)
+        .then(function(profile) {
+          if (profile) {
+            that.fire('show-snackbar', {
+              text: 'You are signed in!'
+            });
+          } else {
+            that.set('route.path', '/account');
+          }
+        }, function(err) {
+          that.fire('show-snackbar', {
+            text: 'Sign-In failed'
+          });
+          that.set('route.path', '/account');
+        });
+      },
+
+      _onLogout: function(event) {
+        this.accountData.logout();
+        this.fire('show-snackbar', {
+          text: 'You are signed out.'
+        });
       },
 
       // Elements in the app can notify a change to be a11y announced.
@@ -605,11 +708,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._announce(e.detail);
       },
 
+      _onRouteChange: function(e) {
+        if (e.detail.path) {
+          this.set('route.path', e.detail.path);
+        }
+      },
+
       // A11y announce the given message.
       _announce: function(message) {
+        var that = this;
         this._a11yLabel = '';
         this.debounce('_a11yAnnouncer', function() {
-          this._a11yLabel = message;
+          that._a11yLabel = message;
         }, 100);
       },
 
@@ -642,6 +752,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _computePluralizedQuantity: function(quantity) {
         return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
+      },
+
+      _computeProfileIcon: function(profile) {
+        if (profile && profile.id) {
+          return profile.iconURL ? '' : 'face';
+        } else {
+          return 'account-circle';
+        }
       }
 
     });
