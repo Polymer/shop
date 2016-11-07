@@ -17,20 +17,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'shop-payment-request',
 
       properties: {
-        page: String,
-
-        cart: Array,
-
-        total: Number,
-
         currency: {
           type: String,
-          value: "USD"
+          value: 'USD'
         },
 
         supportedMethods: {
           type: Array,
-          value: function() { return []; }
+          value: function() { return ["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]; }
         },
 
         requestPayerPhone: {
@@ -58,7 +52,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       },
 
-      buyItems: function(itemDetails, totalCost) {
+      request: function(itemDetails, totalCost, currency, clearCartOnSuccess) {
+        if (!'PaymentRequest' in window) {
+          this._redirectToCheckout();
+        }
+
+        this.currency = currency;
+
         var details = {
           total: { label: this.summaryLabel, amount:
             { currency: this.currency, value: totalCost.toFixed(2) }
@@ -73,25 +73,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           requestPayerPhone: this.requestPayerPhone
         };
 
-        var request = new PaymentRequest(this._paymentTypesSupported, details, options);
+        try {
+          var request = new PaymentRequest(this._paymentTypesSupported, details, options);
 
-        var that = this;
+          var that = this;
 
-        // Handle changing shipping options
-        request.addEventListener('shippingoptionchange', function(e) {
+          // Handle changing shipping options
+          request.addEventListener('shippingoptionchange', function(e) {
+              e.updateWith(new Promise(function(resolve) {
+                  that._updateShippingOptions(details, request.shippingOption, resolve);
+              }));
+          });
+
+          // Handle selecting/changing the shipping address
+          request.addEventListener('shippingaddresschange', function(e) {
             e.updateWith(new Promise(function(resolve) {
-                that._updateShippingOptions(details, request.shippingOption, resolve);
+                that._updateShippingAddress(details, request.shippingAddress, resolve);
             }));
-        });
+          });
 
-        // Handle selecting/changing the shipping address
-        request.addEventListener('shippingaddresschange', function(e) {
-          e.updateWith(new Promise(function(resolve) {
-              that._updateShippingAddress(details, request.shippingAddress, resolve);
-          }));
-        });
-
-        return request.show()
+          request
+            .show()
+            .then(function(instrumentResponse) {
+              that.fire('process-payment', {
+                'instrument': instrumentResponse,
+                'cartBuy': clearCartOnSuccess
+              });
+            })
+            .catch(function(err) {
+              if (err === 'Request cancelled') {
+                that.fire('error', {error_code: 0, message: err});
+              } else if (err.name == 'NotSupportedError') {
+                that.fire('error', {error_code: 1, message: err.message});
+                that._redirectToCheckout();
+              } else {
+                that.fire('error', {error_code: 2, message: 'Unknown Error calling PaymentRequest'});
+                that._redirectToCheckout();
+              }
+            });
+        } catch (e) {
+          this._redirectToCheckout();
+        }
       },
 
       _updateShippingAddress: function(details, addr, resolve) {
@@ -147,22 +169,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _updateShippingOptions: function(details, shippingOptionId, resolve) {
-        // Find the newly and previously selected shipping options
-        var newShippingOption, oldShippingOption;
-        details.shippingOptions.forEach( function(shippingOption) {
-          if (shippingOption.id === shippingOptionId) {
-            newShippingOption = shippingOption;
-          } if (shippingOption.selected === true) {
-            oldShippingOption = shippingOption;
-          }
-        });
-        // Select the new, deselect the old
-        oldShippingOption.selected = false; // Do this first, in case the same one is selected
-        newShippingOption.selected = true;
-        // Update the total cost and line items
-        this._updateTotal(details, newShippingOption, oldShippingOption);
+          // Find the newly and previously selected shipping options
+          var newShippingOption, oldShippingOption;
+          details.shippingOptions.forEach( function(shippingOption) {
+              if (shippingOption.id === shippingOptionId) {
+                  newShippingOption = shippingOption;
+              } if (shippingOption.selected === true) {
+                  oldShippingOption = shippingOption;
+              }
+          });
+          // Select the new, deselect the old
+          oldShippingOption.selected = false; // Do this first, in case the same one is selected
+          newShippingOption.selected = true;
+          // Update the total cost and line items
+          this._updateTotal(details, newShippingOption, oldShippingOption);
 
-        resolve(details);
+          resolve(details);
       },
 
       // Updates the total order cost to include shipping
@@ -219,6 +241,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         return items;
+      },
+
+      _redirectToCheckout: function() {
+        this.fire('route-change', {
+            path: '/checkout'
+          });
       }
 
     });
