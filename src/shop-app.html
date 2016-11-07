@@ -611,7 +611,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           this.$.payment.request(itemDetails, this.total, this.currency, true);
         } else {
-          this.fire('redirect-to', '/checkout');
+          this.fire('route-change', {
+            path: '/checkout'
+          });
         }
       },
 
@@ -629,16 +631,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         window.setTimeout(function() {
           instrumentResponse.complete('success')
             .then(function() {
-              if (!that._orderSuccessModal) {
-                that._orderSuccessModal = document.createElement('shop-order-success-modal');
-                Polymer.dom(that.root).appendChild(that._orderSuccessModal);
-              }
-              that._orderSuccessModal.open();
-              that._announce('Order processed successfully!');
-
               if (cartBuy) {
                 that.fire('clear-cart');
               }
+
+              that.accountData = that.$.meta.byKey('account');
+
+              if (that.accountData.isSignedIn()) {
+                if (!that._orderSuccessModal) {
+                  that._orderSuccessModal = document.createElement('shop-order-success-modal');
+                  Polymer.dom(that.root).appendChild(that._orderSuccessModal);
+                }
+                that._orderSuccessModal.open();
+              } else {
+                that.fire('route-change', {
+                  path: '/account'
+                });
+              }
+
+              that._announce('Order processed successfully!');
             });
         }, 2000);
       },
