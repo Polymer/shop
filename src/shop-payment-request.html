@@ -43,6 +43,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: false
         },
 
+        requestPayerName: {
+          type: Boolean,
+          value: false
+        },
+
+        shippingType: {
+          type: String,
+          value: "shipping"
+        },
+
         androidPay: {
           type: Object,
           value: function() { return {}; }
@@ -68,9 +78,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         // Collect a shipping address, and honor client's other options.
         var options = {
-          requestShipping: true,
-          requestPayerEmail: this.requestPayerEmail,
-          requestPayerPhone: this.requestPayerPhone
+          requestShipping:    true,
+          requestPayerEmail:  this.requestPayerEmail,
+          requestPayerPhone:  this.requestPayerPhone,
+          requestPayerName:   this.requestPayerName,
+          shippingType:       this.shippingType
         };
 
         var request = new PaymentRequest(this._paymentTypesSupported, details, options);

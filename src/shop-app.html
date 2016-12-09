@@ -276,7 +276,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         currency="USD"
         supported-methods='["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]'
         android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'
-        request-payer-email>
+        request-payer-email
+        request-payer-phone
+        request-payer-name
+        shipping-type="delivery">
     </shop-payment-request>
 
     <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
