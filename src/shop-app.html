@@ -499,7 +499,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.importHref(this.resolveUrl('lazy-resources.html'), function() {
               // Register service worker if supported.
               if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/auth-stab.js');
+                navigator.serviceWorker.register('/service-worker.js');
               }
               this._notifyNetworkStatus();
               this.loadComplete = true;
