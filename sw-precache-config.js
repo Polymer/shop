@@ -30,6 +30,6 @@ module.exports = {
     }
   ],
   importScripts: [
-    './auth-stab.js'
+    './auth-mock.js'
   ]
 };
