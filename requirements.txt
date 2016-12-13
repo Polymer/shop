@@ -1,4 +1,0 @@
-Flask==0.10.1
-oauth2client
-google-api-python-client
-pyopenssl

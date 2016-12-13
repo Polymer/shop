@@ -28,5 +28,8 @@ module.exports = {
         }
       }
     }
+  ],
+  importScripts: [
+    './auth-mock.js'
   ]
 };
