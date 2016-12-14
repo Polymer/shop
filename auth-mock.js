@@ -5,16 +5,20 @@ var OBJECT_STORE_NAME = 'auth_object_store';
 self.addEventListener('fetch', function(event) {
   var response = null;
   var request = event.request.clone();
+
+  // Filter everything else but urls starting with `/auth/`.
   if (/\/auth\/.*$/.test(request.url)) {
     event.respondWith(
+      // Get POST payload
       request.text().then(function(text) {
-        console.log(text);
+        // Retrieve key:val from payload
         var params = multipartFormParser(text);
         params.name     = params.name || '';
         params.id       = params.id || params.email;
         params.imageUrl = params.imageUrl || '';
         params.email    = params.email;
 
+        // For password authentication
         if (/\/auth\/password/.test(request.url)) {
           delete params.id_token;
           if (!params.email || !params.password) {
@@ -22,17 +26,20 @@ self.addEventListener('fetch', function(event) {
           } else {
             return db.get(params);
           }
+        // For signing up
         } else if (/\/auth\/register/.test(request.url)) {
           if (!params.email || !params.password) {
             return Promise.reject('Bad Request', 400);
           } else {
             return db.add(params);
           }
+        // For Google Sign-In
         } else if (/\/auth\/google/.test(request.url)) {
           return verifyIdToken(params.id_token);
         }
         return Promise.reject();
       }).then(function(result) {
+        // Successful authentication
         delete result.password;
         var response = new Response(JSON.stringify(result), {
           status: 200,
@@ -40,11 +47,11 @@ self.addEventListener('fetch', function(event) {
         });
         return response;
       }).catch(function(text, status) {
+        // Authentication failure
         var response = new Response(text || 'Authentication failed.', {
           status: status || 401,
           statusText: text || 'Authentication failed.'
         });
-        console.log(response);
         return response;
       })
     );
@@ -53,6 +60,7 @@ self.addEventListener('fetch', function(event) {
   }
 });
 
+// Retrieve multipart form payload and extract POST'ed data.
 var multipartFormParser = function(body, param) {
   var results = {};
   var params = ['id', 'email', 'password', 'name', 'iconURL', 'id_token'];
@@ -67,6 +75,7 @@ var multipartFormParser = function(body, param) {
   return results;
 };
 
+// Verify Google Id Token with official endpoint.
 var verifyIdToken = function(id_token) {
   var VERIFY_ENDPOINT = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=';
   return fetch(VERIFY_ENDPOINT+id_token)
@@ -86,6 +95,7 @@ var verifyIdToken = function(id_token) {
   });
 };
 
+// Simple database implementation that stores authentication information
 var DB = function() {
   var that = this;
   this.isReady = (function() {
@@ -123,8 +133,8 @@ DB.prototype.transaction = function() {
     });
   })
 }
+// Add an account
 DB.prototype.add = function(params) {
-  // respond with promise resolving given params
   var that = this;
   return new Promise(function(resolve, reject) {
     this.db.transaction().then(function(trans) {
@@ -137,11 +147,11 @@ DB.prototype.add = function(params) {
     });
   });
 };
+// Get an account
 DB.prototype.get = function(params) {
   var that = this;
   return new Promise(function(resolve, reject) {
     that.transaction().then(function(trans) {
-      // Get an object with a key
       var req = trans.objectStore(OBJECT_STORE_NAME).get(params.id);
       req.onsuccess = function(e) {
         var profile = e.target.result;

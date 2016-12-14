@@ -16,7 +16,7 @@
    "bower.json"
   ],
   "includeDependencies": [
-    "auth-stab.js",
+    "auth-mock.js",
     "manifest.json",
     "bower_components/fetch/fetch.js",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"

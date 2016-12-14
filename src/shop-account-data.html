@@ -92,9 +92,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               return Promise.resolve();
             }
 
-            // TODO: Check creds with the auth backend
             if (cred.type === 'password') {
-              return that._loginWithServer(PASSWORD, cred)
+              return that._loginWithServer(PASSWORD, cred);
             } else if (cred.type === 'federated') {
               // This credential must be GOOGLE
               return that.gSignIn(cred.id);
@@ -165,7 +164,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         })().then(function(googleUser) {
           var form = new FormData();
           form.append('id_token', googleUser.getAuthResponse().id_token);
-          form.append('csrf_token', Polymer.dom(document).querySelector('#csrf_token').value);
           return that._loginWithServer(GOOGLE, form);
         }).then(function(profile) {
           if (profile) {
@@ -186,7 +184,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _loginWithServer: function(type, cred) {
-        var opt, path;
+        var email, path;
         // Attempting sign in with Server
         switch (type) {
           case GOOGLE:
@@ -200,24 +198,63 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             break;
         }
 
-        var csrf_token = Polymer.dom(document).querySelector('#csrf_token').value;
-        if (cred instanceof FormData) {
-          cred.append('csrf_token', csrf_token);
-          opt = {
-            method: 'POST',
-            credentials: 'include',
-            body: cred
-          }
-        } else {
-          cred.additionalData = new FormData();
-          cred.additionalData.append('csrf_token', csrf_token);
-          cred.idName = 'email';
-          opt = {
-            method: 'POST',
-            credentials: cred
+        var opt = {
+          method: 'POST',
+          // CSRF protection. If server doesn't see this header,
+          // assume that the request isn't invoked by a browser.
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
           }
         }
 
+        if (cred instanceof FormData) {
+          opt.credentials = 'include';
+          opt.body = cred;
+        } else {
+          cred.idName = 'email';
+          opt.credentials = cred;
+        }
+
+        // Because this demo doesn't include server side code,
+        // a service worker `auth-mock.js` pretends taking care of
+        // authentication. This section is for browsers that
+        // don't support service workers. Respond with a fake profile
+        // to ALL requests.
+        if (!navigator.serviceWorker) {
+          if (type == GOOGLE) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            var profile = auth2.currentUser.get().getBasicProfile();
+            return Promise.resolve({
+              id:       profile.getId(),
+              email:    profile.getEmail(),
+              imageUrl: profile.getImageUrl(),
+              name:     profile.getName()
+            });
+          } else {
+            // Since some browsers don't support FormData.prototype.get,
+            // directly obtain email and password from the form.
+            if (cred instanceof FormData) {
+              email = document.querySelector('#accountEmail').value;
+              var password = document.querySelector('#accountPassword').value;
+              // If either email or password is missing, reject.
+              if (!email || !password) {
+                return Promise.reject();
+              }
+            } else {
+              email = cred.id;
+            }
+            // Pretend signed in / registered.
+            return Promise.resolve({
+              id:       email,
+              email:    email,
+              imageUrl: '',
+              name:     ''
+            });
+          }
+        }
+
+        // For browsers with sane backend including
+        // a server or a service worker.
         return fetch(path, opt)
         .then(function(res) {
           if (res.status === 200) {
