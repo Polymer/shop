@@ -84,10 +84,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-around-justified);
       }
 
-      .google-signin {
+      .centered {
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
         margin-top: 18px;
+      }
+
+      .google-signin {
+        -ms-appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        color: inherit;
         cursor: pointer;
       }
 
@@ -163,8 +175,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <input type="button" on-click="_onSignIn" value="Log In">
           </shop-button>
 
-          <div class="google-signin" on-click="_onGSignIn">
-            <img src="/images/google_signin.png">
+          <div class="centered">
+            <button class="google-signin" on-click="_onGSignIn">
+              <img src="/images/google_signin.png">
+            </button>
           </div>
 
         </form>

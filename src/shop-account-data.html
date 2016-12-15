@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <!--<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">-->
 <link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/google-apis/google-js-api.html">
 
 <dom-module id="shop-account-data">
   <script>
@@ -33,12 +34,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ready: function() {
         var that = this;
         new Polymer.IronMeta({type: 'account', key: 'account', value: this});
-        this._initializeProfile();
-        gapi.load('auth2', function() {
-          gapi.auth2.init().then(function() {
-            that.fire('account-ready');
-          })
+        document.createElement('google-js-api')
+          .addEventListener('js-api-load', function() {
+          gapi.load('auth2', function() {
+            gapi.auth2.init().then(function() {
+              that.fire('account-ready');
+            })
+          });
         });
+        this._initializeProfile();
       },
 
       isSignedIn: function() {

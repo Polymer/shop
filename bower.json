@@ -20,7 +20,8 @@
     "iron-selector": "polymerelements/iron-selector#^1.0.0",
     "paper-icon-button": "polymerelements/paper-icon-button#^1.0.0",
     "paper-spinner": "polymerelements/paper-spinner#^1.0.0",
-    "fetch": "^1.0.0"
+    "fetch": "^1.0.0",
+    "google-apis": "GoogleWebComponents/google-apis#^1.1.7"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
