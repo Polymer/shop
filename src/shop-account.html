@@ -1,0 +1,463 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="shop-button.html">
+<link rel="import" href="shop-common-styles.html">
+<link rel="import" href="shop-form-styles.html">
+<link rel="import" href="shop-input.html">
+<link rel="import" href="shop-select.html">
+
+<dom-module id="shop-account">
+
+  <template>
+    <style include="shop-common-styles shop-button shop-form-styles shop-input shop-select">
+
+      .main-frame {
+        transition: opacity 0.5s;
+      }
+
+      :host([waiting]) .main-frame {
+        opacity: 0.1;
+      }
+
+      shop-input, shop-select {
+        font-size: 16px;
+      }
+
+      paper-spinner-lite {
+        position: fixed;
+        top: calc(50% - 14px);
+        left: calc(50% - 14px);
+      }
+
+      .row {
+        @apply(--layout-horizontal);
+        @apply(--layout-end);
+      }
+
+      .row > .flex,
+      .input-row > * {
+        @apply(--layout-flex);
+      }
+
+      .input-row > *:not(:first-child) {
+        margin-left: 8px;
+      }
+
+      .login-section {
+        text-align: left;
+        width: 50%;
+        margin: auto;
+      }
+
+      .logout-section {
+        margin: 8px;
+      }
+
+      .welcome {
+        text-align: center;
+        margin: 26px;
+      }
+
+      .thanks {
+        font-size: 1.5em;
+        margin: 26px 0;
+      }
+
+      .login-section:not([visible]) {
+        display: none;
+      }
+
+      #loginButton {
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+      }
+
+      .centered {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        margin-top: 18px;
+      }
+
+      .google-signin {
+        -ms-appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+      }
+
+      .google-signin img {
+        width: 191px;
+        height: 46px;
+      }
+
+      @media (max-width: 767px) {
+        .login-form {
+          width: 100%;
+        }
+      }
+    </style>
+
+    <div class="main-frame">
+      <iron-meta id="account" type="account"></iron-meta>
+
+      <div class="welcome">
+        <span>Thanks for shopping with us! Why don't you create an account and get 10% discount now?</span>
+      </div>
+
+      <div class="subsection thanks" visible$="[[_computeSigningUp(route)]]">
+        <span>Your order has been successfully placed.</span>
+      </div>
+
+      <div class="subsection welcome" visible$="[[_hasAccount]]">
+        <span>Welcome to Polymer Shop, {{profile.email::change}}!</span>
+
+        <div class="logout-section">
+          <shop-button responsive id="logoutButton">
+            <input type="submit" on-click="_logout" value="Logout">
+          </shop-button>
+        </div>
+      </div>
+
+      <div class="login-section" visible$="[[!_hasAccount]]">
+        <form action="#" id="loginForm"
+            is="iron-form"
+            method="post"
+            on-iron-form-presubmit="_willSendRequest">
+
+          <div class="row input-row">
+            <shop-input>
+              <input type="email" id="accountEmail" name="email"
+                  placeholder="Email" required
+                  aria-labelledby="accountEmailLabel"
+                  autocomplete="username" value$="[[prefilledEmail]]"
+                  autofocus$="[[!_computeFocusOnPW(route, prefilledEmail)]]">
+              <shop-md-decorator error-message="Invalid Email" aria-hidden="true">
+                <label id="accountEmailLabel">Email</label>
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-input>
+          </div>
+
+          <div class="row input-row">
+            <shop-input>
+              <input type="password" id="accountPassword" name="password"
+                  placeholder="Password" required
+                  aria-labelledby="accountPasswordLabel"
+                  autocomplete="current-password"
+                  autofocus$="[[_computeFocusOnPW(route, prefilledEmail)]]">
+              <shop-md-decorator error-message="Invalid Password" aria-hidden="true">
+                <label id="accountPasswordLabel">Password</label>
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-input>
+          </div>
+
+          <shop-button responsive id="loginButton">
+            <input type="button" on-click="_onSignUp" value="Sign Up">
+            <input type="button" on-click="_onSignIn" value="Log In">
+          </shop-button>
+
+          <div class="centered">
+            <button class="google-signin" on-click="_onGSignIn">
+              <img src="/images/google_signin.png">
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Show spinner when waiting for the server to repond -->
+    <paper-spinner-lite active="[[waiting]]"></paper-spinner-lite>
+
+  </template>
+
+  <script>
+    var SIGNUP = 'signup';
+    var PASSWORD = 'password';
+    var GOOGLE = 'https://accounts.google.com';
+
+    Polymer({
+
+      is: 'shop-account',
+
+      properties: {
+
+        /**
+         * The route for the state. e.g. `success` and `error` are mounted in the
+         * `checkout/` route.
+         */
+        route: {
+          type: Object,
+          notify: true
+        },
+
+        /**
+         * The state of the form. Valid values are:
+         * `init`, `success` and `error`.
+         */
+        state: {
+          type: String,
+          value: 'init'
+        },
+
+        /**
+         * Object containing profile data.
+         */
+        profile: Object,
+
+        /**
+         * The server's response.
+         */
+        response: Object,
+
+        /**
+         * User's email address used to prefill
+         */
+        prefilledEmail: String,
+
+        /**
+         * If true, shop-account is currently visible on the screen.
+         */
+        visible: {
+          type: Boolean,
+          observer: '_visibleChanged'
+        },
+
+        /**
+         * True when waiting for the server to repond.
+         */
+        waiting: {
+          type: Boolean,
+          readOnly: true,
+          reflectToAttribute: true
+        },
+
+        _hasAccount: {
+          type: Boolean,
+          computed: '_computeHasAccount(profile.id)'
+        }
+      },
+
+      ready: function() {
+        if (this.$.account.byKey('account')) {
+          this.accountData = this.$.account.byKey('account');
+        } else {
+          this.listen(window, 'account-ready', '_accountReady');
+        }
+      },
+
+      _accountReady: function() {
+        this.accountData = this.$.account.byKey('account');
+      },
+
+      _computeHasAccount: function(id) {
+        console.log('checking has account');
+        if (id !== undefined && id != '') {
+          console.log('got one!');
+          return true;
+        } else {
+          console.log('no dice :(');
+          return false;
+        }
+      },
+
+      _computeSigningUp: function(route) {
+        return route.path === '/signup';
+      },
+
+      _computeFocusOnPW: function(route, prefilledEmail) {
+        return route.path === '/signup' && prefilledEmail.length > 0;
+      },
+
+      _onGSignIn: function() {
+        var that = this;
+        this._setWaiting(true);
+        this.accountData.gSignIn()
+        .then(function() {
+          that.fire('show-snackbar', {
+            text: 'You are signed in!'
+          });
+          that._setWaiting(false);
+          that.fire('route-change', {
+            path: '/home'
+          });
+        }, function(err) {
+          console.error(err);
+          that._setWaiting(false);
+          that.fire('show-snackbar', {
+            text: 'Sign-In failed'
+          });
+        });
+      },
+
+      _onSignUp: function(evt) {
+        console.log("begin _onSignUp");
+        evt.preventDefault();
+        this._setWaiting(true);
+
+        this.$.loginForm.fire('iron-form-presubmit', null, { bubbles: false });
+
+        var form = new FormData(this.$.loginForm);
+
+        var that = this;
+        this.accountData.pSignUp(form)
+        .then(function(profile) {
+          that.fire('show-snackbar', {
+            text: 'Thanks for signing up!'
+          });
+          that._reset();
+          that._setWaiting(false);
+          that.fire('route-change', {
+            path: '/home'
+          });
+        }).catch(function(err) {
+          that._setWaiting(false);
+          that.fire('show-snackbar', {
+            text: 'Sign-Up failed'
+          });
+        });
+      },
+
+      _onSignIn: function(evt) {
+        evt.preventDefault();
+        this._setWaiting(true);
+
+        this.$.loginForm.fire('iron-form-presubmit', null, { bubbles: false });
+
+        var form = new FormData(this.$.loginForm);
+
+        var that = this;
+        this.accountData.pSignIn(form)
+        .then(function(profile) {
+          that.fire('show-snackbar', {
+            text: 'You are signed in!'
+          });
+          that._reset();
+          that._setWaiting(false);
+          that.fire('route-change', {
+            path: '/home'
+          });
+        }).catch(function(err) {
+          that.fire('show-snackbar', {
+            text: 'Sign-In failed'
+          });
+          that._setWaiting(false);
+        });
+      },
+
+      /**
+       * Sets the valid state and updates the location.
+       */
+      _pushState: function(state) {
+        this._validState = state;
+        this.set('route.path', state);
+      },
+
+      _willSendRequest: function(e) {
+        this._setWaiting(true);
+      },
+
+      _loginWithFirebase: function(email, password) {
+        console.log('Attempting sign in with Firebase');
+
+        var passwordElement = this.$.accountPassword;
+        var that = this;
+
+        return new Promise(function(fulfill, reject) {
+          firebase.auth().signInWithEmailAndPassword(email, password)
+          .then(function() {
+            console.log('Successful sign in');
+
+            var user = firebase.auth().currentUser;
+            if (user != null) {
+              return fulfill(user.email);
+            } else {
+              return fulfill('no user info');
+            }
+          })
+          .catch(function(error) {
+            console.log('Failed sign in. ' + error.code + ': ' + error.message);
+            if (error.code === 'auth/user-not-found') {
+
+              console.log('Unknown user, trying to sign them up instead.');
+              firebase.auth().createUserWithEmailAndPassword(email, password)
+              .then(function(response) {
+                var userEmail = firebase.auth().currentUser.email;
+                console.log('Successful signup of ' + userEmail);
+                return fulfill(userEmail);
+              })
+              .catch(function(error) {
+                that.fire('announce', passwordElement.nextElementSibling.getAttribute('error-message'));
+                passwordElement.focus();
+                passwordElement.setAttribute('aria-invalid', 'true');
+                console.error(error.message);
+                return reject(error.message);
+              });
+
+            } else if (error.code === 'auth/wrong-password') {
+              that.fire('announce', passwordElement.nextElementSibling.getAttribute('error-message'));
+              passwordElement.focus();
+              passwordElement.setAttribute('aria-invalid', 'true');
+              return reject(error.code);
+            } else {
+              console.log('Error signing in with Firebase. ' + error.code + ': ' + error.message);
+              return reject(error.code);
+            }
+          });
+
+        });
+      },
+
+      _logout: function(evt) {
+        evt.preventDefault();
+
+        this._reset();
+        this.fire('logout');
+      },
+
+      _visibleChanged: function(visible) {
+        if (!visible) {
+          return;
+        }
+        this._reset();
+        this.fire('change-section', { title: 'Account' });
+      },
+
+      /**
+       * Sets the initial state.
+       */
+      _reset: function() {
+        var form = this.$.loginForm;
+
+        this._setWaiting(false);
+        form.reset();
+
+        // Remove the `aria-invalid` attribute from the form inputs.
+        for (var el, i = 0; el = form.elements[i], i < form.elements.length; i++) {
+          el.removeAttribute('aria-invalid');
+        }
+      }
+    });
+
+  </script>
+
+</dom-module>

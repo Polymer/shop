@@ -14,7 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="shop-button.html">
 
-<dom-module id="shop-cart-modal">
+<dom-module id="shop-order-success-modal">
 
   <template>
 
@@ -53,6 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-flex);
         line-height: 24px;
         margin: 8px;
+        font-weight: bold;
       }
 
       .modal-button {
@@ -60,7 +61,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin: 16px 8px;
       }
 
-      .modal-button > a {
+      .modal-button > * {
         box-sizing: border-box;
         width: 100%;
         padding: 8px 24px;
@@ -89,14 +90,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="layout-horizontal">
-      <div class="label">Added to cart</div>
+      <div class="label">Order Successful!</div>
     </div>
     <div class="layout-horizontal">
       <shop-button class="modal-button">
-        <a href="/cart" on-tap="close" id="viewCartAnchor">View Cart</a>
+        <a href="/" on-tap="close" id="goHomeAnchor">Home</a>
       </shop-button>
       <shop-button class="modal-button">
-        <a href="#" on-click="_checkout">Checkout</a>
+        <a href="#" on-tap="close" id="closeModalAnchor">Close</a>
       </shop-button>
     </div>
 
@@ -108,7 +109,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
 
-      is: 'shop-cart-modal',
+      is: 'shop-order-success-modal',
 
       behaviors: [
         Polymer.IronOverlayBehaviorImpl
@@ -129,11 +130,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       listeners: {
         'transitionend' : '_transitionEnd',
         'iron-overlay-canceled': '_onCancel'
-      },
-
-      _checkout: function() {
-        this.close();
-        this.fire('buy-cart');
       },
 
       _renderOpened: function() {
@@ -159,7 +155,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         if (this.opened) {
           this._finishRenderOpened();
-          this.fire('announce', 'Item added to the cart');
+          this.fire('announce', 'Order successful');
         } else {
           this._finishRenderClosed();
           this.backdropElement.style.display = '';
@@ -167,7 +163,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       get _focusableNodes() {
-        return [this.$.viewCartAnchor, this.$.closeBtn];
+        return [this.$.goHomeAnchor, this.$.closeBtn];
       },
 
       refit: Function(),
