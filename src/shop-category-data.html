@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         item: {
           type: Object,
-          computed: '_computeItem(category.items, itemName)',
+          readOnly: true,
           notify: true
         },
 
@@ -76,6 +76,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           readOnly: true
         }
       },
+
+      observers: [
+        '_computeItem(category.items, itemName)'
+      ],
 
       _getCategoryObject: function(categoryName) {
         for (var i = 0, c; c = this.categories[i]; ++i) {
@@ -96,12 +100,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _computeItem: function(items, itemName) {
-        for (var i = 0, item; item = items[i]; ++i) {
-          if (item.name === itemName) {
-            return item;
+        // items and itemName are updated from the route. Since they are
+        // updated sequentially and not once, there will be 1 cycle where
+        // itemName does not exist in the items array.
+        // Therefore we have to debounce the calculation 1 frame to make
+        // sure both values have been properly updated.
+        this.debounce('compute-item', function() {
+          for (var i = 0, item; item = items[i]; ++i) {
+            if (item.name === itemName) {
+              this.item !== item && this._setItem(item);
+              return;
+            }
           }
-        }
-        this.fire('show-invalid-url-warning');
+          this.fire('show-invalid-url-warning');
+        });
       },
 
       _fetchItems: function(category, attempts) {
