@@ -248,7 +248,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               category: item.category,
               title: item.title
             });
-          });
+            // Debounce for 2 frames to  make sure that `shop-category-data` has updated
+            // its internal item before trying to change the item.
+          },2);
         }
       },
 
