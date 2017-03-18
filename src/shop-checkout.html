@@ -11,12 +11,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="shop-button.html">
 <link rel="import" href="shop-common-styles.html">
+<link rel="import" href="shop-checkbox.html">
 <link rel="import" href="shop-form-styles.html">
 <link rel="import" href="shop-input.html">
+<link rel="import" href="shop-md-decorator.html">
 <link rel="import" href="shop-select.html">
-<link rel="import" href="shop-checkbox.html">
+<link rel="import" href="shop-underline.html">
 
 <dom-module id="shop-checkout">
 
@@ -491,8 +497,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         _hasItems: {
           type: Boolean,
           computed: '_computeHasItem(cart.length)'
-        }
+        },
 
+        routeActive: Boolean,
+        routeData: Object
       }}
 
       static get observers() { return [

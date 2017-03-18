@@ -18,11 +18,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
+
+
 <dom-module id="shop-app">
+  <!--
+    TODO(ricitc): make these lazy-imports after
+        https://github.com/Polymer/polymer-analyzer/pull/543 lands
+        DO NOT MERGE until then :)
+  -->
+  <link rel="import" href="shop-cart-data.html">
+  <link rel="import" href="lazy-resources.html">
+  <link rel="import" href="shop-list.html">
+  <link rel="import" href="shop-detail.html">
+  <link rel="import" href="shop-cart.html">
+  <link rel="import" href="shop-checkout.html">
 
   <template>
 
@@ -276,12 +290,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div id="tabContainer" sticky$="[[_shouldShowTabs]]" hidden$="[[!_shouldShowTabs]]">
         <dom-if if="[[_shouldRenderTabs]]">
           <template>
+            <!-- TODO(rictic): fix behaviors in Polymer 2 elements. -->
             <shop-tabs
                 selected="[[categoryName]]"
                 attr-for-selected="name">
               <dom-repeat items="[[categories]]" as="category" initial-count="4">
                 <template>
-                <shop-tab name="[[category.name]]">
+                <shop-tab name$="[[category.name]]">
                   <a href="/list/[[category.name]]">[[category.title]]</a>
                 </shop-tab>
                 </template>
@@ -354,6 +369,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 0
         },
 
+        /** Data extracted from url segments. */
+        routeData: Object,
+
+        /** True when the window is small. */
+        smallScreen: Boolean,
+
+        categoryName: String,
+
+        drawerOpened: Boolean,
+
+        offline: Boolean,
+
         _shouldShowTabs: {
           computed: '_computeShouldShowTabs(page, smallScreen)'
         },
@@ -364,7 +391,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         _shouldRenderDrawer: {
           computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
-        }
+
+        },
+        _a11yLabel: String,
       }}
 
       static get observers() { return [
