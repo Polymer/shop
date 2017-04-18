@@ -96,7 +96,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <a href="/cart" on-tap="close" id="viewCartAnchor">View Cart</a>
       </shop-button>
       <shop-button class="modal-button">
-        <a href="/checkout" on-tap="close">Checkout</a>
+        <button on-tap="_buyCart" type="button">Checkout</button>
       </shop-button>
     </div>
 
@@ -139,6 +139,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _renderClosed: function() {
         this.classList.remove('opened');
+      },
+
+      _buyCart: function() {
+        this.fire('buy-cart');
+        this.close();
       },
 
       _onCancel: function(e) {

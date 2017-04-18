@@ -60,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div class="checkout-box">
           Total: <span class="subtotal">[[_formatTotal(total)]]</span>
           <shop-button responsive>
-            <a href="/checkout">Checkout</a>
+            <button on-tap="_buyCart" type="button">Checkout</button>
           </shop-button>
         </div>
       </div>
@@ -89,7 +89,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Boolean,
           computed: '_computeHasItem(cart.length)'
         }
+      },
 
+      _buyCart: function() {
+        this.fire('buy-cart');
       },
 
       _formatTotal: function(total) {
