@@ -1,0 +1,40 @@
+application: shop
+version: 1
+runtime: go
+api_version: go1
+
+handlers:
+# match requests to the static files that are served by
+# the appengine frontend edge cache (like a CDN)
+- url: /bower_components
+  static_dir: static/bower_components
+  secure: always
+
+- url: /data
+  static_dir: static/data
+  secure: always
+  application_readable: true
+
+- url: /images
+  static_dir: static/images
+  secure: always
+
+- url: /src
+  static_dir: static/src
+  secure: always
+
+- url: /service-worker.js
+  static_files: static/service-worker.js
+  upload: static/service-worker.js
+  secure: always
+
+- url: /manifest.json
+  static_files: static/manifest.json
+  upload: static/manifest.json
+  secure: always
+
+# all other requests are handled by the go app which will
+# serve out the index.html page rendered with added metadata 
+- url: /.*
+  script: _go_app
+  secure: always
