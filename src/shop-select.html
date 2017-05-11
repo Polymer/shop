@@ -110,7 +110,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     // TODO(rictic): how does this work with just a dom-module? Is that kosher?
     if (false) {
-      Polymer({is: 'shop-select'});
+      customElements.define('shop-select', class extends HTMLElement {});
     }
   </script>
 </dom-module>
