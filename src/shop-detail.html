@@ -23,6 +23,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <style include="shop-common-styles shop-button shop-select">
 
+      shop-button#buyNow > * {
+        width: 100%;
+      }
+
+      #buyNow:not([visible]) {
+        display: none;
+      }
+
+      shop-button#addToCart > * {
+        margin-bottom: 4px;
+        width: 100%;
+      }
+
       :host {
         display: block;
       }
@@ -127,6 +140,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           margin: 12px 0 32px;
         }
 
+        shop-button[responsive]#buyNow > * {
+            background-color: var(--app-secondary-color);
+        }
+
+        #buyNow {
+          right: 0;
+          left: 50%
+        }
+
+        #addToCart[half-size] {
+          right: 50%;
+          left: 0;
+        }
+
       }
 
     </style>
@@ -186,9 +213,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <h2>Description</h2>
           <p id="desc"></p>
         </div>
-        <shop-button responsive>
-          <button on-tap="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
-        </shop-button>
+        <div id="buyButtons">
+          <shop-button responsive id="addToCart" half-size$="[[_hasPaymentRequest()]]">
+            <button on-tap="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
+          </shop-button>
+          <shop-button responsive id="buyNow" visible$="[[_hasPaymentRequest()]]">
+            <button on-tap="_buyNow" aria-label="Buy this item now">Buy Now</button>
+          </shop-button>
+        </div>
       </div>
     </div>
 
@@ -271,6 +303,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       },
 
+      _buyNow: function() {
+        var item  = {
+          item: this.item,
+          quantity: parseInt(this.$.quantitySelect.value, 10),
+          size: this.$.sizeSelect.value
+        };
+
+        this.fire('buy-item', item);
+      },
+
       _isDefined: function(item) {
         return item != null;
       },
@@ -283,6 +325,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (!offline) {
           this._tryReconnect();
         }
+      },
+
+      _hasPaymentRequest: function() {
+        return 'PaymentRequest' in window;
       }
 
     });

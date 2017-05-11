@@ -1,37 +1,38 @@
-application: shop
-version: 1
 runtime: python27
 api_version: 1
 threadsafe: yes
 
+libraries:
+- name: ssl
+  version: latest
+
 handlers:
 - url: /bower_components
-  static_dir: bower_components
+  static_dir: build/bundled/bower_components
   secure: always
 
 - url: /data
-  static_dir: data
+  static_dir: build/bundled/data
   secure: always
 
 - url: /images
-  static_dir: images
+  static_dir: build/bundled/images
   secure: always
 
 - url: /src
-  static_dir: src
+  static_dir: build/bundled/src
   secure: always
 
 - url: /service-worker.js
-  static_files: service-worker.js
-  upload: service-worker.js
+  static_files: build/bundled/service-worker.js
+  upload: build/bundled/service-worker.js
   secure: always
 
 - url: /manifest.json
-  static_files: manifest.json
-  upload: manifest.json
+  static_files: build/bundled/manifest.json
+  upload: build/bundled/manifest.json
   secure: always
 
 - url: /.*
-  static_files: index.html
-  upload: index.html
+  script: main.app
   secure: always
