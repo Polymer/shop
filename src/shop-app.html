@@ -14,10 +14,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/helpers/helpers.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-a11y-announcer/iron-a11y-announcer.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
@@ -85,12 +87,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .cart-btn-container {
         position: relative;
         width: 40px;
-      }
-
-      .announcer {
-        position: fixed;
-        height: 0;
-        overflow: hidden;
       }
 
       :host(:not([page=detail])) .back-btn {
@@ -320,9 +316,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <div class="demo-label">Demo Only</div>
     </footer>
 
-    <!-- a11y announcer -->
-    <div class="announcer" aria-live="assertive">[[_a11yLabel]]</div>
-
   </template>
 
   <script>
@@ -386,6 +379,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.listen(window, 'online', '_notifyNetworkStatus');
           this.listen(window, 'offline', '_notifyNetworkStatus');
         });
+      },
+
+      attached: function() {
+        // This will create the singleton element if it has not
+        // been created yet:
+        Polymer.IronA11yAnnouncer.requestAvailability();
       },
 
       _routePageChanged: function(page) {
@@ -519,10 +518,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       // A11y announce the given message.
       _announce: function(message) {
-        this._a11yLabel = '';
-        this.debounce('_a11yAnnouncer', function() {
-          this._a11yLabel = message;
-        }, 100);
+        this.fire('iron-announce', { 'text': message }, { bubbles: true });
       },
 
       // This is for performance logging only.
