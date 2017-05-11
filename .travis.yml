@@ -11,6 +11,6 @@ install:
   - yarn global add polymer-cli
   - polymer install
 before_script:
-  - polymer lint
+  # - polymer lint
 script:
   - xvfb-run polymer test
