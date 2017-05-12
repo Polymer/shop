@@ -10,6 +10,7 @@
     "manifest.json",
     "bower_components/webcomponentsjs/*"
   ],
+  "shell": "src/shop-app.html",
   "builds": [
     {
       "preset": "es5-bundled"
