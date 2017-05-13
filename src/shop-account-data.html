@@ -1,0 +1,278 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<!--<link rel="import" href="../bower_components/iron-localstorage/iron-localstorage.html">-->
+<link rel="import" href="../bower_components/iron-meta/iron-meta.html">
+<link rel="import" href="../bower_components/google-apis/google-js-api.html">
+
+<dom-module id="shop-account-data">
+  <script>
+    var SIGNUP = 'signup';
+    var PASSWORD = 'password';
+    var GOOGLE = 'https://accounts.google.com';
+
+    Polymer({
+
+      is: 'shop-account-data',
+
+      properties: {
+        profile: {
+          type: Object,
+          value: null,
+          notify: true
+        }
+      },
+
+      ready: function() {
+        var that = this;
+        new Polymer.IronMeta({type: 'account', key: 'account', value: this});
+        document.createElement('google-js-api')
+          .addEventListener('js-api-load', function() {
+          gapi.load('auth2', function() {
+            gapi.auth2.init().then(function() {
+              that.fire('account-ready');
+            })
+          });
+        });
+        this._initializeProfile();
+      },
+
+      isSignedIn: function() {
+        return !!this.profile.id;
+      },
+
+      setProfile: function(profile) {
+        // Set profile
+        this.profile = {
+          name:     profile.name,
+          id:       profile.id,
+          iconURL:  profile.imageUrl,
+          email:    profile.email
+        };
+      },
+
+      _initializeProfile: function() {
+        // Init profile
+        this.profile = {
+          name:     '',
+          id:       '',
+          iconURL:  '',
+          email:    ''
+        };
+      },
+
+      autoSignIn: function(unmediated) {
+        var that = this;
+        // Do nothing when Credential API is not available
+        if (navigator.credentials) {
+          // Attempt to get credentials and auto-login if possible
+          return navigator.credentials.get({
+            password: true,
+            federated: {
+              providers: [
+                'https://accounts.google.com'
+              ]
+            },
+            unmediated: unmediated
+          }).then(function (cred) {
+            // Ensure they're not empty
+            if (!cred) {
+              return Promise.resolve();
+            }
+
+            if (cred.type === 'password') {
+              return that._loginWithServer(PASSWORD, cred);
+            } else if (cred.type === 'federated') {
+              // This credential must be GOOGLE
+              return that.gSignIn(cred.id);
+            }
+          }).then(function(profile) {
+            if (profile) {
+              that.setProfile(profile);
+            }
+            return Promise.resolve(profile);
+          }, function() {
+            that._initializeProfile();
+            return Promise.reject();
+          });
+        } else {
+          return Promise.resolve();
+        }
+      },
+
+      pSignIn: function(form) {
+        var that = this;
+        return this._loginWithServer(PASSWORD, form)
+        .then(function(profile) {
+          that.setProfile(profile);
+          if (navigator.credentials) {
+            var email = form.get('email');
+            var password = form.get('password');
+            var cred = new PasswordCredential({
+              id:       email,
+              password: password
+            });
+            // Credential stored
+            return navigator.credentials.store(cred);
+         }
+       });
+      },
+
+      pSignUp: function(form) {
+        var that = this;
+        return this._loginWithServer(SIGNUP, form)
+        .then(function(profile) {
+          that.setProfile(profile);
+          if (navigator.credentials) {
+            var email = form.get('email');
+            var password = form.get('password');
+            var cred = new PasswordCredential({
+              id:       email,
+              password: password
+            });
+            // Credential stored
+            return navigator.credentials.store(cred);
+          }
+        });
+      },
+
+      gSignIn: function(id) {
+        var that = this;
+        return (function() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          if (auth2.isSignedIn.get()) {
+            var googleUser = auth2.currentUser.get();
+            if (googleUser.getBasicProfile().getEmail() === id) {
+              return Promise.resolve(googleUser);
+            }
+          }
+          return auth2.signIn({
+            login_hint: id || ''
+          });
+        })().then(function(googleUser) {
+          var form = new FormData();
+          form.append('id_token', googleUser.getAuthResponse().id_token);
+          return that._loginWithServer(GOOGLE, form);
+        }).then(function(profile) {
+          if (profile) {
+            that.setProfile(profile);
+            if (navigator.credentials) {
+              // Signed in with Google Account
+              var cred = new FederatedCredential({
+                id:       profile.email,
+                name:     profile.name,
+                iconURL:  profile.imageUrl,
+                provider: GOOGLE
+              });
+              navigator.credentials.store(cred);
+            }
+          }
+          return Promise.resolve(profile);
+        });
+      },
+
+      _loginWithServer: function(type, cred) {
+        var email, path;
+        // Attempting sign in with Server
+        switch (type) {
+          case GOOGLE:
+            path = '/auth/google';
+            break;
+          case SIGNUP:
+            path = '/auth/register';
+            break;
+          default:
+            path = '/auth/password';
+            break;
+        }
+
+        var opt = {
+          method: 'POST',
+          // CSRF protection. If server doesn't see this header,
+          // assume that the request isn't invoked by a browser.
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }
+
+        if (cred instanceof FormData) {
+          opt.credentials = 'include';
+          opt.body = cred;
+        } else {
+          cred.idName = 'email';
+          opt.credentials = cred;
+        }
+
+        // Because this demo doesn't include server side code,
+        // a service worker `auth-mock.js` pretends taking care of
+        // authentication. This section is for browsers that
+        // don't support service workers. Respond with a fake profile
+        // to ALL requests.
+        if (!navigator.serviceWorker) {
+          if (type == GOOGLE) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            var profile = auth2.currentUser.get().getBasicProfile();
+            return Promise.resolve({
+              id:       profile.getId(),
+              email:    profile.getEmail(),
+              imageUrl: profile.getImageUrl(),
+              name:     profile.getName()
+            });
+          } else {
+            // Since some browsers don't support FormData.prototype.get,
+            // directly obtain email and password from the form.
+            if (cred instanceof FormData) {
+              email = document.querySelector('#accountEmail').value;
+              var password = document.querySelector('#accountPassword').value;
+              // If either email or password is missing, reject.
+              if (!email || !password) {
+                return Promise.reject();
+              }
+            } else {
+              email = cred.id;
+            }
+            // Pretend signed in / registered.
+            return Promise.resolve({
+              id:       email,
+              email:    email,
+              imageUrl: '',
+              name:     ''
+            });
+          }
+        }
+
+        // For browsers with sane backend including
+        // a server or a service worker.
+        return fetch(path, opt)
+        .then(function(res) {
+          if (res.status === 200) {
+            // Server authentication succeeded
+            return res.json();
+          } else {
+            // Server authentication failed
+            return Promise.reject('Authentication failed');
+          }
+        });
+      },
+
+      logout: function() {
+        if (navigator.credentials) {
+          navigator.credentials.requireUserMediation();
+        }
+        this._initializeProfile();
+        return Promise.resolve();
+      }
+
+    });
+
+  </script>
+
+</dom-module>
