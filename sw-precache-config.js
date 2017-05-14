@@ -2,11 +2,11 @@ module.exports = {
   staticFileGlobs: [
     '/index.html',
     '/manifest.json',
-    '/bower_components/webcomponentsjs/webcomponents-lite.min.js',
+    '/bower_components/*',
     '/images/*'
   ],
   navigateFallback: '/index.html',
-  navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/).*/],
+  navigateFallbackWhitelist: [/^(?!.*\.html$|\/data\/|\/register|\/unregister|\/signout|\/auth\/).*/],
   runtimeCaching: [
     {
       urlPattern: /\/data\/images\/.*/,
@@ -28,5 +28,8 @@ module.exports = {
         }
       }
     }
+  ],
+  importScripts: [
+    './auth-mock.js'
   ]
 };
