@@ -20,8 +20,5 @@
     "manifest.json",
     "bower_components/fetch/fetch.js",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
-  ],
-  "lint": {
-    "rules": ["polymer-2-hybrid"] 
-  }
+  ]
 }
