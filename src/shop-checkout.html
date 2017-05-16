@@ -16,10 +16,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shop-form-styles.html">
 <link rel="import" href="shop-input.html">
 <link rel="import" href="shop-select.html">
-<link rel="import" href="shop-checkbox.html">
 
 <dom-module id="shop-checkout">
-
+  <link rel="lazy-import" href="lazy-resources.html" group="imported-by-app">
   <template>
     <style include="shop-common-styles shop-button shop-form-styles shop-input shop-select shop-checkbox">
 
@@ -491,8 +490,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         _hasItems: {
           type: Boolean,
           computed: '_computeHasItem(cart.length)'
-        }
+        },
 
+        routeActive: Boolean,
+        routeData: Object
       }}
 
       static get observers() { return [

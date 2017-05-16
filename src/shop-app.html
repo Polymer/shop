@@ -18,11 +18,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/lazy-imports/lazy-imports-mixin.html">
 <link rel="import" href="shop-category-data.html">
-<!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
 
+
 <dom-module id="shop-app">
+  <link rel="lazy-import" href="lazy-resources.html" group="lazy-resources">
+  <!-- shop-home.html is loaded eagerly, as it's the default. -->
+  <link rel="lazy-import" href="shop-list.html" group="list">
+  <link rel="lazy-import" href="shop-detail.html" group="detail">
+  <link rel="lazy-import" href="shop-cart.html" group="cart">
+  <link rel="lazy-import" href="shop-checkout.html" group="checkout">
 
   <template>
 
@@ -281,7 +288,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 attr-for-selected="name">
               <dom-repeat items="[[categories]]" as="category" initial-count="4">
                 <template>
-                <shop-tab name="[[category.name]]">
+                <shop-tab name$="[[category.name]]">
                   <a href="/list/[[category.name]]">[[category.title]]</a>
                 </shop-tab>
                 </template>
@@ -338,7 +345,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // performance logging
     window.performance && performance.mark && performance.mark('shop-app - before register');
 
-    class ShopApp extends Polymer.Element {
+    /**
+     * @extends Polymer.Element
+     * @appliesMixin Polymer.LazyImportsMixin
+     */
+    class ShopApp extends Polymer.LazyImportsMixin(Polymer.Element) {
 
       static get is() { return 'shop-app'; }
 
@@ -354,6 +365,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: 0
         },
 
+        /** Data extracted from url segments. */
+        routeData: Object,
+
+        /** True when the window is small. */
+        smallScreen: Boolean,
+
+        categoryName: String,
+
+        drawerOpened: Boolean,
+
+        offline: Boolean,
+
         _shouldShowTabs: {
           computed: '_computeShouldShowTabs(page, smallScreen)'
         },
@@ -364,7 +387,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         _shouldRenderDrawer: {
           computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
-        }
+        },
+
+        _a11yLabel: String,
       }}
 
       static get observers() { return [
@@ -416,9 +441,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // When a load failed, it triggered a 404 which means we need to
             // eagerly load the 404 page definition
             let cb = this._pageLoaded.bind(this, Boolean(oldPage));
-            Polymer.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              cb, cb, true);
+            this.importLazyGroup(page).then(cb, cb);
           }
         }
       }
@@ -438,7 +461,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // load lazy resources after render and set `loadComplete` when done.
         if (!this.loadComplete) {
           Polymer.RenderStatus.afterNextRender(this, () => {
-            Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
+            this.importLazyGroup('lazy-resources').then(() => {
               // Register service worker if supported.
               if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('service-worker.js', {scope: '/'});

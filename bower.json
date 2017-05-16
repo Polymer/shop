@@ -19,7 +19,8 @@
     "iron-pages": "polymerelements/iron-pages#2.0-preview",
     "iron-selector": "polymerelements/iron-selector#2.0-preview",
     "paper-icon-button": "polymerelements/paper-icon-button#2.0-preview",
-    "paper-spinner": "polymerelements/paper-spinner#2.0-preview"
+    "paper-spinner": "polymerelements/paper-spinner#2.0-preview",
+    "lazy-imports": "Polymer/lazy-imports#master"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0-prerelease.6"
