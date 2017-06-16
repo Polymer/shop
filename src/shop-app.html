@@ -274,7 +274,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cart="[[cart]]"
         total="[[total]]"
         currency="USD"
-        supported-methods='["visa", "mastercard", "amex", "discover", "maestro", "diners", "jcb", "unionpay", "bitcoin"]'
+        basic-card='["visa", "mastercard", "amex", "discover", "diners", "jcb", "unionpay"]'
+        supported-methods='["https://emerald-eon.appspot.com/alicepay","https://emerald-eon.appspot.com/bobpay"]'
         android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'
         request-payer-email
         request-payer-phone

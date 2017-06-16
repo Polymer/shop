@@ -8,29 +8,29 @@ libraries:
 
 handlers:
 - url: /bower_components
-  static_dir: build/bundled/bower_components
+  static_dir: bower_components
   secure: always
 
 - url: /data
-  static_dir: build/bundled/data
+  static_dir: data
   secure: always
 
 - url: /images
-  static_dir: build/bundled/images
+  static_dir: images
   secure: always
 
 - url: /src
-  static_dir: build/bundled/src
+  static_dir: src
   secure: always
 
 - url: /service-worker.js
-  static_files: build/bundled/service-worker.js
-  upload: build/bundled/service-worker.js
+  static_files: service-worker.js
+  upload: service-worker.js
   secure: always
 
 - url: /manifest.json
-  static_files: build/bundled/manifest.json
-  upload: build/bundled/manifest.json
+  static_files: manifest.json
+  upload: manifest.json
   secure: always
 
 - url: /.*

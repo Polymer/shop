@@ -28,6 +28,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: "USD"
         },
 
+        basicCard: {
+          type: Array,
+          value: function() { return []; }
+        },
+
         supportedMethods: {
           type: Array,
           value: function() { return []; }
@@ -64,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         _paymentTypesSupported: {
-          computed: '_computePaymentTypesSupported(supportedMethods, androidPay)'
+          computed: '_computePaymentTypesSupported(basicCard, supportedMethods, androidPay)'
         }
       },
 
@@ -197,8 +202,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           details.displayItems.splice(details.displayItems.length, 0, newShippingOption);
       },
 
-      _computePaymentTypesSupported: function(supportedMethods, androidPay) {
+      _computePaymentTypesSupported: function(basicCards, supportedMethods, androidPay) {
         var paymentTypes = [];
+
+        if (basicCards.length > 0) {
+          paymentTypes.push({
+            supportedMethods: ['basic-card'],
+            data: {
+              supportedNetworks: basicCards
+            }
+          });
+        }
 
         if (supportedMethods.length > 0) {
           paymentTypes.push({
