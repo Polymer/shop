@@ -8,14 +8,26 @@
     "src/shop-checkout.html",
     "src/lazy-resources.html"
   ],
-  "sourceGlobs": [
-   "src/**/*",
-   "data/**/*",
-   "images/**/*",
-   "bower.json"
+  "sources": [
+    "src/**/*",
+    "data/**/*",
+    "images/**/*",
+    "bower.json"
   ],
-  "includeDependencies": [
+  "extraDependencies": [
+    "app.yaml",
     "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+    "bower_components/webcomponentsjs/*"
+  ],
+  "lint": {
+    "rules": ["polymer-2-hybrid"]
+  },
+  "builds": [
+    {
+      "preset": "es5-bundled"
+    },
+    {
+      "preset": "es6-unbundled"
+    }
   ]
 }
