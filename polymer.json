@@ -24,6 +24,22 @@
   },
   "builds": [
     {
+      "name": "es5-unbundled",
+      "js": {
+        "minify": true,
+        "compile": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      },
+      "bundle": false,
+      "addServiceWorker": true,
+      "addPushManifest": true
+    },
+    {
       "preset": "es5-bundled"
     },
     {
