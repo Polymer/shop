@@ -2,7 +2,7 @@ const fs = require('fs');
 const pushManifest = require('../build/es6-bundled/push-manifest.json');
 const result = {
   "hosting": {
-    "public": "build/es6-bundled",
+    "public": "build/es5-bundled",
     "rewrites": [
       {
         "source": "**",
@@ -24,6 +24,10 @@ pushManifest[''] = Object.assign({},
     "bower_components/webcomponentsjs/webcomponents-loader.js": {
       "type": "script",
       "weight": 1
+    },
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js": {
+      "type": "script",
+      "weight": 1
     }
   });
 pushManifest['list/**'] = Object.assign({},
@@ -39,6 +43,10 @@ pushManifest['list/**'] = Object.assign({},
       "weight": 1
     },
     "bower_components/webcomponentsjs/webcomponents-loader.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js": {
       "type": "script",
       "weight": 1
     }
@@ -58,6 +66,10 @@ pushManifest['detail/**'] = Object.assign({},
     "bower_components/webcomponentsjs/webcomponents-loader.js": {
       "type": "script",
       "weight": 1
+    },
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js": {
+      "type": "script",
+      "weight": 1
     }
   });
 pushManifest['cart'] = Object.assign({},
@@ -75,6 +87,10 @@ pushManifest['cart'] = Object.assign({},
     "bower_components/webcomponentsjs/webcomponents-loader.js": {
       "type": "script",
       "weight": 1
+    },
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js": {
+      "type": "script",
+      "weight": 1
     }
   });
 pushManifest['checkout'] = Object.assign({},
@@ -90,6 +106,10 @@ pushManifest['checkout'] = Object.assign({},
       "weight": 1
     },
     "bower_components/webcomponentsjs/webcomponents-loader.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/webcomponentsjs/custom-elements-es5-adapter.js": {
       "type": "script",
       "weight": 1
     }
