@@ -2,11 +2,11 @@
  * Usage:
  *   node scripts/generate_firebase_json.js
  *   node scripts/generate_firebase_json.js es6 unbundled
- *   node scripts/generate_firebase_json.js es5 bundled
+ *   node scripts/generate_firebase_json.js es5
  */
 const esVersion = process.argv[2] || 'es6';
 const bundleOption = process.argv[3] || 'bundled';
-const variation = `${esVersion}-${bundleOption}`;
+const variation = `static-${esVersion}-${bundleOption}`;
 
 
 const fs = require('fs');

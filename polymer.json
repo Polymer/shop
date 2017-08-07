@@ -34,6 +34,18 @@
     {
       "preset": "es6-bundled",
       "basePath": true
+    },
+    {
+      "name": "static-es5-bundled",
+      "preset": "es5-bundled"
+    },
+    {
+      "name": "static-es6-unbundled",
+      "preset": "es6-unbundled"
+    },
+    {
+      "name": "static-es6-bundled",
+      "preset": "es6-bundled"
     }
   ]
 }
