@@ -21,6 +21,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shop-category-data.html">
 <!-- Since 'home' is the default route, eagerly load it. -->
 <link rel="import" href="shop-home.html">
+<link rel="import" href="shop-list.html">
+<link rel="import" href="shop-detail.html">
+<link rel="import" href="shop-cart.html">
+<link rel="import" href="shop-checkout.html">
+<link rel="import" href="lazy-resources.html">
 
 <dom-module id="shop-app">
 
@@ -408,18 +413,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page, oldPage) {
         if (page != null) {
-          // home route is eagerly loaded
-          if (page == 'home') {
-            this._pageLoaded(Boolean(oldPage));
-          // other routes are lazy loaded
-          } else {
-            // When a load failed, it triggered a 404 which means we need to
-            // eagerly load the 404 page definition
-            let cb = this._pageLoaded.bind(this, Boolean(oldPage));
-            Polymer.importHref(
-              this.resolveUrl('shop-' + page + '.html'),
-              cb, cb, true);
-          }
+          this._pageLoaded(Boolean(oldPage));
         }
       }
 
@@ -438,14 +432,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // load lazy resources after render and set `loadComplete` when done.
         if (!this.loadComplete) {
           Polymer.RenderStatus.afterNextRender(this, () => {
-            Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
-              // Register service worker if supported.
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('service-worker.js', {scope: '/'});
-              }
-              this._notifyNetworkStatus();
-              this.loadComplete = true;
-            });
+            // Register service worker if supported.
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+            }
+            this._notifyNetworkStatus();
+            this.loadComplete = true;
           });
         }
       }
