@@ -6,13 +6,13 @@ const fs = require('fs');
 
 const packageJson = {
   "scripts": {
-    "start": "prpl-server --host 0.0.0.0 --https-redirect"
+    "start": "prpl-server --host 0.0.0.0 --https-redirect --bot-proxy https://render-tron.appspot.com/render"
   },
   "engines": {
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "prpl-server": "^0.7.0"
+    "prpl-server": "^0.9.0"
   }
 };
 
