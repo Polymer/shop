@@ -8,6 +8,6 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "prpl-server": "^0.9.0"
+    "prpl-server": "^0.10.1"
   }
 }

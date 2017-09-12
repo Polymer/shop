@@ -6,6 +6,7 @@
 const fs = require('fs');
 const pushManifestPath = 'build/es6-unbundled/push-manifest.json';
 const pushManifest = require(`../${pushManifestPath}`);
+const newManifest = {};
 
 const navigateRequestPreloads = {
   "bower_components/webcomponentsjs/webcomponents-loader.js": {
@@ -14,7 +15,7 @@ const navigateRequestPreloads = {
   }
 };
 
-pushManifest['/'] = Object.assign({
+newManifest['/'] = Object.assign({
     "src/shop-app.html": {
       "type": "document",
       "weight": 1
@@ -22,7 +23,7 @@ pushManifest['/'] = Object.assign({
   },
   pushManifest['src/shop-app.html'],
   navigateRequestPreloads);
-pushManifest['/list/.*'] = Object.assign({
+newManifest['/list/.*'] = Object.assign({
     "src/shop-app.html": {
       "type": "document",
       "weight": 1
@@ -35,7 +36,7 @@ pushManifest['/list/.*'] = Object.assign({
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-list.html'],
   navigateRequestPreloads);
-pushManifest['/detail/.*'] = Object.assign({
+newManifest['/detail/.*'] = Object.assign({
     "src/shop-app.html": {
       "type": "document",
       "weight": 1
@@ -48,7 +49,7 @@ pushManifest['/detail/.*'] = Object.assign({
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-detail.html'],
   navigateRequestPreloads);
-pushManifest['/cart'] = Object.assign({
+newManifest['/cart'] = Object.assign({
     "src/shop-app.html": {
       "type": "document",
       "weight": 1
@@ -61,7 +62,7 @@ pushManifest['/cart'] = Object.assign({
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-cart.html'],
   navigateRequestPreloads);
-pushManifest['/checkout'] = Object.assign({
+newManifest['/checkout'] = Object.assign({
     "src/shop-app.html": {
       "type": "document",
       "weight": 1
@@ -75,4 +76,4 @@ pushManifest['/checkout'] = Object.assign({
   pushManifest['src/shop-checkout.html'],
   navigateRequestPreloads);
 
-fs.writeFileSync(pushManifestPath, JSON.stringify(pushManifest, null, 2));
+fs.writeFileSync(pushManifestPath, JSON.stringify(newManifest, null, 2));
