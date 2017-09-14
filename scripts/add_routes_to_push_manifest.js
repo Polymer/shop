@@ -75,5 +75,6 @@ newManifest['/checkout'] = Object.assign({
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-checkout.html'],
   navigateRequestPreloads);
+newManifest['src/lazy-resources.html'] = pushManifest['src/lazy-resources.html'];
 
 fs.writeFileSync(pushManifestPath, JSON.stringify(newManifest, null, 2));
