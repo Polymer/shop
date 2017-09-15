@@ -14,6 +14,7 @@
     "iron-form": "polymerelements/iron-form#^2.0.0",
     "iron-icon": "polymerelements/iron-icon#^2.0.0",
     "iron-iconset-svg": "polymerelements/iron-iconset-svg#^2.0.0",
+    "iron-location": "polymerelements/iron-location#fix-ie-capture",
     "iron-media-query": "polymerelements/iron-media-query#^2.0.0",
     "iron-overlay-behavior": "polymerelements/iron-overlay-behavior#^2.0.0",
     "iron-pages": "polymerelements/iron-pages#^2.0.0",
@@ -23,5 +24,8 @@
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0"
+  },
+  "resolutions": {
+    "iron-location": "fix-ie-capture"
   }
 }

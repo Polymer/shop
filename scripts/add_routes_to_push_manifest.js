@@ -75,6 +75,16 @@ newManifest['/checkout'] = Object.assign({
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-checkout.html'],
   navigateRequestPreloads);
-newManifest['src/lazy-resources.html'] = pushManifest['src/lazy-resources.html'];
+
+// HACK(keanulee): need to dedup already pushed assets -
+// https://github.com/Polymer/polymer-build/issues/260
+const dedupedLazyResourcesAssets = {};
+const lazyResourcesAssets = pushManifest['src/lazy-resources.html'];
+Object.keys(lazyResourcesAssets).forEach((asset) => {
+  if (!newManifest['/'][asset]) {
+    dedupedLazyResourcesAssets[asset] = lazyResourcesAssets[asset];
+  }
+});
+newManifest['src/lazy-resources.html'] = dedupedLazyResourcesAssets;
 
 fs.writeFileSync(pushManifestPath, JSON.stringify(newManifest, null, 2));
