@@ -58,7 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           value: "shipping"
         },
 
-        androidPay: {
+        payWithGoogle: {
           type: Object,
           value: function() { return {}; }
         },
@@ -69,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
 
         _paymentTypesSupported: {
-          computed: '_computePaymentTypesSupported(basicCard, supportedMethods, androidPay)'
+          computed: '_computePaymentTypesSupported(basicCard, supportedMethods, payWithGoogle)'
         }
       },
 
@@ -202,7 +202,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           details.displayItems.splice(details.displayItems.length, 0, newShippingOption);
       },
 
-      _computePaymentTypesSupported: function(basicCards, supportedMethods, androidPay) {
+      _computePaymentTypesSupported: function(basicCards, supportedMethods, payWithGoogle) {
         var paymentTypes = [];
 
         if (basicCards.length > 0) {
@@ -220,10 +220,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           });
         }
 
-        if (androidPay && androidPay != {}) {
+        if (payWithGoogle && payWithGoogle != {}) {
           paymentTypes.push({
-            supportedMethods: ['https://android.com/pay'],
-            data: androidPay
+            supportedMethods: ['https://google.com/pay'],
+            data: payWithGoogle
           });
         }
 

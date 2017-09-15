@@ -276,7 +276,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         currency="USD"
         basic-card='["visa", "mastercard", "amex", "discover", "diners", "jcb", "unionpay"]'
         supported-methods='["https://emerald-eon.appspot.com/alicepay","https://emerald-eon.appspot.com/bobpay"]'
-        android-pay='{"merchantName":"Android Pay Demo","merchantId":"12345678901234567890","environment":"TEST","allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"],"paymentMethodTokenizationParameters":{"tokenizationType":"GATEWAY_TOKEN","parameters":{"gateway":"stripe","stripe:publishableKey":"pk_live_abcdefghijklmnopqrstuvwx","stripe:version":"2016-07-06"}}}'
+        pay-with-google='{"merchantId":"02510116604241796260","environment":"TEST","apiVersion":1,"allowedPaymentMethods":["CARD","TOKENIZED_CARD"],"paymentMethodTokenizationParameters": { "tokenizationType":"DIRECT", "parameters": {"publicKey": "BOdoXP1aiNpkh3JUhiSZKHYF2Y="}},"cardRequirements":{ "allowedCardNetworks":["AMEX","DISCOVER","MASTERCARD","VISA"], "billingAddressRequired":true,"billingAddressFormat":"FULL"}, "phoneNumberRequired":false,"emailRequired":false, "shippingAddressRequired":false}'
         request-payer-email
         request-payer-phone
         request-payer-name
