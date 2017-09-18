@@ -71,7 +71,3 @@ Run the command to build the presets:
 Use `polymer serve` to serve a specific build preset of the app. For example:
 
     polymer serve build/es5-bundled
-
-Use `prpl-server` to automatically serve the appropriate build preset based on browser capabilities:
-
-    prpl-server --root build/
