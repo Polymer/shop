@@ -21,6 +21,7 @@ newManifest['/'] = Object.assign({
       "weight": 1
     }
   },
+  pushManifest['/'],
   pushManifest['src/shop-app.html'],
   navigateRequestPreloads);
 newManifest['/list/.*'] = Object.assign({
@@ -33,6 +34,7 @@ newManifest['/list/.*'] = Object.assign({
       "weight": 1
     }
   },
+  pushManifest['/list/.*'],
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-list.html'],
   navigateRequestPreloads);
@@ -46,6 +48,7 @@ newManifest['/detail/.*'] = Object.assign({
       "weight": 1
     }
   },
+  pushManifest['/detail/.*'],
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-detail.html'],
   navigateRequestPreloads);
@@ -59,6 +62,7 @@ newManifest['/cart'] = Object.assign({
       "weight": 1
     }
   },
+  pushManifest['/cart'],
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-cart.html'],
   navigateRequestPreloads);
@@ -72,6 +76,7 @@ newManifest['/checkout'] = Object.assign({
       "weight": 1
     }
   },
+  pushManifest['/checkout'],
   pushManifest['src/shop-app.html'],
   pushManifest['src/shop-checkout.html'],
   navigateRequestPreloads);
