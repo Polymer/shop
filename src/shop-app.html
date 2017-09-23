@@ -615,8 +615,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if ('PaymentRequest' in window) {
           var that = this;
           var itemDetails = this.payment._computeItemDetails();
-          // TODO: Calculate total
-          var total = 60;
+          var total = itemDetails.reduce(function(sum,item){
+            return sum + parseFloat(item.amount.value);
+          }, 0);
           this.payment.buyItems(itemDetails, total)
           .then(function(instrument) {
             return that._processPayment(instrument, true);
