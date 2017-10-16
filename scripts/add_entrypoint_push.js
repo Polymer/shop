@@ -1,6 +1,6 @@
 /**
  * Usage:
- *   node scripts/add_routes_to_push_manifest.js
+ *   node scripts/add_entrypoint_push.js
  */
 
 const fs = require('fs');
@@ -81,7 +81,7 @@ newManifest['/checkout'] = Object.assign({
   pushManifest['src/shop-checkout.html'],
   navigateRequestPreloads);
 
-// HACK(keanulee): need to dedup already pushed assets -
+// Dedup assets already pushed by shell -
 // https://github.com/Polymer/polymer-build/issues/260
 const dedupedLazyResourcesAssets = {};
 const lazyResourcesAssets = pushManifest['src/lazy-resources.html'];
