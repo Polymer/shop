@@ -107,11 +107,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cart.cart = cartData;
         // Data bindings will stamp out new DOM asynchronously
         // so wait to check for updates
-        setTimeout(function() {
+        flush(function() {
           var section = cart.shadowRoot.querySelectorAll('.subsection')[1];
           assert.isTrue(section.hasAttribute('visible'), 'main section should have visible attirubte when cart has items');
           done();
-        }, 1000);
+        });
       });
 
       test('main section should not have visible attirubte when cart is empty', function(done) {
