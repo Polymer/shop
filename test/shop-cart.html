@@ -66,7 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         cart = fixture('basic');
       });
 
-      test('cart item lengths should be equalled', function(done) {
+      test('cart item lengths should be equal', function(done) {
         // Set cart property
         cart.cart = cartData;
         // Data bindings will stamp out new DOM asynchronously
@@ -102,26 +102,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       });
 
-      test('main section should have visible attirubte when cart has items', function(done) {
+      test('main section should have visible attribute when cart has items', function(done) {
         // Set cart property
         cart.cart = cartData;
         // Data bindings will stamp out new DOM asynchronously
         // so wait to check for updates
         flush(function() {
           var section = cart.shadowRoot.querySelectorAll('.subsection')[1];
-          assert.isTrue(section.hasAttribute('visible'), 'main section should have visible attirubte when cart has items');
+          assert.isTrue(section.hasAttribute('visible'), 'main section should have visible attribute when cart has items');
           done();
         });
       });
 
-      test('main section should not have visible attirubte when cart is empty', function(done) {
+      test('main section should not have visible attribute when cart is empty', function(done) {
         // Set cart property
         cart.cart = [];
         // Data bindings will stamp out new DOM asynchronously
         // so wait to check for updates
         flush(function() {
           var section = cart.shadowRoot.querySelectorAll('.subsection')[1];
-          assert.isFalse(section.hasAttribute('visible'), 'main section should not have visible attirubte when cart is empty');
+          assert.isFalse(section.hasAttribute('visible'), 'main section should not have visible attribute when cart is empty');
           done();
         });
       });

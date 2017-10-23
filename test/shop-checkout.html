@@ -78,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         });
       });
 
-      test('order items length should be equalled', function(done) {
+      test('order items length should be equal', function(done) {
         // Set cart property
         checkout.cart = cartData;
         // Data bindings will stamp out new DOM asynchronously
@@ -97,12 +97,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // so wait to check for updates
         flush(function() {
           var section = checkout.shadowRoot.querySelector('.subsection.grid');
-          assert.isTrue(section.hasAttribute('visible'), 'checkout form should have visible attirubte when cart has items');
+          assert.isTrue(section.hasAttribute('visible'), 'checkout form should have visible attribute when cart has items');
           done();
         });
       });
 
-      test('checkout form should have visible attirubte when cart has items', function(done) {
+      test('checkout form should have visible attribute when cart has items', function(done) {
         // Set cart property
         checkout.cart = [];
         // Data bindings will stamp out new DOM asynchronously
