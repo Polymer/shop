@@ -12,10 +12,12 @@ import { afterNextRender } from '../node_modules/@polymer/polymer/lib/utils/rend
 import { timeOut } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 
-import { store } from './shop-redux-store.js';
-import { changeOffline } from './shop-redux-categories.js';
-import { computeNumItems } from './shop-redux-helpers.js';
-import './shop-redux-router.js';
+import { store } from './redux/store.js';
+import { changeOffline } from './redux/categories-actions.js';
+import { computeNumItems } from './redux/helpers.js';
+import './redux/categories-reducers.js';
+import './redux/cart-reducers.js';
+import './redux/router.js';
 
 // performance logging
 window.performance && performance.mark && performance.mark('shop-app - before register');
@@ -354,6 +356,7 @@ class ShopApp extends Element {
     // Custom elements polyfill safe way to indicate an element has been upgraded.
     this.removeAttribute('unresolved');
     // listen for custom events
+    // TODO: try to move event actions to action creators
     this.addEventListener('add-cart-item', (e)=>this._onAddCartItem(e));
     this.addEventListener('set-cart-item', (e)=>this._onSetCartItem(e));
     this.addEventListener('clear-cart', (e)=>this._onClearCart(e));

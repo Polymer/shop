@@ -9,10 +9,10 @@ import './shop-checkbox.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { timeOut } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 
-import { store, installReducers } from './shop-redux-store.js';
-import { pushState } from './shop-redux-router.js';
-import { clearCart } from './shop-redux-cart.js';
-import { computeTotal } from './shop-redux-helpers.js';
+import { store, installReducers } from './redux/store.js';
+import { pushState } from './redux/router.js';
+import { clearCart } from './redux/cart-actions.js';
+import { computeTotal } from './redux/helpers.js';
 
 installReducers({
   // Internal state from checkout flow (init/success/error).

@@ -2,7 +2,7 @@ import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
 import './shop-button.js';
 import './shop-image.js';
 
-import { store } from './shop-redux-store.js';
+import { store } from './redux/store.js';
 
 class ShopHome extends Element {
   static get template() {

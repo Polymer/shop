@@ -3,8 +3,8 @@ import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
 
-import { store } from './shop-redux-store.js';
-import { computeTotal } from './shop-redux-helpers.js';
+import { store } from './redux/store.js';
+import { computeTotal } from './redux/helpers.js';
 
 class ShopCart extends Element {
   static get template() {

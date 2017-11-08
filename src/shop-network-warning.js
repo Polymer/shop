@@ -3,8 +3,8 @@ import '../node_modules/@polymer/iron-icon/iron-icon.js';
 import './shop-button.js';
 import './shop-icons.js';
 
-import { store } from './shop-redux-store.js';
-import { tryReconnect } from './shop-redux-categories.js';
+import { store } from './redux/store.js';
+import { tryReconnect } from './redux/categories-actions.js';
 
 class ShopNetworkWarning extends Element {
   static get template() {

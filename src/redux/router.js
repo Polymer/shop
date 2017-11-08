@@ -1,6 +1,6 @@
-import { store, installReducers } from './shop-redux-store.js';
-import { loadCategory } from './shop-redux-categories.js';
-import { findCategory } from './shop-redux-helpers.js';
+import { store, installReducers } from './store.js';
+import { loadCategory } from './categories-actions.js';
+import { findCategory } from './helpers.js';
 
 installReducers({
   // window.location changed

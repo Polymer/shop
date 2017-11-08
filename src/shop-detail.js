@@ -7,9 +7,9 @@ import './shop-select.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 
-import { store } from './shop-redux-store.js';
-import { addCartItem } from './shop-redux-cart.js';
-import { findCategory, findItem } from './shop-redux-helpers.js';
+import { store } from './redux/store.js';
+import { addCartItem } from './redux/cart-actions.js';
+import { findCategory, findItem } from './redux/helpers.js';
 
 class ShopDetail extends Element {
   static get template() {

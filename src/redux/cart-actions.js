@@ -1,35 +1,5 @@
-import { store, installReducers } from './shop-redux-store.js';
-
-installReducers({
-  // Cart initialization/update from another window.
-  _cartChanged(state, action) {
-    const cart = action.cart;
-    return {
-      ...state,
-      cart
-    };
-  }
-});
-
-function initCart() {
-  store.dispatch({
-    type: '_cartChanged',
-    cart: getLocalCartData()
-  });
-}
-window.addEventListener('storage', initCart);
-initCart();
-
-function getLocalCartData() {
-  const localCartData = localStorage.getItem('shop-cart-data');
-  try {
-    return JSON.parse(localCartData) || [];
-  } catch (e) {
-    return [];
-  }
-}
-
 // Add to cart from detail view.
+// TODO: cartItemAdded
 export function addCartItem(detail) {
   return (dispatch, getState) => {
     const state = getState();
@@ -43,12 +13,22 @@ export function addCartItem(detail) {
 }
 
 // Update from cart view.
+// TODO: consider renaming to something closer to UI action, such as cartItemQuantityUpdated
 export function setCartItem(detail) {
   return (dispatch, getState) => {
     const state = getState();
     const cart = state.cart.slice(0);
     const i = findCartItemIndex(cart, detail.item.name, detail.size);
     updateCart(dispatch, cart, i, detail);
+
+    // Replace with:
+    // dispatch({
+    //   type: 'CART_ITEM_QUANTITY_UPDATED',
+    //   payload: {
+    //     cartItemId,
+    //     quantity
+    //   }
+    // })
   };
 }
 
@@ -77,6 +57,7 @@ function findCartItemIndex(cart, name, size) {
 }
 
 function updateCart(dispatch, cart, i, detail) {
+  // NOTE: cart is NOT from store - it is just as a helper
   if (detail.quantity === 0) {
     // Remove item from cart when the new quantity is 0.
     if (i !== -1) {
@@ -92,6 +73,7 @@ function updateCart(dispatch, cart, i, detail) {
 
   localStorage.setItem('shop-cart-data', JSON.stringify(cart));
   dispatch({
+    // TODO: CART_DATA_RECEIVED
     type: '_cartChanged',
     cart
   });

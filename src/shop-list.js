@@ -6,8 +6,8 @@ import './shop-list-item.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 
-import { store } from './shop-redux-store.js';
-import { findCategory } from './shop-redux-helpers.js';
+import { store } from './redux/store.js';
+import { findCategory } from './redux/helpers.js';
 
 class ShopList extends Element {
   static get template() {

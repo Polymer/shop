@@ -5,8 +5,8 @@ import './shop-icons.js';
 import './shop-image.js';
 import './shop-select.js';
 
-import { store } from './shop-redux-store.js';
-import { setCartItem } from './shop-redux-cart.js';
+import { store } from './redux/store.js';
+import { setCartItem } from './redux/cart-actions.js';
 
 const $_documentContainer = document.createElement('div');
 $_documentContainer.setAttribute('style', 'display: none;');
