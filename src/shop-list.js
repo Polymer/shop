@@ -170,12 +170,12 @@ class ShopList extends Element {
       microTask, () => {
         if (category) {
           // Notify the category and the page's title
-          this.dispatchEvent(new CustomEvent('change-section', {
-            bubbles: true, composed: true, detail: {
-              category: category.name,
-              title: category.title,
-              image: this.baseURI + category.image
-            }}));
+          // this.dispatchEvent(new CustomEvent('change-section', {
+          //   bubbles: true, composed: true, detail: {
+          //     // category: category.name,
+          //     title: category.title,
+          //     image: this.baseURI + category.image
+          //   }}));
         } else {
           this.dispatchEvent(new CustomEvent('show-invalid-url-warning', {
             bubbles: true, composed: true}));

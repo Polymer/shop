@@ -225,13 +225,13 @@ class ShopDetail extends Element {
           this.$.quantitySelect.value = '1';
           this.$.sizeSelect.value = 'M';
 
-          this.dispatchEvent(new CustomEvent('change-section', {
-            bubbles: true, composed: true, detail: {
-              category: item ? item.category : '',
-              title: item ? item.title : '',
-              description: item ? item.description.substring(0, 100) : '',
-              image: item ? this.baseURI + item.image : ''
-            }}));
+          // this.dispatchEvent(new CustomEvent('change-section', {
+          //   bubbles: true, composed: true, detail: {
+          //     // category: item ? item.category : '',
+          //     title: item ? item.title : '',
+          //     description: item ? item.description.substring(0, 100) : '',
+          //     image: item ? this.baseURI + item.image : ''
+          //   }}));
         })
     }
   }

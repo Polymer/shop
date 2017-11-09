@@ -445,10 +445,10 @@ class ShopCheckout extends Element {
     /**
      * If true, shop-checkout is currently visible on the screen.
      */
-    visible: {
-      type: Boolean,
-      observer: '_visibleChanged'
-    },
+    // visible: {
+    //   type: Boolean,
+    //   observer: '_visibleChanged'
+    // },
 
     /**
      * True when waiting for the server to repond.
@@ -641,16 +641,16 @@ class ShopCheckout extends Element {
     return this._formatPrice(entry.quantity * entry.item.price);
   }
 
-  _visibleChanged(visible) {
-    if (!visible) {
-      return;
-    }
-    // Reset the UI states
-    this._reset();
-    // Notify the page's title
-    this.dispatchEvent(new CustomEvent('change-section', {
-      bubbles: true, composed: true, detail: { title: 'Checkout' }}));
-  }
+  // _visibleChanged(visible) {
+  //   if (!visible) {
+  //     return;
+  //   }
+  //   // Reset the UI states
+  //   this._reset();
+  //   // Notify the page's title
+  //   this.dispatchEvent(new CustomEvent('change-section', {
+  //     bubbles: true, composed: true, detail: { title: 'Checkout' }}));
+  // }
 
 }
 

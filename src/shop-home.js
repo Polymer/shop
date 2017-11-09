@@ -114,10 +114,10 @@ class ShopHome extends Element {
       type: Array
     },
 
-    visible: {
-      type: Boolean,
-      observer: '_visibleChanged'
-    }
+    // visible: {
+    //   type: Boolean,
+    //   observer: '_visibleChanged'
+    // }
 
   }}
 
@@ -133,12 +133,12 @@ class ShopHome extends Element {
     this.categories = Object.values(state.categories);
   }
 
-  _visibleChanged(visible) {
-    if (visible) {
-      this.dispatchEvent(new CustomEvent('change-section', {
-        bubbles: true, composed: true, detail: {title: 'Home'}}));
-    }
-  }
+  // _visibleChanged(visible) {
+  //   if (visible) {
+  //     this.dispatchEvent(new CustomEvent('change-section', {
+  //       bubbles: true, composed: true, detail: {title: 'Home'}}));
+  //   }
+  // }
 }
 
 customElements.define(ShopHome.is, ShopHome);

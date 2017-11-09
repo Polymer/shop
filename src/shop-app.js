@@ -358,16 +358,16 @@ class ShopApp extends Element {
     this.addEventListener('add-cart-item', (e)=>this._onAddCartItem(e));
     this.addEventListener('set-cart-item', (e)=>this._onSetCartItem(e));
     this.addEventListener('clear-cart', (e)=>this._onClearCart(e));
-    this.addEventListener('change-section', (e)=>this._onChangeSection(e));
+    // this.addEventListener('change-section', (e)=>this._onChangeSection(e));
     this.addEventListener('announce', (e)=>this._onAnnounce(e));
     this.addEventListener('dom-change', (e)=>this._domChange(e));
     this.addEventListener('show-invalid-url-warning', (e)=>this._onFallbackSelectionTriggered(e));
   }
 
   _pageChanged(page, oldPage) {
-    if (page === 'list') {
-      this._listScrollTop = window.pageYOffset;
-    }
+    // if (page === 'list') {
+    //   this._listScrollTop = window.pageYOffset;
+    // }
 
     // Close the drawer - in case the *route* change came from a link in the drawer.
     this.drawerOpened = false;
@@ -430,54 +430,52 @@ class ShopApp extends Element {
     this.drawerOpened = !this.drawerOpened;
   }
 
-  _setMeta(attrName, attrValue, content) {
-    let element = document.head.querySelector(`meta[${attrName}="${attrValue}"]`);
-    if (!element) {
-      element = document.createElement('meta');
-      element.setAttribute(attrName, attrValue);
-      document.head.appendChild(element);
-    }
-    element.setAttribute('content', content || '');
-  }
+  // _setMeta(attrName, attrValue, content) {
+  //   let element = document.head.querySelector(`meta[${attrName}="${attrValue}"]`);
+  //   if (!element) {
+  //     element = document.createElement('meta');
+  //     element.setAttribute(attrName, attrValue);
+  //     document.head.appendChild(element);
+  //   }
+  //   element.setAttribute('content', content || '');
+  // }
 
   // Elements in the app can notify section changes.
   // Response by a11y announcing the section and syncronizing the category.
-  _onChangeSection(event) {
-    let detail = event.detail;
+  // _onChangeSection(event) {
+  //   let detail = event.detail;
 
-    // Scroll to the top of the page when navigating to a non-list page. For list view,
-    // scroll to the last saved position only if the category has not changed.
-    let scrollTop = 0;
-    if (this.page === 'list') {
-      if (this.categoryName === detail.category) {
-        scrollTop = this._listScrollTop;
-      } else {
-        // Reset the list view scrollTop if the category changed.
-        this._listScrollTop = 0;
-      }
-    }
-    // Use `Polymer.AppLayout.scroll` with `behavior: 'silent'` to disable header scroll
-    // effects during the scroll.
-    scroll({ top: scrollTop, behavior: 'silent' });
+  //   // // Scroll to the top of the page when navigating to a non-list page. For list view,
+  //   // // scroll to the last saved position only if the category has not changed.
+  //   // let scrollTop = 0;
+  //   // if (this.page === 'list') {
+  //   //   if (this.categoryName === detail.category) {
+  //   //     scrollTop = this._listScrollTop;
+  //   //   } else {
+  //   //     // Reset the list view scrollTop if the category changed.
+  //   //     this._listScrollTop = 0;
+  //   //   }
+  //   // }
+  //   // // Use `Polymer.AppLayout.scroll` with `behavior: 'silent'` to disable header scroll
+  //   // // effects during the scroll.
+  //   // scroll({ top: scrollTop, behavior: 'silent' });
 
-    this.categoryName = detail.category || '';
-
-    // Announce the page's title
-    if (detail.title) {
-      document.title = detail.title + ' - SHOP';
-      this._announce(detail.title + ', loaded');
-      // Set open graph metadata
-      this._setMeta('property', 'og:title', detail.title);
-      this._setMeta('property', 'og:description', detail.description || document.title);
-      this._setMeta('property', 'og:url', document.location.href);
-      this._setMeta('property', 'og:image', detail.image || this.baseURI + 'images/shop-icon-128.png');
-      // Set twitter card metadata
-      this._setMeta('property', 'twitter:title', detail.title);
-      this._setMeta('property', 'twitter:description', detail.description || document.title);
-      this._setMeta('property', 'twitter:url', document.location.href);
-      this._setMeta('property', 'twitter:image:src', detail.image || this.baseURI + 'images/shop-icon-128.png');
-    }
-  }
+  //   // Announce the page's title
+  //   if (detail.title) {
+  //     document.title = detail.title + ' - SHOP';
+  //     this._announce(detail.title + ', loaded');
+  //     // Set open graph metadata
+  //     this._setMeta('property', 'og:title', detail.title);
+  //     this._setMeta('property', 'og:description', detail.description || document.title);
+  //     this._setMeta('property', 'og:url', document.location.href);
+  //     this._setMeta('property', 'og:image', detail.image || this.baseURI + 'images/shop-icon-128.png');
+  //     // Set twitter card metadata
+  //     this._setMeta('property', 'twitter:title', detail.title);
+  //     this._setMeta('property', 'twitter:description', detail.description || document.title);
+  //     this._setMeta('property', 'twitter:url', document.location.href);
+  //     this._setMeta('property', 'twitter:image:src', detail.image || this.baseURI + 'images/shop-icon-128.png');
+  //   }
+  // }
 
   _onAddCartItem() {
     if (!this._cartModal) {

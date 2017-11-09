@@ -69,10 +69,10 @@ class ShopCart extends Element {
 
     cart: Array,
 
-    visible: {
-      type: Boolean,
-      observer: '_visibleChanged'
-    },
+    // visible: {
+    //   type: Boolean,
+    //   observer: '_visibleChanged'
+    // },
 
     _hasItems: {
       type: Boolean,
@@ -108,13 +108,13 @@ class ShopCart extends Element {
     return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
   }
 
-  _visibleChanged(visible) {
-    if (visible) {
-      // Notify the section's title
-      this.dispatchEvent(new CustomEvent('change-section', {
-        bubbles: true, composed: true, detail: { title: 'Your cart' }}));
-    }
-  }
+  // _visibleChanged(visible) {
+  //   if (visible) {
+  //     // Notify the section's title
+  //     this.dispatchEvent(new CustomEvent('change-section', {
+  //       bubbles: true, composed: true, detail: { title: 'Your cart' }}));
+  //   }
+  // }
 
 }
 
