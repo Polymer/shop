@@ -614,7 +614,6 @@ class ShopCheckout extends Element {
     if (response.success) {
       this._pushState('success');
       this._reset();
-      this.dispatchEvent(new CustomEvent('clear-cart', {bubbles: true, composed: true}));
       store.dispatch(clearCart());
     } else {
       this._pushState('error');

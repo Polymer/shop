@@ -112,10 +112,6 @@ class ShopList extends Element {
     failure: Boolean
 
   }}
-
-  static get observers() { return [
-    '_categoryChanged(category, visible)'
-  ]}
   
   constructor() {
     super();
@@ -160,27 +156,6 @@ class ShopList extends Element {
     }
     let pluralizedQ = quantity === 1 ? 'item' : 'items';
     return  '(' + quantity + ' ' + pluralizedQ + ')';
-  }
-
-  _categoryChanged(category, visible) {
-    if (!visible) {
-      return;
-    }
-    this._changeSectionDebouncer = Debouncer.debounce(this._changeSectionDebouncer,
-      microTask, () => {
-        if (category) {
-          // Notify the category and the page's title
-          // this.dispatchEvent(new CustomEvent('change-section', {
-          //   bubbles: true, composed: true, detail: {
-          //     // category: category.name,
-          //     title: category.title,
-          //     image: this.baseURI + category.image
-          //   }}));
-        } else {
-          this.dispatchEvent(new CustomEvent('show-invalid-url-warning', {
-            bubbles: true, composed: true}));
-        }
-      });
   }
 
 }

@@ -341,12 +341,19 @@ class ShopApp extends Element {
 
   update() {
     const state = store.getState();
+    let page = getLocationPathPart(state, 0) || 'home';
+    const categoryName = getLocationPathPart(state, 1);
+    // TODO: determine if page is valid.
+    if (categoryName && Object.keys(state.categories).indexOf(categoryName) === -1) {
+      page = '404';
+    }
     this.setProperties({
       categories: Object.values(state.categories),
-      categoryName: getLocationPathPart(state, 1),
+      categoryName,
       numItems: computeNumItems(state),
-      page: getLocationPathPart(state, 0) || 'home',
-      offline: !state.network.online
+      page,
+      offline: !state.network.online,
+      _a11yLabel: state.announcer.label
     });
   }
 
@@ -356,12 +363,12 @@ class ShopApp extends Element {
     this.removeAttribute('unresolved');
     // listen for custom events
     this.addEventListener('add-cart-item', (e)=>this._onAddCartItem(e));
-    this.addEventListener('set-cart-item', (e)=>this._onSetCartItem(e));
-    this.addEventListener('clear-cart', (e)=>this._onClearCart(e));
+    // this.addEventListener('set-cart-item', (e)=>this._onSetCartItem(e));
+    // this.addEventListener('clear-cart', (e)=>this._onClearCart(e));
     // this.addEventListener('change-section', (e)=>this._onChangeSection(e));
-    this.addEventListener('announce', (e)=>this._onAnnounce(e));
-    this.addEventListener('dom-change', (e)=>this._domChange(e));
-    this.addEventListener('show-invalid-url-warning', (e)=>this._onFallbackSelectionTriggered(e));
+    // this.addEventListener('announce', (e)=>this._onAnnounce(e));
+    // this.addEventListener('dom-change', (e)=>this._domChange(e));
+    // this.addEventListener('show-invalid-url-warning', (e)=>this._onFallbackSelectionTriggered(e));
   }
 
   _pageChanged(page, oldPage) {
@@ -430,103 +437,12 @@ class ShopApp extends Element {
     this.drawerOpened = !this.drawerOpened;
   }
 
-  // _setMeta(attrName, attrValue, content) {
-  //   let element = document.head.querySelector(`meta[${attrName}="${attrValue}"]`);
-  //   if (!element) {
-  //     element = document.createElement('meta');
-  //     element.setAttribute(attrName, attrValue);
-  //     document.head.appendChild(element);
-  //   }
-  //   element.setAttribute('content', content || '');
-  // }
-
-  // Elements in the app can notify section changes.
-  // Response by a11y announcing the section and syncronizing the category.
-  // _onChangeSection(event) {
-  //   let detail = event.detail;
-
-  //   // // Scroll to the top of the page when navigating to a non-list page. For list view,
-  //   // // scroll to the last saved position only if the category has not changed.
-  //   // let scrollTop = 0;
-  //   // if (this.page === 'list') {
-  //   //   if (this.categoryName === detail.category) {
-  //   //     scrollTop = this._listScrollTop;
-  //   //   } else {
-  //   //     // Reset the list view scrollTop if the category changed.
-  //   //     this._listScrollTop = 0;
-  //   //   }
-  //   // }
-  //   // // Use `Polymer.AppLayout.scroll` with `behavior: 'silent'` to disable header scroll
-  //   // // effects during the scroll.
-  //   // scroll({ top: scrollTop, behavior: 'silent' });
-
-  //   // Announce the page's title
-  //   if (detail.title) {
-  //     document.title = detail.title + ' - SHOP';
-  //     this._announce(detail.title + ', loaded');
-  //     // Set open graph metadata
-  //     this._setMeta('property', 'og:title', detail.title);
-  //     this._setMeta('property', 'og:description', detail.description || document.title);
-  //     this._setMeta('property', 'og:url', document.location.href);
-  //     this._setMeta('property', 'og:image', detail.image || this.baseURI + 'images/shop-icon-128.png');
-  //     // Set twitter card metadata
-  //     this._setMeta('property', 'twitter:title', detail.title);
-  //     this._setMeta('property', 'twitter:description', detail.description || document.title);
-  //     this._setMeta('property', 'twitter:url', document.location.href);
-  //     this._setMeta('property', 'twitter:image:src', detail.image || this.baseURI + 'images/shop-icon-128.png');
-  //   }
-  // }
-
   _onAddCartItem() {
     if (!this._cartModal) {
       this._cartModal = document.createElement('shop-cart-modal');
       this.root.appendChild(this._cartModal);
     }
     this._cartModal.open();
-    this._announce('Item added to the cart');
-  }
-
-  _onSetCartItem(event) {
-    let detail = event.detail;
-    if (detail.quantity === 0) {
-      this._announce('Item deleted');
-    } else {
-      this._announce('Quantity changed to ' + detail.quantity);
-    }
-  }
-
-  _onClearCart() {
-    this._announce('Cart cleared');
-  }
-
-  // Elements in the app can notify a change to be a11y announced.
-  _onAnnounce(e) {
-    this._announce(e.detail);
-  }
-
-  // A11y announce the given message.
-  _announce(message) {
-    this._a11yLabel = '';
-    this._announceDebouncer = Debouncer.debounce(this._announceDebouncer,
-      timeOut.after(100), () => {
-        this._a11yLabel = message;
-      });
-  }
-
-  // This is for performance logging only.
-  _domChange(e) {
-    if (window.performance && performance.mark && !this.__loggedDomChange) {
-      let target = e.composedPath()[0];
-      let host = target.getRootNode().host;
-      if (host && host.localName.match(this.page)) {
-        this.__loggedDomChange = true;
-        performance.mark(host.localName + '.domChange');
-      }
-    }
-  }
-
-  _onFallbackSelectionTriggered() {
-    this.page = '404';
   }
 
   _computeShouldShowTabs(page, smallScreen) {
