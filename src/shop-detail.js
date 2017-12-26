@@ -1,13 +1,15 @@
 import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
-import '../node_modules/@polymer/app-route/app-route.js';
 import '../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js';
 import './shop-button.js';
-import './shop-category-data.js';
 import './shop-common-styles.js';
 import './shop-image.js';
 import './shop-select.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '../node_modules/@polymer/polymer/lib/utils/async.js';
+
+import { store } from './redux/store.js';
+import { addCartItem } from './redux/cart-actions.js';
+import { findCategory, findItem } from './redux/helpers.js';
 
 class ShopDetail extends Element {
   static get template() {
@@ -122,24 +124,6 @@ class ShopDetail extends Element {
 
     </style>
 
-    <!--
-      app-route provides the name of the category and the item.
-    -->
-    <app-route
-        route="[[route]]"
-        pattern="/:category/:item"
-        data="{{routeData}}"></app-route>
-
-    <!--
-      shop-category-data provides the item data for a given category and item name.
-    -->
-    <shop-category-data
-        id="categoryData"
-        category-name="[[routeData.category]]"
-        item-name="[[routeData.item]]"
-        item="{{item}}"
-        failure="{{failure}}"></shop-category-data>
-
     <div id="content" hidden$="[[failure]]">
       <shop-image alt="[[item.title]]" src="[[item.largeImage]]"></shop-image>
       <div class="detail" has-content$="[[_isDefined(item)]]">
@@ -187,10 +171,7 @@ class ShopDetail extends Element {
       shop-network-warning shows a warning message when the items can't be rendered due
       to network conditions.
     -->
-    <shop-network-warning
-        hidden$="[[!failure]]"
-        offline="[[offline]]"
-        on-try-reconnect="_tryReconnect"></shop-network-warning>
+    <shop-network-warning hidden$="[[!failure]]"></shop-network-warning>
     `;
 
   }
@@ -201,18 +182,9 @@ class ShopDetail extends Element {
 
     item: Object,
 
-    route: Object,
-
-    routeData: Object,
-
     visible: {
       type: Boolean,
       value: false
-    },
-
-    offline: {
-      type: Boolean,
-      observer: '_offlineChanged'
     },
 
     failure: Boolean
@@ -222,6 +194,21 @@ class ShopDetail extends Element {
   static get observers() { return [
     '_itemChanged(item, visible)'
   ]}
+
+  constructor() {
+    super();
+
+    store.subscribe(() => this.update());
+    this.update();
+  }
+
+  update() {
+    const state = store.getState();
+    this.setProperties({
+      item: findItem(findCategory(state.categories, state.categoryName), state.itemName),
+      failure: state.failure
+    });
+  }
 
   _itemChanged(item, visible) {
     if (visible) {
@@ -260,25 +247,16 @@ class ShopDetail extends Element {
   _addToCart() {
     // This event will be handled by shop-app.
     this.dispatchEvent(new CustomEvent('add-cart-item', {
-      bubbles: true, composed: true, detail: {
-        item: this.item,
-        quantity: parseInt(this.$.quantitySelect.value, 10),
-        size: this.$.sizeSelect.value
-      }}));
+      bubbles: true, composed: true}));
+    store.dispatch(addCartItem({
+      item: this.item,
+      quantity: parseInt(this.$.quantitySelect.value, 10),
+      size: this.$.sizeSelect.value
+    }));
   }
 
   _isDefined(item) {
     return item != null;
-  }
-
-  _tryReconnect() {
-    this.$.categoryData.refresh();
-  }
-
-  _offlineChanged(offline) {
-    if (!offline) {
-      this._tryReconnect();
-    }
   }
 
 }

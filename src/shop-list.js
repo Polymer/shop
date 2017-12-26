@@ -1,13 +1,13 @@
 import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
-import '../node_modules/@polymer/app-route/app-route.js';
 import '../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js';
-import './shop-category-data.js';
 import './shop-common-styles.js';
 import './shop-image.js';
 import './shop-list-item.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 
+import { store } from './redux/store.js';
+import { findCategory } from './redux/helpers.js';
 
 class ShopList extends Element {
   static get template() {
@@ -68,23 +68,6 @@ class ShopList extends Element {
 
     </style>
 
-    <!--
-      app-route provides the name of the category.
-    -->
-    <app-route
-        route="[[route]]"
-        pattern="/:category"
-        data="{{routeData}}"></app-route>
-
-    <!--
-      shop-category-data provides the category data for a given category name.
-    -->
-    <shop-category-data
-        id="categoryData"
-        category-name="[[routeData.category]]"
-        category="{{category}}"
-        failure="{{failure}}"></shop-category-data>
-
     <shop-image
         alt="[[category.title]]"
         src="[[category.image]]"
@@ -109,10 +92,7 @@ class ShopList extends Element {
       shop-network-warning shows a warning message when the items can't be rendered due
       to network conditions.
     -->
-    <shop-network-warning
-        hidden$="[[!failure]]"
-        offline="[[offline]]"
-        on-try-reconnect="_tryReconnect"></shop-network-warning>
+    <shop-network-warning hidden$="[[!failure]]"></shop-network-warning>
 
   </template>
   `;
@@ -124,18 +104,9 @@ class ShopList extends Element {
 
     category: Object,
 
-    route: Object,
-
-    routeData: Object,
-
     visible: {
       type: Boolean,
       value: false
-    },
-
-    offline: {
-      type: Boolean,
-      observer: '_offlineChanged'
     },
 
     failure: Boolean
@@ -145,6 +116,21 @@ class ShopList extends Element {
   static get observers() { return [
     '_categoryChanged(category, visible)'
   ]}
+  
+  constructor() {
+    super();
+
+    store.subscribe(() => this.update());
+    this.update();
+  }
+
+  update() {
+    const state = store.getState();
+    this.setProperties({
+      category: findCategory(state.categories, state.categoryName),
+      failure: state.failure
+    });
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -194,16 +180,6 @@ class ShopList extends Element {
             bubbles: true, composed: true}));
         }
       });
-  }
-
-  _tryReconnect() {
-    this.$.categoryData.refresh();
-  }
-
-  _offlineChanged(offline) {
-    if (!offline && this.isAttached) {
-      this._tryReconnect();
-    }
   }
 
 }

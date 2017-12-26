@@ -3,17 +3,21 @@ import '../node_modules/@polymer/app-layout/app-header/app-header.js';
 import '../node_modules/@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '../node_modules/@polymer/app-layout/app-toolbar/app-toolbar.js';
 import { scroll } from '../node_modules/@polymer/app-layout/helpers/helpers.js';
-import '../node_modules/@polymer/app-route/app-location.js';
-import '../node_modules/@polymer/app-route/app-route.js';
 import '../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js';
 import '../node_modules/@polymer/iron-media-query/iron-media-query.js';
 import '../node_modules/@polymer/iron-pages/iron-pages.js';
 import '../node_modules/@polymer/iron-selector/iron-selector.js';
-import './shop-category-data.js';
 import './shop-home.js';
 import { afterNextRender } from '../node_modules/@polymer/polymer/lib/utils/render-status.js';
 import { timeOut } from '../node_modules/@polymer/polymer/lib/utils/async.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
+
+import { store } from './redux/store.js';
+import { changeOffline } from './redux/categories-actions.js';
+import { computeNumItems } from './redux/helpers.js';
+import './redux/categories-reducers.js';
+import './redux/cart-reducers.js';
+import './redux/router.js';
 
 // performance logging
 window.performance && performance.mark && performance.mark('shop-app - before register');
@@ -218,24 +222,8 @@ class ShopApp extends Element {
     </style>
 
     <shop-analytics key="UA-39334307-16"></shop-analytics>
-    <!--
-      app-location and app-route elements provide the state of the URL for the app.
-    -->
-    <app-location route="{{route}}"></app-location>
-    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
-
-    <!--
-      shop-category-data provides the list of categories.
-    -->
-    <shop-category-data categories="{{categories}}"></shop-category-data>
-
-    <!--
-      shop-cart-data maintains the state of the user's shopping cart (in localstorage) and
-      calculates the total amount.
-    -->
-    <shop-cart-data id="cart" cart="{{cart}}" num-items="{{numItems}}" total="{{total}}"></shop-cart-data>
 
     <app-header role="navigation" id="header" effects="waterfall" condenses="" reveals="">
       <app-toolbar>
@@ -291,15 +279,15 @@ class ShopApp extends Element {
 
     <iron-pages role="main" selected="[[page]]" attr-for-selected="name" selected-attribute="visible" fallback-selection="404">
       <!-- home view -->
-      <shop-home name="home" categories="[[categories]]"></shop-home>
+      <shop-home name="home"></shop-home>
       <!-- list view of items in a category -->
-      <shop-list name="list" route="[[subroute]]" offline="[[offline]]"></shop-list>
+      <shop-list name="list"></shop-list>
       <!-- detail view of one item -->
-      <shop-detail name="detail" route="[[subroute]]" offline="[[offline]]"></shop-detail>
+      <shop-detail name="detail"></shop-detail>
       <!-- cart view -->
-      <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
+      <shop-cart name="cart"></shop-cart>
       <!-- checkout view -->
-      <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
+      <shop-checkout name="checkout"></shop-checkout>
 
       <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
@@ -341,13 +329,26 @@ class ShopApp extends Element {
     }
   }}
 
-  static get observers() { return [
-    '_routePageChanged(routeData.page)'
-  ]}
-
   constructor() {
     super();
     window.performance && performance.mark && performance.mark('shop-app.created');
+
+    store.subscribe(() => this.update());
+    this.update();
+  }
+
+  update() {
+    const state = store.getState();
+    this.setProperties({
+      categories: state.categories,
+      categoryName: state.categoryName,
+      numItems: computeNumItems(state.cart),
+      page: state.page || 'home'
+    });
+
+    // NOTE: Only this element updates state.offline, so no need to update from
+    // state.offline here.
+    // this.offline = state.offline;
   }
 
   ready() {
@@ -355,6 +356,7 @@ class ShopApp extends Element {
     // Custom elements polyfill safe way to indicate an element has been upgraded.
     this.removeAttribute('unresolved');
     // listen for custom events
+    // TODO: try to move event actions to action creators
     this.addEventListener('add-cart-item', (e)=>this._onAddCartItem(e));
     this.addEventListener('set-cart-item', (e)=>this._onSetCartItem(e));
     this.addEventListener('clear-cart', (e)=>this._onClearCart(e));
@@ -369,18 +371,14 @@ class ShopApp extends Element {
     });
   }
 
-  _routePageChanged(page) {
-    if (this.page === 'list') {
+  _pageChanged(page, oldPage) {
+    if (page === 'list') {
       this._listScrollTop = window.pageYOffset;
     }
 
-    this.page = page || 'home';
-
     // Close the drawer - in case the *route* change came from a link in the drawer.
     this.drawerOpened = false;
-  }
 
-  _pageChanged(page, oldPage) {
     if (page != null) {
       // home route is eagerly loaded
       if (page == 'home') {
@@ -449,6 +447,8 @@ class ShopApp extends Element {
           'You are offline' : 'You are online';
       this._networkSnackbar.open();
     }
+
+    store.dispatch(changeOffline(this.offline));
   }
 
   _toggleDrawer() {
@@ -504,19 +504,17 @@ class ShopApp extends Element {
     }
   }
 
-  _onAddCartItem(event) {
+  _onAddCartItem() {
     if (!this._cartModal) {
       this._cartModal = document.createElement('shop-cart-modal');
       this.root.appendChild(this._cartModal);
     }
-    this.$.cart.addItem(event.detail);
     this._cartModal.open();
     this._announce('Item added to the cart');
   }
 
   _onSetCartItem(event) {
     let detail = event.detail;
-    this.$.cart.setItem(detail);
     if (detail.quantity === 0) {
       this._announce('Item deleted');
     } else {
@@ -525,7 +523,6 @@ class ShopApp extends Element {
   }
 
   _onClearCart() {
-    this.$.cart.clearCart();
     this._announce('Cart cleared');
   }
 

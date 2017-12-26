@@ -1,5 +1,4 @@
 import { Element } from '../node_modules/@polymer/polymer/polymer-element.js';
-import '../node_modules/@polymer/app-route/app-route.js';
 import '../node_modules/@polymer/iron-flex-layout/iron-flex-layout.js';
 import './shop-button.js';
 import './shop-common-styles.js';
@@ -9,6 +8,22 @@ import './shop-select.js';
 import './shop-checkbox.js';
 import { Debouncer } from '../node_modules/@polymer/polymer/lib/utils/debounce.js';
 import { timeOut } from '../node_modules/@polymer/polymer/lib/utils/async.js';
+
+import { store, installReducers } from './redux/store.js';
+import { pushState } from './redux/router.js';
+import { clearCart } from './redux/cart-actions.js';
+import { computeTotal } from './redux/helpers.js';
+
+installReducers({
+  // Internal state from checkout flow (init/success/error).
+  _checkoutStateChanged(state, action) {
+    const checkoutState = action.checkoutState;
+    return {
+      ...state,
+      checkoutState
+    };
+  }
+});
 
 class ShopCheckout extends Element {
   static get template() {
@@ -139,7 +154,7 @@ class ShopCheckout extends Element {
                   </div>
                   <div class="row input-row">
                     <shop-input>
-                      <input type="tel" id="accountPhone" name="accountPhone" pattern="\d{10,}"
+                      <input type="tel" id="accountPhone" name="accountPhone" pattern="\\d{10,}"
                           placeholder="Phone Number" required
                           aria-labelledby="accountPhoneLabel accountInfoHeading">
                       <shop-md-decorator error-message="Invalid Phone Number" aria-hidden="true">
@@ -292,7 +307,7 @@ class ShopCheckout extends Element {
                   </div>
                   <div class="row input-row">
                     <shop-input>
-                      <input type="tel" id="ccNumber" name="ccNumber" pattern="[\d\s]{15,}"
+                      <input type="tel" id="ccNumber" name="ccNumber" pattern="[\\d\\s]{15,}"
                           placeholder="Card Number" required
                           autocomplete="cc-number">
                       <shop-md-decorator error-message="Invalid Card Number" aria-hidden="true">
@@ -345,7 +360,7 @@ class ShopCheckout extends Element {
                       </shop-md-decorator>
                     </shop-select>
                     <shop-input>
-                      <input type="tel" id="ccCVV" name="ccCVV" pattern="\d{3,4}"
+                      <input type="tel" id="ccCVV" name="ccCVV" pattern="\\d{3,4}"
                           placeholder="CVV" required
                           autocomplete="cc-csc">
                       <shop-md-decorator error-message="Invalid CVV" aria-hidden="true">
@@ -398,14 +413,6 @@ class ShopCheckout extends Element {
 
     </div>
 
-    <!-- Handles the routing for the success and error subroutes -->
-    <app-route
-        active="{{routeActive}}"
-        data="{{routeData}}"
-        route="[[route]]"
-        pattern="/:state">
-     </app-route>
-
     <!-- Show spinner when waiting for the server to repond -->
     <paper-spinner-lite active="[[waiting]]"></paper-spinner-lite>
     `;
@@ -413,15 +420,6 @@ class ShopCheckout extends Element {
   static get is() { return 'shop-checkout'; }
 
   static get properties() { return {
-
-    /**
-     * The route for the state. e.g. `success` and `error` are mounted in the
-     * `checkout/` route.
-     */
-    route: {
-      type: Object,
-      notify: true
-    },
 
     /**
      * The total price of the contents in the user's cart.
@@ -433,8 +431,7 @@ class ShopCheckout extends Element {
      * `init`, `success` and `error`.
      */
     state: {
-      type: String,
-      value: 'init'
+      type: String
     },
 
     /**
@@ -482,9 +479,21 @@ class ShopCheckout extends Element {
 
   }}
 
-  static get observers() { return [
-    '_updateState(routeActive, routeData)'
-  ]}
+  constructor() {
+    super();
+
+    store.subscribe(() => this.update());
+    this.update();
+  }
+
+  update() {
+    const state = store.getState();
+    this.setProperties({
+      cart: state.cart,
+      total: computeTotal(state.cart),
+      state: state.checkoutState
+    });
+  }
 
   _submit(e) {
     if (this._validateForm()) {
@@ -514,25 +523,16 @@ class ShopCheckout extends Element {
    * Sets the valid state and updates the location.
    */
   _pushState(state) {
-    this._validState = state;
-    this.set('route.path', state);
-  }
-
-  /**
-   * Checks that the `:state` subroute is correct. That is, the state has been pushed
-   * after receiving response from the server. e.g. Users can only go to `/checkout/success`
-   * if the server responsed with a success message.
-   */
-  _updateState(active, routeData) {
-    if (active && routeData) {
-      let state = routeData.state;
-      if (this._validState === state) {
-        this.state = state;
-        this._validState = '';
-        return;
-      }
-    }
-    this.state = 'init';
+    // This changes window.location only - it does not affect the checkout state.
+    pushState(`${window.location.origin}/checkout/${state}`);
+    
+    // The only way to update checkout state is with the '_checkoutStateChanged'
+    // action. This is to prevent an user from navigating directly to the
+    // success/error pages.
+    store.dispatch({
+      type: '_checkoutStateChanged',
+      checkoutState: state
+    });
   }
 
   /**
@@ -628,6 +628,7 @@ class ShopCheckout extends Element {
       this._pushState('success');
       this._reset();
       this.dispatchEvent(new CustomEvent('clear-cart', {bubbles: true, composed: true}));
+      store.dispatch(clearCart());
     } else {
       this._pushState('error');
     }

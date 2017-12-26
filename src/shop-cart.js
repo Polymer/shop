@@ -3,6 +3,9 @@ import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
 
+import { store } from './redux/store.js';
+import { computeTotal } from './redux/helpers.js';
+
 class ShopCart extends Element {
   static get template() {
     return `
@@ -77,6 +80,21 @@ class ShopCart extends Element {
     }
 
   }}
+
+  constructor() {
+    super();
+
+    store.subscribe(() => this.update());
+    this.update();
+  }
+
+  update() {
+    const state = store.getState();
+    this.setProperties({
+      cart: state.cart,
+      total: computeTotal(state.cart)
+    });
+  }
 
   _formatTotal(total) {
     return isNaN(total) ? '' : '$' + total.toFixed(2);
