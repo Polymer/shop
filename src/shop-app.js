@@ -392,16 +392,16 @@ class ShopApp extends Element {
         let cb = this._pageLoaded.bind(this, Boolean(oldPage));
         switch (page) {
           case 'list':
-            import('./shop-list.js').then(cb);
+            import(/* webpackChunkName: 'shop-list' */ './shop-list.js').then(cb);
             break;
           case 'detail':
-            import('./shop-detail.js').then(cb);
+            import(/* webpackChunkName: 'shop-detail' */ './shop-detail.js').then(cb);
             break;
           case 'cart':
-            import('./shop-cart.js').then(cb);
+            import(/* webpackChunkName: 'shop-cart' */ './shop-cart.js').then(cb);
             break;
           case 'checkout':
-            import('./shop-checkout.js').then(cb);
+            import(/* webpackChunkName: 'shop-checkout' */ './shop-checkout.js').then(cb);
             break;
         }
       }
@@ -423,7 +423,7 @@ class ShopApp extends Element {
     // load lazy resources after render and set `loadComplete` when done.
     if (!this.loadComplete) {
       afterNextRender(this, () => {
-        import('./lazy-resources.js').then(() => {
+        import(/* webpackChunkName: 'lazy-resources' */ './lazy-resources.js').then(() => {
           // Register service worker if supported.
           if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js', {scope: '/'});

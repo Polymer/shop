@@ -5,6 +5,9 @@
   "contributors": [
     "The Polymer Authors"
   ],
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
   "dependencies": {
     "@polymer/polymer": "^3.0.0-pre.1",
     "@polymer/app-layout": "^3.0.0-pre.1",
@@ -21,5 +24,9 @@
     "@polymer/paper-icon-button": "^3.0.0-pre.1",
     "@polymer/paper-spinner": "^3.0.0-pre.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-minify-webpack-plugin": "^0.2.0",
+    "webpack": "^3.10.0",
+    "workbox-webpack-plugin": "^2.1.2"
+  }
 }
