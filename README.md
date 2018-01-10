@@ -1,4 +1,4 @@
-# SHOP
+# Polymer Shop
 
 ## Prerequisites
 
@@ -74,4 +74,4 @@ Use `polymer serve` to serve a specific build preset of the app. For example:
 
 ## Deploying
 
-Our [production deployment of SHOP](https://shop.polymer-project.org/) is hosted on App Engine with Node.js. You can examine its configuration on the [app-engine-node branch](https://github.com/Polymer/shop/tree/app-engine-node) of this repository and [compare it with the master branch](https://github.com/Polymer/shop/pull/145).
+[Production deployment of Polymer Shop](https://shop.polymer-project.org/) is hosted on App Engine with Node.js. You can examine its configuration on the [app-engine-node branch](https://github.com/Polymer/shop/tree/app-engine-node) of this repository and [compare it with the master branch](https://github.com/Polymer/shop/pull/145).
