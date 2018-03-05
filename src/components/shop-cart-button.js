@@ -12,7 +12,7 @@ import { LitElement, html } from '../../node_modules/@polymer/lit-element/lit-el
 
 import { store } from '../store.js';
 import { connect } from '../../node_modules/pwa-helpers/connect-mixin.js';
-import { numItemsSelector } from '../reducers/cart.js';
+import { numItemsSelector } from '../selectors/cart.js';
 
 class ShopCartButton extends connect(store)(LitElement) {
   render({ numItems }) {

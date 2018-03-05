@@ -10,7 +10,7 @@
 
 // TODO: See below where imports are used.
 // import { fetchCategoryItems } from './categories.js';
-// import { currentCategorySelector } from '../reducers/categories.js';
+// import { currentCategorySelector } from '../selectors/categories.js';
 
 export const SET_ANNOUNCER_LABEL = 'SET_ANNOUNCER_LABEL';
 export const CLEAR_ANNOUNCER_LABEL = 'CLEAR_ANNOUNCER_LABEL';

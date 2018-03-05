@@ -22,9 +22,9 @@ import { installOfflineWatcher } from '../../node_modules/pwa-helpers/network.js
 import { installMediaQueryWatcher } from '../../node_modules/pwa-helpers/media-query.js';
 
 import { store } from '../store.js';
-import { pageSelector } from '../reducers/location.js';
-import { currentCategorySelector } from '../reducers/categories.js';
-import { metaSelector } from '../reducers/app.js';
+import { pageSelector } from '../selectors/location.js';
+import { currentCategorySelector } from '../selectors/categories.js';
+import { metaSelector } from '../selectors/app.js';
 import { updateLocation } from '../actions/location.js';
 import { updateNetworkStatus } from '../actions/app.js';
 import { fetchCategories } from '../actions/categories.js';

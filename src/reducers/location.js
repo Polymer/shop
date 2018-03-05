@@ -8,8 +8,12 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { UPDATE_LOCATION, RECEIVE_LAZY_RESOURCES, SET_PATH_IS_VALID, SET_PATH_IS_INVALID } from '../actions/location.js';
-import { createSelector } from '../../node_modules/reselect/es/index.js';
+import {
+  UPDATE_LOCATION,
+  RECEIVE_LAZY_RESOURCES,
+  SET_PATH_IS_VALID,
+  SET_PATH_IS_INVALID
+} from '../actions/location.js';
 
 const location = (state = {}, action) => {
   switch (action.type) {
@@ -39,19 +43,3 @@ const location = (state = {}, action) => {
 }
 
 export default location;
-
-const pathSelector = state => state.location.path;
-
-export const splitPathSelector = createSelector(
-  pathSelector,
-  path => {
-    return (path || '').slice(1).split('/');
-  }
-);
-
-export const pageSelector = createSelector(
-  splitPathSelector,
-  splitPath => {
-    return splitPath[0] || 'home';
-  }
-);

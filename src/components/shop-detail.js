@@ -17,7 +17,7 @@ import './shop-image.js';
 
 import { store } from '../store.js';
 import { connect } from '../../node_modules/pwa-helpers/connect-mixin.js';
-import { currentCategorySelector, currentItemSelector } from '../reducers/categories.js';
+import { currentCategorySelector, currentItemSelector } from '../selectors/categories.js';
 import { addToCart } from '../actions/cart.js';
 
 class ShopDetail extends connect(store)(LitElement) {

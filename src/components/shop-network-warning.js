@@ -16,7 +16,7 @@ import './shop-icons.js';
 import { store } from '../store.js';
 import { connect } from '../../node_modules/pwa-helpers/connect-mixin.js';
 import { fetchCategoryItems } from '../actions/categories.js';
-import { currentCategorySelector } from '../reducers/categories.js';
+import { currentCategorySelector } from '../selectors/categories.js';
 
 class ShopNetworkWarning extends connect(store)(LitElement) {
   render({ offline }) {

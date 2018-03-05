@@ -8,8 +8,8 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-import { pageSelector } from '../reducers/location.js';
-import { currentCategorySelector, currentItemSelector } from '../reducers/categories.js';
+import { pageSelector } from '../selectors/location.js';
+import { currentCategorySelector, currentItemSelector } from '../selectors/categories.js';
 import { fetchCategoryItems, fetchCategories } from './categories.js';
 import { announceLabel } from './app.js';
 

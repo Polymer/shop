@@ -21,7 +21,7 @@ import { timeOut } from '../../node_modules/@polymer/polymer/lib/utils/async.js'
 
 import { store } from '../store.js';
 import { connect } from '../../node_modules/pwa-helpers/connect-mixin.js';
-import { totalSelector } from '../reducers/cart.js';
+import { totalSelector } from '../selectors/cart.js';
 import { updateCheckoutState } from '../actions/checkout.js';
 import { clearCart } from '../actions/cart.js';
 import { announceLabel } from '../actions/app.js';

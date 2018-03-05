@@ -16,7 +16,7 @@ import { shopFormStyle } from './shop-form-style.js';
 
 import { store } from '../store.js';
 import { connect } from '../../node_modules/pwa-helpers/connect-mixin.js';
-import { totalSelector } from '../reducers/cart.js';
+import { totalSelector } from '../selectors/cart.js';
 
 class ShopCart extends connect(store)(LitElement) {
   render({ cart, total }) {
