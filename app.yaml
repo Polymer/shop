@@ -15,8 +15,8 @@ handlers:
   http_headers:
     Link:
       </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
-      </src/components/shop-app.js>;rel=modulepreload;as=script,
-      </src/components/shop-list.js>;rel=modulepreload;as=script
+      </src/components/shop-app.js>;rel=preload;as=script,
+      </src/components/shop-list.js>;rel=preload;as=script
 
 - url: /detail/.*
   static_files: dist/index.html
@@ -25,8 +25,8 @@ handlers:
   http_headers:
     Link:
       </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
-      </src/components/shop-app.js>;rel=modulepreload;as=script,
-      </src/components/shop-detail.js>;rel=modulepreload;as=script
+      </src/components/shop-app.js>;rel=preload;as=script,
+      </src/components/shop-detail.js>;rel=preload;as=script
 
 - url: /cart
   static_files: dist/index.html
@@ -35,8 +35,8 @@ handlers:
   http_headers:
     Link:
       </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
-      </src/components/shop-app.js>;rel=modulepreload;as=script,
-      </src/components/shop-cart.js>;rel=modulepreload;as=script
+      </src/components/shop-app.js>;rel=preload;as=script,
+      </src/components/shop-cart.js>;rel=preload;as=script
 
 - url: /checkout
   static_files: dist/index.html
@@ -45,8 +45,8 @@ handlers:
   http_headers:
     Link:
       </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
-      </src/components/shop-app.js>;rel=modulepreload;as=script,
-      </src/components/shop-checkout.js>;rel=modulepreload;as=script
+      </src/components/shop-app.js>;rel=preload;as=script,
+      </src/components/shop-checkout.js>;rel=preload;as=script
 
 - url: /([^.]*)
   static_files: dist/index.html
@@ -55,7 +55,7 @@ handlers:
   http_headers:
     Link:
       </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
-      </src/components/shop-app.js>;rel=modulepreload;as=script
+      </src/components/shop-app.js>;rel=preload;as=script
 
 - url: /(.*)
   static_files: dist/\1
