@@ -7,7 +7,14 @@
   ],
   "scripts": {
     "start": "polyserve --npm --module-resolution=node",
-    "test": "mocha test/ --timeout=10000"
+    "test": "mocha test/ --timeout=10000",
+    "bundle": "polymer-bundler --module-resolution node --out-dir bundled --shell src/components/shop-app.js src/components/shop-app.js",
+    "minify": "babel bundled --out-dir dist",
+    "copy": "cp -r data images index.html manifest.json dist",
+    "sw": "workbox generateSW workbox-config.js",
+    "copy-polyfills": "cp -r node_modules/@webcomponents/webcomponentsjs .",
+    "clean": "rm -rf bundled dist webcomponentsjs",
+    "build": "npm run clean && npm run bundle && npm run minify && npm run copy && npm run sw && npm run copy-polyfills"
   },
   "dependencies": {
     "@polymer/app-layout": "^3.0.0-pre.12",
@@ -25,10 +32,15 @@
     "reselect": "^3.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-minify": "^0.2.0",
     "chai": "^4.1.2",
     "mocha": "^5.0.0",
     "pixelmatch": "^4.0.2",
     "polyserve": "^0.26.0",
-    "puppeteer": "^1.0.0"
+    "puppeteer": "^1.0.0",
+    "workbox-cli": "^3.0.0"
   }
 }

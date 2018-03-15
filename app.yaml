@@ -1,0 +1,71 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /node_modules/@webcomponents/webcomponentsjs
+  static_dir: webcomponentsjs
+  secure: always
+
+- url: /list/.*
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  http_headers:
+    Link:
+      </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
+      </src/components/shop-app.js>;rel=modulepreload;as=script,
+      </src/components/shop-list.js>;rel=modulepreload;as=script
+
+- url: /detail/.*
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  http_headers:
+    Link:
+      </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
+      </src/components/shop-app.js>;rel=modulepreload;as=script,
+      </src/components/shop-detail.js>;rel=modulepreload;as=script
+
+- url: /cart
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  http_headers:
+    Link:
+      </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
+      </src/components/shop-app.js>;rel=modulepreload;as=script,
+      </src/components/shop-cart.js>;rel=modulepreload;as=script
+
+- url: /checkout
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  http_headers:
+    Link:
+      </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
+      </src/components/shop-app.js>;rel=modulepreload;as=script,
+      </src/components/shop-checkout.js>;rel=modulepreload;as=script
+
+- url: /([^.]*)
+  static_files: dist/index.html
+  upload: dist/index.html
+  secure: always
+  http_headers:
+    Link:
+      </node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js>;rel=preload;as=script,
+      </src/components/shop-app.js>;rel=modulepreload;as=script
+
+- url: /(.*)
+  static_files: dist/\1
+  upload: dist/.*
+  secure: always
+
+skip_files:
+- bundled/
+- data/
+- images/
+- node_modules/
+- src/
+- test/
