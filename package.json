@@ -14,7 +14,9 @@
     "sw": "workbox generateSW workbox-config.js",
     "copy-polyfills": "cp -r node_modules/@webcomponents/webcomponentsjs .",
     "clean": "rm -rf bundled dist webcomponentsjs",
-    "build": "npm run clean && npm run bundle && npm run minify && npm run copy && npm run sw && npm run copy-polyfills"
+    "build": "npm run clean && npm run bundle && npm run minify && npm run copy && npm run sw && npm run copy-polyfills",
+    "webpack": "webpack src/components/shop-app.js --mode development --module-bind js=babel-loader",
+    "rollup": "rollup src/components/shop-app.js --f es --dir dist/src/components --experimentalCodeSplitting --experimentalDynamicImport"
   },
   "dependencies": {
     "@polymer/app-layout": "^3.0.0-pre.12",
@@ -33,6 +35,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-minify": "^0.2.0",
@@ -41,6 +44,9 @@
     "pixelmatch": "^4.0.2",
     "polyserve": "^0.26.0",
     "puppeteer": "^1.0.0",
+    "rollup": "^0.57.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11",
     "workbox-cli": "^3.0.0"
   }
 }
