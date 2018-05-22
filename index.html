@@ -56,13 +56,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <shop-app unresolved>SHOP</shop-app>
 
-  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="/src/shop-app.js"></script>
+  <script>
+    // HACK(keanulee): The Redux package assumes `process` exists - mock it here before
+    // the module is loaded.
+    window.process = {
+      env: {
+        NODE_ENV: 'production'
+      }
+    };
+  </script>
 
-  <script type="module">
-import '/src/shop-app.js';
-window.performance && performance.mark && performance.mark('index.html');
-</script>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="src/components/shop-app.js"></script>
+
+  <script>
+    if ('serviceWorker' in window.navigator) {
+      window.addEventListener('load', function() {
+        window.navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
 
 </body>
 </html>
