@@ -9,7 +9,7 @@
  */
 const prpl = require('prpl-server');
 const express = require('express');
-const shrinkRay = require('shrink-ray');
+const shrinkRay = require('shrink-ray-current');
 const rendertron = require('rendertron-middleware');
 const app = express();
 
