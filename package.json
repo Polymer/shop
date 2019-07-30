@@ -5,7 +5,10 @@
     "The Polymer Authors"
   ],
   "license": "BSD-3-Clause",
-  "repository": "Polymer/shop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Polymer/shop.git"
+  },
   "scripts": {
     "start": "polymer serve",
     "build": "npm run build:prpl-server && npm run build:static",
@@ -41,9 +44,23 @@
     "gulp-rename": "^1.3.0",
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
-    "polymer-cli": "^1.9.2",
-    "prpl-server": "^1.3.0",
+    "polymer-cli": "^1.9.11",
+    "prpl-server": "^1.4.0",
     "sinon": "^7.1.1",
     "wct-mocha": "^1.0.0"
-  }
+  },
+  "description": "Shop is a sample e-commerce [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).",
+  "bugs": {
+    "url": "https://github.com/Polymer/shop/issues"
+  },
+  "homepage": "https://github.com/Polymer/shop#readme",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "pwa",
+    "gae"
+  ],
+  "author": "dsgcloud"
 }

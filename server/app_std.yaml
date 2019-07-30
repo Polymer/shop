@@ -1,1 +1,7 @@
 runtime: nodejs8
+service: pwa-shop
+handlers:
+  - url: '.*'
+    script: auto
+    secure: always
+    redirect_http_response_code: 301

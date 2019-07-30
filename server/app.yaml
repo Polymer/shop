@@ -1,4 +1,5 @@
 runtime: nodejs
+service: pwa-shop-flex
 env: flex
 automatic_scaling:
   min_num_instances: 1
