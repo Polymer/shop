@@ -35,6 +35,9 @@ class ShopCart extends PolymerElement {
     <div class="main-frame">
       <div class="subsection" visible$="[[!_hasItems]]">
         <p class="empty-cart">Your <iron-icon icon="shopping-cart"></iron-icon> is empty.</p>
+        <shop-button responsive>
+            <a href="/">Continue Shopping</a>
+        </shop-button>
       </div>
       <div class="subsection" visible$="[[_hasItems]]">
         <header>
@@ -52,6 +55,9 @@ class ShopCart extends PolymerElement {
           Total: <span class="subtotal">[[_formatTotal(total)]]</span>
           <shop-button responsive>
             <a href="/checkout">Checkout</a>
+          </shop-button>
+          <shop-button responsive>
+            <a href="/">Continue Shopping</a>
           </shop-button>
         </div>
       </div>
