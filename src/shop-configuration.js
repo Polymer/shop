@@ -37,7 +37,7 @@ export default {
     transactionInfo: {
       totalPriceStatus: 'FINAL',
       totalPriceLabel: 'Total',
-      totalPrice: '100.00',
+      totalPrice: '0',
       currencyCode: 'USD',
       countryCode: 'US',
     },

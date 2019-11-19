@@ -197,6 +197,15 @@ class GooglePayButton extends PolymerElement {
 
         return isReadyToPay;
       })
+      .then(() => this._client.prefetchPaymentData(this._buildPaymentRequest({
+        transactionInfo: {
+          totalPriceStatus: 'FINAL',
+          totalPriceLabel: 'Total',
+          totalPrice: '0',
+          currencyCode: 'USD',
+          countryCode: 'US',
+        }
+      })))
       .catch(error => {
         console.error(error);
       });
