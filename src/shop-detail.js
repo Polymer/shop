@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import './google-pay-button.js'
+import './payment-request-button.js'
 import './shop-button.js';
 import './shop-category-data.js';
 import './shop-common-styles.js';
@@ -196,9 +197,15 @@ class ShopDetail extends PolymerElement {
             merchant-info="[[config.googlepay.merchantInfo]]"
             shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
             appearance="[[config.googlepay.appearance]]"
-            on-payment-data-result="[[_onPaymentDataResult]]"
+            on-payment-data-result="[[_onGooglePayPaymentDataResult]]"
             on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
           ></google-pay-button>
+          <payment-request-button id="paymentRequestButton"
+            payment-methods="[[config.paymentrequest.paymentMethods]]"
+            shipping-options="[[config.paymentrequest.shippingOptions]]"
+            request-shipping="[[config.paymentrequest.requestShipping]]"
+            on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
+          ></payment-request-button>
           <shop-button>
             <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
           </shop-button>
@@ -221,8 +228,8 @@ class ShopDetail extends PolymerElement {
   constructor() {
     super();
 
-    this._getTransactionInfo = this._getTransactionInfo.bind(this);
-    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
+    this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
+    this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
   }
 
   static get is() { return 'shop-detail'; }
@@ -277,7 +284,8 @@ class ShopDetail extends PolymerElement {
           this.quantity = 1;
           this.$.sizeSelect.value = 'M';
 
-          this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
+          this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+          this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
 
           this.dispatchEvent(new CustomEvent('change-section', {
             bubbles: true, composed: true, detail: {
@@ -290,11 +298,15 @@ class ShopDetail extends PolymerElement {
     }
   }
 
-  _onPaymentDataResult(paymentResponse) {
-    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext());
+  _onGooglePayPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext('google-pay'));
   }
 
-  _getPurchaseContext() {
+  _onPaymentRequestPaymentDataResult(paymentResponse) {
+    this.config.paymentrequest.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext('payment-request'));
+  }
+
+  _getPurchaseContext(method) {
     return {
       items: [
         {
@@ -304,12 +316,13 @@ class ShopDetail extends PolymerElement {
         }
       ],
       type: 'item',
-      method: 'google-pay',
+      method,
     };
   }
 
   _quantityChanged(q) {
-    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
+    this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+    this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 
   _unescapeText(text) {
@@ -346,7 +359,7 @@ class ShopDetail extends PolymerElement {
     }
   }
 
-  _getTransactionInfo() {
+  _getGooglePayTransactionInfo() {
     if (this.item) {
       const price = this.quantity * this.item.price;
       return {
@@ -359,6 +372,30 @@ class ShopDetail extends PolymerElement {
           label: `${this.item.title} x ${this.quantity}`,
           type: 'LINE_ITEM',
           price: price.toFixed(2),
+        }],
+      };
+    }
+    return null;
+  }
+
+  _getPaymentRequestDetails() {
+    if (this.item) {
+      const price = this.quantity * this.item.price;
+      return {
+        total: {
+          label: 'Total',
+          amount: {
+            currency: 'USD',
+            value: price.toFixed(2),
+          },
+        },
+        displayItems: [{
+          label: `${this.item.title} x ${this.quantity}`,
+          type: 'LINE_ITEM',
+          amount: {
+            currency: 'USD',
+            value: price.toFixed(2),
+          }
         }],
       };
     }

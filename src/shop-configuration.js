@@ -54,4 +54,37 @@ export default {
     },
     onPaymentAuthorized: function () { return { transactionState: 'SUCCESS'}; },
   },
+  paymentrequest: {
+    paymentMethods: [
+      {
+        supportedMethods: 'basic-card',
+        data: {
+          supportedNetworks: ['visa', 'mastercard', 'amex'],
+        },
+      },
+    ],
+    shippingOptions: [
+      {
+        id: 'free',
+        label: 'Free shipping',
+        amount: {
+          currency: 'USD',
+          value: '0.00',
+        },
+        selected: true,
+      }
+    ],
+    requestShipping: true,
+    onPaymentDataResponse: function (paymentResponse, context) {
+      console.log('Success', paymentResponse);
+      this.dispatchEvent(new CustomEvent('payment-selected', {
+        bubbles: true,
+        composed: true,
+        detail: {
+          paymentResponse,
+          context: typeof context === 'function' ? context() : context,
+        }
+      }));
+    },
+  },
 };

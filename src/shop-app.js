@@ -530,6 +530,8 @@ class ShopApp extends PolymerElement {
     const { paymentResponse, context } = event.detail;
     if (context.method === 'google-pay') {
       this._processGooglePayPayment(paymentResponse, context);
+    } else if (context.method === 'payment-request') {
+      this._processPaymentRequestPayment(paymentResponse, context);
     }
 
     if (context.type === 'cart') {
@@ -543,6 +545,10 @@ class ShopApp extends PolymerElement {
 
   _processGooglePayPayment(paymentResponse, context) {
     console.log('Process Google Pay Payment', paymentResponse, context);
+  }
+
+  _processPaymentRequestPayment(paymentResponse, context) {
+    console.log('Process Payment Request Payment', paymentResponse, context);
   }
 
   _onClearCart() {

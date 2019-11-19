@@ -1,5 +1,6 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './google-pay-button.js'
+import './payment-request-button.js'
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
@@ -72,9 +73,15 @@ class ShopCart extends PolymerElement {
             merchant-info="[[config.googlepay.merchantInfo]]"
             shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
             appearance="[[config.googlepay.appearance]]"
-            on-payment-data-result="[[_onPaymentDataResult]]"
+            on-payment-data-result="[[_onGooglePayPaymentDataResult]]"
             on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
           ></google-pay-button>
+          <payment-request-button id="paymentRequestButton"
+            payment-methods="[[config.paymentrequest.paymentMethods]]"
+            shipping-options="[[config.paymentrequest.shippingOptions]]"
+            request-shipping="[[config.paymentrequest.requestShipping]]"
+            on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
+          ></payment-request-button>
 
           <shop-button>
             <a href="/checkout">Checkout</a>
@@ -119,8 +126,8 @@ class ShopCart extends PolymerElement {
   constructor() {
     super();
 
-    this._getTransactionInfo = this._getTransactionInfo.bind(this);
-    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
+    this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
+    this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
   }
 
   _formatTotal(total) {
@@ -143,7 +150,7 @@ class ShopCart extends PolymerElement {
     }
   }
 
-  _onPaymentDataResult(paymentResponse) {
+  _onGooglePayPaymentDataResult(paymentResponse) {
     this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
@@ -151,7 +158,15 @@ class ShopCart extends PolymerElement {
     });
   }
 
-  _getTransactionInfo() {
+  _onPaymentRequestPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+      items: this.cart,
+      type: 'cart',
+      method: 'payment-request',
+    });
+  }
+
+  _getGooglePayTransactionInfo() {
     if (this.cart) {
       return {
         totalPriceStatus: 'FINAL',
@@ -168,8 +183,31 @@ class ShopCart extends PolymerElement {
     return null;
   }
 
+  _getPaymentRequestDetails() {
+    if (this.cart) {
+      return {
+        total: {
+          label: 'Total',
+          amount: {
+            currency: 'USD',
+          },
+        },
+        displayItems: this.cart.map(i => ({
+          label: `${i.item.title} x ${i.quantity}`,
+          type: 'LINE_ITEM',
+          amount: {
+            currency: 'USD',
+            value: (i.item.price * i.quantity).toFixed(2),
+          }
+        })),
+      };
+    }
+    return null;
+  }
+
   _cartChanged() {
-    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
+    this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+    this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 
 }

@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import './google-pay-button.js'
+import './payment-request-button.js'
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
@@ -124,17 +125,6 @@ class ShopCheckout extends PolymerElement {
     <div class="main-frame">
       <iron-pages id="pages" selected="[[state]]" attr-for-selected="state">
         <div state="init">
-          <div class="buy-buttons">
-            <google-pay-button id="googlePayButton"
-              environment="[[config.googlepay.environment]]"
-              allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
-              merchant-info="[[config.googlepay.merchantInfo]]"
-              shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
-              appearance="[[config.googlepay.appearance]]"
-              on-payment-data-result="[[_onPaymentDataResult]]"
-              on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
-            ></google-pay-button>
-          </div>
           <iron-form id="checkoutForm"
               on-iron-form-response="_didReceiveResponse"
               on-iron-form-presubmit="_willSendRequest">
@@ -142,6 +132,26 @@ class ShopCheckout extends PolymerElement {
 
               <div class="subsection" visible$="[[!_hasItems]]">
                 <p class="empty-cart">Your <iron-icon icon="shopping-cart"></iron-icon> is empty.</p>
+              </div>
+
+              <div class="subsection" visible$="[[_hasItems]]">
+                <div class="buy-buttons">
+                  <google-pay-button id="googlePayButton"
+                    environment="[[config.googlepay.environment]]"
+                    allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
+                    merchant-info="[[config.googlepay.merchantInfo]]"
+                    shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
+                    appearance="[[config.googlepay.appearance]]"
+                    on-payment-data-result="[[_onGooglePayPaymentDataResult]]"
+                    on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+                  ></google-pay-button>
+                  <payment-request-button id="paymentRequestButton"
+                    payment-methods="[[config.paymentrequest.paymentMethods]]"
+                    shipping-options="[[config.paymentrequest.shippingOptions]]"
+                    request-shipping="[[config.paymentrequest.requestShipping]]"
+                    on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
+                  ></payment-request-button>
+                </div>
               </div>
 
               <header class="subsection" visible$="[[_hasItems]]">
@@ -547,8 +557,8 @@ class ShopCheckout extends PolymerElement {
   constructor() {
     super();
 
-    this._getTransactionInfo = this._getTransactionInfo.bind(this);
-    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
+    this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
+    this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
   }
 
   /**
@@ -705,7 +715,7 @@ class ShopCheckout extends PolymerElement {
       bubbles: true, composed: true, detail: { title: 'Checkout' }}));
   }
 
-  _onPaymentDataResult(paymentResponse) {
+  _onGooglePayPaymentDataResult(paymentResponse) {
     this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
@@ -713,7 +723,15 @@ class ShopCheckout extends PolymerElement {
     });
   }
 
-  _getTransactionInfo() {
+  _onPaymentRequestPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+      items: this.cart,
+      type: 'cart',
+      method: 'payment-request',
+    });
+  }
+
+  _getGooglePayTransactionInfo() {
     if (this.cart) {
       return {
         totalPriceStatus: 'FINAL',
@@ -730,8 +748,31 @@ class ShopCheckout extends PolymerElement {
     return null;
   }
 
+  _getPaymentRequestDetails() {
+    if (this.cart) {
+      return {
+        total: {
+          label: 'Total',
+          amount: {
+            currency: 'USD',
+          },
+        },
+        displayItems: this.cart.map(i => ({
+          label: `${i.item.title} x ${i.quantity}`,
+          type: 'LINE_ITEM',
+          amount: {
+            currency: 'USD',
+            value: (i.item.price * i.quantity).toFixed(2),
+          }
+        })),
+      };
+    }
+    return null;
+  }
+
   _cartChanged() {
-    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
+    this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+    this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 
 }
