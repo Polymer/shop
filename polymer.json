@@ -12,6 +12,19 @@
   ],
   "builds": [
     {
+      "preset": "es6-unbundled",
+      "name": "default",
+      "js": {
+        "minify": false
+      },
+      "css": {
+        "minify": false
+      },
+      "html": {
+        "minify": false
+      }
+    },
+    {
       "name": "esm-bundled",
       "browserCapabilities": [
         "es2015",

@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "predeploy": [
+      "npm run build:static -- --name default --add-service-worker"
+    ],
+    "public": "build/default",
+    "rewrites": [{
+      "source": "**",
+      "destination": "/index.html"
+    }],
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ]
+  }
+}
