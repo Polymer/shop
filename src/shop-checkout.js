@@ -118,6 +118,12 @@ class ShopCheckout extends PolymerElement {
           margin-left: 0;
         }
 
+        #submitBox {
+          display: block;
+          width: 80%;
+          margin: 0 auto;
+        }
+
       }
 
     </style>
@@ -403,7 +409,7 @@ class ShopCheckout extends PolymerElement {
                     <div class="flex">Total</div>
                     <div>[[_formatPrice(total)]]</div>
                   </div>
-                  <shop-button responsive id="submitBox">
+                  <shop-button id="submitBox">
                     <input type="button" on-click="_submit" value="Place Order">
                   </shop-button>
                 </section>
@@ -416,7 +422,7 @@ class ShopCheckout extends PolymerElement {
         <header state="success">
           <h1>Thank you</h1>
           <p>[[response.successMessage]]</p>
-          <shop-button responsive>
+          <shop-button>
             <a href="/">Finish</a>
           </shop-button>
         </header>
@@ -425,7 +431,7 @@ class ShopCheckout extends PolymerElement {
         <header state="error">
           <h1>We couldn&acute;t process your order</h1>
           <p id="errorMessage">[[response.errorMessage]]</p>
-          <shop-button responsive>
+          <shop-button>
             <a href="/checkout">Try again</a>
           </shop-button>
         </header>

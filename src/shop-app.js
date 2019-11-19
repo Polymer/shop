@@ -200,6 +200,10 @@ class ShopApp extends PolymerElement {
         text-transform: uppercase;
       }
 
+      shop-detail, shop-cart, shop-checkout {
+        margin-top: -65px;
+      }
+
       /* small screen */
       @media (max-width: 767px) {
         :host {
@@ -212,6 +216,10 @@ class ShopApp extends PolymerElement {
 
         :host([page=detail]) .menu-btn {
           display: none;
+        }
+
+        shop-detail, shop-cart, shop-checkout {
+          margin-top: 0;
         }
       }
 
@@ -306,10 +314,12 @@ class ShopApp extends PolymerElement {
       <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
 
+    <!--
     <footer>
       <a href="https://www.polymer-project.org/3.0/toolbox/">Made by Polymer</a>
       <div class="demo-label">Demo Only</div>
     </footer>
+    -->
 
     <!-- a11y announcer -->
     <div class="announcer" aria-live="assertive">[[_a11yLabel]]</div>
