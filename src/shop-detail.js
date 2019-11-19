@@ -1,6 +1,7 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import './google-pay-button.js'
 import './shop-button.js';
 import './shop-category-data.js';
 import './shop-common-styles.js';
@@ -8,6 +9,7 @@ import './shop-image.js';
 import './shop-select.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '@polymer/polymer/lib/utils/async.js';
+import config from './shop-configuration.js';
 
 class ShopDetail extends PolymerElement {
   static get template() {
@@ -88,6 +90,16 @@ class ShopDetail extends PolymerElement {
         padding: 16px 24px 16px 70px;
       }
 
+      .buttons {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .buttons > * {
+        margin-top: 4px;
+        width: 100%;
+      }
+
       @media (max-width: 767px) {
 
         #content {
@@ -161,12 +173,12 @@ class ShopDetail extends PolymerElement {
           </shop-select>
           <shop-select>
             <label id="quantityLabel" prefix>Quantity</label>
-            <select id="quantitySelect" aria-labelledby="quantityLabel">
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
+            <select id="quantitySelect" aria-labelledby="quantityLabel" value="{{quantity::change}}">
+              <option value="1" selected?="[[_isSelected(1, quantity)]]">1</option>
+              <option value="2" selected?="[[_isSelected(2, quantity)]]">2</option>
+              <option value="3" selected?="[[_isSelected(3, quantity)]]">3</option>
+              <option value="4" selected?="[[_isSelected(4, quantity)]]">4</option>
+              <option value="5" selected?="[[_isSelected(5, quantity)]]">5</option>
             </select>
             <shop-md-decorator aria-hidden="true">
               <shop-underline></shop-underline>
@@ -177,9 +189,20 @@ class ShopDetail extends PolymerElement {
           <h2>Description</h2>
           <p id="desc"></p>
         </div>
-        <shop-button responsive>
-          <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
-        </shop-button>
+        <div class="buttons">
+          <google-pay-button id="googlePayButton"
+            environment="[[config.googlepay.environment]]"
+            allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
+            merchant-info="[[config.googlepay.merchantInfo]]"
+            shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
+            appearance="[[config.googlepay.appearance]]"
+            on-payment-data-result="[[_onPaymentDataResult]]"
+            on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+          ></google-pay-button>
+          <shop-button>
+            <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
+          </shop-button>
+        </div>
       </div>
     </div>
 
@@ -195,11 +218,29 @@ class ShopDetail extends PolymerElement {
 
   }
 
+  constructor() {
+    super();
+
+    this._getTransactionInfo = this._getTransactionInfo.bind(this);
+    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
+  }
+
   static get is() { return 'shop-detail'; }
 
   static get properties() { return {
 
+    config: {
+      type: Object,
+      value: () => config,
+    },
+
     item: Object,
+
+    quantity: {
+      type: Number,
+      value: 1,
+      observer: '_quantityChanged',
+    },
 
     route: Object,
 
@@ -233,8 +274,10 @@ class ShopDetail extends PolymerElement {
           this.$.desc.innerHTML = this._unescapeText(text);
 
           // Reset the select menus.
-          this.$.quantitySelect.value = '1';
+          this.quantity = 1;
           this.$.sizeSelect.value = 'M';
+
+          this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
 
           this.dispatchEvent(new CustomEvent('change-section', {
             bubbles: true, composed: true, detail: {
@@ -245,6 +288,28 @@ class ShopDetail extends PolymerElement {
             }}));
         })
     }
+  }
+
+  _onPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext());
+  }
+
+  _getPurchaseContext() {
+    return {
+      items: [
+        {
+          item: this.item,
+          quantity: this.quantity,
+          size: this.$.sizeSelect.value
+        }
+      ],
+      type: 'item',
+      method: 'google-pay',
+    };
+  }
+
+  _quantityChanged(q) {
+    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
   }
 
   _unescapeText(text) {
@@ -262,7 +327,7 @@ class ShopDetail extends PolymerElement {
     this.dispatchEvent(new CustomEvent('add-cart-item', {
       bubbles: true, composed: true, detail: {
         item: this.item,
-        quantity: parseInt(this.$.quantitySelect.value, 10),
+        quantity: this.quantity,
         size: this.$.sizeSelect.value
       }}));
   }
@@ -279,6 +344,29 @@ class ShopDetail extends PolymerElement {
     if (!offline) {
       this._tryReconnect();
     }
+  }
+
+  _getTransactionInfo() {
+    if (this.item) {
+      const price = this.quantity * this.item.price;
+      return {
+        totalPriceStatus: 'FINAL',
+        totalPriceLabel: 'Total',
+        totalPrice: price.toFixed(2),
+        currencyCode: 'USD',
+        countryCode: 'US',
+        displayItems: [{
+          label: `${this.item.title} x ${this.quantity}`,
+          type: 'LINE_ITEM',
+          price: price.toFixed(2),
+        }],
+      };
+    }
+    return null;
+  }
+
+  _isSelected(option, value) {
+    return option == value;
   }
 
 }

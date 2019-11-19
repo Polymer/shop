@@ -1,7 +1,9 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import './google-pay-button.js'
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
+import config from './shop-configuration.js';
 
 class ShopCart extends PolymerElement {
   static get template() {
@@ -14,12 +16,23 @@ class ShopCart extends PolymerElement {
 
       .checkout-box {
         font-weight: bold;
-        text-align: right;
-        margin-right: 10px;
+        text-align: center;
       }
 
       .subtotal {
-        margin: 0 64px 0 24px;
+        margin: 0 0 0 24px;
+      }
+
+      .buy-buttons {
+        width: 80%;
+        max-width: 400px;
+        margin: 40px auto 20px;
+        padding: 20px;
+      }
+
+      .buy-buttons > * {
+        margin-bottom: 4px;
+        width: 100%;
       }
 
       @media (max-width: 767px) {
@@ -50,7 +63,20 @@ class ShopCart extends PolymerElement {
         </div>
         <div class="checkout-box">
           Total: <span class="subtotal">[[_formatTotal(total)]]</span>
-          <shop-button responsive>
+        </div>
+
+        <div class="buy-buttons">
+          <google-pay-button id="googlePayButton"
+            environment="[[config.googlepay.environment]]"
+            allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
+            merchant-info="[[config.googlepay.merchantInfo]]"
+            shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
+            appearance="[[config.googlepay.appearance]]"
+            on-payment-data-result="[[_onPaymentDataResult]]"
+            on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+          ></google-pay-button>
+
+          <shop-button>
             <a href="/checkout">Checkout</a>
           </shop-button>
         </div>
@@ -58,25 +84,44 @@ class ShopCart extends PolymerElement {
     </div>
     `;
   }
+
   static get is() { return 'shop-cart'; }
 
-  static get properties() { return {
+  static get properties() {
+    return {
 
-    total: Number,
+      config: {
+        type: Object,
+        value: () => config,
+      },
 
-    cart: Array,
+      total: Number,
 
-    visible: {
-      type: Boolean,
-      observer: '_visibleChanged'
-    },
+      cart: {
+        type: Array,
+        observer: '_cartChanged',
+      },
 
-    _hasItems: {
-      type: Boolean,
-      computed: '_computeHasItem(cart.length)'
+      visible: {
+        type: Boolean,
+        observer: '_visibleChanged'
+      },
+
+      _hasItems: {
+        type: Boolean,
+        computed: '_computeHasItem(cart.length)'
+      }
+
     }
 
-  }}
+  }
+
+  constructor() {
+    super();
+
+    this._getTransactionInfo = this._getTransactionInfo.bind(this);
+    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
+  }
 
   _formatTotal(total) {
     return isNaN(total) ? '' : '$' + total.toFixed(2);
@@ -96,6 +141,35 @@ class ShopCart extends PolymerElement {
       this.dispatchEvent(new CustomEvent('change-section', {
         bubbles: true, composed: true, detail: { title: 'Your cart' }}));
     }
+  }
+
+  _onPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+      items: this.cart,
+      type: 'cart',
+      method: 'google-pay',
+    });
+  }
+
+  _getTransactionInfo() {
+    if (this.cart) {
+      return {
+        totalPriceStatus: 'FINAL',
+        totalPriceLabel: 'Total',
+        currencyCode: 'USD',
+        countryCode: 'US',
+        displayItems: this.cart.map(i => ({
+          label: `${i.item.title} x ${i.quantity}`,
+          type: 'LINE_ITEM',
+          price: (i.item.price * i.quantity).toFixed(2),
+        })),
+      };
+    }
+    return null;
+  }
+
+  _cartChanged() {
+    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
   }
 
 }

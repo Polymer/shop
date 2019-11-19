@@ -300,6 +300,8 @@ class ShopApp extends PolymerElement {
       <shop-cart name="cart" cart="[[cart]]" total="[[total]]"></shop-cart>
       <!-- checkout view -->
       <shop-checkout name="checkout" cart="[[cart]]" total="[[total]]" route="{{subroute}}"></shop-checkout>
+      <!-- confirmation view -->
+      <shop-confirmation name="confirmation"></confirmation>
 
       <shop-404-warning name="404"></shop-404-warning>
     </iron-pages>
@@ -362,6 +364,9 @@ class ShopApp extends PolymerElement {
     this.addEventListener('announce', (e)=>this._onAnnounce(e));
     this.addEventListener('dom-change', (e)=>this._domChange(e));
     this.addEventListener('show-invalid-url-warning', (e)=>this._onFallbackSelectionTriggered(e));
+
+    this.addEventListener('payment-selected', (e)=>this._onPaymentSelected(e));
+
     // listen for online/offline
     afterNextRender(this, () => {
       window.addEventListener('online', (e)=>this._notifyNetworkStatus(e));
@@ -395,6 +400,9 @@ class ShopApp extends PolymerElement {
           break;
         case 'checkout':
           import('./shop-checkout.js').then(cb);
+          break;
+        case 'confirmation':
+          import('./shop-confirmation.js').then(cb);
           break;
         default:
           this._pageLoaded(Boolean(oldPage));
@@ -516,6 +524,25 @@ class ShopApp extends PolymerElement {
     } else {
       this._announce('Quantity changed to ' + detail.quantity);
     }
+  }
+
+  _onPaymentSelected(event) {
+    const { paymentResponse, context } = event.detail;
+    if (context.method === 'google-pay') {
+      this._processGooglePayPayment(paymentResponse, context);
+    }
+
+    if (context.type === 'cart') {
+      this.dispatchEvent(new CustomEvent('clear-cart', {
+        bubbles: true, composed: true
+      }));
+    }
+
+    this.set('route.path', '/confirmation');
+  }
+
+  _processGooglePayPayment(paymentResponse, context) {
+    console.log('Process Google Pay Payment', paymentResponse, context);
   }
 
   _onClearCart() {

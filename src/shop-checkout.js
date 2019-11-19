@@ -1,6 +1,7 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import './google-pay-button.js'
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
@@ -9,6 +10,7 @@ import './shop-select.js';
 import './shop-checkbox.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
+import config from './shop-configuration.js';
 
 class ShopCheckout extends PolymerElement {
   static get template() {
@@ -91,6 +93,19 @@ class ShopCheckout extends PolymerElement {
         margin: 30px 0;
       }
 
+      .buy-buttons {
+        width: 80%;
+        max-width: 400px;
+        margin: 10px auto 20px;
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .buy-buttons > * {
+        margin-bottom: 4px;
+        width: 100%;
+      }
+
       @media (max-width: 767px) {
 
         .grid {
@@ -109,6 +124,17 @@ class ShopCheckout extends PolymerElement {
     <div class="main-frame">
       <iron-pages id="pages" selected="[[state]]" attr-for-selected="state">
         <div state="init">
+          <div class="buy-buttons">
+            <google-pay-button id="googlePayButton"
+              environment="[[config.googlepay.environment]]"
+              allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
+              merchant-info="[[config.googlepay.merchantInfo]]"
+              shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
+              appearance="[[config.googlepay.appearance]]"
+              on-payment-data-result="[[_onPaymentDataResult]]"
+              on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+            ></google-pay-button>
+          </div>
           <iron-form id="checkoutForm"
               on-iron-form-response="_didReceiveResponse"
               on-iron-form-presubmit="_willSendRequest">
@@ -440,7 +466,15 @@ class ShopCheckout extends PolymerElement {
     /**
      * An array containing the items in the cart.
      */
-    cart: Array,
+    cart: {
+      type: Array,
+      observer: '_cartChanged',
+    },
+
+    config: {
+      type: Object,
+      value: () => config,
+    },
 
     /**
      * The server's response.
@@ -508,6 +542,13 @@ class ShopCheckout extends PolymerElement {
 
       // this.$.checkoutForm.submit();
     }
+  }
+
+  constructor() {
+    super();
+
+    this._getTransactionInfo = this._getTransactionInfo.bind(this);
+    this._onPaymentDataResult = this._onPaymentDataResult.bind(this);
   }
 
   /**
@@ -662,6 +703,35 @@ class ShopCheckout extends PolymerElement {
     // Notify the page's title
     this.dispatchEvent(new CustomEvent('change-section', {
       bubbles: true, composed: true, detail: { title: 'Checkout' }}));
+  }
+
+  _onPaymentDataResult(paymentResponse) {
+    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+      items: this.cart,
+      type: 'cart',
+      method: 'google-pay',
+    });
+  }
+
+  _getTransactionInfo() {
+    if (this.cart) {
+      return {
+        totalPriceStatus: 'FINAL',
+        totalPriceLabel: 'Total',
+        currencyCode: 'USD',
+        countryCode: 'US',
+        displayItems: this.cart.map(i => ({
+          label: `${i.item.title} x ${i.quantity}`,
+          type: 'LINE_ITEM',
+          price: (i.item.price * i.quantity).toFixed(2),
+        })),
+      };
+    }
+    return null;
+  }
+
+  _cartChanged() {
+    this.$.googlePayButton.transactionInfo = this._getTransactionInfo();
   }
 
 }
