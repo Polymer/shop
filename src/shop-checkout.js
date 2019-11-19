@@ -418,15 +418,6 @@ class ShopCheckout extends PolymerElement {
           </iron-form>
         </div>
 
-        <!-- Success message UI -->
-        <header state="success">
-          <h1>Thank you</h1>
-          <p>[[response.successMessage]]</p>
-          <shop-button>
-            <a href="/">Finish</a>
-          </shop-button>
-        </header>
-
         <!-- Error message UI -->
         <header state="error">
           <h1>We couldn&acute;t process your order</h1>
@@ -682,9 +673,9 @@ class ShopCheckout extends PolymerElement {
     this._setWaiting(true);
 
     if (response.success) {
-      this._pushState('success');
       this._reset();
       this.dispatchEvent(new CustomEvent('clear-cart', {bubbles: true, composed: true}));
+      this.dispatchEvent(new CustomEvent('confirmation', {bubbles: true, composed: true}));
     } else {
       this._pushState('error');
     }

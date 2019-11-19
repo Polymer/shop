@@ -376,6 +376,7 @@ class ShopApp extends PolymerElement {
     this.addEventListener('show-invalid-url-warning', (e)=>this._onFallbackSelectionTriggered(e));
 
     this.addEventListener('payment-selected', (e)=>this._onPaymentSelected(e));
+    this.addEventListener('confirmation', (e)=>this._onConfirmation(e));
 
     // listen for online/offline
     afterNextRender(this, () => {
@@ -550,6 +551,12 @@ class ShopApp extends PolymerElement {
       }));
     }
 
+    this.dispatchEvent(new CustomEvent('confirmation', {
+      bubbles: true, composed: true
+    }));
+}
+
+  _onConfirmation(event) {
     this.set('route.path', '/confirmation');
   }
 
