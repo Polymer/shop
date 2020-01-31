@@ -473,10 +473,7 @@ class ShopCheckout extends PolymerElement {
     /**
      * An array containing the items in the cart.
      */
-    cart: {
-      type: Array,
-      observer: '_cartChanged',
-    },
+    cart: Array,
 
     config: {
       type: Object,
@@ -524,7 +521,8 @@ class ShopCheckout extends PolymerElement {
   }}
 
   static get observers() { return [
-    '_updateState(routeActive, routeData)'
+    '_updateState(routeActive, routeData)',
+    '_refreshDetails(cart, total)',
   ]}
 
   _submit(e) {
@@ -767,7 +765,7 @@ class ShopCheckout extends PolymerElement {
     return null;
   }
 
-  _cartChanged() {
+  _refreshDetails() {
     this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
     this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
