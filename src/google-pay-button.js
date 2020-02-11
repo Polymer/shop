@@ -1,5 +1,6 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import loadScript from './load-script.js';
+import Settings from './settings.js';
 
 class GooglePayButton extends PolymerElement {
 
@@ -143,6 +144,8 @@ class GooglePayButton extends PolymerElement {
   }
 
   _initializeButton() {
+    if (Settings.get('gp') !== '1') return;
+
     return loadScript('https://pay.google.com/gp/p/js/pay.js')
       .then(() => {
         this._client = new google.payments.api.PaymentsClient(this._getClientConfig());

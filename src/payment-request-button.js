@@ -1,4 +1,5 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
+import Settings from './settings.js';
 
 const emptyPaymentDetails = {
   total: {
@@ -70,7 +71,7 @@ class PaymentRequestButton extends PolymerElement {
   ready() {
     super.ready();
 
-    if (window.PaymentRequest) {
+    if (window.PaymentRequest && Settings.get('pr') === '1') {
       this._initializeButton();
     }
   }
