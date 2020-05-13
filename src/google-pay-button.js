@@ -239,11 +239,11 @@ class GooglePayButton extends PolymerElement {
   // workaround to get css styles into component
   _copyGPayStyles() {
     const styles = document.querySelectorAll('head > style');
-    const gPayStyles = Array.from(styles).filter(s => s.innerText.indexOf('.gpay-button') !== -1);
+    const gPayStyles = Array.from(styles).filter(s => s.innerHTML.indexOf('.gpay-button') !== -1);
 
     gPayStyles.forEach(s => {
       const style = document.createElement('style');
-      style.innerText = s.innerText;
+      style.innerHTML = s.innerHTML;
       this.shadowRoot.appendChild(style);
     });
   }
