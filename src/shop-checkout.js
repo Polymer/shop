@@ -1,8 +1,8 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import './google-pay-button.js'
-import './payment-request-button.js'
+import '@google-pay/button-element';
+import './payment-request-button.js';
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
@@ -11,7 +11,10 @@ import './shop-select.js';
 import './shop-checkbox.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
-import config from './shop-configuration.js';
+import { getGooglePayConfig, getPaymentRequestConfig } from './shop-configuration.js';
+
+const googlepayConfig = getGooglePayConfig();
+const paymentrequestConfig = getPaymentRequestConfig();
 
 class ShopCheckout extends PolymerElement {
   static get template() {
@@ -143,18 +146,19 @@ class ShopCheckout extends PolymerElement {
               <div class="subsection" visible$="[[_hasItems]]">
                 <div class="buy-buttons">
                   <google-pay-button id="googlePayButton"
-                    environment="[[config.googlepay.environment]]"
-                    allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
-                    merchant-info="[[config.googlepay.merchantInfo]]"
-                    shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
-                    appearance="[[config.googlepay.appearance]]"
-                    on-payment-data-result="[[_onGooglePayPaymentDataResult]]"
-                    on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+                    class="fill"
+                    environment="[[googlepayConfig.environment]]"
+                    payment-request="[[googlepayConfig.paymentRequest]]"
+                    button-type="[[googlepayConfig.appearance.buttonType]]"
+                    button-color="[[googlepayConfig.appearance.buttonColor]]"
+                    existing-payment-method-required="[[googlepayConfig.existingPaymentMethodRequired]]"
+                    on-load-payment-data="[[_onGooglePayPaymentDataResult]]"
+                    on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
                   ></google-pay-button>
                   <payment-request-button id="paymentRequestButton"
-                    payment-methods="[[config.paymentrequest.paymentMethods]]"
-                    shipping-options="[[config.paymentrequest.shippingOptions]]"
-                    request-shipping="[[config.paymentrequest.requestShipping]]"
+                    payment-methods="[[paymentrequestConfig.paymentMethods]]"
+                    shipping-options="[[paymentrequestConfig.shippingOptions]]"
+                    request-shipping="[[paymentrequestConfig.requestShipping]]"
                     on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
                   ></payment-request-button>
                 </div>
@@ -475,9 +479,14 @@ class ShopCheckout extends PolymerElement {
      */
     cart: Array,
 
-    config: {
+    googlepayConfig: {
       type: Object,
-      value: () => config,
+      value: () => googlepayConfig,
+    },
+
+    paymentrequestConfig: {
+      type: Object,
+      value: () => paymentrequestConfig,
     },
 
     /**
@@ -711,7 +720,7 @@ class ShopCheckout extends PolymerElement {
   }
 
   _onGooglePayPaymentDataResult(paymentResponse) {
-    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.googlepayConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'google-pay',
@@ -719,7 +728,7 @@ class ShopCheckout extends PolymerElement {
   }
 
   _onPaymentRequestPaymentDataResult(paymentResponse) {
-    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.googlepayConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'payment-request',
@@ -731,6 +740,7 @@ class ShopCheckout extends PolymerElement {
       return {
         totalPriceStatus: 'FINAL',
         totalPriceLabel: 'Total',
+        totalPrice: this.cart.reduce((total, i) => total + (i.item.price * i.quantity), 0).toFixed(2),
         currencyCode: 'USD',
         countryCode: 'US',
         displayItems: this.cart.map(i => ({
@@ -766,7 +776,7 @@ class ShopCheckout extends PolymerElement {
   }
 
   _refreshDetails() {
-    this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+    this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
     this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 

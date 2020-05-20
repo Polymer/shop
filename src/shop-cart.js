@@ -1,10 +1,13 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
-import './google-pay-button.js'
-import './payment-request-button.js'
+import '@google-pay/button-element';
+import './payment-request-button.js';
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
-import config from './shop-configuration.js';
+import { getGooglePayConfig, getPaymentRequestConfig } from './shop-configuration.js';
+
+const googlepayConfig = getGooglePayConfig();
+const paymentrequestConfig = getPaymentRequestConfig();
 
 class ShopCart extends PolymerElement {
   static get template() {
@@ -68,18 +71,19 @@ class ShopCart extends PolymerElement {
 
         <div class="buy-buttons">
           <google-pay-button id="googlePayButton"
-            environment="[[config.googlepay.environment]]"
-            allowed-payment-methods="[[config.googlepay.allowedPaymentMethods]]"
-            merchant-info="[[config.googlepay.merchantInfo]]"
-            shipping-address-required="[[config.googlepay.shippingAddressRequired]]"
-            appearance="[[config.googlepay.appearance]]"
-            on-payment-data-result="[[_onGooglePayPaymentDataResult]]"
-            on-payment-authorized="[[config.googlepay.onPaymentAuthorized]]"
+            class="fill"
+            environment="[[googlepayConfig.environment]]"
+            payment-request="[[googlepayConfig.paymentRequest]]"
+            button-type="[[googlepayConfig.appearance.buttonType]]"
+            button-color="[[googlepayConfig.appearance.buttonColor]]"
+            existing-payment-method-required="[[googlepayConfig.existingPaymentMethodRequired]]"
+            on-load-payment-data="[[_onGooglePayPaymentDataResult]]"
+            on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
           ></google-pay-button>
           <payment-request-button id="paymentRequestButton"
-            payment-methods="[[config.paymentrequest.paymentMethods]]"
-            shipping-options="[[config.paymentrequest.shippingOptions]]"
-            request-shipping="[[config.paymentrequest.requestShipping]]"
+            payment-methods="[[paymentrequestConfig.paymentMethods]]"
+            shipping-options="[[paymentrequestConfig.shippingOptions]]"
+            request-shipping="[[paymentrequestConfig.requestShipping]]"
             on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
           ></payment-request-button>
 
@@ -97,9 +101,14 @@ class ShopCart extends PolymerElement {
   static get properties() {
     return {
 
-      config: {
+      googlepayConfig: {
         type: Object,
-        value: () => config,
+        value: () => googlepayConfig,
+      },
+
+      paymentrequestConfig: {
+        type: Object,
+        value: () => paymentrequestConfig,
       },
 
       total: Number,
@@ -152,7 +161,7 @@ class ShopCart extends PolymerElement {
   }
 
   _onGooglePayPaymentDataResult(paymentResponse) {
-    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.googlepayConfig.onLoadPaymentData.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'google-pay',
@@ -160,7 +169,7 @@ class ShopCart extends PolymerElement {
   }
 
   _onPaymentRequestPaymentDataResult(paymentResponse) {
-    this.config.googlepay.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.googlepayConfig.onLoadPaymentData.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'payment-request',
@@ -172,6 +181,7 @@ class ShopCart extends PolymerElement {
       return {
         totalPriceStatus: 'FINAL',
         totalPriceLabel: 'Total',
+        totalPrice: this.cart.reduce((total, i) => total + (i.item.price * i.quantity), 0).toFixed(2),
         currencyCode: 'USD',
         countryCode: 'US',
         displayItems: this.cart.map(i => ({
@@ -207,7 +217,7 @@ class ShopCart extends PolymerElement {
   }
 
   _refreshDetails() {
-    this.$.googlePayButton.transactionInfo = this._getGooglePayTransactionInfo();
+    this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
     this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 
