@@ -37,6 +37,7 @@ const config = {
         currencyCode: 'USD',
         countryCode: 'US',
       },
+      callbackIntents: ['PAYMENT_AUTHORIZATION'],
       shippingAddressRequired: false,
     },
     onLoadPaymentData: function (paymentResponse, context) {

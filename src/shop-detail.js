@@ -308,7 +308,7 @@ class ShopDetail extends PolymerElement {
   }
 
   _onGooglePayPaymentDataResult(paymentResponse) {
-    this.googlepayConfig.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext('google-pay'));
+    this.googlepayConfig.onLoadPaymentData.bind(this)(paymentResponse, this._getPurchaseContext('google-pay'));
   }
 
   _onPaymentRequestPaymentDataResult(paymentResponse) {

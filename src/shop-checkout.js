@@ -720,7 +720,7 @@ class ShopCheckout extends PolymerElement {
   }
 
   _onGooglePayPaymentDataResult(paymentResponse) {
-    this.googlepayConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.googlepayConfig.onLoadPaymentData.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'google-pay',
