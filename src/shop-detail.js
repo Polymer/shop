@@ -104,6 +104,10 @@ class ShopDetail extends PolymerElement {
         width: 100%;
       }
 
+      google-pay-button {
+        height: 40px;
+      }
+
       @media (max-width: 767px) {
 
         #content {

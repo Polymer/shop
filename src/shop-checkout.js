@@ -110,6 +110,10 @@ class ShopCheckout extends PolymerElement {
         width: 100%;
       }
 
+      google-pay-button {
+        height: 40px;
+      }
+
       @media (max-width: 767px) {
 
         .grid {
