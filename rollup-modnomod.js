@@ -61,11 +61,11 @@ const filesizeConfig = {
 
 const copyConfig = {
   targets: [
-    { src: 'node_modules/@webcomponents', dest: 'rollup-build/node_modules' },
-    { src: 'node_modules/systemjs/dist/s.min.js', dest: 'rollup-build/node_modules/systemjs/dist' },
-    { src: 'images', dest: 'rollup-build' },
-    { src: 'data', dest: 'rollup-build' },
-    { src: 'index-prod.html', dest: 'rollup-build', rename: 'index.html' },
+    { src: 'node_modules/@webcomponents', dest: 'build-modnomod/node_modules' },
+    { src: 'node_modules/systemjs/dist/s.min.js', dest: 'build-modnomod/node_modules/systemjs/dist' },
+    { src: 'images', dest: 'build-modnomod' },
+    { src: 'data', dest: 'build-modnomod' },
+    { src: 'index-modnomod.html', dest: 'build-modnomod', rename: 'index.html' },
   ],
 };
 
@@ -75,7 +75,7 @@ const configs = [
   {
     input: 'src/components/shop-app.js',
     output: {
-      dir: 'rollup-build/src/components',
+      dir: 'build-modnomod/src/components',
       format: 'es',
     },
     plugins: [
@@ -88,7 +88,7 @@ const configs = [
   {
     input: ['src/components/shop-app.js'],
     output: {
-      dir: 'rollup-build/nomodule/src/components',
+      dir: 'build-modnomod/nomodule/src/components',
       format: 'systemjs',
     },
     plugins: [
@@ -103,7 +103,7 @@ const configs = [
   {
     input: 'src/babel-polyfills-nomodule.js',
     output: {
-      file: 'rollup-build/nomodule/src/babel-polyfills-nomodule.js',
+      file: 'build-modnomod/nomodule/src/babel-polyfills-nomodule.js',
       format: 'iife',
     },
     plugins: [commonjs({ include: ['node_modules/**'] }), resolve()],

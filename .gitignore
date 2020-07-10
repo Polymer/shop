@@ -1,2 +1,7 @@
 node_modules
 build
+build-universal
+build-modern
+build-modnomod
+.DS_Store
+.vscode
