@@ -355,7 +355,7 @@ class ShopDetail extends PolymerElement {
       items: [
         {
           item: this.item,
-          quantity: this.quantity,
+          quantity: Number(this.quantity),
           size: this.$.sizeSelect.value
         }
       ],
@@ -384,7 +384,7 @@ class ShopDetail extends PolymerElement {
     this.dispatchEvent(new CustomEvent('add-cart-item', {
       bubbles: true, composed: true, detail: {
         item: this.item,
-        quantity: this.quantity,
+        quantity: Number(this.quantity),
         size: this.$.sizeSelect.value
       }}));
   }
@@ -405,7 +405,7 @@ class ShopDetail extends PolymerElement {
 
   _getGooglePayTransactionInfo(shippingOption) {
     if (this.item) {
-      const price = this.quantity * this.item.price;
+      const price = Number(this.quantity) * this.item.price;
 
       const paymentRequest = this.googlepayConfig.buildPaymentRequest([{
         label: `${this.item.title} x ${this.quantity}`,
@@ -420,7 +420,7 @@ class ShopDetail extends PolymerElement {
 
   _getPaymentRequestDetails(shippingOption) {
     if (this.item) {
-      const price = this.quantity * this.item.price;
+      const price = Number(this.quantity) * this.item.price;
       return this.paymentrequestConfig.getTransactionInfo([{
         label: `${this.item.title} x ${this.quantity}`,
         type: 'LINE_ITEM',
