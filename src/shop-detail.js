@@ -207,6 +207,7 @@ class ShopDetail extends PolymerElement {
             existing-payment-method-required="[[googlepayConfig.existingPaymentMethodRequired]]"
             on-load-payment-data="[[_onGooglePayPaymentDataResult]]"
             on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
+            on-payment-data-changed="[[_onGooglePayPaymentDataChanged]]"
           ></google-pay-button>
           <payment-request-button id="paymentRequestButton"
             payment-methods="[[paymentrequestConfig.paymentMethods]]"
@@ -237,7 +238,9 @@ class ShopDetail extends PolymerElement {
     super();
 
     this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
+    this._onGooglePayPaymentDataChanged = this._onGooglePayPaymentDataChanged.bind(this);
     this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
+    this._onPaymentRequestShippingOptionChange = this._onPaymentRequestShippingOptionChange.bind(this);
   }
 
   static get is() { return 'shop-detail'; }
@@ -300,6 +303,9 @@ class ShopDetail extends PolymerElement {
           this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
           this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
 
+          this.$.paymentRequestButton.removeEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
+          this.$.paymentRequestButton.addEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
+
           this.dispatchEvent(new CustomEvent('change-section', {
             bubbles: true, composed: true, detail: {
               category: item ? item.category : '',
@@ -315,8 +321,33 @@ class ShopDetail extends PolymerElement {
     this.googlepayConfig.onLoadPaymentData.bind(this)(paymentResponse, this._getPurchaseContext('google-pay'));
   }
 
+  _onGooglePayPaymentDataChanged(paymentData) {
+    if (paymentData.shippingOptionData.id) {
+      const shippingOption = this.googlepayConfig.shippingOptions.find(option => option.id === paymentData.shippingOptionData.id);
+      if (shippingOption) {
+        const transactionInfo = this._getGooglePayTransactionInfo(shippingOption);
+
+        return {
+          newTransactionInfo: transactionInfo,
+        };
+      }
+    }
+    return {};
+  }
+
   _onPaymentRequestPaymentDataResult(paymentResponse) {
     this.paymentrequestConfig.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext('payment-request'));
+  }
+
+  _onPaymentRequestShippingOptionChange(event) {
+    const shippingOption = this.$.paymentRequestButton.shippingOptions.find(option => option.id === event.detail.paymentRequest.shippingOption);
+    event.detail.event.updateWith({
+      ...this._getPaymentRequestDetails(shippingOption),
+      shippingOptions: this.$.paymentRequestButton.shippingOptions.map(option => ({
+        ...option,
+        selected: option.id === event.detail.paymentRequest.shippingOption,
+      })),
+    });
   }
 
   _getPurchaseContext(method) {
@@ -372,45 +403,32 @@ class ShopDetail extends PolymerElement {
     }
   }
 
-  _getGooglePayTransactionInfo() {
+  _getGooglePayTransactionInfo(shippingOption) {
     if (this.item) {
       const price = this.quantity * this.item.price;
-      return {
-        totalPriceStatus: 'FINAL',
-        totalPriceLabel: 'Total',
-        totalPrice: price.toFixed(2),
-        currencyCode: 'USD',
-        countryCode: 'US',
-        displayItems: [{
-          label: `${this.item.title} x ${this.quantity}`,
-          type: 'LINE_ITEM',
-          price: price.toFixed(2),
-        }],
-      };
+
+      const paymentRequest = this.googlepayConfig.buildPaymentRequest([{
+        label: `${this.item.title} x ${this.quantity}`,
+        type: 'LINE_ITEM',
+        price: price.toFixed(2),
+      }], shippingOption);
+
+      return paymentRequest.transactionInfo;
     }
     return null;
   }
 
-  _getPaymentRequestDetails() {
+  _getPaymentRequestDetails(shippingOption) {
     if (this.item) {
       const price = this.quantity * this.item.price;
-      return {
-        total: {
-          label: 'Total',
-          amount: {
-            currency: 'USD',
-            value: price.toFixed(2),
-          },
-        },
-        displayItems: [{
-          label: `${this.item.title} x ${this.quantity}`,
-          type: 'LINE_ITEM',
-          amount: {
-            currency: 'USD',
-            value: price.toFixed(2),
-          }
-        }],
-      };
+      return this.paymentrequestConfig.getTransactionInfo([{
+        label: `${this.item.title} x ${this.quantity}`,
+        type: 'LINE_ITEM',
+        amount: {
+          currency: 'USD',
+          value: price.toFixed(2),
+        }
+      }], shippingOption);
     }
     return null;
   }

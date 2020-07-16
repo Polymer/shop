@@ -109,6 +109,14 @@ class PaymentRequestButton extends PolymerElement {
       requestShipping: this.requestShipping,
     });
 
+    paymentRequest.addEventListener('shippingoptionchange', event => {
+      this.dispatchEvent(new CustomEvent('shippingoptionchange', {
+        bubbles: true, composed: true, detail: {
+          paymentRequest,
+          event,
+        }}));
+    });
+
     return paymentRequest.show()
       .then(paymentResponse => {
         if (this.onPaymentDataResult) {

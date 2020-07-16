@@ -158,7 +158,8 @@ class ShopCheckout extends PolymerElement {
                     existing-payment-method-required="[[googlepayConfig.existingPaymentMethodRequired]]"
                     on-load-payment-data="[[_onGooglePayPaymentDataResult]]"
                     on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
-                  ></google-pay-button>
+                    on-payment-data-changed="[[_onGooglePayPaymentDataChanged]]"
+                    ></google-pay-button>
                   <payment-request-button id="paymentRequestButton"
                     payment-methods="[[paymentrequestConfig.paymentMethods]]"
                     shipping-options="[[paymentrequestConfig.shippingOptions]]"
@@ -566,7 +567,9 @@ class ShopCheckout extends PolymerElement {
     super();
 
     this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
+    this._onGooglePayPaymentDataChanged = this._onGooglePayPaymentDataChanged.bind(this);
     this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
+    this._onPaymentRequestShippingOptionChange = this._onPaymentRequestShippingOptionChange.bind(this);
   }
 
   /**
@@ -732,56 +735,71 @@ class ShopCheckout extends PolymerElement {
   }
 
   _onPaymentRequestPaymentDataResult(paymentResponse) {
-    this.googlepayConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
+    this.paymentrequestConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
       items: this.cart,
       type: 'cart',
       method: 'payment-request',
     });
   }
 
-  _getGooglePayTransactionInfo() {
+  _getGooglePayTransactionInfo(shippingOption) {
     if (this.cart) {
-      return {
-        totalPriceStatus: 'FINAL',
-        totalPriceLabel: 'Total',
-        totalPrice: this.cart.reduce((total, i) => total + (i.item.price * i.quantity), 0).toFixed(2),
-        currencyCode: 'USD',
-        countryCode: 'US',
-        displayItems: this.cart.map(i => ({
-          label: `${i.item.title} x ${i.quantity}`,
-          type: 'LINE_ITEM',
-          price: (i.item.price * i.quantity).toFixed(2),
-        })),
-      };
+      const paymentRequest = this.googlepayConfig.buildPaymentRequest(this.cart.map(i => ({
+        label: `${i.item.title} x ${i.quantity}`,
+        type: 'LINE_ITEM',
+        price: (i.item.price * i.quantity).toFixed(2),
+      })), shippingOption);
+
+      return paymentRequest.transactionInfo;
     }
     return null;
   }
 
-  _getPaymentRequestDetails() {
+  _onGooglePayPaymentDataChanged(paymentData) {
+    if (paymentData.shippingOptionData.id) {
+      const shippingOption = this.googlepayConfig.shippingOptions.find(option => option.id === paymentData.shippingOptionData.id);
+      if (shippingOption) {
+        const transactionInfo = this._getGooglePayTransactionInfo(shippingOption);
+
+        return {
+          newTransactionInfo: transactionInfo,
+        };
+      }
+    }
+    return {};
+  }
+
+  _getPaymentRequestDetails(shippingOption) {
     if (this.cart) {
-      return {
-        total: {
-          label: 'Total',
-          amount: {
-            currency: 'USD',
-          },
-        },
-        displayItems: this.cart.map(i => ({
-          label: `${i.item.title} x ${i.quantity}`,
-          type: 'LINE_ITEM',
-          amount: {
-            currency: 'USD',
-            value: (i.item.price * i.quantity).toFixed(2),
-          }
-        })),
-      };
+      return this.paymentrequestConfig.getTransactionInfo(this.cart.map(i => ({
+        label: `${i.item.title} x ${i.quantity}`,
+        type: 'LINE_ITEM',
+        amount: {
+          currency: 'USD',
+          value: (i.item.price * i.quantity).toFixed(2),
+        }
+      })), shippingOption);
     }
     return null;
+  }
+
+  _onPaymentRequestShippingOptionChange(event) {
+    const shippingOption = this.$.paymentRequestButton.shippingOptions.find(option => option.id === event.detail.paymentRequest.shippingOption);
+    event.detail.event.updateWith({
+      ...this._getPaymentRequestDetails(shippingOption),
+      shippingOptions: this.$.paymentRequestButton.shippingOptions.map(option => ({
+        ...option,
+        selected: option.id === event.detail.paymentRequest.shippingOption,
+      })),
+    });
   }
 
   _refreshDetails() {
     this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
     this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
+
+    this.$.paymentRequestButton.removeEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
+    this.$.paymentRequestButton.addEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
   }
 
 }
