@@ -78,26 +78,6 @@ function buildGooglePayPaymentRequest(displayItems, shippingOption) {
   };
 }
 
-function getPaymentRequestTransactionInfo(displayItems, shippingOption) {
-  const opt = shippingOption || config.paymentrequest.shippingOptions[0];
-  const items = [...displayItems, {
-    label: opt.label,
-    amount: opt.amount,
-    type: 'SHIPPING_OPTION',
-  }];
-
-  return {
-    total: {
-      label: 'Total',
-      amount: {
-        currency: 'USD',
-        value: items.reduce((total, item) => total + Number(item.amount.value), 0).toFixed(2),
-      },
-    },
-    displayItems: items,
-  };
-}
-
 const config = {
   googlepay: {
     environment: 'TEST',
@@ -122,38 +102,6 @@ const config = {
     onPaymentAuthorized: function () { return { transactionState: 'SUCCESS'}; },
     buildPaymentRequest: buildGooglePayPaymentRequest,
   },
-  paymentrequest: {
-    paymentMethods: [
-      {
-        supportedMethods: 'basic-card',
-        data: {
-          supportedNetworks: ['visa', 'mastercard', 'amex'],
-        },
-      },
-    ],
-    shippingOptions: shippingOptions.map((option, index) => ({
-      id: option.id,
-      label: option.label,
-      amount: {
-        currency: 'USD',
-        value: option.price.toFixed(2),
-      },
-      selected: index === 0,
-    })),
-    requestShipping: true,
-    onPaymentDataResponse: function (paymentResponse, context) {
-      console.log('Success', paymentResponse);
-      this.dispatchEvent(new CustomEvent('payment-selected', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          paymentResponse,
-          context: typeof context === 'function' ? context() : context,
-        }
-      }));
-    },
-    getTransactionInfo: getPaymentRequestTransactionInfo,
-  },
 };
 
 function getGooglePayConfig() {
@@ -162,13 +110,6 @@ function getGooglePayConfig() {
   };
 }
 
-function getPaymentRequestConfig() {
-  return {
-    ...config.paymentrequest,
-  };
-}
-
 export {
   getGooglePayConfig,
-  getPaymentRequestConfig,
 };

@@ -2,7 +2,6 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@google-pay/button-element';
-import './payment-request-button.js';
 import './shop-button.js';
 import './shop-common-styles.js';
 import './shop-form-styles.js';
@@ -11,10 +10,9 @@ import './shop-select.js';
 import './shop-checkbox.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
-import { getGooglePayConfig, getPaymentRequestConfig } from './shop-configuration.js';
+import { getGooglePayConfig } from './shop-configuration.js';
 
 const googlepayConfig = getGooglePayConfig();
-const paymentrequestConfig = getPaymentRequestConfig();
 
 class ShopCheckout extends PolymerElement {
   static get template() {
@@ -160,12 +158,6 @@ class ShopCheckout extends PolymerElement {
                     on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
                     on-payment-data-changed="[[_onGooglePayPaymentDataChanged]]"
                     ></google-pay-button>
-                  <payment-request-button id="paymentRequestButton"
-                    payment-methods="[[paymentrequestConfig.paymentMethods]]"
-                    shipping-options="[[paymentrequestConfig.shippingOptions]]"
-                    request-shipping="[[paymentrequestConfig.requestShipping]]"
-                    on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
-                  ></payment-request-button>
                 </div>
               </div>
 
@@ -489,11 +481,6 @@ class ShopCheckout extends PolymerElement {
       value: () => googlepayConfig,
     },
 
-    paymentrequestConfig: {
-      type: Object,
-      value: () => paymentrequestConfig,
-    },
-
     /**
      * The server's response.
      */
@@ -568,8 +555,6 @@ class ShopCheckout extends PolymerElement {
 
     this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
     this._onGooglePayPaymentDataChanged = this._onGooglePayPaymentDataChanged.bind(this);
-    this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
-    this._onPaymentRequestShippingOptionChange = this._onPaymentRequestShippingOptionChange.bind(this);
   }
 
   /**
@@ -734,14 +719,6 @@ class ShopCheckout extends PolymerElement {
     });
   }
 
-  _onPaymentRequestPaymentDataResult(paymentResponse) {
-    this.paymentrequestConfig.onPaymentDataResponse.bind(this)(paymentResponse, {
-      items: this.cart,
-      type: 'cart',
-      method: 'payment-request',
-    });
-  }
-
   _getGooglePayTransactionInfo(shippingOption) {
     if (this.cart) {
       const paymentRequest = this.googlepayConfig.buildPaymentRequest(this.cart.map(i => ({
@@ -769,37 +746,8 @@ class ShopCheckout extends PolymerElement {
     return {};
   }
 
-  _getPaymentRequestDetails(shippingOption) {
-    if (this.cart) {
-      return this.paymentrequestConfig.getTransactionInfo(this.cart.map(i => ({
-        label: `${i.item.title} x ${i.quantity}`,
-        type: 'LINE_ITEM',
-        amount: {
-          currency: 'USD',
-          value: (i.item.price * i.quantity).toFixed(2),
-        }
-      })), shippingOption);
-    }
-    return null;
-  }
-
-  _onPaymentRequestShippingOptionChange(event) {
-    const shippingOption = this.$.paymentRequestButton.shippingOptions.find(option => option.id === event.detail.paymentRequest.shippingOption);
-    event.detail.event.updateWith({
-      ...this._getPaymentRequestDetails(shippingOption),
-      shippingOptions: this.$.paymentRequestButton.shippingOptions.map(option => ({
-        ...option,
-        selected: option.id === event.detail.paymentRequest.shippingOption,
-      })),
-    });
-  }
-
   _refreshDetails() {
     this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
-    this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
-
-    this.$.paymentRequestButton.removeEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
-    this.$.paymentRequestButton.addEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
   }
 
 }

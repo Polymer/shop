@@ -2,7 +2,6 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/app-route/app-route.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@google-pay/button-element';
-import './payment-request-button.js';
 import './shop-button.js';
 import './shop-category-data.js';
 import './shop-common-styles.js';
@@ -10,10 +9,9 @@ import './shop-image.js';
 import './shop-select.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
 import { microTask } from '@polymer/polymer/lib/utils/async.js';
-import { getGooglePayConfig, getPaymentRequestConfig } from './shop-configuration.js';
+import { getGooglePayConfig } from './shop-configuration.js';
 
 const googlepayConfig = getGooglePayConfig();
-const paymentrequestConfig = getPaymentRequestConfig();
 
 class ShopDetail extends PolymerElement {
   static get template() {
@@ -209,12 +207,6 @@ class ShopDetail extends PolymerElement {
             on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
             on-payment-data-changed="[[_onGooglePayPaymentDataChanged]]"
           ></google-pay-button>
-          <payment-request-button id="paymentRequestButton"
-            payment-methods="[[paymentrequestConfig.paymentMethods]]"
-            shipping-options="[[paymentrequestConfig.shippingOptions]]"
-            request-shipping="[[paymentrequestConfig.requestShipping]]"
-            on-payment-data-result="[[_onPaymentRequestPaymentDataResult]]"
-          ></payment-request-button>
           <shop-button>
             <button on-click="_addToCart" aria-label="Add this item to cart">Add to Cart</button>
           </shop-button>
@@ -239,8 +231,6 @@ class ShopDetail extends PolymerElement {
 
     this._onGooglePayPaymentDataResult = this._onGooglePayPaymentDataResult.bind(this);
     this._onGooglePayPaymentDataChanged = this._onGooglePayPaymentDataChanged.bind(this);
-    this._onPaymentRequestPaymentDataResult = this._onPaymentRequestPaymentDataResult.bind(this);
-    this._onPaymentRequestShippingOptionChange = this._onPaymentRequestShippingOptionChange.bind(this);
   }
 
   static get is() { return 'shop-detail'; }
@@ -250,11 +240,6 @@ class ShopDetail extends PolymerElement {
     googlepayConfig: {
       type: Object,
       value: () => googlepayConfig,
-    },
-
-    paymentrequestConfig: {
-      type: Object,
-      value: () => paymentrequestConfig,
     },
 
     item: Object,
@@ -301,10 +286,6 @@ class ShopDetail extends PolymerElement {
           this.$.sizeSelect.value = 'M';
 
           this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
-          this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
-
-          this.$.paymentRequestButton.removeEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
-          this.$.paymentRequestButton.addEventListener('shippingoptionchange', this._onPaymentRequestShippingOptionChange);
 
           this.dispatchEvent(new CustomEvent('change-section', {
             bubbles: true, composed: true, detail: {
@@ -335,21 +316,6 @@ class ShopDetail extends PolymerElement {
     return {};
   }
 
-  _onPaymentRequestPaymentDataResult(paymentResponse) {
-    this.paymentrequestConfig.onPaymentDataResponse.bind(this)(paymentResponse, this._getPurchaseContext('payment-request'));
-  }
-
-  _onPaymentRequestShippingOptionChange(event) {
-    const shippingOption = this.$.paymentRequestButton.shippingOptions.find(option => option.id === event.detail.paymentRequest.shippingOption);
-    event.detail.event.updateWith({
-      ...this._getPaymentRequestDetails(shippingOption),
-      shippingOptions: this.$.paymentRequestButton.shippingOptions.map(option => ({
-        ...option,
-        selected: option.id === event.detail.paymentRequest.shippingOption,
-      })),
-    });
-  }
-
   _getPurchaseContext(method) {
     return {
       items: [
@@ -366,7 +332,6 @@ class ShopDetail extends PolymerElement {
 
   _quantityChanged(q) {
     this.$.googlePayButton.paymentRequest.transactionInfo = this._getGooglePayTransactionInfo();
-    this.$.paymentRequestButton.details = this._getPaymentRequestDetails();
   }
 
   _unescapeText(text) {
@@ -414,21 +379,6 @@ class ShopDetail extends PolymerElement {
       }], shippingOption);
 
       return paymentRequest.transactionInfo;
-    }
-    return null;
-  }
-
-  _getPaymentRequestDetails(shippingOption) {
-    if (this.item) {
-      const price = Number(this.quantity) * this.item.price;
-      return this.paymentrequestConfig.getTransactionInfo([{
-        label: `${this.item.title} x ${this.quantity}`,
-        type: 'LINE_ITEM',
-        amount: {
-          currency: 'USD',
-          value: price.toFixed(2),
-        }
-      }], shippingOption);
     }
     return null;
   }
