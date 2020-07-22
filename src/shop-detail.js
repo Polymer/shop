@@ -27,11 +27,16 @@ class ShopDetail extends PolymerElement {
         @apply --layout-center-justified;
       }
 
-      shop-image {
+      .shop-image {
         position: relative;
         margin: 64px 32px;
         width: 50%;
         max-width: 600px;
+      }
+
+      shop-image {
+        position: relative;
+        width: 100%;
         --shop-image-img: {
           @apply --layout-fit;
         };
@@ -41,6 +46,14 @@ class ShopDetail extends PolymerElement {
         content: "";
         display: block;
         padding-top: 100%;
+      }
+
+      .shop-image .info {
+        margin: 5px auto;
+        padding: 15px 20px;
+        background-color: #fff3cd;
+        border: 1px solid #ffdeaa;
+        max-width: 400px;
       }
 
       .detail {
@@ -113,7 +126,7 @@ class ShopDetail extends PolymerElement {
           @apply --layout-center;
         }
 
-        shop-image {
+        .shop-image {
           margin: 0;
           width: 80%;
         }
@@ -159,7 +172,10 @@ class ShopDetail extends PolymerElement {
         failure="{{failure}}"></shop-category-data>
 
     <div id="content" hidden$="[[failure]]">
-      <shop-image alt="[[item.title]]" src="[[item.largeImage]]"></shop-image>
+      <div class="shop-image">
+        <shop-image alt="[[item.title]]" src="[[item.largeImage]]"></shop-image>
+        <div class="info">This site is used for demonstration purposes only. No purchases will be processed. You will not be charged, and no goods will be shipped.</div>
+      </div>
       <div class="detail" has-content$="[[_isDefined(item)]]">
         <h1>[[item.title]]</h1>
         <div class="price">[[_formatPrice(item.price)]]</div>

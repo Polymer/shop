@@ -61,7 +61,6 @@ class ShopApp extends PolymerElement {
       .logo a {
         font-size: 16px;
         font-weight: 600;
-        letter-spacing: 0.3em;
         color: var(--app-primary-color);
         text-decoration: none;
         /* required for IE 11, so this <a> can receive pointer events */
@@ -254,7 +253,7 @@ class ShopApp extends PolymerElement {
             <paper-icon-button icon="arrow-back" aria-label="Go back"></paper-icon-button>
           </a>
         </div>
-        <div class="logo" main-title=""><a href="/" aria-label="SHOP Home">SHOP</a></div>
+        <div class="logo" main-title=""><a href="/" aria-label="SHOP Home">GOOGLE PAY DEMO SHOP</a></div>
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="shopping-cart" aria-label\$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
