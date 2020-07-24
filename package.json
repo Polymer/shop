@@ -17,34 +17,34 @@
   },
   "dependencies": {
     "@google-pay/button-element": "^1.0.4",
-    "@polymer/app-layout": "^3.0.0",
+    "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.0",
-    "@polymer/app-storage": "^3.0.0",
+    "@polymer/app-storage": "^3.0.3",
     "@polymer/iron-flex-layout": "^3.0.0",
     "@polymer/iron-form": "^3.0.0",
     "@polymer/iron-icon": "^3.0.0",
     "@polymer/iron-iconset-svg": "^3.0.0",
     "@polymer/iron-media-query": "^3.0.0",
-    "@polymer/iron-overlay-behavior": "^3.0.0",
+    "@polymer/iron-overlay-behavior": "^3.0.3",
     "@polymer/iron-pages": "^3.0.0",
     "@polymer/iron-selector": "^3.0.0",
     "@polymer/paper-behaviors": "^3.0.0",
-    "@polymer/paper-icon-button": "^3.0.0",
-    "@polymer/paper-spinner": "^3.0.0",
-    "@polymer/polymer": "^3.0.0",
-    "@webcomponents/webcomponentsjs": "^2.0.0"
+    "@polymer/paper-icon-button": "^3.0.2",
+    "@polymer/paper-spinner": "^3.0.2",
+    "@polymer/polymer": "^3.4.1",
+    "@webcomponents/webcomponentsjs": "^2.4.4"
   },
   "devDependencies": {
     "@polymer/test-fixture": "^4.0.2",
     "chai": "^4.1.2",
     "del": "^3.0.0",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-rename": "^1.3.0",
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
     "polymer-cli": "^1.9.11",
-    "prpl-server": "^1.3.0",
-    "sinon": "^7.1.1",
-    "wct-mocha": "^1.0.0"
+    "prpl-server": "^1.4.0",
+    "sinon": "^7.5.0",
+    "wct-mocha": "^1.1.0"
   }
 }
