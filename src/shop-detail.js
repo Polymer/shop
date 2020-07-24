@@ -5,6 +5,7 @@ import '@google-pay/button-element';
 import './shop-button.js';
 import './shop-category-data.js';
 import './shop-common-styles.js';
+import './shop-disclaimer.js';
 import './shop-image.js';
 import './shop-select.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
@@ -46,14 +47,6 @@ class ShopDetail extends PolymerElement {
         content: "";
         display: block;
         padding-top: 100%;
-      }
-
-      .shop-image .info {
-        margin: 5px auto;
-        padding: 15px 20px;
-        background-color: #fff3cd;
-        border: 1px solid #ffdeaa;
-        max-width: 400px;
       }
 
       .detail {
@@ -174,7 +167,7 @@ class ShopDetail extends PolymerElement {
     <div id="content" hidden$="[[failure]]">
       <div class="shop-image">
         <shop-image alt="[[item.title]]" src="[[item.largeImage]]"></shop-image>
-        <div class="info">This site is used for demonstration purposes only. No purchases will be processed. You will not be charged, and no goods will be shipped.</div>
+        <shop-disclaimer></shop-disclaimer>
       </div>
       <div class="detail" has-content$="[[_isDefined(item)]]">
         <h1>[[item.title]]</h1>

@@ -2,6 +2,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@google-pay/button-element';
 import './shop-button.js';
 import './shop-common-styles.js';
+import './shop-disclaimer.js';
 import './shop-form-styles.js';
 import { getGooglePayConfig } from './shop-configuration.js';
 
@@ -72,6 +73,7 @@ class ShopCart extends PolymerElement {
         </div>
 
         <div class="buy-buttons">
+          <shop-disclaimer></shop-disclaimer>
           <google-pay-button id="googlePayButton"
             class="fill"
             environment="[[googlepayConfig.environment]]"

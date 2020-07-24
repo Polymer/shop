@@ -4,6 +4,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@google-pay/button-element';
 import './shop-button.js';
 import './shop-common-styles.js';
+import './shop-disclaimer.js';
 import './shop-form-styles.js';
 import './shop-input.js';
 import './shop-select.js';
@@ -147,6 +148,7 @@ class ShopCheckout extends PolymerElement {
 
               <div class="subsection" visible$="[[_hasItems]]">
                 <div class="buy-buttons">
+                  <shop-disclaimer></shop-disclaimer>
                   <google-pay-button id="googlePayButton"
                     class="fill"
                     environment="[[googlepayConfig.environment]]"
