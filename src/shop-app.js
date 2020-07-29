@@ -10,13 +10,17 @@ import '@polymer/iron-media-query/iron-media-query.js';
 import '@polymer/iron-pages/iron-pages.js';
 import '@polymer/iron-selector/iron-selector.js';
 import './shop-category-data.js';
+import './shop-developer.js';
 import './shop-home.js';
 import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 import { timeOut } from '@polymer/polymer/lib/utils/async.js';
 import { Debouncer } from '@polymer/polymer/lib/utils/debounce.js';
+import { getGooglePayConfig } from './shop-configuration.js';
 
 // performance logging
 window.performance && performance.mark && performance.mark('shop-app - before register');
+
+const googlepayConfig = getGooglePayConfig();
 
 class ShopApp extends PolymerElement {
   static get template() {
@@ -233,6 +237,8 @@ class ShopApp extends PolymerElement {
 
     <iron-media-query query="max-width: 767px" query-matches="{{smallScreen}}"></iron-media-query>
 
+    <shop-developer id="developerDialog"></shop-developer>
+
     <!--
       shop-category-data provides the list of categories.
     -->
@@ -254,6 +260,13 @@ class ShopApp extends PolymerElement {
           </a>
         </div>
         <div class="logo" main-title=""><a href="/" aria-label="SHOP Home">GOOGLE PAY DEMO SHOP</a></div>
+        <div>
+          <a on-tap="_openDeveloperDialog">
+            <paper-icon-button
+              icon="developer-console"
+              aria-label="Developer"></paper-icon-button>
+          </a>
+        </div>
         <div class="cart-btn-container">
           <a href="/cart" tabindex="-1">
             <paper-icon-button icon="shopping-cart" aria-label\$="Shopping cart: [[_computePluralizedQuantity(numItems)]]"></paper-icon-button>
@@ -610,6 +623,25 @@ class ShopApp extends PolymerElement {
 
   _computePluralizedQuantity(quantity) {
     return quantity + ' ' + (quantity === 1 ? 'item' : 'items');
+  }
+
+  _openDeveloperDialog() {
+    const paymentRequest = this._getGooglePayTransactionInfo();
+    this.$.developerDialog.setEditorValue(paymentRequest);
+    this.$.developerDialog.open();
+  }
+
+  _getGooglePayTransactionInfo() {
+    if (this.cart) {
+      const paymentRequest = googlepayConfig.buildPaymentRequest(this.cart.map(i => ({
+        label: `${i.item.title} x ${i.quantity}`,
+        type: 'LINE_ITEM',
+        price: (i.item.price * i.quantity).toFixed(2),
+      })));
+
+      return paymentRequest;
+    }
+    return null;
   }
 }
 
