@@ -19,6 +19,19 @@ class ShopDeveloper extends PolymerElement {
   static get template() {
     return html`
     <style include="shop-common-styles">
+      .title {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .title h3 {
+        flex-grow: 1;
+      }
+
+      .title span {
+        display: inline-block;
+        margin-top: 1.15em;
+      }
 
       @media (max-width: 600px) {
         paper-dialog {
@@ -54,7 +67,10 @@ class ShopDeveloper extends PolymerElement {
 
     <paper-dialog id="dialog" style="overflow:auto;">
       <div>
-        <h3>Developer Console</h3>
+        <div class="title">
+          <h3>Developer Console</h3>
+          <span>Edit in <a href="https://jsfiddle.net/6aso0xkr/" target="_blank">JSFiddle</a></span>
+        </div>
         <ace-widget
           id="aceWidget"
           mode="ace/mode/json"
