@@ -2,7 +2,6 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dialog';
 import '@google-pay/button-element';
 import '@granite-elements/ace-widget';
-import './shop-button.js';
 import './shop-common-styles.js';
 import { getGooglePayConfig } from './shop-configuration.js';
 
