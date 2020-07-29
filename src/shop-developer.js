@@ -138,7 +138,11 @@ class ShopDeveloper extends PolymerElement {
   }
 
   getEditorValue() {
-    return JSON.parse(this.$.aceWidget.editor.getValue());
+    try {
+      return JSON.parse(this.$.aceWidget.editor.getValue());
+    } catch (err) {
+      return undefined;
+    }
   }
 
   setEditorValue(obj) {
