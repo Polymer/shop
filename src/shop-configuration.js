@@ -26,9 +26,8 @@ const paymentRequest = {
       tokenizationSpecification: {
         type: 'PAYMENT_GATEWAY',
         parameters: {
-          'gateway': 'stripe',
-          'stripe:version': '2018-10-31',
-          'stripe:publishableKey': 'pk_test_MNKMwKAvgdo2yKOhIeCOE6MZ00yS3mWShu',
+          gateway: 'example',
+          gatewayId: '1234567890',
         },
       },
     },
