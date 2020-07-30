@@ -75,7 +75,7 @@ class ShopDeveloper extends PolymerElement {
           mode="ace/mode/json"
           theme="ace/theme/monokai"
           tab-size="2"
-          base-path="https://unpkg.com/ace-custom-element@1.0.2/dist/ace/"
+          base-path="https://unpkg.com/ace-custom-element@1.2.1/dist/ace/"
         ></ace-editor>
         <div class="row" id="buttonRow">
           <google-pay-button id="googlePayButton"
@@ -95,7 +95,7 @@ class ShopDeveloper extends PolymerElement {
             mode="ace/mode/json"
             theme="ace/theme/solarized_light"
             tab-size="2"
-            base-path="https://unpkg.com/ace-custom-element@1.0.2/dist/ace/"
+            base-path="https://unpkg.com/ace-custom-element@1.2.1/dist/ace/"
             hide-gutter
             readonly
           ></ace-editor>
@@ -132,12 +132,12 @@ class ShopDeveloper extends PolymerElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.$.aceWidget.addEventListener('change', this._handleEditorChanged);
+    this.$.aceWidget.addEventListener('blur', this._handleEditorChanged);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.$.aceWidget.removeEventListener('change', this._handleEditorChanged);
+    this.$.aceWidget.removeEventListener('blur', this._handleEditorChanged);
   }
 
   _handleEditorChanged() {
