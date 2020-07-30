@@ -8,7 +8,6 @@
   "extraDependencies": [
     "manifest.json",
     "node_modules/@webcomponents/webcomponentsjs/**",
-    "node_modules/ace-builds/src-noconflict/*.js",
     "push-manifest.json"
   ],
   "builds": [
@@ -40,14 +39,11 @@
       "html": {
         "minify": true
       },
-      "bundle": {
-        "exclude": ["node_modules/ace-builds/src-noconflict/*.js"]
-      },
+      "bundle": true,
       "addServiceWorker": true
     },
     {
       "name": "es6-bundled",
-      "exclude": ["node_modules/ace-builds/src-noconflict/*.js"],
       "browserCapabilities": [
         "es2015"
       ],
@@ -62,9 +58,7 @@
       "html": {
         "minify": true
       },
-      "bundle": {
-        "exclude": ["node_modules/ace-builds/src-noconflict/*.js"]
-      },
+      "bundle": true,
       "addServiceWorker": true
     },
     {
@@ -80,9 +74,7 @@
       "html": {
         "minify": true
       },
-      "bundle": {
-        "exclude": ["node_modules/ace-builds/src-noconflict/*.js"]
-      },
+      "bundle": true,
       "addServiceWorker": true
     }
   ],

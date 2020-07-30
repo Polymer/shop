@@ -1,7 +1,6 @@
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-dialog';
 import '@google-pay/button-element';
-import '@granite-elements/ace-widget';
 import './shop-common-styles.js';
 import { getGooglePayConfig } from './shop-configuration.js';
 
@@ -59,7 +58,8 @@ class ShopDeveloper extends PolymerElement {
 
       #aceWidgetResponse, #aceWidget {
         width: 100%;
-        height: 100%;
+        height: 550px;
+        font-size: 14px;
       }
 
     </style>
@@ -70,13 +70,12 @@ class ShopDeveloper extends PolymerElement {
           <h3>Developer Console</h3>
           <span>Edit in <a href="https://jsfiddle.net/6aso0xkr/" target="_blank">JSFiddle</a></span>
         </div>
-        <ace-widget
+        <ace-editor
           id="aceWidget"
           mode="ace/mode/json"
           theme="ace/theme/monokai"
           tab-size="2"
-          initialFocus
-        ></ace-widget>
+        ></ace-editor>
         <div class="row" id="buttonRow">
           <google-pay-button id="googlePayButton"
             environment="[[googlepayConfig.environment]]"
@@ -90,13 +89,14 @@ class ShopDeveloper extends PolymerElement {
         </div>
         <div id="response">
           <h3>Response</h3>
-          <ace-widget
+          <ace-editor
             id="aceWidgetResponse"
             mode="ace/mode/json"
             theme="ace/theme/solarized_light"
             tab-size="2"
+            hide-gutter
             readonly
-          ></ace-widget>
+          ></ace-editor>
         </div>
       </div>
     </paper-dialog>
@@ -130,12 +130,12 @@ class ShopDeveloper extends PolymerElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.$.aceWidget.addEventListener('editor-content', this._handleEditorChanged);
+    this.$.aceWidget.addEventListener('change', this._handleEditorChanged);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.$.aceWidget.removeEventListener('editor-content', this._handleEditorChanged);
+    this.$.aceWidget.removeEventListener('change', this._handleEditorChanged);
   }
 
   _handleEditorChanged() {
@@ -144,17 +144,16 @@ class ShopDeveloper extends PolymerElement {
   }
 
   open() {
-    const value = this.$.aceWidget.editor.getValue();
+    const value = this.$.aceWidget.value;
     if (!value) {
       this.setEditorValue(defaultPaymentRequest);
     }
-    this.$.aceWidgetResponse.editor.renderer.setShowGutter(false);
     this.$.dialog.open();
   }
 
   getEditorValue() {
     try {
-      return JSON.parse(this.$.aceWidget.editor.getValue());
+      return JSON.parse(this.$.aceWidget.value);
     } catch (err) {
       return undefined;
     }
@@ -162,14 +161,12 @@ class ShopDeveloper extends PolymerElement {
 
   setEditorValue(obj) {
     this._paymentRequest = filterPaymentRequest(obj);
-    this.$.aceWidget.editor.setValue(JSON.stringify(this._paymentRequest, null, '  '));
-    this.$.aceWidget.editor.resize();
+    this.$.aceWidget.value = JSON.stringify(this._paymentRequest, null, '  ');
     this.$.dialog.refit();
   }
 
   setResponseValue(obj) {
-    this.$.aceWidgetResponse.editor.setValue(JSON.stringify(obj, null, '  '));
-    this.$.aceWidgetResponse.editor.resize();
+    this.$.aceWidgetResponse.value = JSON.stringify(obj, null, '  ');
     this.$.dialog.refit();
   }
 

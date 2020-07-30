@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@google-pay/button-element": "^1.0.4",
-    "@granite-elements/ace-widget": "^2.2.7-b1",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.0",
     "@polymer/app-storage": "^3.0.3",
