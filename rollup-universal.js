@@ -45,14 +45,6 @@ const terserConfig = {
   },
 };
 
-const minifyHTMLLiteralsConfig = {
-  options: {
-    minifyOptions: {
-      removeAttributeQuotes: false
-    }
-  }
-}
-
 const filesizeConfig = {
   showGzippedSize: true,
   showBrotliSize: false,
@@ -79,8 +71,7 @@ const configs = [
       format: 'systemjs',
     },
     plugins: [
-      minifyHTML(minifyHTMLLiteralsConfig),
-      commonjs({ include: ['node_modules/**'] }),
+      minifyHTML(),
       babel(babelConfig),
       resolve(),
       copy(copyConfig),
