@@ -14,19 +14,6 @@ import filesize from 'rollup-plugin-filesize';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import copy from 'rollup-plugin-copy';
 
-const terserConfig = {
-  output: {
-    comments: function (_, comment) {
-      const text = comment.value;
-      const type = comment.type;
-      if (type == 'comment2') {
-        // multiline comment
-        return /@preserve|@license|@cc_on/i.test(text);
-      }
-    },
-  },
-};
-
 const filesizeConfig = {
   showGzippedSize: true,
   showBrotliSize: false,
@@ -60,7 +47,7 @@ const config = {
 };
 
 if (process.env.NODE_ENV !== 'development') {
-  config.plugins.push(terser(terserConfig));
+  config.plugins.push(terser());
 }
 
 export default config;

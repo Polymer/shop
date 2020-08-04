@@ -32,19 +32,6 @@ const babelConfig = {
   },
 };
 
-const terserConfig = {
-  output: {
-    comments: function (_, comment) {
-      const text = comment.value;
-      const type = comment.type;
-      if (type == 'comment2') {
-        // multiline comment
-        return /@preserve|@license|@cc_on/i.test(text);
-      }
-    },
-  },
-};
-
 const filesizeConfig = {
   showGzippedSize: true,
   showBrotliSize: false,
@@ -91,7 +78,7 @@ const configs = [
 
 for (const config of configs) {
   if (process.env.NODE_ENV !== 'development') {
-    config.plugins.push(terser(terserConfig));
+    config.plugins.push(terser());
   }
   config.plugins.push(filesize(filesizeConfig));
 }

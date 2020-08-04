@@ -32,19 +32,6 @@ const babelConfig = {
   },
 };
 
-const terserConfig = {
-  output: {
-    comments: function (_, comment) {
-      const text = comment.value;
-      const type = comment.type;
-      if (type == 'comment2') {
-        // multiline comment
-        return /@preserve|@license|@cc_on/i.test(text);
-      }
-    },
-  },
-};
-
 const minifyHTMLLiteralsConfig = {
   options: {
     minifyOptions: {
@@ -82,6 +69,7 @@ const configs = [
       minifyHTML(minifyHTMLLiteralsConfig),
       resolve()
     ],
+    preserveEntrySignatures: false,
   },
   // The main JavaScript bundle for older browsers that don't support
   // JavaScript modules or ES2015+.
@@ -98,6 +86,7 @@ const configs = [
       resolve(),
       copy(copyConfig),
     ],
+    preserveEntrySignatures: false,
   },
   // Babel polyfills for older browsers that don't support ES2015+.
   {
@@ -112,7 +101,7 @@ const configs = [
 
 for (const config of configs) {
   if (process.env.NODE_ENV !== 'development') {
-    config.plugins.push(terser(terserConfig));
+    config.plugins.push(terser());
   }
   config.plugins.push(filesize(filesizeConfig));
 }
