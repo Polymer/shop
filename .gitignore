@@ -3,3 +3,5 @@ build
 
 firebase-debug.log
 .firebase/
+
+.DS_Store
