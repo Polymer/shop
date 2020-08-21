@@ -16,7 +16,7 @@
     "test": "rm -rf build/ && polymer lint && polymer test"
   },
   "dependencies": {
-    "@google-pay/button-element": "^1.0.4",
+    "@google-pay/button-element": "^1.1.0",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.0",
     "@polymer/app-storage": "^3.0.3",
@@ -44,7 +44,7 @@
     "gulp-replace": "^1.0.0",
     "mocha": "^5.2.0",
     "polymer-cli": "^1.9.11",
-    "prpl-server": "^1.4.0",
+    "prpl-server": "^1.4.2",
     "sinon": "^7.5.0",
     "wct-mocha": "^1.1.0"
   }
