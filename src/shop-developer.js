@@ -68,7 +68,7 @@ class ShopDeveloper extends PolymerElement {
       <div>
         <div class="title">
           <h3>Developer Console</h3>
-          <span>Edit in <a href="https://jsfiddle.net/6aso0xkr/" target="_blank">JSFiddle</a></span>
+          <span>Edit in <a href="https://jsfiddle.net/hxksv3c0/" target="_blank">JSFiddle</a></span>
         </div>
         <ace-editor
           id="aceWidget"
