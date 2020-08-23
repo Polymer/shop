@@ -12,14 +12,15 @@ class ShopDisclaimer extends PolymerElement {
       }
 
       div {
-        padding: 15px 20px;
+        padding: 2px 20px;
         background-color: #fff3cd;
         border: 1px solid #ffdeaa;
       }
 
     </style>
     <div>
-      This site is used for demonstration purposes only. No purchases will be processed. You will not be charged, and no goods will be shipped.
+      <p>This site is used for demonstration purposes only. You will not be charged, purchases will be processed, and no goods will be shipped.</p>
+      <p>Source code for this site can be found on <a href="https://github.com/google-pay/shop-paydemo" target="_blank">GitHub</a>.</p>
     </div>
     `;
 
