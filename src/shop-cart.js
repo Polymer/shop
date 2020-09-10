@@ -75,11 +75,11 @@ class ShopCart extends PolymerElement {
         <div class="buy-buttons">
           <shop-disclaimer></shop-disclaimer>
           <google-pay-button id="googlePayButton"
-            class="fill"
             environment="[[googlepayConfig.environment]]"
             payment-request="[[googlepayConfig.paymentRequest]]"
             button-type="[[googlepayConfig.appearance.buttonType]]"
             button-color="[[googlepayConfig.appearance.buttonColor]]"
+            button-size-mode="fill"
             existing-payment-method-required="[[googlepayConfig.existingPaymentMethodRequired]]"
             on-load-payment-data="[[_onGooglePayPaymentDataResult]]"
             on-payment-authorized="[[googlepayConfig.onPaymentAuthorized]]"
