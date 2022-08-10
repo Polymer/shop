@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shop-button.html">
 <link rel="import" href="shop-image.html">
+<link rel="import" href="shop-webviewer.html">
 
 <dom-module id="shop-home">
 
@@ -71,6 +72,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
       }
 
+      shop-webviewer{
+        width: 100%; 
+        height: 600px; 
+        margin: 0 auto;
+      }
+
       h2 {
         font-size: 1.3em;
         font-weight: 500;
@@ -98,6 +105,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     </style>
+
+    <shop-webviewer ></shop-webviewer>
+    <button on-click="handleClick">testing</button>
 
     <dom-repeat items="[[categories]]">
       <template strip-whitespace>
@@ -133,6 +143,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
       }}
+
+      handleClick(e, detail) {
+        alert('click event is working')
+      }
 
       _visibleChanged(visible) {
         if (visible) {
