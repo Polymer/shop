@@ -1,0 +1,837 @@
+{
+  "action": {
+    "add": "추가",
+    "apply": "적용",
+    "applyAll": "모두적용",
+    "calendar": "캘린더",
+    "calibrate": "교정",
+    "cancel": "취소",
+    "clear": "지우기",
+    "close": "닫기",
+    "undo": "되돌리기",
+    "redo": "다시실행",
+    "comment": "코멘트",
+    "reply": "댓글",
+    "copy": "복사",
+    "delete": "삭제",
+    "group": "그룹",
+    "ungroup": "그룹해제",
+    "download": "다운로드",
+    "edit": "편집",
+    "extract": "선택페이지 다운로드",
+    "enterFullscreen": "전체화면",
+    "exitFullscreen": "전체화면 나가기",
+    "fit": "맞추기",
+    "fitToPage": "페이지에 맞추기",
+    "fitToWidth": "너비에 맞추기",
+    "more": "더보기",
+    "openFile": "파일열기",
+    "pagePrev": "이전페이지",
+    "pageNext": "다음페이지",
+    "pageSet": "페이지설정",
+    "print": "인쇄",
+    "proceed": "계속",
+    "name": "이름",
+    "rename": "이름바꾸기",
+    "ok": "확인",
+    "rotate": "회전",
+    "rotate3D": "3D회전",
+    "rotateClockwise": "오른쪽으로 회전",
+    "rotateCounterClockwise": "왼쪽으로 회전",
+    "save": "저장",
+    "post": "게시",
+    "create": "생성",
+    "showMoreResults": "더보기",
+    "sign": "서명",
+    "style": "스타일",
+    "submit": "제출",
+    "zoom": "확대/축소",
+    "zoomIn": "확대",
+    "zoomOut": "축소",
+    "zoomSet": "줌 설정",
+    "zoomControls": "줌 컨트롤",
+    "draw": "그리기",
+    "type": "입력",
+    "upload": "업로드",
+    "link": "링크",
+    "darkMode": "다크모드",
+    "lightMode": "라이트모드",
+    "fileAttachmentDownload": "다운로드",
+    "prevResult": "이전결과",
+    "nextResult": "다음결과",
+    "prev": "이전",
+    "next": "다음",
+    "startFormEditing": "폼편집 시작",
+    "exitFormEditing": "폼편집 종료",
+    "exit": "나가기",
+    "addOption": "옵션추가",
+    "formFieldEdit": "폼편집",
+    "viewShortCutKeysFor3D": "3D 단축키 보기",
+    "markAllRead": "모두 읽은상태로 표시",
+    "insertPage": "페이지 삽입",
+    "insertBlankPageAbove": "위에 빈페이지 삽입",
+    "insertBlankPageBelow": "아래에 빈페이지 삽입",
+    "pageManipulation": "페이지 편집",
+    "replace": "바꾸기",
+    "showLess": "간략히 보기",
+    "showMore": "더보기",
+    "chooseFile": "파일선택",
+    "selectYourOption": "옵션을 선택하세요",
+    "open": "열기",
+    "deselectAll": "모두 선택해제",
+    "select": "선택",
+    "moveToTop": "맨 위로 이동",
+    "moveToBottom": "맨 아래로 이동",
+    "redactPages": "페이지 수정",
+    "playAudio": "재생",
+    "pauseAudio": "일시중지",
+    "selectAll": "모두선택",
+    "unselect": "선택취소",
+    "addMark": "마크추가",
+    "viewFile": "파일보기",
+    "switchLanguage": "언어"
+  },
+  "annotation": {
+    "areaMeasurement": "면적측정",
+    "arc": "호",
+    "arcMeasurement": "호측정",
+    "arrow": "화살표",
+    "callout": "설명선",
+    "crop": "잘라내기",
+    "caret": "커서",
+    "dateFreeText": "날짜",
+    "formFillCheckmark": "체크표시",
+    "formFillCross": "X표시",
+    "distanceMeasurement": "거리측정",
+    "countMeasurement": "체크표시",
+    "ellipse": "타원형",
+    "eraser": "지우개",
+    "fileattachment": "파일첨부",
+    "freehand": "그리기",
+    "freeHandHighlight": "하이라이트 그리기",
+    "freetext": "텍스트상자",
+    "highlight": "하이라이트",
+    "image": "이미지",
+    "line": "선",
+    "perimeterMeasurement": "둘레측정",
+    "polygon": "다각형",
+    "polygonCloud": "구름선",
+    "polyline": "꺾은선",
+    "rectangle": "사각형",
+    "redact": "수정",
+    "formFillDot": "점표시",
+    "signature": "서명",
+    "squiggly": "물결선",
+    "stamp": "이미지",
+    "stickyNote": "코멘트",
+    "strikeout": "취소선",
+    "underline": "밑줄",
+    "custom": "사용자지정",
+    "rubberStamp": "스탬프",
+    "note": "노트",
+    "textField": "텍스트상자",
+    "signatureFormField": "서명",
+    "checkBoxFormField": "체크박스",
+    "radioButtonFormField": "라디오버튼",
+    "listBoxFormField": "목록상자",
+    "comboBoxFormField": "콤보박스",
+    "link": "링크",
+    "other": "더보기",
+    "3D": "3D",
+    "sound": "소리"
+  },
+  "rubberStamp": {
+    "Approved": "승인",
+    "AsIs": "유지",
+    "Completed": "완료",
+    "Confidential": "기밀",
+    "Departmental": "부서",
+    "Draft": "초안",
+    "Experimental": "실험적",
+    "Expired": "만료",
+    "Final": "최종",
+    "ForComment": "코멘트",
+    "ForPublicRelease": "공개용",
+    "InformationOnly": "정보제공용",
+    "NotApproved": "거절",
+    "NotForPublicRelease": "비공개용",
+    "PreliminaryResults": "임시결과",
+    "Sold": "판매됨",
+    "TopSecret": "기밀",
+    "Void": "무효",
+    "SHSignHere": "여기에 서명하세요",
+    "SHWitness": "증거",
+    "SHInitialHere": "동의합니다.",
+    "SHAccepted": "수락",
+    "SBRejected": "거절"
+  },
+  "component": {
+    "attachmentPanel": "첨부파일",
+    "leftPanel": "패널",
+    "toolsHeader": "도구",
+    "searchOverlay": "검색",
+    "searchPanel": "검색",
+    "menuOverlay": "메뉴",
+    "notesPanel": "참고",
+    "outlinesPanel": "개요",
+    "bookmarksPanel": "즐겨찾기",
+    "newBookmark": "즐겨찾기 추가",
+    "bookmarkPage": "즐겨찾기",
+    "bookmarkTitle": "책갈피 타이틀",
+    "signaturePanel": "서명",
+    "layersPanel": "레이어",
+    "thumbnailsPanel": "미리보기",
+    "toolsButton": "도구",
+    "redaction": "수정 삭제",
+    "viewControlsOverlay": "컨트롤 보기",
+    "calibration": "구경 측정",
+    "zoomOverlay": "줌 오버레이",
+    "textPopup": "텍스트 팝업",
+    "createStampButton": "스탬프 생성",
+    "filter": "필터",
+    "pageReplaceModalTitle": "페이지 바꾸기",
+    "files": "파일",
+    "editText": "텍스트 편집",
+    "redactionPanel": "교정 패널"
+  },
+  "message": {
+    "toolsOverlayNoPresets": "사전설정 없음",
+    "badDocument": "문서가 손상되어 불러올수 없습니다.",
+    "customPrintPlaceholder": "예: 3, 4-10",
+    "encryptedAttemptsExceeded": "비밀번호 입력횟수를 초과하여 암호화 문서를 불러오지 못햇습니다.",
+    "encryptedUserCancelled": "비밀번호 입력을 취소하여 암호화 문서를 불러오지 못했습니다.",
+    "enterPassword": "비밀번호를 입력하세요",
+    "incorrectPassword": "비밀번호를 다시 입력하세요. 남은 시도: {{ remainingAttempts }}",
+    "noAnnotations": "주석에 대한 댓글입니다.",
+    "noAnnotationsReadOnly": "주석이 없습니다.",
+    "noAnnotationsFilter": "주석 필터가 없습니다.",
+    "noOutlines": "개요가 없습니다.",
+    "noAttachments": "첨부파일이 없습니다.",
+    "noResults": "검색 결과가 없습니다.",
+    "numResultsFound": "건의 검색결과를 찾았습니다.",
+    "notSupported": "지원하지 않는 유형의 파일입니다.",
+    "passwordRequired": "비밀번호를 입력하세요.",
+    "preparingToPrint": "인쇄준비 중...",
+    "annotationReplyCount": "{{count}} 댓글",
+    "annotationReplyCount_plural": "{{count}} 답글",
+    "printTotalPageCount": "{{count}} 페이지",
+    "printTotalPageCount_plural": "{{count}} 페이지",
+    "processing": "처리 중...",
+    "searching": "검색 중...",
+    "searchCommentsPlaceholder": "코멘트 검색",
+    "searchDocumentPlaceholder": "문서 검색",
+    "signHere": "여기에 서명하세요",
+    "insertTextHere": "여기에 텍스트를 입력하세요",
+    "imageSignatureAcceptedFileTypes": "{{acceptedFileTypes}} 만 허용됩니다",
+    "enterMeasurement": "두 지점의 측정 값을 입력하세요.",
+    "errorEnterMeasurement": "잘못된 형식의 숫자를 입력하였습니다. 7.5 또는 7 1/2과 같은 값을 입력하세요.",
+    "linkURLorPage": "링크URL 또는 페이지",
+    "warning": "경고",
+    "enterContentEditingMode": "텍스트 편집모드로 전환합니다.",
+    "existingAnnotationWarning": "편집 후 기존 주석과 일치하지 않을 수 있습니다.",
+    "changesCannotBeUndone": "변경사항은 취소할 수 없습니다.",
+    "doNotShowAgain": "다시 표시하지 않기",
+    "enterReplacementText": "변경할 텍스트를 입력하세요",
+    "sortBy": "정렬기준",
+    "emptyCustomStampInput": "텍스트르 입력하세요.",
+    "unpostedComment": "게시되지 않은 댓글",
+    "lockedLayer": "레이어가 잠겨 있습니다.",
+    "layerVisibililtyNoChange": "레이어 가시성을 변경할 수 없습니다.",
+    "untitled": "제목없음",
+    "selectHowToLoadFile": "파일 불러오기",
+    "openFileByUrl": "URL로 파일열기:",
+    "enterUrlHere": "여기에 URL을 입력하세요.",
+    "openLocalFile": "로컬파일 열기:",
+    "selectFile": "파일선택",
+    "selectPageToReplace": "문서에서 교체할 페이지를 선택하세요.",
+    "embeddedFiles": "포함된 파일",
+    "pageNum": "페이지 번호",
+    "error": "오류"
+  },
+  "option": {
+    "type": {
+      "caret": "커서",
+      "custom": "사용자 지정",
+      "ellipse": "타원형",
+      "fileattachment": "파일첨부",
+      "freehand": "그리기",
+      "callout": "설명선",
+      "freetext": "텍스트상자",
+      "line": "선",
+      "polygon": "다각형",
+      "polyline": "꺾은선",
+      "rectangle": "사각형",
+      "redact": "민감정보 삭제",
+      "signature": "서명",
+      "stamp": "이미지",
+      "stickyNote": "코멘트",
+      "highlight": "하이라이트",
+      "strikeout": "취소선",
+      "underline": "밑줄",
+      "squiggly": "물결선",
+      "3D": "3D",
+      "other": "더보기"
+    },
+    "notesOrder": {
+      "dropdownLabel": "정렬목록",
+      "position": "페이지",
+      "time": "작성시간",
+      "status": "상태",
+      "author": "작성자",
+      "type": "유형",
+      "color": "색상",
+      "createdDate": "작성일",
+      "modifiedDate": "수정일"
+    },
+    "toolbarGroup": {
+      "dropdownLabel": "도구모음",
+      "toolbarGroup-View": "보기",
+      "toolbarGroup-Annotate": "주석",
+      "toolbarGroup-Shapes": "도형",
+      "toolbarGroup-Insert": "삽입",
+      "toolbarGroup-Measure": "측정",
+      "toolbarGroup-Edit": "편집",
+      "toolbarGroup-FillAndSign": "채우기&서명",
+      "toolbarGroup-Forms": "양식",
+      "toolbarGroup-Redact": "수정"
+    },
+    "annotationColor": {
+      "StrokeColor": "테두리 색",
+      "FillColor": "채우기 색",
+      "TextColor": "글자 색"
+    },
+    "colorPalette": {
+      "colorLabel": "색상"
+    },
+    "displayMode": {
+      "layout": "레이아웃",
+      "pageTransition": "페이지 전환"
+    },
+    "documentControls": {
+      "placeholder": "1, 3, 5-10",
+      "selectTooltip": "여러 페이지 선택",
+      "closeTooltip": "다중 선택 닫기"
+    },
+    "outlineControls": {
+      "add": "추가",
+      "reorder": "정렬"
+    },
+    "layout": {
+      "cover": "커버 보기",
+      "double": "두 페이지",
+      "single": "한 페이지"
+    },
+    "mathSymbols": "수학 기호",
+    "notesPanel": {
+      "separator": {
+        "today": "오늘",
+        "yesterday": "어제",
+        "unknown": "알수없음"
+      },
+      "noteContent": {
+        "noName": "(이름 없음)",
+        "noDate": "(날짜 없음)"
+      }
+    },
+    "pageTransition": {
+      "continuous": "연속",
+      "default": "페이지별",
+      "reader": "리더"
+    },
+    "print": {
+      "all": "모두",
+      "current": "현재 페이지",
+      "pages": "페이지",
+      "specifyPages": "페이지 지정",
+      "view": "보기",
+      "pageQuality": "인쇄품질",
+      "qualityNormal": "일반",
+      "qualityHigh": "최상",
+      "includeAnnotations": "주석포함",
+      "includeComments": "댓글포함",
+      "printSettings": "인쇄 설정"
+    },
+    "printInfo": {
+      "author": "저자",
+      "subject": "제목",
+      "date": "날짜"
+    },
+    "redaction": {
+      "markForRedaction": "민감정보표시"
+    },
+    "searchPanel": {
+      "caseSensitive": "대/소문자 구분",
+      "wholeWordOnly": "전체단어로 검색",
+      "wildcard": "와일드 카드"
+    },
+    "toolsOverlay": {
+      "currentStamp": "현재 스탬프",
+      "currentSignature": "현재 서명",
+      "signatureAltText": "서명"
+    },
+    "stampOverlay": {
+      "addStamp": "스탬프 추가"
+    },
+    "signatureOverlay": {
+      "addSignature": "서명 추가"
+    },
+    "signatureModal": {
+      "modalName": "서명 만들기",
+      "dragAndDrop": "여기에 드래그앤드롭 하세요.",
+      "or": "또는",
+      "pickImage": "서명 이미지 선택",
+      "selectImage": "업로드"
+    },
+    "pageReplacementModal": {
+      "dragAndDrop": "여기에 드래그앤드롭 하세요.",
+      "or": "또는",
+      "chooseFile": "파일 선택",
+      "localFile": "업로드",
+      "pageReplaceInputLabel": "페이지 교체",
+      "pageReplaceInputFromSource": "페이지 포함"
+    },
+    "filterAnnotModal": {
+      "commentBy": "작성자로 정렬",
+      "types": "종류",
+      "color": "색상",
+      "includeReplies": "댓글포함"
+    },
+    "status": {
+      "status": "상태"
+    },
+    "state": {
+      "accepted": "승인",
+      "rejected": "거절",
+      "completed": "완료",
+      "cancelled": "취소",
+      "set": "상태 설정 :",
+      "setBy": "설정",
+      "none": "없음",
+      "marked": "표시",
+      "unmarked": "비표시"
+    },
+    "measurementOverlay": {
+      "scale": "배율",
+      "angle": "각도",
+      "distance": "거리",
+      "perimeter": "둘레",
+      "area": "면적",
+      "distanceMeasurement": "거리 측정",
+      "perimeterMeasurement": "둘레 측정",
+      "arcMeasurement": "호 측정",
+      "areaMeasurement": "면적 측정",
+      "countMeasurement": "카운트 측정",
+      "radius": "반지름",
+      "count": "카운트",
+      "length": "길이"
+    },
+    "measurementOption": {
+      "scale": "배율"
+    },
+    "stylePopup": {
+      "textStyle": "텍스트 스타일",
+      "colors": "색상",
+      "invalidFontSize": "글꼴 크기는 다음보다 작아야 합니다.",
+      "labelText": "레이블 텍스트",
+      "labelTextPlaceholder": "레이블 텍스트 추가"
+    },
+    "styleOption": {
+      "style": "스타일",
+      "solid": "진하게",
+      "cloudy": "흐리게"
+    },
+    "slider": {
+      "opacity": "불투명도",
+      "thickness": "두께",
+      "text": "텍스트 크기"
+    },
+    "shared": {
+      "page": "페이지",
+      "precision": "정밀도",
+      "enableSnapping": "스냅 가능"
+    },
+    "watermark": {
+      "title": "타이틀",
+      "addWatermark": "워터마크 추가",
+      "size": "크기",
+      "location": "위치",
+      "text": "텍스트",
+      "style": "스타일",
+      "resetAllSettings": "초기화",
+      "font": "글꼴",
+      "addNew": "새로 추가하기",
+      "locations": {
+        "center": "중앙",
+        "topLeft": "좌측상단",
+        "topRight": "우측상단",
+        "topCenter": "상단중앙",
+        "bottomLeft": "좌측하단",
+        "bottomRight": "우측하단",
+        "bottomCenter": "하단중앙"
+      }
+    },
+    "thumbnailPanel": {
+      "delete": "삭제",
+      "rotateClockwise": "오른쪽으로 회전",
+      "rotateCounterClockwise": "왼쪽으로 회전"
+    },
+    "thumbnailsControlOverlay": {
+      "move": "페이지 이동"
+    },
+    "richText": {
+      "bold": "진하게",
+      "italic": "이탤릭체",
+      "underline": "밑줄",
+      "strikeout": "취소선",
+      "alignLeft": "왼쪽 정렬",
+      "alignRight": "오른쪽 정렬",
+      "alignCenter": "가운데 정렬",
+      "justifyCenter": "양쪽 맞춤",
+      "alignTop": "상단 정렬",
+      "alignMiddle": "가운데 정렬",
+      "alignBottom": "하단 정렬"
+    },
+    "customStampModal": {
+      "stampColor": "스탬프 색상 :",
+      "modalName": "스탬프 만들기",
+      "stampText": "텍스트 :",
+      "timestampText": "날짜 텍스트 :",
+      "Username": "사용자 이름",
+      "Date": "날짜",
+      "Time": "시간"
+    },
+    "pageRedactModal": {
+      "addMark": "마크 추가",
+      "pageSelection": "페이지 선택",
+      "current": "현재 페이지",
+      "specify": "페이지 지정",
+      "odd": "홀수 페이지",
+      "even": "짝수 페이지",
+      "header": "마크 페이지 수정",
+      "specifyPlaceholder": "1, 3, 5-10"
+    },
+    "lineStyleOptions": {
+      "title": "스타일"
+    }
+  },
+  "warning": {
+    "deletePage": {
+      "deleteTitle": "페이지 삭제",
+      "deleteMessage": "선택한 페이지를 삭제 하시겠습니까?",
+      "deleteLastPageMessage": "모든 페이지를 삭제할 수 없습니다."
+    },
+    "extractPage": {
+      "title": "페이지 다운로드",
+      "message": "선택한 페이지를 다운로드 하시겠습니까?",
+      "confirmBtn": "페이지 다운로드",
+      "secondaryBtn": "페이지 다운로드 및 삭제"
+    },
+    "redaction": {
+      "applyTile": "적용",
+      "applyMessage": "편집을 위해 선택된 모든 항목을 영구적으로 제거합니다."
+    },
+    "selectPage": {
+      "selectTitle": "선택된 페이지 없음",
+      "selectMessage": "페이지를 선택하고 다시 시도하세요."
+    },
+    "colorPicker": {
+      "deleteTitle": "맞춤색상 삭제",
+      "deleteMessage": "선택한 맞춤색상을 제거 하시겠습니까?"
+    }
+  },
+  "shortcut": {
+    "arrow": "(A)",
+    "callout": "(C)",
+    "copy": "(Ctrl C)",
+    "delete": "(Del)",
+    "ellipse": "(O)",
+    "eraser": "(E)",
+    "freehand": "(F)",
+    "freetext": "(T)",
+    "highlight": "(H)",
+    "line": "(L)",
+    "pan": "(P)",
+    "rectangle": "(R)",
+    "rotateClockwise": "(Ctrl Shift +)",
+    "rotateCounterClockwise": "(Ctrl Shift -)",
+    "select": "(Esc)",
+    "signature": "(S)",
+    "squiggly": "(G)",
+    "image": "(NS)",
+    "redo": "(Ctrl Shift Z)",
+    "redo_windows": "(Ctrl Y)",
+    "undo": "(Ctrl Z)",
+    "stickyNote": "(N)",
+    "strikeout": "(K)",
+    "underline": "(U)",
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl B)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl U)",
+      "strikeout": "(Ctrl K)"
+    },
+    "rotate3D": "Shift + 끌기",
+    "zoom3D": "Shift + 스크롤"
+  },
+  "tool": {
+    "pan": "이동",
+    "select": "선택",
+    "Marquee": "선택윤곽 확대/축소",
+    "Link": "링크URL 또는 페이지",
+    "Standard": "일반",
+    "Custom": "사용자정의"
+  },
+  "link": {
+    "url": "URL",
+    "page": "페이지",
+    "enterurl": "URL을 입력하세요",
+    "enterpage": "페이지 번호를 입력하세요",
+    "urlLink": "URL링크"
+  },
+  "Model3D": {
+    "add3D": "URL을 입력하여 3D 주석 추가",
+    "enterurl": "3D개체의 URL을 glTF 형식으로 입력하세요.",
+    "enterurlOrLocalFile": "URL을 입력하거나 glTF 형식으로 3D개체를 업로드합니다.",
+    "formatError": "glTF (.glb) 형식 만 지원됩니다."
+  },
+  "OpenFile": {
+    "enterUrlOrChooseFile": "URL을 입력하거나 WebViewer에 로드할 파일을 선택하세요.",
+    "enterUrl": "파일URL 입력",
+    "extension": "파일 확장자",
+    "existingFile": "열린 파일입니다.",
+    "addTab": "탭 추가"
+  },
+  "datePicker": {
+    "previousMonth": "지난달",
+    "nextMonth": "다음달",
+    "months": {
+      "0": "1월",
+      "1": "2월",
+      "2": "3월",
+      "3": "4월",
+      "4": "5월",
+      "5": "6월",
+      "6": "7월",
+      "7": "8월",
+      "8": "9월",
+      "9": "10월",
+      "10": "11월",
+      "11": "12월"
+    },
+    "monthsShort": {
+      "0": "1월",
+      "1": "2월",
+      "2": "3월",
+      "3": "4월",
+      "4": "5월",
+      "5": "6월",
+      "6": "7월",
+      "7": "8월",
+      "8": "9월",
+      "9": "10월",
+      "10": "11월",
+      "11": "12월"
+    },
+    "weekdays": {
+      "0": "일요일",
+      "1": "월요일",
+      "2": "화요일",
+      "3": "수요일",
+      "4": "목요일",
+      "5": "금요일",
+      "6": "토요일"
+    },
+    "weekdaysShort": {
+      "0": "일",
+      "1": "월",
+      "2": "화",
+      "3": "수",
+      "4": "목",
+      "5": "금",
+      "6": "토"
+    },
+    "today": "오늘",
+    "invalidDateTime": " 입력한 날짜/시간 형식이 일치하지 않습니다."
+  },
+  "formField": {
+    "formFieldPopup": {
+      "fieldName": "양식이름",
+      "fieldValue": "기본값",
+      "readOnly": "읽기전용",
+      "multiSelect": "다중선택",
+      "required": "필수",
+      "multiLine": "여러 줄",
+      "apply": "적용",
+      "cancel": "취소",
+      "flags": "양식옵션",
+      "options": "양식목록",
+      "radioGroups": "동일한 양식이름을 가진 라디오버튼은 동일한 그룹에 속합니다.",
+      "nameRequired": "양식이름을 입력하세요.",
+      "size": "크기",
+      "width": "너비",
+      "height": "높이",
+      "invalidField": {
+        "duplicate": "이미 존재하는 양식이름입니다.",
+        "empty": "양식이름을 입력하세요."
+      }
+    },
+    "apply": "적용",
+    "type": "양식유형",
+    "types": {
+      "text": "텍스트",
+      "signature": "서명",
+      "checkbox": "체크박스",
+      "radio": "라디오버튼",
+      "listbox": "리스트박스",
+      "combobox": "콤보박스"
+    }
+  },
+  "digitalSignatureModal": {
+    "certification": "인증",
+    "Certification": "인증",
+    "signature": "서명",
+    "Signature": "서명",
+    "valid": "유효한",
+    "invalid": "유효하지 않음",
+    "unknown": "알수없음",
+    "title": "{{type}} 속성",
+    "header": {
+      "documentIntegrity": "문서 무결성",
+      "identitiesTrust": "정체성과 신뢰",
+      "generalErrors": "일반 오류",
+      "digestStatus": "다이제스트 상태"
+    },
+    "documentPermission": {
+      "noChangesAllowed": "{{editor}}는 이 문서를 변경할 수 없습니다.",
+      "formfillingSigningAllowed": "{{editor}}는 이 문서에 양식채우기 및 서명을 허용하였습니다. 다른 변경은 허용되지 않습니다.",
+      "annotatingFormfillingSigningAllowed": "{{editor}}는 이 문서에 양식채우기, 서명 및 주석 추가를 허용하였습니다.",
+      "unrestricted": "{{editor}}는 문서를 편집할 수 있습니다."
+    },
+    "digestAlgorithm": {
+      "preamble": "서명하는데 사용된 다이제스트 알고리즘 :",
+      "unknown": "서명하는데 사용된 다이제스트 알고리즘을 알 수 없습니다."
+    },
+    "trustVerification": {
+      "none": "사용 가능한 자세한 신뢰 확인 결과가 없습니다.",
+      "current": "현재시간에 대한 신뢰검증 시도",
+      "signing": "서명시간과 관련하여 시도된 신뢰 확인 : {{trustVerificationTime}}",
+      "timestamp": "보안 삽입된 타임스탬프와 관련하여 시도된 신뢰확인 : {{trustVerificationTime}}"
+    },
+    "signerIdentity": {
+      "preamble": "서명자의 신원",
+      "valid": "유효한",
+      "unknown": "알수없음."
+    },
+    "summaryBox": {
+      "summary": "디지털 {{type}}은 {{status}}입니다.",
+      "signedBy": ", {{name}} 서명"
+    }
+  },
+  "digitalSignatureVerification": {
+    "certifier": "증명자",
+    "certified": "인증",
+    "Certified": "인증됨",
+    "signer": "서명자",
+    "signed": "서명",
+    "Signed": "서명됨",
+    "by": "으로",
+    "on": "의 위에",
+    "disallowedChange": "허용되지 않는 변경 : {{type}}, objnum : {{objnum}}",
+    "unsignedSignatureField": "서명되지 않은 서명필드: {{fieldName}}",
+    "trustVerification": {
+      "current": "사용된 확인시간은 현재시간입니다.",
+      "signing": "확인시간은 서명자의 컴퓨터시계에 있습니다.",
+      "timestamp": "확인시간은 문서에 포함된 보안타임스탬프에서 가져옵니다.",
+      "verifiedTrust": "신뢰확인 결과 : 확인됨",
+      "noTrustVerification": "사용 가능한 자세한 신뢰확인 결과가 없습니다."
+    },
+    "permissionStatus": {
+      "noPermissionsStatus": "권한상태가 없습니다.",
+      "permissionsVerificationDisabled": "권한확인이 비활성화되었습니다.",
+      "hasAllowedChanges": "문서에 허용된 변경내역이 있습니다.",
+      "invalidatedByDisallowedChanges": "문서에 허용하지 않은 변경내역이 있습니다.",
+      "unmodified": "문서에 변경내역이 없습니다."
+    },
+    "trustStatus": {
+      "trustVerified": "{{verificationType}}에 대한 신뢰가 성공적으로 설정되었습니다.",
+      "untrusted": "신뢰를 구축 할 수 없습니다.",
+      "trustVerificationDisabled": "신뢰확인이 비활성화되었습니다.",
+      "noTrustStatus": "보고 할 신뢰상태가 없습니다."
+    },
+    "digestStatus": {
+      "digestInvalid": "다이제스트가 잘못되었습니다.",
+      "digestVerified": "다이제스트가 정확합니다.",
+      "digestVerificationDisabled": "다이제스트 확인이 비활성화되었습니다.",
+      "weakDigestAlgorithmButDigestVerifiable": "다이제스트는 정확하지만 다이제스트 알고리즘은 약하고 안전하지 않습니다.",
+      "noDigestStatus": "보고 할 다이제스트 상태가 없습니다.",
+      "unsupportedEncoding": "설치된 SignatureHandler가 서명의 인코딩을 인식 할 수 없습니다."
+    },
+    "documentStatus": {
+      "noError": "보고 할 일반적인 오류가 없습니다.",
+      "corruptFile": "SignatureHandler가 파일손상을 보고했습니다.",
+      "unsigned": "암호화 서명되지 않았습니다.",
+      "badByteRanges": "SignatureHandler는 디지털 서명의 ByteRanges 손상을 보고합니다.",
+      "corruptCryptographicContents": "SignatureHandler는 디지털서명 내용의 손상을 보고합니다."
+    },
+    "signatureDetails": {
+      "signatureDetails": "서명 세부정보",
+      "contactInformation": "연락정보",
+      "location": "위치",
+      "reason": "원인",
+      "signingTime": "서명시간",
+      "noContactInformation": "연락처정보가 없습니다.",
+      "noLocation": "위치정보가 없습니다.",
+      "noReason": "원인정보가 없습니다.",
+      "noSigningTime": "서명시간이 없습니다."
+    },
+    "panelMessages": {
+      "noSignatureFields": "서명 필드가 없습니다.",
+      "certificateDownloadError": "인증서 다운로드 오류",
+      "localCertificateError": "로컬인증서 오류"
+    }
+  },
+  "cropPopUp": {
+    "title": "잘라내기",
+    "allPages": "모든 페이지",
+    "singlePage": "현재 페이지",
+    "cropDimensions": "크기",
+    "dimensionInput": {
+      "unitOfMeasurement": "단위",
+      "autoTrim": "자동자르기"
+    },
+    "cropModal": {
+      "applyTitle": "잘라내기를 적용하시겠습니까?",
+      "applyMessage": "이 작업은 선택한 모든 페이지를 영구적으로 자릅니다.",
+      "cancelTitle": "자르기를 취소하시겠습니까?",
+      "cancelMessage": "선택한 모든 페이지 자르기를 취소하시겠습니까?"
+    }
+  },
+  "redactionPanel": {
+    "noMarkedRedactions": "텍스트, 지역, 페이지를 표시하거나 검색하여 수정을 시작하세요.",
+    "redactionSearchPlaceholder": "키워드 검색 또는 패턴으로 추가",
+    "redactionCounter": "표시 수정",
+    "clearMarked": "표시 지우기",
+    "redactAllMarked": "모두 수정",
+    "redactionItem": {
+      "regionRedaction": "지역 수정",
+      "fullPageRedaction": "전체 페이지수정",
+      "image": "이미지"
+    },
+    "expand": "확대",
+    "collapse": "축소",
+    "searchResults": "검색결과",
+    "search": {
+      "creditCards": "신용카드",
+      "phoneNumbers": "전화번호",
+      "images": "이미지",
+      "emails": "이메일",
+      "pattern": "패턴",
+      "start": "검색시작"
+    }
+  },
+  "languageModal": {
+    "selectLanguage": "언어 선택"
+  }
+}

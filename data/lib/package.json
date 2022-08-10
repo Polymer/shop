@@ -1,0 +1,9 @@
+{
+  "name": "webviewer",
+  "description": "PDFTron WebViewer",
+  "version": "8.6.1",
+  "main": "webviewer.min.js",
+  "author": "PDFTron Systems Inc.",
+  "build": "MTU3NTkzMDE2ODA2OC02LjAuMC1iZXRhLTM=",
+  "types": "./types.d.ts"
+}

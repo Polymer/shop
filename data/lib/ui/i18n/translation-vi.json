@@ -1,0 +1,833 @@
+{
+  "action": {
+    "add": "Thêm vào",
+    "apply": "Áp dụng",
+    "applyAll": "Áp dụng tất cả",
+    "calendar": "Lịch",
+    "calibrate": "Hiệu chỉnh",
+    "cancel": "Hủy",
+    "clear": "Xóa",
+    "close": "Đóng",
+    "undo": "Hoàn tác",
+    "redo": "Làm Lại",
+    "comment": "Bình Luận",
+    "reply": "Thêm trả lời",
+    "copy": "Sao chép",
+    "delete": "Xóa",
+    "group": "Nhóm",
+    "ungroup": "Bỏ gộp nhóm",
+    "download": "Tải xuống",
+    "edit": "Chỉnh sửa",
+    "extract": "Trích xuất",
+    "enterFullscreen": "Toàn màn hình",
+    "exitFullscreen": "Thoát chế độ toàn màn hình",
+    "fit": "Làm vừa",
+    "fitToPage": "Làm vừa theo trang",
+    "fitToWidth": "Làm vừa theo chiều rộng",
+    "more": "Thêm",
+    "openFile": "Mở tệp",
+    "pagePrev": "Trang trước",
+    "pageNext": "Trang tiếp theo",
+    "pageSet": "Đặt trang",
+    "print": "In",
+    "proceed": "Tiếp tục",
+    "name": "Tên",
+    "rename": "Đổi tên",
+    "ok": "OK",
+    "rotate": "Hướng Trang",
+    "rotate3D": "Xoay",
+    "rotateClockwise": "Xoay theo Chiều Kim Đồng Hồ",
+    "rotateCounterClockwise": "Xoay Ngược Chiều Kim Đồng Hồ",
+    "save": "Lưu",
+    "post": "Đăng",
+    "create": "Tạo",
+    "showMoreResults": "Hiển thị thêm kết quả",
+    "sign": "Ký",
+    "style": "Kiểu",
+    "submit": "Gửi",
+    "zoom": "Thu phóng",
+    "zoomIn": "Thu phóng vào",
+    "zoomOut": "Thu phóng ra",
+    "zoomSet": "Đặt mức thu phóng",
+    "zoomControls": "Điều Khiển Thu Phóng",
+    "draw": "Vẽ",
+    "type": "Kiểu",
+    "upload": "Tải lên",
+    "link": "Liên kết",
+    "darkMode": "Chế độ tối",
+    "lightMode": "Chế độ sáng",
+    "fileAttachmentDownload": "Tải xuống tệp đính kèm",
+    "prevResult": "Kết quả trước",
+    "nextResult": "Kết quả tiếp theo",
+    "prev": "Trước",
+    "next": "Tiếp theo",
+    "startFormEditing": "Bắt Đầu Sửa Biểu Mẫu",
+    "exitFormEditing": "Thoát Chế Độ Sửa Biểu Mẫu",
+    "exit": "Thoát",
+    "addOption": "Thêm Tùy Chọn",
+    "formFieldEdit": "Chỉnh Sửa Trường Biểu Mẫu",
+    "viewShortCutKeysFor3D": "Xem Phím Tắt",
+    "markAllRead": "Đánh dấu tất cả là đọc",
+    "insertPage": "Chèn Trang",
+    "insertBlankPageAbove": "Chèn trang trống ở trên",
+    "insertBlankPageBelow": "Chèn trang trống ở dưới",
+    "pageManipulation": "Thao Tác Trang",
+    "replace": "Thay thế",
+    "showLess": "hiển thị ít hơn",
+    "showMore": "...nhiều hơn",
+    "chooseFile": "Chọn một tệp",
+    "selectYourOption": "Chọn tùy chọn của bạn",
+    "open": "Mở",
+    "deselectAll": "Bỏ Chọn Tất Cả",
+    "select": "Chọn",
+    "moveToTop": "Di chuyển lên trên cùng",
+    "moveToBottom": "Di chuyển xuống dưới cùng",
+    "redactPages": "Biên tập lại các trang",
+    "playAudio": "Phát âm thanh",
+    "pauseAudio": "Tạm dừng âm thanh",
+    "selectAll": "Chọn tất cả",
+    "unselect": "Bỏ chọn",
+    "addMark": "Thêm dấu",
+    "viewFile": "Xem tài liệu",
+    "switchLanguage": "Ngôn ngữ"
+  },
+  "annotation": {
+    "areaMeasurement": "Diện tích",
+    "arc": "Hồ quang",
+    "arcMeasurement": "Đo hồ quang",
+    "arrow": "Mũi tên",
+    "callout": "Chú thích",
+    "crop": "Cắt Trang",
+    "caret": "Dấu sót",
+    "dateFreeText": "Lịch",
+    "formFillCheckmark": "Dấu kiểm",
+    "formFillCross": "Dấu gạch chéo",
+    "distanceMeasurement": "Khoảng cách",
+    "countMeasurement": "Đo đếm",
+    "ellipse": "Elip",
+    "eraser": "Tẩy",
+    "fileattachment": "Tệp Đính Kèm",
+    "freehand": "Free Hand",
+    "freeHandHighlight": "Điểm Nhấn Free Hand",
+    "freetext": "Văn Bản Tự Do",
+    "highlight": "Nổi bật",
+    "image": "Ảnh",
+    "line": "Đường kẻ",
+    "perimeterMeasurement": "Chu vi",
+    "polygon": "Đa giác",
+    "polygonCloud": "Đám mây",
+    "polyline": "Hình nhiều nét",
+    "rectangle": "Hình chữ nhật",
+    "redact": "Biên tập",
+    "formFillDot": "Chấm",
+    "signature": "Chữ ký",
+    "squiggly": "Nguệch ngoạc",
+    "stamp": "Tem",
+    "stickyNote": "Ghi chú",
+    "strikeout": "Gạch bỏ",
+    "underline": "Gạch chân",
+    "custom": "Tùy chỉnh",
+    "rubberStamp": "Tem Cao Su",
+    "note": "Ghi chú",
+    "textField": "Trường Văn Bản",
+    "signatureFormField": "Trường Chữ Ký",
+    "checkBoxFormField": "Trường Hộp Kiểm",
+    "radioButtonFormField": "Trường RadioButton",
+    "listBoxFormField": "Trường Hộp Danh Sách",
+    "comboBoxFormField": "Trường Hộp Kết Hợp",
+    "link": "Liên kết",
+    "other": "Khác",
+    "3D": "3D",
+    "sound": "Âm thanh"
+  },
+  "rubberStamp": {
+    "Approved": "Đã chấp thuận",
+    "AsIs": "Nguyên Trạng",
+    "Completed": "Đã hoàn thành",
+    "Confidential": "Bảo mật",
+    "Departmental": "Bộ phận",
+    "Draft": "Bản nháp",
+    "Experimental": "Thử nghiệm",
+    "Expired": "Đã hết hạn",
+    "Final": "Cuối cùng",
+    "ForComment": "Để Nhận Xét",
+    "ForPublicRelease": "Để Phát Hành Công Khai",
+    "InformationOnly": "Chỉ để cung cấp Thông Tin",
+    "NotApproved": "Không Được Chấp Thuận",
+    "NotForPublicRelease": "Không Phải Để Phát Hành Công Khai",
+    "PreliminaryResults": "Kết Quả Sơ Bộ",
+    "Sold": "Đã Bán",
+    "TopSecret": "Bí Mật Tối Cao",
+    "Void": "Vô Hiệu Lực",
+    "SHSignHere": "Ký Tại Đây",
+    "SHWitness": "Nhân Chứng",
+    "SHInitialHere": "Ký Tắt Tại Đây",
+    "SHAccepted": "Đã Chấp Nhận",
+    "SBRejected": "Đã Từ Chối"
+  },
+  "component": {
+    "attachmentPanel": "Tệp đính kèm",
+    "leftPanel": "Bảng",
+    "toolsHeader": "Công cụ",
+    "searchOverlay": "Tìm kiếm",
+    "searchPanel": "Tìm kiếm",
+    "menuOverlay": "Menu",
+    "notesPanel": "Bình Luận",
+    "outlinesPanel": "Tóm tắt",
+    "bookmarksPanel": "Đánh dấu",
+    "signaturePanel": "Chữ ký",
+    "newBookmark": "Đánh Dấu Mới",
+    "bookmarkPage": "Trang",
+    "layersPanel": "Lớp",
+    "thumbnailsPanel": "Hình nhỏ",
+    "toolsButton": "Công cụ",
+    "redaction": "Biên tập",
+    "viewControlsOverlay": "Xem Điều Khiển",
+    "calibration": "Hiệu chuẩn",
+    "zoomOverlay": "Lớp Phủ Zoom",
+    "textPopup": "Bật Lên Văn Bản",
+    "createStampButton": "Tạo Tem Mới",
+    "filter": "Lọc",
+    "pageReplaceModalTitle": "Thay Thế Trang",
+    "files": "Tệp",
+    "editText": "Chỉnh Sửa Văn Bản",
+    "redactionPanel": "Bảng Biên Tập"
+  },
+  "message": {
+    "toolsOverlayNoPresets": "Không Có Cài Đặt Trước",
+    "badDocument": "Không thể tải tài liệu. Tài liệu bị lỗi hoặc không hợp lệ.",
+    "customPrintPlaceholder": "Ví dụ: 3, 4-10",
+    "encryptedAttemptsExceeded": "Không thể tải được tài liệu mã hóa. Thử quá nhiều lần.",
+    "encryptedUserCancelled": "Không thể tải được tài liệu mã hóa. Đã hủy nhập mật khẩu.",
+    "enterPassword": "Tài liệu này được bảo vệ bằng mật khẩu. Vui lòng nhập mật khẩu",
+    "incorrectPassword": "Mật khẩu không chính xác, số lần thử còn lại: {{ remainingAttempts }}",
+    "noAnnotations": "Bắt đầu tạo chú thích để lưu lại bình luận.",
+    "noAnnotationsReadOnly": "Tài liệu này không có chú thích nào.",
+    "noAnnotationsFilter": "Bắt đầu tạo chú thích và bộ lọc sẽ xuất hiện ở đây.",
+    "noOutlines": "Tài liệu này không có tóm tắt nào.",
+    "noAttachments": "Tài liệu này không có tệp đính kèm nào.",
+    "noResults": "Không tìm thấy kết quả nào.",
+    "numResultsFound": "kết quả tìm thấy",
+    "notSupported": "Loại tệp đó không được hỗ trợ.",
+    "passwordRequired": "Yêu cầu mật khẩu",
+    "enterPasswordPlaceholder": "Nhập mật khẩu",
+    "preparingToPrint": "Chuẩn bị in...",
+    "annotationReplyCount": "{{count}} Trả Lời",
+    "annotationReplyCount_plural": "{{count}} Trả Lời",
+    "printTotalPageCount": "Tổng: {{count}} trang",
+    "printTotalPageCount_plural": "Tổng: {{count}} trang",
+    "processing": "Đang xử lý...",
+    "searching": "Đang tìm kiếm...",
+    "searchCommentsPlaceholder": "Tìm kiếm bình luận",
+    "searchDocumentPlaceholder": "Tìm kiếm tài liệu",
+    "signHere": "Ký tại đây",
+    "insertTextHere": "Chèn văn bản tại đây",
+    "imageSignatureAcceptedFileTypes": "Chỉ chấp nhận {{acceptedFileTypes}}",
+    "enterMeasurement": "Nhập phép đo giữa hai điểm",
+    "errorEnterMeasurement": "Số bạn đã nhập không hợp lệ, bạn có thể nhập các giá trị như 7,5 hoặc 7 1/2",
+    "linkURLorPage": "Liên kết URL hoặc một Trang",
+    "warning": "Cảnh báo",
+    "enterContentEditingMode": "Bạn sắp vào chế độ chỉnh sửa nội dung.",
+    "existingAnnotationWarning": "Chú thích hiện có có thể không khớp với văn bản sau khi đã được chỉnh sửa.",
+    "changesCannotBeUndone": "Bất kỳ thay đổi nào được thực hiện không thể được hoàn tác.",
+    "doNotShowAgain": "Không hiển thị lại điều này cho tôi",
+    "enterReplacementText": "Nhập văn bản bạn muốn thay thế",
+    "sortBy": "Sắp xếp",
+    "emptyCustomStampInput": "Văn bản tem không thể trống",
+    "unpostedComment": "Nhận Xét Chưa Đăng",
+    "lockedLayer": "Lớp bị khóa",
+    "layerVisibililtyNoChange": "Không thể thay đổi độ hiển thị lớp",
+    "untitled": "Không có tiêu đề",
+    "selectHowToLoadFile": "Chọn cách tải tài liệu của bạn",
+    "openFileByUrl": "Mở tệp theo URL:",
+    "enterUrlHere": "Nhập URL tại đây",
+    "openLocalFile": "Mở tệp cục bộ:",
+    "selectFile": "Chọn tệp",
+    "selectPageToReplace": "Chọn các trang trong tài liệu bạn muốn thay thế.",
+    "embeddedFiles": "Tệp Nhúng",
+    "pageNum": "Số Trang",
+    "error": "Lỗi"
+  },
+  "option": {
+    "type": {
+      "caret": "Dấu sót",
+      "custom": "Tùy chỉnh",
+      "ellipse": "Elip",
+      "fileattachment": "Tệp Đính Kèm",
+      "freehand": "Free Hand",
+      "callout": "Chú thích",
+      "freetext": "Văn Bản Tự Do",
+      "line": "Đường kẻ",
+      "polygon": "Đa giác",
+      "polyline": "Hình nhiều nét",
+      "rectangle": "Hình chữ nhật",
+      "redact": "Biên tập",
+      "signature": "Chữ ký",
+      "stamp": "Tem",
+      "stickyNote": "Ghi Chú Dính",
+      "highlight": "Nổi bật",
+      "strikeout": "Gạch bỏ",
+      "underline": "Gạch chân",
+      "squiggly": "Nguệch ngoạc",
+      "3D": "3D",
+      "other": "Khác"
+    },
+    "notesOrder": {
+      "dropdownLabel": "Sắp Xếp Danh Sách Lệnh",
+      "position": "Vị trí",
+      "time": "Thời gian",
+      "status": "Trạng thái",
+      "author": "Tác giả",
+      "type": "Kiểu",
+      "color": "Màu",
+      "createdDate": "Ngày Tạo",
+      "modifiedDate": "Ngày Sửa Đổi"
+    },
+    "toolbarGroup": {
+      "dropdownLabel": "Nhóm Thanh Công Cụ",
+      "toolbarGroup-View": "Xem",
+      "toolbarGroup-Annotate": "Chú thích",
+      "toolbarGroup-Shapes": "Hình dạng",
+      "toolbarGroup-Insert": "Chèn",
+      "toolbarGroup-Measure": "Đo",
+      "toolbarGroup-Edit": "Chỉnh sửa",
+      "toolbarGroup-FillAndSign": "Điền và Ký",
+      "toolbarGroup-Forms": "Biểu mẫu",
+      "toolbarGroup-Redact": "Biên tập"
+    },
+    "annotationColor": {
+      "StrokeColor": "Nét",
+      "FillColor": "Lấp",
+      "TextColor": "Văn bản"
+    },
+    "colorPalette": {
+      "colorLabel": "Màu"
+    },
+    "displayMode": {
+      "layout": "Bố Cục Trang",
+      "pageTransition": "Chuyển Tiếp Trang"
+    },
+    "documentControls": {
+      "placeholder": "1, 3, 5-10",
+      "selectTooltip": "Chọn nhiều trang",
+      "closeTooltip": "Đóng đa chọn"
+    },
+    "outlineControls": {
+      "add": "Thêm mục",
+      "reorder": "Sắp xếp lại thứ tự"
+    },
+    "layout": {
+      "cover": "Trang Mặt Bìa",
+      "double": "Trang Đôi",
+      "single": "Trang Đơn"
+    },
+    "mathSymbols": "Biểu tượng toán học",
+    "notesPanel": {
+      "separator": {
+        "today": "Hôm nay",
+        "yesterday": "Hôm qua",
+        "unknown": "Không xác định"
+      },
+      "noteContent": {
+        "noName": "(không có tên)",
+        "noDate": "(không có ngày)"
+      }
+    },
+    "pageTransition": {
+      "continuous": "Trang Liên Tục",
+      "default": "Từng Trang",
+      "reader": "Người đọc"
+    },
+    "print": {
+      "all": "Tất cả",
+      "current": "Trang Hiện Tại",
+      "pages": "Trang để in",
+      "specifyPages": "Chỉ định các trang",
+      "view": "Chế Độ Xem Hiện Tại",
+      "pageQuality": "Chất Lượng In",
+      "qualityNormal": "Bình thường",
+      "qualityHigh": "Cao",
+      "includeAnnotations": "Bao gồm chú thích",
+      "includeComments": "Bao gồm bình luận",
+      "printSettings": "Cài đặt in"
+    },
+    "printInfo": {
+      "author": "Tác giả",
+      "subject": "Chủ đề",
+      "date": "Ngày"
+    },
+    "redaction": {
+      "markForRedaction": "Đánh dấu để biên tập"
+    },
+    "searchPanel": {
+      "caseSensitive": "Nhạy cảm viết hoa",
+      "wholeWordOnly": "Toàn bộ từ",
+      "wildcard": "Wildcard"
+    },
+    "toolsOverlay": {
+      "currentStamp": "Tem Hiện Tại",
+      "currentSignature": "Chữ Ký Hiện Tại",
+      "signatureAltText": "Chữ ký"
+    },
+    "stampOverlay": {
+      "addStamp": "Thêm Tem Mới"
+    },
+    "signatureOverlay": {
+      "addSignature": "Thêm Chữ Ký Mới"
+    },
+    "signatureModal": {
+      "modalName": "Tạo Chữ Ký Mới",
+      "dragAndDrop": "Kéo & Thả hình ảnh của bạn tại đây",
+      "or": "Hoặc",
+      "pickImage": "Chọn một chữ ký",
+      "selectImage": "Chọn hình ảnh của bạn tại đây"
+    },
+    "pageReplacementModal": {
+      "dragAndDrop": "Kéo & Thả tệp của bạn tại đây",
+      "or": "Hoặc",
+      "chooseFile": "Chọn một tệp",
+      "localFile": "Tệp Cục Bộ",
+      "pageReplaceInputLabel": "Thay Thế (các) Trang",
+      "pageReplaceInputFromSource": "bằng (các) trang"
+    },
+    "filterAnnotModal": {
+      "commentBy": "Nhận xét của",
+      "types": "Kiểu",
+      "color": "Màu",
+      "includeReplies": "Bao Gồm Trả Lời"
+    },
+    "status": {
+      "status": "Trạng thái"
+    },
+    "state": {
+      "accepted": "Đã Chấp Nhận",
+      "rejected": "Đã Từ Chối",
+      "completed": "Đã hoàn thành",
+      "cancelled": "Đã hủy",
+      "set": "Đặt trạng thái:",
+      "setBy": "được đặt bởi",
+      "none": "Không có",
+      "marked": "Đã đánh dấu",
+      "unmarked": "Không đánh dấu"
+    },
+    "measurementOverlay": {
+      "scale": "Tỷ Lệ Quy Mô",
+      "angle": "Góc",
+      "distance": "Khoảng cách",
+      "perimeter": "Chu vi",
+      "area": "Diện tích",
+      "distanceMeasurement": "Đo Lường Khoảng Cách",
+      "perimeterMeasurement": "Đo Lường Chu Vi",
+      "arcMeasurement": "Đo hồ quang",
+      "areaMeasurement": "Đo Lường Diện Tích",
+      "countMeasurement": "Đo đếm",
+      "radius": "Bán kính",
+      "count": "Số lượng",
+      "length": "Chiều dài"
+    },
+    "measurementOption": {
+      "scale": "Quy mô"
+    },
+    "stylePopup": {
+      "textStyle": "Kiểu Văn Bản",
+      "colors": "Màu",
+      "invalidFontSize": "Cỡ chữ phải nhỏ hơn ",
+      "labelText": "Văn Bản Nhãn",
+      "labelTextPlaceholder": "Thêm văn bản nhãn"
+    },
+    "styleOption": {
+      "style": "Kiểu",
+      "solid": "Rắn",
+      "cloudy": "Mây mù"
+    },
+    "slider": {
+      "opacity": "Độ đục",
+      "thickness": "Nét",
+      "text": "Kích Cỡ Văn Bản"
+    },
+    "shared": {
+      "page": "Trang",
+      "precision": "Độ chính xác",
+      "enableSnapping": "Bật chụp nhanh cho các công cụ đo lường"
+    },
+    "watermark": {
+      "title": "Chữ ký ảnh",
+      "addWatermark": "Thêm hình mờ",
+      "size": "Kích thước",
+      "location": "Chọn vị trí để sửa hình mờ",
+      "text": "Văn bản",
+      "style": "Kiểu",
+      "resetAllSettings": "Đặt Lại Tất Cả Thiết Đặt",
+      "font": "Phông chữ",
+      "addNew": "Thêm mới",
+      "locations": {
+        "center": "Giữa",
+        "topLeft": "Trên Cùng Bên Trái",
+        "topRight": "Trên Cùng Bên Phải",
+        "topCenter": "Trên Cùng Giữa",
+        "bottomLeft": "Dưới Cùng Bên Trái",
+        "bottomRight": "Dưới Cùng Bên Phải",
+        "bottomCenter": "Dưới Cùng Giữa"
+      }
+    },
+    "thumbnailPanel": {
+      "delete": "Xóa",
+      "rotateClockwise": "Theo chiều kim đồng hồ",
+      "rotateCounterClockwise": "Ngược chiều kim đồng hồ"
+    },
+    "thumbnailsControlOverlay": {
+      "move": "Di chuyển trang"
+    },
+    "richText": {
+      "bold": "Đậm",
+      "italic": "Nghiêng",
+      "underline": "Gạch chân",
+      "strikeout": "Gạch bỏ",
+      "alignLeft": "Căn chỉnh văn bản bên trái",
+      "alignRight": "Căn chỉnh văn bản bên phải",
+      "alignCenter": "Căn chỉnh văn bản giữa",
+      "justifyCenter": "Căn đều văn bản giữa",
+      "alignTop": "Căn chỉnh trên cùng",
+      "alignMiddle": "Căn chỉnh giữa",
+      "alignBottom": "Căn chỉnh dưới cùng"
+    },
+    "customStampModal": {
+      "modalName": "Tạo Tem Mới",
+      "stampText": "Văn bản tem",
+      "timestampText": "Văn bản dấu thời gian",
+      "stampColor": "Màu tem:",
+      "Username": "Tên người dùng",
+      "Date": "Ngày",
+      "Time": "Thời gian"
+    },
+    "pageRedactModal": {
+      "addMark": "Thêm dấu",
+      "pageSelection": "Lựa chọn trang",
+      "current": "Trang hiện tại",
+      "specify": "Chỉ định các trang",
+      "odd": "Chỉ các trang lẻ",
+      "even": "Chỉ trang chẵn",
+      "header": "Đánh dấu trang Redaction"
+    }
+  },
+  "warning": {
+    "deletePage": {
+      "deleteTitle": "Xóa Trang",
+      "deleteMessage": "Bạn có chắc chắn muốn xóa (các) trang đã chọn không. Không thể hoàn tác điều này",
+      "deleteLastPageMessage": "Bạn không thể xóa tất cả các trang trong tài liệu."
+    },
+    "extractPage": {
+      "title": "Trích Xuất Trang",
+      "message": "Bạn có chắc chắn muốn trích xuất (các) trang đã chọn không?",
+      "confirmBtn": "Trích xuất",
+      "secondaryBtn": "Trích Xuất và Xóa"
+    },
+    "redaction": {
+      "applyTile": "Áp Dụng Biên Tập",
+      "applyMessage": "Hành động này sẽ gỡ vĩnh viễn tất cả các mục được chọn để biên tập. Không thể hoàn tác hành động này."
+    },
+    "selectPage": {
+      "selectTitle": "Không Có Trang nào được Chọn",
+      "selectMessage": "Vui lòng chọn trang và thử lại."
+    },
+    "colorPicker": {
+      "deleteTitle": "Xóa màu tùy chỉnh",
+      "deleteMessage": "Xóa màu tùy chỉnh đã chọn? Nó sẽ bị gỡ bỏ khỏi bảng màu của bạn."
+    }
+  },
+  "shortcut": {
+    "arrow": "(A)",
+    "callout": "(C)",
+    "copy": "(Ctrl C)",
+    "delete": "(Del)",
+    "ellipse": "(O)",
+    "eraser": "(E)",
+    "freehand": "(F)",
+    "freetext": "(T)",
+    "highlight": "(H)",
+    "line": "(L)",
+    "pan": "(P)",
+    "rectangle": "(R)",
+    "rotateClockwise": "(Ctrl Shift +)",
+    "rotateCounterClockwise": "(Ctrl Shift -)",
+    "select": "(Esc)",
+    "signature": "(S)",
+    "squiggly": "(G)",
+    "image": "(I)",
+    "redo": "(Ctrl Shift Z)",
+    "redo_windows": "(Ctrl Y)",
+    "undo": "(Ctrl Z)",
+    "stickyNote": "(N)",
+    "strikeout": "(K)",
+    "underline": "(U)",
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl B)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl U)",
+      "strikeout": "(Ctrl K)"
+    },
+    "rotate3D": "Shift + Kéo",
+    "zoom3D": "Shift + Lăn"
+  },
+  "tool": {
+    "pan": "Quét",
+    "select": "Chọn",
+    "Marquee": "Thu Phóng Màn",
+    "Link": "Liên kết URL hoặc Trang",
+    "Standard": "Tiêu Chuẩn",
+    "Custom": "Tùy chỉnh"
+  },
+  "link": {
+    "url": "URL",
+    "page": "Trang",
+    "enterurl": "Nhập URL bạn muốn liên kết đến",
+    "enterpage": "Chọn số trang bạn muốn liên kết đến",
+    "urlLink": "Liên kết URL"
+  },
+  "Model3D": {
+    "add3D": "Thêm đối tượng 3D",
+    "enterurl": "Nhập URL của đối tượng 3D ở định dạng glTF",
+    "enterurlOrLocalFile": "Nhập URL hoặc tải lên đối tượng 3D ở định dạng glTF",
+    "formatError": "Chỉ có định dạng glTF (.glb) được hỗ trợ"
+  },
+  "OpenFile": {
+    "enterUrlOrChooseFile": "Nhập URL hoặc chọn tệp để tải vào WebViewer",
+    "enterUrl": "Nhập URL tệp",
+    "extension": "Phần mở rộng tệp",
+    "existingFile": "Tệp đã mở",
+    "addTab": "Thêm tab"
+  },
+  "datePicker": {
+    "previousMonth": "Tháng Trước",
+    "nextMonth": "Tháng Tiếp Theo",
+    "months": {
+      "0": "Tháng 1",
+      "1": "Tháng 2",
+      "2": "Tháng 3",
+      "3": "Tháng 4",
+      "4": "Tháng 5",
+      "5": "Tháng 6",
+      "6": "Tháng 7",
+      "7": "Tháng 8",
+      "8": "Tháng 9",
+      "9": "Tháng 10",
+      "10": "Tháng 11",
+      "11": "Tháng 12"
+    },
+    "monthsShort": {
+      "0": "Tháng 1",
+      "1": "Tháng 2",
+      "2": "Tháng 3",
+      "3": "Tháng 4",
+      "4": "Tháng 5",
+      "5": "Tháng 6",
+      "6": "Tháng 7",
+      "7": "Tháng 8",
+      "8": "Tháng 9",
+      "9": "Tháng 10",
+      "10": "Tháng 11",
+      "11": "Tháng 12"
+    },
+    "weekdays": {
+      "0": "Chủ Nhật",
+      "1": "Thứ Hai",
+      "2": "Thứ Ba",
+      "3": "Thứ Tư",
+      "4": "Thứ Năm",
+      "5": "Thứ Sáu",
+      "6": "Thứ Bảy"
+    },
+    "weekdaysShort": {
+      "0": "Chủ Nhật",
+      "1": "Thứ Hai",
+      "2": "Thứ Ba",
+      "3": "Thứ Tư",
+      "4": "Thứ Năm",
+      "5": "Thứ Sáu",
+      "6": "Thứ Bảy"
+    },
+    "today": "Hôm nay",
+    "invalidDateTime": "Ngày/Giờ Không Hợp Lệ: Đầu vào phải khớp với định dạng"
+  },
+  "formField": {
+    "formFieldPopup": {
+      "fieldName": "Tên Trường",
+      "fieldValue": "Giá Trị Mặc Định",
+      "readOnly": "Chỉ Đọc",
+      "multiSelect": "Đa Chọn",
+      "required": "Bắt buộc",
+      "multiLine": "Đa dòng",
+      "apply": "Áp dụng",
+      "cancel": "Hủy",
+      "flags": "Cờ Trường",
+      "options": "Tùy Chọn",
+      "radioGroups": "Các nút radio có cùng Tên Trường sẽ thuộc cùng một nhóm.",
+      "nameRequired": "Tên trường là bắt buộc",
+      "size": "Kích thước",
+      "width": "Chiều rộng",
+      "height": "Chiều cao",
+      "invalidField": {
+        "duplicate": "Tên Trường đã tồn tại",
+        "empty": "Tên Trường không thể trống"
+      }
+    },
+    "apply": "Áp Dụng Trường",
+    "type": "Loại Trường",
+    "types": {
+      "text": "Văn bản",
+      "signature": "Chữ ký",
+      "checkbox": "Hộp kiểm",
+      "radio": "Nút radio",
+      "listbox": "Hộp danh sách",
+      "combobox": "Hộp kết hợp"
+    }
+  },
+  "digitalSignatureModal": {
+    "certification": "chứng nhận",
+    "Certification": "Chứng nhận",
+    "signature": "chữ ký",
+    "Signature": "Chữ ký",
+    "valid": "hợp lệ",
+    "invalid": "không hợp lệ",
+    "unknown": "không xác định",
+    "title": "Thuộc Tính {{type}}",
+    "header": {
+      "documentIntegrity": "Tính Toàn Vẹn Tài Liệu",
+      "identitiesTrust": "Danh Tính & Uy Tín",
+      "generalErrors": "Lỗi Chung",
+      "digestStatus": "Trạng Thái Lĩnh Hội"
+    },
+    "documentPermission": {
+      "noChangesAllowed": "{{editor}} đã chỉ định rằng không có thay đổi nào được phép đối với tài liệu này",
+      "formfillingSigningAllowed": "{{editor}} đã chỉ định rằng Điền và Ký Biểu Mẫu được phép cho tài liệu này. Không có thay đổi nào khác được cho phép.",
+      "annotatingFormfillingSigningAllowed": "{{editor}} đã chỉ định rằng Điền, Ký và Nhận Xét Biểu Mẫu được phép cho tài liệu này. Không có thay đổi nào khác được cho phép.",
+      "unrestricted": "{{editor}} đã chỉ định rằng không có hạn chế nào đối với tài liệu này."
+    },
+    "digestAlgorithm": {
+      "preamble": "Thuật toán lĩnh hội được sử dụng để ký chữ ký: ",
+      "unknown": "Thuật toán lĩnh hội được sử dụng để ký chữ ký là không xác định."
+    },
+    "trustVerification": {
+      "none": "Không có kết quả xác minh tin cậy chi tiết có sẵn.",
+      "current": "Đã thử xác minh uy tín liên quan đến thời gian hiện tại",
+      "signing": "Đã thử xác minh uy tín liên quan đến thời gian ký: {{trustVerificationTime}}",
+      "timestamp": "Đã thử xác minh uy tín liên quan đến việc dấu thời gian nhúng bảo mật: {{trustVerificationTime}}"
+    },
+    "signerIdentity": {
+      "preamble": "Danh tính của người ký tên là ",
+      "valid": "hợp lệ.",
+      "unknown": "không xác định."
+    },
+    "summaryBox": {
+      "summary": "{{type}} kỹ thuật số là {{status}}",
+      "signedBy": ", ký tên bởi {{name}}"
+    }
+  },
+  "digitalSignatureVerification": {
+    "certifier": "người chứng nhận",
+    "certified": "đã chứng nhận",
+    "Certified": "Đã chứng nhận",
+    "signer": "người ký",
+    "signed": "đã ký",
+    "Signed": "Đã ký",
+    "by": "bởi",
+    "on": "vào",
+    "disallowedChange": "Thay Đổi Không Được Phép: {{type}}, objnum: {{objnum}}",
+    "unsignedSignatureField": "Trường chữ ký chưa ký: {{fieldName}}",
+    "trustVerification": {
+      "current": "Thời gian xác minh được sử dụng là thời gian hiện tại",
+      "signing": "Thời gian xác minh là từ đồng hồ trên máy tính của người ký",
+      "timestamp": "Thời gian xác minh là từ dấu thời gian bảo mật được nhúng trong tài liệu",
+      "verifiedTrust": "Kết quả xác minh uy tín: Đã xác minh",
+      "noTrustVerification": "Không có kết quả xác minh tin cậy chi tiết có sẵn."
+    },
+    "permissionStatus": {
+      "noPermissionsStatus": "Không có trạng thái quyền nào để báo cáo.",
+      "permissionsVerificationDisabled": "Xác minh quyền đã bị vô hiệu hóa.",
+      "hasAllowedChanges": "Tài liệu có những thay đổi được cho phép bởi các thiết đặt quyền chữ ký.",
+      "invalidatedByDisallowedChanges": "Tài liệu có những thay đổi không được cho phép bởi các thiết đặt quyền chữ ký.",
+      "unmodified": "Tài liệu đã không được sửa đổi kể từ khi nó được"
+    },
+    "trustStatus": {
+      "trustVerified": "Đã thiết lập uy tín vào {{verificationType}} thành công.",
+      "untrusted": "Không thể thiết lập uy tín.",
+      "trustVerificationDisabled": "Xác minh uy tín đã bị vô hiệu hóa.",
+      "noTrustStatus": "Không có trạng thái uy tín nào để báo cáo."
+    },
+    "digestStatus": {
+      "digestInvalid": "Sự lĩnh hội không chính xác.",
+      "digestVerified": "Sự lĩnh hội chính xác.",
+      "digestVerificationDisabled": "Xác minh lĩnh hội đã bị vô hiệu hóa.",
+      "weakDigestAlgorithmButDigestVerifiable": "Lĩnh hội chính xác, nhưng thuật toán lĩnh hội yếu và không bảo mật.",
+      "noDigestStatus": "Không có trạng thái lĩnh hội nào để báo cáo.",
+      "unsupportedEncoding": "Không có SignatureHandler được cài đặt nào có thể nhận ra mã hóa chữ ký"
+    },
+    "documentStatus": {
+      "noError": "Không có lỗi chung để báo cáo.",
+      "corruptFile": "SignatureHandler đã báo cáo lỗi tập tin.",
+      "unsigned": "Chữ ký vẫn chưa được ký bằng mật mã.",
+      "badByteRanges": "SignatureHandler báo cáo lỗi trong ByteRanges trong chữ ký số.",
+      "corruptCryptographicContents": "SignatureHandler báo cáo lỗi trong Nội Dung trong chữ ký số."
+    },
+    "signatureDetails": {
+      "signatureDetails": "Chi Tiết Chữ Ký",
+      "contactInformation": "Thông Tin Liên Hệ",
+      "location": "Vị trí",
+      "reason": "Lý do",
+      "signingTime": "Thời Gian Ký",
+      "noContactInformation": "Không có thông tin liên hệ nào được cung cấp",
+      "noLocation": "Không có vị trí nào được cung cấp",
+      "noReason": "Không có lý do nào được cung cấp",
+      "noSigningTime": "Không tìm thấy thời gian ký nào"
+    },
+    "panelMessages": {
+      "noSignatureFields": "Tài liệu này không có trường chữ ký nào",
+      "certificateDownloadError": "Đã gặp phải lỗi khi cố gắng tải xuống chứng chỉ uy tín",
+      "localCertificateError": "Có một số vấn đề với việc đọc chứng chỉ cục bộ"
+    }
+  },
+  "cropPopUp": {
+    "title": "Các trang cần cắt",
+    "allPages": "Tất cả",
+    "singlePage": "Trang hiện tại",
+    "cropDimensions": "Kích thước cây trồng",
+    "dimensionInput": {
+      "unitOfMeasurement": "Đơn vị",
+      "autoTrim": "Tự động cắt"
+    },
+    "cropModal": {
+      "applyTitle": "Áp dụng cây trồng?",
+      "applyMessage": "Hành động này sẽ cắt vĩnh viễn tất cả các trang đã chọn đã chọn. Nó không thể được hoàn tác.",
+      "cancelTitle": "Hủy cắt?",
+      "cancelMessage": "Bạn có chắc chắn muốn hủy việc cắt xén tất cả các trang đã chọn không?"
+    }
+  },
+  "redactionPanel": {
+    "noMarkedRedactions": "Bắt đầu biên tập lại bằng cách đánh dấu văn bản, vùng, trang hoặc thực hiện tìm kiếm.",
+    "redactionSearchPlaceholder": "Bổ sung theo tìm kiếm từ khóa hoặc mẫu",
+    "redactionCounter": "Đã Đánh Dấu để Biên Tập",
+    "clearMarked": "Xóa",
+    "redactAllMarked": "Biên Tập Tất Cả",
+    "redactionItem": {
+      "regionRedaction": "Biên tập vùng",
+      "fullPageRedaction": "Biên tập toàn trang",
+      "image": "Hình ảnh"
+    },
+    "expand": "Mở rộng",
+    "collapse": "Thu gọn",
+    "searchResults": "Kết quả tìm kiếm",
+    "search": {
+      "creditCards": "Thẻ tín dụng",
+      "phoneNumbers": "Số điện thoại",
+      "images": "Hình ảnh",
+      "emails": "Email",
+      "pattern": "Mẫu",
+      "start": "Bắt đầu thực hiện tìm kiếm của bạn"
+    }
+  },
+  "languageModal": {
+    "selectLanguage": "Chọn ngôn ngữ"
+  }
+}

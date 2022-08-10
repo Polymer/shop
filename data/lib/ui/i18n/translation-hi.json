@@ -1,0 +1,833 @@
+{
+  "action": {
+    "add": "जोड़ें",
+    "apply": "लागू करना",
+    "applyAll": "सभी लागू",
+    "calendar": "पंचांग",
+    "calibrate": "जांचना",
+    "cancel": "रद्द करें",
+    "clear": "स्पष्ट",
+    "close": "बंद करना",
+    "undo": "पूर्ववत",
+    "redo": "तैयार",
+    "comment": "टिप्पणी",
+    "reply": "उत्तर जोड़ें",
+    "copy": "प्रतिलिपि",
+    "delete": "हटाएं",
+    "group": "समूह",
+    "ungroup": "असमूहीकृत",
+    "download": "डाउनलोड",
+    "edit": "संपादित करें",
+    "extract": "निचोड़",
+    "enterFullscreen": "पूर्ण स्क्रीन",
+    "exitFullscreen": "पूर्ण स्क्रीन से बाहर निकलें",
+    "fit": "फ़िट",
+    "fitToPage": "पेज के लिए फिट",
+    "fitToWidth": "चौड़ाई में फ़िट करें",
+    "more": "अधिक",
+    "openFile": "खुली फाइल",
+    "pagePrev": "पिछला पृष्ठ",
+    "pageNext": "अगला पृष्ठ",
+    "pageSet": "पृष्ठ स्थापित करें",
+    "print": "छाप",
+    "proceed": "आगे बढ़ना",
+    "name": "नाम",
+    "rename": "नाम बदलें",
+    "ok": "ठीक",
+    "rotate": "पृष्ठ अभिविन्यास",
+    "rotate3D": "घुमाएँ",
+    "rotateClockwise": "घड़ी की सुई की दिशा में घुमाओ",
+    "rotateCounterClockwise": "वामावर्त स्थिति में घुमाएं",
+    "save": "सहेजें",
+    "post": "पद",
+    "create": "सृजन करना",
+    "showMoreResults": "अधिक परिणाम दिखाएं",
+    "sign": "संकेत",
+    "style": "अंदाज",
+    "submit": "प्रस्तुत करना",
+    "zoom": "ज़ूम",
+    "zoomIn": "ज़ूम इन",
+    "zoomOut": "ज़ूम आउट",
+    "zoomSet": "ज़ूम सेट करें",
+    "zoomControls": "ज़ूम नियंत्रण",
+    "draw": "खींचना",
+    "type": "प्रकार",
+    "upload": "डालना",
+    "link": "संपर्क",
+    "darkMode": "डार्क मोड",
+    "lightMode": "लाइट मोड",
+    "fileAttachmentDownload": "संलग्न फ़ाइल डाउनलोड करें",
+    "prevResult": "पिछला परिणाम",
+    "nextResult": "अगला परिणाम",
+    "prev": "पहले का",
+    "next": "अगला",
+    "startFormEditing": "फॉर्म एडिटिंग शुरू करें",
+    "exitFormEditing": "फॉर्म एडिटिंग मोड से बाहर निकलें",
+    "exit": "बाहर जाएं",
+    "addOption": "विकल्प जोड़ें",
+    "formFieldEdit": "प्रपत्र फ़ील्ड संपादित करें",
+    "viewShortCutKeysFor3D": "शॉर्टकट कुंजियाँ देखें",
+    "markAllRead": "सभी को पढ़ा हुआ मार्क करें",
+    "insertPage": "पेज इंसर्शन",
+    "insertBlankPageAbove": "ऊपर खाली पेज डालें",
+    "insertBlankPageBelow": "नीचे खाली पेज डालें",
+    "pageManipulation": "पृष्ठ हेरफेर",
+    "replace": "बदलने के",
+    "showLess": "कम दिखाएं",
+    "showMore": "...अधिक",
+    "chooseFile": "एक फ़ाइल चुनें",
+    "selectYourOption": "अपना विकल्प चुनें",
+    "open": "खुला हुआ",
+    "deselectAll": "सबको अचयनित करो",
+    "select": "चुनते हैं",
+    "moveToTop": "शीर्ष पर जाएं",
+    "moveToBottom": "नीचे ले जाएँ",
+    "redactPages": "पृष्ठ सुधारें",
+    "playAudio": "ऑडियो चलाएं",
+    "pauseAudio": "ऑडियो विराम",
+    "selectAll": "सबका चयन करें",
+    "unselect": "सभी का चयन रद्द",
+    "addMark": "मार्क जोड़ें",
+    "viewFile": "फ़ाइल देखें",
+    "switchLanguage": "भाषा"
+  },
+  "annotation": {
+    "areaMeasurement": "क्षेत्र",
+    "arc": "आर्क",
+    "arcMeasurement": "चाप माप",
+    "arrow": "तीर",
+    "callout": "पुकारें",
+    "crop": "फसल पृष्ठ",
+    "caret": "का अभाव",
+    "dateFreeText": "पंचांग",
+    "formFillCheckmark": "टिकटिक",
+    "formFillCross": "पार करना",
+    "distanceMeasurement": "दूरी",
+    "countMeasurement": "गणना माप",
+    "ellipse": "अंडाकार",
+    "eraser": "रबड़",
+    "fileattachment": "दस्तावेज़ संलग्नक",
+    "freehand": "मुक्त हाथ",
+    "freeHandHighlight": "फ्री हैंड हाइलाइट",
+    "freetext": "फ्री टेक्स्ट",
+    "highlight": "हाइलाइट",
+    "image": "छवि",
+    "line": "रेखा",
+    "perimeterMeasurement": "परिमाप",
+    "polygon": "बहुभुज",
+    "polygonCloud": "बादल",
+    "polyline": "पॉलीलाइन",
+    "rectangle": "आयत",
+    "redact": "संपादन",
+    "formFillDot": "दूरसंचार विभाग",
+    "signature": "हस्ताक्षर",
+    "squiggly": "टेढ़ा-मेढ़ा",
+    "stamp": "डाक टिकट",
+    "stickyNote": "ध्यान दें",
+    "strikeout": "मिटाना",
+    "underline": "रेखांकन",
+    "custom": "रीति",
+    "rubberStamp": "रबड़ की मोहर",
+    "note": "ध्यान दें",
+    "textField": "पाठ का क्षेत्र",
+    "signatureFormField": "सिग्नेचर फील्ड",
+    "checkBoxFormField": "चेकबॉक्स फ़ील्ड",
+    "radioButtonFormField": "रेडियोबटन फील्ड",
+    "listBoxFormField": "सूची बॉक्स फ़ील्ड",
+    "comboBoxFormField": "कॉम्बो बॉक्स फील्ड",
+    "link": "संपर्क",
+    "other": "अन्य",
+    "3D": "3डी",
+    "sound": "ध्वनि"
+  },
+  "rubberStamp": {
+    "Approved": "स्वीकृत",
+    "AsIs": "जैसा है",
+    "Completed": "पुरा होना",
+    "Confidential": "गुप्त",
+    "Departmental": "विभागीय",
+    "Draft": "प्रारूप",
+    "Experimental": "प्रयोगात्मक",
+    "Expired": "समय सीमा समाप्त",
+    "Final": "अंतिम",
+    "ForComment": "टिप्पणी के लिए",
+    "ForPublicRelease": "सार्वजनिक रिलीज के लिए",
+    "InformationOnly": "केवल जानकारी",
+    "NotApproved": "अस्वीकृत",
+    "NotForPublicRelease": "सार्वजनिक रिलीज के लिए नहीं",
+    "PreliminaryResults": "प्रारंभिक परिणाम",
+    "Sold": "बेचा",
+    "TopSecret": "परम गुप्त",
+    "Void": "शून्य",
+    "SHSignHere": "यहां हस्ताक्षर करें",
+    "SHWitness": "साक्षी",
+    "SHInitialHere": "आद्याक्षर यहाँ",
+    "SHAccepted": "स्वीकार किया हुआ",
+    "SBRejected": "अस्वीकृत"
+  },
+  "component": {
+    "attachmentPanel": "संलग्नक",
+    "leftPanel": "पैनल",
+    "toolsHeader": "उपकरण",
+    "searchOverlay": "खोज",
+    "searchPanel": "खोज",
+    "menuOverlay": "मेन्यू",
+    "notesPanel": "टिप्पणियाँ",
+    "outlinesPanel": "रूपरेखा",
+    "bookmarksPanel": "बुकमार्क",
+    "signaturePanel": "हस्ताक्षर",
+    "newBookmark": "नया बुकमार्क",
+    "bookmarkPage": "पृष्ठ",
+    "layersPanel": "परतों",
+    "thumbnailsPanel": "थंबनेल",
+    "toolsButton": "उपकरण",
+    "redaction": "लिखना",
+    "viewControlsOverlay": "नियंत्रण देखें",
+    "calibration": "कैलिब्रेशन",
+    "zoomOverlay": "ज़ूम ओवरले",
+    "textPopup": "टेक्स्ट पॉपअप",
+    "createStampButton": "नया स्टाम्प बनाएं",
+    "filter": "फ़िल्टर",
+    "pageReplaceModalTitle": "पृष्ठ बदलें",
+    "files": "फ़ाइलें",
+    "editText": "लिखाई में बदलाव",
+    "redactionPanel": "रिडक्शन पैनल"
+  },
+  "message": {
+    "toolsOverlayNoPresets": "कोई प्रीसेट नहीं",
+    "badDocument": "दस्तावेज़ लोड करने में विफल. दस्तावेज़ या तो भ्रष्ट है या मान्य नहीं है।",
+    "customPrintPlaceholder": "जैसे 3, 4-10",
+    "encryptedAttemptsExceeded": "एन्क्रिप्टेड दस्तावेज़ लोड करने में विफल. भी कई प्रयास।",
+    "encryptedUserCancelled": "एन्क्रिप्टेड दस्तावेज़ लोड करने में विफल. पासवर्ड प्रविष्टि रद्द की गई।",
+    "enterPassword": "यह दस्तावेज़ पासवर्ड से सुरक्षित है। कृपया पासवर्ड दर्ज करें",
+    "incorrectPassword": "गलत पासवर्ड, प्रयास शेष: {{शेष प्रयास}}",
+    "noAnnotations": "टिप्पणी करने के लिए टिप्पणियां करना प्रारंभ करें।",
+    "noAnnotationsReadOnly": "इस दस्तावेज़ में कोई टिप्पणी नहीं है।",
+    "noAnnotationsFilter": "एनोटेशन बनाना शुरू करें और फिल्टर यहां दिखाई देंगे।",
+    "noOutlines": "इस दस्तावेज़ की कोई रूपरेखा नहीं है।",
+    "noAttachments": "इस दस्तावेज़ में कोई अनुलग्नक नहीं है।",
+    "noResults": "कोई परिणाम नहीं मिला।",
+    "numResultsFound": "परिणाम मिले",
+    "notSupported": "उस फ़ाइल प्रकार का समर्थन नहीं कर रहा है।",
+    "passwordRequired": "पासवर्ड आवश्यक",
+    "enterPasswordPlaceholder": "पास वर्ड दर्ज करें",
+    "preparingToPrint": "प्रिंट करने की तैयारी की जा रही है...",
+    "annotationReplyCount": "{{गिनती}} उत्तर दें",
+    "annotationReplyCount_plural": "{{गिनती}} जवाब",
+    "printTotalPageCount": "कुल: {{गिनती}} पृष्ठ",
+    "printTotalPageCount_plural": "कुल: {{गिनती}} पृष्ठ",
+    "processing": "संसाधित किया जा रहा है...",
+    "searching": "खोज कर...",
+    "searchCommentsPlaceholder": "टिप्पणियाँ खोजें",
+    "searchDocumentPlaceholder": "दस्तावेज़ खोजें",
+    "signHere": "यहाँ पर हस्ताक्षर करे",
+    "insertTextHere": "यहां टेक्स्ट डालें",
+    "imageSignatureAcceptedFileTypes": "केवल {{acceptedFileTypes}} स्वीकार किए जाते हैं",
+    "enterMeasurement": "दो बिंदुओं के बीच माप दर्ज करें",
+    "errorEnterMeasurement": "आपके द्वारा दर्ज किया गया नंबर अमान्य है, आप 7.5 या 7 1/2 . जैसे मान दर्ज कर सकते हैं",
+    "linkURLorPage": "लिंक यूआरएल या पेज",
+    "warning": "चेतावनी",
+    "enterContentEditingMode": "आप सामग्री संपादन मोड में प्रवेश करने वाले हैं।",
+    "existingAnnotationWarning": "संपादित किए जाने के बाद मौजूदा एनोटेशन टेक्स्ट से मेल नहीं खा सकते हैं।",
+    "changesCannotBeUndone": "किए गए किसी भी परिवर्तन को पूर्ववत नहीं किया जा सकता है।",
+    "doNotShowAgain": "मुझे फिर से न दिखाएं",
+    "enterReplacementText": "वह टेक्स्ट दर्ज करें जिसे आप बदलना चाहते हैं",
+    "sortBy": "तरह",
+    "emptyCustomStampInput": "स्टाम्प टेक्स्ट खाली नहीं हो सकता",
+    "unpostedComment": "पोस्ट नहीं की गई टिप्पणी",
+    "lockedLayer": "परत बंद है",
+    "layerVisibililtyNoChange": "परत दृश्यता को बदला नहीं जा सकता",
+    "untitled": "शीर्षकहीन",
+    "selectHowToLoadFile": "अपना दस्तावेज़ लोड करने का तरीका चुनें",
+    "openFileByUrl": "URL द्वारा फ़ाइल खोलें:",
+    "enterUrlHere": "यहां यूआरएल दर्ज करें",
+    "openLocalFile": "स्थानीय फ़ाइल खोलें:",
+    "selectFile": "फ़ाइल का चयन करें",
+    "selectPageToReplace": "दस्तावेज़ में उन पृष्ठों का चयन करें जिनसे आप बदलना चाहते हैं।",
+    "embeddedFiles": "एंबेडेड फ़ाइलें",
+    "pageNum": "पृष्ठ संख्या",
+    "error": "त्रुटि"
+  },
+  "option": {
+    "type": {
+      "caret": "का अभाव",
+      "custom": "रीति",
+      "ellipse": "अंडाकार",
+      "fileattachment": "दस्तावेज़ संलग्नक",
+      "freehand": "मुक्त हाथ",
+      "callout": "पुकारें",
+      "freetext": "फ्री टेक्स्ट",
+      "line": "रेखा",
+      "polygon": "बहुभुज",
+      "polyline": "पॉलीलाइन",
+      "rectangle": "आयत",
+      "redact": "संपादन",
+      "signature": "हस्ताक्षर",
+      "stamp": "डाक टिकट",
+      "stickyNote": "चिपचिपा नोट",
+      "highlight": "हाइलाइट",
+      "strikeout": "मिटाना",
+      "underline": "रेखांकन",
+      "squiggly": "टेढ़ा-मेढ़ा",
+      "3D": "3डी",
+      "other": "अन्य"
+    },
+    "notesOrder": {
+      "dropdownLabel": "क्रमबद्ध क्रम सूची",
+      "position": "स्थान",
+      "time": "समय",
+      "status": "स्थिति",
+      "author": "लेखक",
+      "type": "प्रकार",
+      "color": "रंग",
+      "createdDate": "रचना तिथि",
+      "modifiedDate": "संशोधित तिथि"
+    },
+    "toolbarGroup": {
+      "dropdownLabel": "टूलबार समूह",
+      "toolbarGroup-View": "राय",
+      "toolbarGroup-Annotate": "एन्नोटेट",
+      "toolbarGroup-Shapes": "आकार",
+      "toolbarGroup-Insert": "डालने",
+      "toolbarGroup-Measure": "उपाय",
+      "toolbarGroup-Edit": "संपादित करें",
+      "toolbarGroup-FillAndSign": "भरें और हस्ताक्षर करें",
+      "toolbarGroup-Forms": "फार्म",
+      "toolbarGroup-Redact": "संपादन"
+    },
+    "annotationColor": {
+      "StrokeColor": "आघात",
+      "FillColor": "भरना",
+      "TextColor": "मूलपाठ"
+    },
+    "colorPalette": {
+      "colorLabel": "रंग"
+    },
+    "displayMode": {
+      "layout": "पेज लेआउट",
+      "pageTransition": "पृष्ठ संक्रमण"
+    },
+    "documentControls": {
+      "placeholder": "1, 3, 5-10",
+      "selectTooltip": "एकाधिक पृष्ठों का चयन करें",
+      "closeTooltip": "बहुचयन बंद करें"
+    },
+    "outlineControls": {
+      "add": "मद जोड़ें",
+      "reorder": "पुन: व्यवस्थित करें"
+    },
+    "layout": {
+      "cover": "कवर फेसिंग पेज",
+      "double": "डबल पेज",
+      "single": "एक पृष्ठ"
+    },
+    "mathSymbols": "गणित के प्रतीक",
+    "notesPanel": {
+      "separator": {
+        "today": "आज",
+        "yesterday": "बीता हुआ कल",
+        "unknown": "अनजान"
+      },
+      "noteContent": {
+        "noName": "(कोई नाम नहीं)",
+        "noDate": "(कोई तारीख नहीं)"
+      }
+    },
+    "pageTransition": {
+      "continuous": "सतत पृष्ठ",
+      "default": "पेज दर पेज",
+      "reader": "रीडर"
+    },
+    "print": {
+      "all": "सभी",
+      "current": "वर्तमान पृष्ठ",
+      "pages": "प्रिंट करने के लिए पेज",
+      "specifyPages": "पृष्ठ निर्दिष्ट करें",
+      "view": "वर्तमान दृश्य",
+      "pageQuality": "प्रिंट की गुणवत्ता",
+      "qualityNormal": "साधारण",
+      "qualityHigh": "उच्च",
+      "includeAnnotations": "एनोटेशन शामिल करें",
+      "includeComments": "टिप्पणियाँ शामिल करें",
+      "printSettings": "प्रिंट सेटिंग्स"
+    },
+    "printInfo": {
+      "author": "लेखक",
+      "subject": "विषय",
+      "date": "तारीख"
+    },
+    "redaction": {
+      "markForRedaction": "रिडक्शन के लिए मार्क"
+    },
+    "searchPanel": {
+      "caseSensitive": "अक्षर संवेदनशील",
+      "wholeWordOnly": "पूरा शब्द",
+      "wildcard": "वाइल्डकार्ड"
+    },
+    "toolsOverlay": {
+      "currentStamp": "वर्तमान टिकट",
+      "currentSignature": "वर्तमान हस्ताक्षर",
+      "signatureAltText": "हस्ताक्षर"
+    },
+    "stampOverlay": {
+      "addStamp": "नया स्टाम्प जोड़ें"
+    },
+    "signatureOverlay": {
+      "addSignature": "नया हस्ताक्षर जोड़ें"
+    },
+    "signatureModal": {
+      "modalName": "नया हस्ताक्षर बनाएं",
+      "dragAndDrop": "अपनी छवि को यहां खींचें और छोड़ें",
+      "or": "या",
+      "pickImage": "एक हस्ताक्षर चुनें",
+      "selectImage": "यहां अपनी छवि चुनें"
+    },
+    "pageReplacementModal": {
+      "dragAndDrop": "अपनी फ़ाइल को यहां खींचें और छोड़ें",
+      "or": "या",
+      "chooseFile": "एक फ़ाइल चुनें",
+      "localFile": "स्थानीय फ़ाइल",
+      "pageReplaceInputLabel": "पृष्ठ बदलें",
+      "pageReplaceInputFromSource": "पृष्ठ के साथ"
+    },
+    "filterAnnotModal": {
+      "commentBy": "द्वारा टिप्पणी",
+      "types": "प्रकार",
+      "color": "रंग",
+      "includeReplies": "उत्तर शामिल करें"
+    },
+    "status": {
+      "status": "स्थिति"
+    },
+    "state": {
+      "accepted": "स्वीकार किया हुआ",
+      "rejected": "अस्वीकृत",
+      "completed": "पुरा होना",
+      "cancelled": "रद्द",
+      "set": "स्थिति सेट करें:",
+      "setBy": "द्वारा निर्धारित",
+      "none": "कोई नहीं",
+      "marked": "चिह्नित",
+      "unmarked": "अगोचर"
+    },
+    "measurementOverlay": {
+      "scale": "स्केल अनुपात",
+      "angle": "कोण",
+      "distance": "दूरी",
+      "perimeter": "परिमाप",
+      "area": "क्षेत्र",
+      "distanceMeasurement": "दूरी मापन",
+      "perimeterMeasurement": "परिधि माप",
+      "arcMeasurement": "चाप माप",
+      "areaMeasurement": "क्षेत्र मापन",
+      "countMeasurement": "गणना माप",
+      "radius": "RADIUS",
+      "count": "गिनती",
+      "length": "लंबाई"
+    },
+    "measurementOption": {
+      "scale": "स्केल"
+    },
+    "stylePopup": {
+      "textStyle": "पाठ शैली",
+      "colors": "रंग की",
+      "invalidFontSize": "फ़ॉन्ट आकार . से कम होना चाहिए",
+      "labelText": "लेबल टेक्स्ट",
+      "labelTextPlaceholder": "लेबल टेक्स्ट जोड़ें"
+    },
+    "styleOption": {
+      "style": "अंदाज",
+      "solid": "ठोस",
+      "cloudy": "बादल"
+    },
+    "slider": {
+      "opacity": "अस्पष्टता",
+      "thickness": "आघात",
+      "text": "टेक्स्ट का साइज़"
+    },
+    "shared": {
+      "page": "पृष्ठ",
+      "precision": "शुद्धता",
+      "enableSnapping": "माप उपकरणों के लिए स्नैपिंग सक्षम करें"
+    },
+    "watermark": {
+      "title": "वाटर-मार्क",
+      "addWatermark": "वॉटरमार्क जोड़िए",
+      "size": "आकार",
+      "location": "वॉटरमार्क संपादित करने के लिए स्थान चुनें",
+      "text": "मूलपाठ",
+      "style": "अंदाज",
+      "resetAllSettings": "सभी सेटिंग्स को रीसेट",
+      "font": "निर्माण",
+      "addNew": "नया जोड़ो",
+      "locations": {
+        "center": "केंद्र",
+        "topLeft": "बाएं से बाएं",
+        "topRight": "दायां शीर्ष",
+        "topCenter": "शीर्ष केंद्र",
+        "bottomLeft": "तली छोड़ें",
+        "bottomRight": "नीचे दाएं",
+        "bottomCenter": "निचला मध्यम"
+      }
+    },
+    "thumbnailPanel": {
+      "delete": "हटाएं",
+      "rotateClockwise": "दक्षिणावर्त",
+      "rotateCounterClockwise": "वामावर्त"
+    },
+    "thumbnailsControlOverlay": {
+      "move": "पन्ने ले जाएँ"
+    },
+    "richText": {
+      "bold": "साहसिक",
+      "italic": "तिरछा",
+      "underline": "रेखांकन",
+      "strikeout": "मिटाना",
+      "alignLeft": "पाठ संरेखित बाएं",
+      "alignRight": "टेक्स्ट सही संरेखित करें",
+      "alignCenter": "पाठ संरेखित केंद्र",
+      "justifyCenter": "टेक्स्ट जस्टिफाई सेंटर",
+      "alignTop": "शीर्ष संरेखित करें",
+      "alignMiddle": "मध्य संरेखित करें",
+      "alignBottom": "नीचे संरेखित करें"
+    },
+    "customStampModal": {
+      "modalName": "नया स्टाम्प बनाएं",
+      "stampText": "स्टाम्प टेक्स्ट",
+      "timestampText": "टाइमस्टैम्प टेक्स्ट",
+      "stampColor": "स्टाम्प रंग:",
+      "Username": "उपयोगकर्ता नाम",
+      "Date": "तारीख",
+      "Time": "समय"
+    },
+    "pageRedactModal": {
+      "addMark": "मार्क जोड़ें",
+      "pageSelection": "पृष्ठ चयन",
+      "current": "वर्तमान पृष्ठ",
+      "specify": "पृष्ठ निर्दिष्ट करें",
+      "odd": "केवल विषम पृष्ठ",
+      "even": "केवल सम पृष्ठ",
+      "header": "मार्क पेज रिडक्शन"
+    }
+  },
+  "warning": {
+    "deletePage": {
+      "deleteTitle": "पेज हटाएं",
+      "deleteMessage": "क्या आप वाकई चयनित पृष्ठ (पृष्ठों) को हटाना चाहते हैं। इसे पूर्ववत नहीं किया जा सकता",
+      "deleteLastPageMessage": "आप दस्तावेज़ के सभी पृष्ठ नहीं हटा सकते।"
+    },
+    "extractPage": {
+      "title": "पृष्ठ निकालें",
+      "message": "क्या आप वाकई चयनित पृष्ठ (पृष्ठों) को निकालना चाहते हैं?",
+      "confirmBtn": "निचोड़",
+      "secondaryBtn": "निकालें और हटाएं"
+    },
+    "redaction": {
+      "applyTile": "रिडक्शन लागू करें",
+      "applyMessage": "यह क्रिया संशोधन के लिए चयनित सभी आइटम स्थायी रूप से हटा देगी। यह पूर्ववत नहीं किया जा सकता।"
+    },
+    "selectPage": {
+      "selectTitle": "कोई पेज नहीं चुना गया",
+      "selectMessage": "कृपया पृष्ठों का चयन करें और पुनः प्रयास करें।"
+    },
+    "colorPicker": {
+      "deleteTitle": "कस्टम रंग हटाएं",
+      "deleteMessage": "चयनित कस्टम रंग हटाएं? इसे आपके रंग पैलेट से हटा दिया जाएगा।"
+    }
+  },
+  "shortcut": {
+    "arrow": "(ए)",
+    "callout": "(सी)",
+    "copy": "(Ctrl सी)",
+    "delete": "(द)",
+    "ellipse": "(ओ)",
+    "eraser": "(तथा)",
+    "freehand": "(एफ)",
+    "freetext": "(टी)",
+    "highlight": "(एच)",
+    "line": "(मैं)",
+    "pan": "(पी)",
+    "rectangle": "(आर)",
+    "rotateClockwise": "(Ctrl शिफ्ट +)",
+    "rotateCounterClockwise": "(Ctrl शिफ्ट -)",
+    "select": "(Esc)",
+    "signature": "(एस)",
+    "squiggly": "(जी)",
+    "image": "(मैं)",
+    "redo": "(Ctrl शिफ्ट जेड)",
+    "redo_windows": "(Ctrl वाई)",
+    "undo": "(Ctrl जेड)",
+    "stickyNote": "(एन)",
+    "strikeout": "(प्रति)",
+    "underline": "(यू)",
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl बी)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl यू)",
+      "strikeout": "(Ctrl कश्मीर)"
+    },
+    "rotate3D": "शिफ्ट + ड्रैग",
+    "zoom3D": "शिफ्ट + स्क्रॉल"
+  },
+  "tool": {
+    "pan": "कड़ाही",
+    "select": "चुनते हैं",
+    "Marquee": "शामियाना उड़ना",
+    "Link": "लिंक यूआरएल या पेज",
+    "Standard": "मानक",
+    "Custom": "रीति"
+  },
+  "link": {
+    "url": "यूआरएल",
+    "page": "पृष्ठ",
+    "enterurl": "वह URL दर्ज करें जिससे आप लिंक करना चाहते हैं",
+    "enterpage": "उस पृष्ठ संख्या का चयन करें जिसे आप लिंक करना चाहते हैं",
+    "urlLink": "यूआरएल लिंक"
+  },
+  "Model3D": {
+    "add3D": "3डी वस्तु जोड़ें",
+    "enterurl": "3D ऑब्जेक्ट का URL GLTF प्रारूप में दर्ज करें",
+    "enterurlOrLocalFile": "URL दर्ज करें या glTF प्रारूप में एक 3D ऑब्जेक्ट अपलोड करें",
+    "formatError": "केवल glTF (.glb) प्रारूप समर्थित है"
+  },
+  "OpenFile": {
+    "enterUrlOrChooseFile": "URL दर्ज करें या WebViewer में लोड करने के लिए कोई फ़ाइल चुनें",
+    "enterUrl": "फ़ाइल URL दर्ज करें",
+    "extension": "दस्तावेज़ विस्तारण",
+    "existingFile": "फ़ाइल पहले से खुली है",
+    "addTab": "टैब जोड़ें"
+  },
+  "datePicker": {
+    "previousMonth": "पिछला महीना",
+    "nextMonth": "अगले महीने",
+    "months": {
+      "0": "जनवरी",
+      "1": "फ़रवरी",
+      "2": "जुलूस",
+      "3": "अप्रैल",
+      "4": "मई",
+      "5": "जून",
+      "6": "जुलाई",
+      "7": "अगस्त",
+      "8": "सितंबर",
+      "9": "अक्टूबर",
+      "10": "नवंबर",
+      "11": "दिसंबर"
+    },
+    "monthsShort": {
+      "0": "जनवरी",
+      "1": "फ़रवरी",
+      "2": "समुद्र",
+      "3": "अप्रैल",
+      "4": "मई",
+      "5": "जून",
+      "6": "जुलाई",
+      "7": "अगस्त",
+      "8": "सात",
+      "9": "अक्टूबर",
+      "10": "नवम्बर",
+      "11": "दिसम्बर"
+    },
+    "weekdays": {
+      "0": "रविवार",
+      "1": "सोमवार",
+      "2": "मंगलवार",
+      "3": "बुधवार",
+      "4": "गुरूवार",
+      "5": "शुक्रवार",
+      "6": "शनिवार"
+    },
+    "weekdaysShort": {
+      "0": "रवि",
+      "1": "मेरे",
+      "2": "आपका अपना",
+      "3": "बुध",
+      "4": "कलेक्ट",
+      "5": "शुक्र",
+      "6": "बैठ गया"
+    },
+    "today": "आज",
+    "invalidDateTime": "अमान्य दिनांक/समय: इनपुट प्रारूप से मेल खाना चाहिए"
+  },
+  "formField": {
+    "formFieldPopup": {
+      "fieldName": "क्षेत्र का नाम",
+      "fieldValue": "डिफ़ॉल्ट मान",
+      "readOnly": "सिफ़ पढ़िये",
+      "multiSelect": "बहु का चयन",
+      "required": "आवश्यक",
+      "multiLine": "बहुपंक्ति",
+      "apply": "लागू करना",
+      "cancel": "रद्द करें",
+      "flags": "फील्ड झंडे",
+      "options": "विकल्प",
+      "radioGroups": "समान फ़ील्ड नाम वाले रेडियो बटन उसी समूह में होंगे।",
+      "nameRequired": "फ़ील्ड नाम आवश्यक है",
+      "size": "आकार",
+      "width": "चौड़ाई",
+      "height": "ऊंचाई",
+      "invalidField": {
+        "duplicate": "फ़ील्ड का नाम पहले से मौजूद है",
+        "empty": "फ़ील्ड का नाम खाली नहीं हो सकता"
+      }
+    },
+    "apply": "फ़ील्ड लागू करें",
+    "type": "क्षेत्र के जैसा",
+    "types": {
+      "text": "मूलपाठ",
+      "signature": "हस्ताक्षर",
+      "checkbox": "चेक बॉक्स",
+      "radio": "रेडियो की बटन",
+      "listbox": "सूची बाक्स",
+      "combobox": "सम्मिश्रण पटी"
+    }
+  },
+  "digitalSignatureModal": {
+    "certification": "प्रमाणीकरण",
+    "Certification": "प्रमाणीकरण",
+    "signature": "हस्ताक्षर",
+    "Signature": "हस्ताक्षर",
+    "valid": "वैध",
+    "invalid": "अमान्य",
+    "unknown": "अनजान",
+    "title": "{{प्रकार}} गुण",
+    "header": {
+      "documentIntegrity": "दस्तावेज़ अखंडता",
+      "identitiesTrust": "पहचान और विश्वास",
+      "generalErrors": "सामान्य त्रुटियाँ",
+      "digestStatus": "डाइजेस्ट स्थिति"
+    },
+    "documentPermission": {
+      "noChangesAllowed": "{{editor}} ने निर्दिष्ट किया है कि इस दस्तावेज़ में किसी भी बदलाव की अनुमति नहीं है",
+      "formfillingSigningAllowed": "{{editor}} ने निर्दिष्ट किया है कि इस दस्तावेज़ के लिए फॉर्म भरने और हस्ताक्षर करने की अनुमति है। किसी अन्य परिवर्तन की अनुमति नहीं है।",
+      "annotatingFormfillingSigningAllowed": "{{editor}} ने निर्दिष्ट किया है कि इस दस्तावेज़ के लिए फॉर्म भरने, हस्ताक्षर करने और टिप्पणी करने की अनुमति है। किसी अन्य परिवर्तन की अनुमति नहीं है।",
+      "unrestricted": "{{editor}} ने निर्दिष्ट किया है कि इस दस्तावेज़ के लिए कोई प्रतिबंध नहीं हैं।"
+    },
+    "digestAlgorithm": {
+      "preamble": "डाइजेस्ट एल्गोरिथम जिसका उपयोग हस्ताक्षर पर हस्ताक्षर करने के लिए किया गया था:",
+      "unknown": "हस्ताक्षर पर हस्ताक्षर करने के लिए उपयोग किया गया डाइजेस्ट एल्गोरिथ्म अज्ञात है।"
+    },
+    "trustVerification": {
+      "none": "कोई विस्तृत विश्वास सत्यापन परिणाम उपलब्ध नहीं है।",
+      "current": "वर्तमान समय के संबंध में विश्वास सत्यापन का प्रयास किया गया",
+      "signing": "हस्ताक्षर करने के समय के संबंध में विश्वास सत्यापन का प्रयास किया गया: {{trustVerificationTime}}",
+      "timestamp": "एम्बेडेड टाइमस्टैम्प को सुरक्षित करने के संबंध में विश्वास सत्यापन का प्रयास किया गया: {{trustVerificationTime}}"
+    },
+    "signerIdentity": {
+      "preamble": "हस्ताक्षरकर्ता की पहचान है",
+      "valid": "वैध।",
+      "unknown": "अनजान।"
+    },
+    "summaryBox": {
+      "summary": "डिजिटल {{type}} {{status}} है",
+      "signedBy": ", {{name}} द्वारा हस्ताक्षरित"
+    }
+  },
+  "digitalSignatureVerification": {
+    "certifier": "प्रमाणित",
+    "certified": "प्रमाणित",
+    "Certified": "प्रमाणित",
+    "signer": "संकेत",
+    "signed": "पर हस्ताक्षर किए",
+    "Signed": "पर हस्ताक्षर किए",
+    "by": "द्वारा",
+    "on": "पर",
+    "disallowedChange": "अस्वीकृत परिवर्तन: {{type}}, objnum: {{objnum}}",
+    "unsignedSignatureField": "अहस्ताक्षरित हस्ताक्षर फ़ील्ड: {{fieldName}}",
+    "trustVerification": {
+      "current": "उपयोग किया गया सत्यापन समय वर्तमान समय था",
+      "signing": "सत्यापन समय हस्ताक्षरकर्ता के कंप्यूटर पर घड़ी से है",
+      "timestamp": "सत्यापन समय दस्तावेज़ में एम्बेडेड सुरक्षित टाइमस्टैम्प से है",
+      "verifiedTrust": "विश्वास सत्यापन परिणाम: सत्यापित",
+      "noTrustVerification": "कोई विस्तृत विश्वास सत्यापन परिणाम उपलब्ध नहीं है।"
+    },
+    "permissionStatus": {
+      "noPermissionsStatus": "रिपोर्ट करने के लिए कोई अनुमति स्थिति नहीं है।",
+      "permissionsVerificationDisabled": "अनुमति सत्यापन अक्षम कर दिया गया है।",
+      "hasAllowedChanges": "दस्तावेज़ में ऐसे परिवर्तन हैं जिनकी अनुमति हस्ताक्षर अनुमति सेटिंग्स द्वारा दी गई है।",
+      "invalidatedByDisallowedChanges": "दस्तावेज़ में ऐसे परिवर्तन हैं जो हस्ताक्षर अनुमति सेटिंग्स द्वारा अस्वीकृत हैं।",
+      "unmodified": "दस्तावेज़ को तब से संशोधित नहीं किया गया है जब से यह था"
+    },
+    "trustStatus": {
+      "trustVerified": "{{verificationType}} में सफलतापूर्वक विश्वास स्थापित किया।",
+      "untrusted": "विश्वास स्थापित नहीं हो सका।",
+      "trustVerificationDisabled": "विश्वास सत्यापन अक्षम कर दिया गया है।",
+      "noTrustStatus": "रिपोर्ट करने के लिए कोई विश्वास स्थिति नहीं।"
+    },
+    "digestStatus": {
+      "digestInvalid": "पाचन गलत है।",
+      "digestVerified": "पाचन सही है।",
+      "digestVerificationDisabled": "डाइजेस्ट सत्यापन अक्षम कर दिया गया है।",
+      "weakDigestAlgorithmButDigestVerifiable": "डाइजेस्ट सही है, लेकिन डाइजेस्ट एल्गोरिथम कमजोर है और सुरक्षित नहीं है।",
+      "noDigestStatus": "रिपोर्ट करने के लिए कोई डाइजेस्ट स्थिति नहीं है।",
+      "unsupportedEncoding": "कोई भी स्थापित सिग्नेचरहैंडलर हस्ताक्षर के एन्कोडिंग को पहचानने में सक्षम नहीं था"
+    },
+    "documentStatus": {
+      "noError": "रिपोर्ट करने के लिए कोई सामान्य त्रुटि नहीं।",
+      "corruptFile": "सिग्नेचरहैंडलर ने फ़ाइल भ्रष्टाचार की सूचना दी।",
+      "unsigned": "हस्ताक्षर अभी तक क्रिप्टोग्राफिक रूप से हस्ताक्षरित नहीं किया गया है।",
+      "badByteRanges": "सिग्नेचरहैंडलर डिजिटल सिग्नेचर में बाइटरेंज में भ्रष्टाचार की रिपोर्ट करता है।",
+      "corruptCryptographicContents": "सिग्नेचरहैंडलर डिजिटल हस्ताक्षर की सामग्री में भ्रष्टाचार की रिपोर्ट करता है।"
+    },
+    "signatureDetails": {
+      "signatureDetails": "हस्ताक्षर विवरण",
+      "contactInformation": "संपर्क जानकारी",
+      "location": "स्थान",
+      "reason": "कारण",
+      "signingTime": "हस्ताक्षर करने का समय",
+      "noContactInformation": "कोई संपर्क जानकारी प्रदान नहीं की गई",
+      "noLocation": "कोई स्थान प्रदान नहीं किया गया",
+      "noReason": "कोई कारण नहीं दिया गया",
+      "noSigningTime": "कोई हस्ताक्षर समय नहीं मिला"
+    },
+    "panelMessages": {
+      "noSignatureFields": "इस दस्तावेज़ में कोई हस्ताक्षर फ़ील्ड नहीं है",
+      "certificateDownloadError": "विश्वसनीय प्रमाणपत्र डाउनलोड करने का प्रयास करते समय त्रुटि आई",
+      "localCertificateError": "स्थानीय प्रमाणपत्र पढ़ने में कुछ समस्याएं हैं"
+    }
+  },
+  "cropPopUp": {
+    "title": "क्रॉप करने के लिए पेज",
+    "allPages": "सभी",
+    "singlePage": "वर्तमान पृष्ठ",
+    "cropDimensions": "फसल आयाम",
+    "dimensionInput": {
+      "unitOfMeasurement": "इकाई",
+      "autoTrim": "ऑटो-ट्रिम"
+    },
+    "cropModal": {
+      "applyTitle": "फसल लागू करें?",
+      "applyMessage": "यह क्रिया चयनित सभी चयनित पृष्ठों को स्थायी रूप से काट देगी। यह पूर्ववत नहीं किया जा सकता।",
+      "cancelTitle": "फसल रद्द करें?",
+      "cancelMessage": "क्या आप वाकई सभी चयनित पृष्ठों को क्रॉप करना रद्द करना चाहते हैं?"
+    }
+  },
+  "redactionPanel": {
+    "noMarkedRedactions": "पाठ, क्षेत्रों, पृष्ठों को चिह्नित करके या खोज करके पुनः अभिनय करना प्रारंभ करें।",
+    "redactionSearchPlaceholder": "कीवर्ड खोज या पैटर्न द्वारा जोड़ें",
+    "redactionCounter": "रिडक्शन के लिए चिह्नित",
+    "clearMarked": "स्पष्ट",
+    "redactAllMarked": "Redact All",
+    "redactionItem": {
+      "regionRedaction": "रीजन रिडक्शन",
+      "fullPageRedaction": "पूरा पेज रिडक्शन",
+      "image": "छवि"
+    },
+    "expand": "विस्तार करना",
+    "collapse": "ढहना",
+    "searchResults": "खोज के परिणाम",
+    "search": {
+      "creditCards": "क्रेडिट कार्ड",
+      "phoneNumbers": "दूरभाष संख्या",
+      "images": "इमेजिस",
+      "emails": "ईमेल",
+      "pattern": "प्रतिरूप",
+      "start": "अपनी खोज शुरू करें"
+    }
+  },
+  "languageModal": {
+    "selectLanguage": "भाषा का चयन करें"
+  }
+}

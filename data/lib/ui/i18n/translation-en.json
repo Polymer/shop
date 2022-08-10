@@ -1,0 +1,847 @@
+{
+  "action": {
+    "add": "Add",
+    "apply": "Apply",
+    "applyAll": "Apply all",
+    "calendar": "Calendar",
+    "calibrate": "Calibrate",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "clearAll": "Clear all",
+    "close": "Close",
+    "undo": "Undo",
+    "redo": "Redo",
+    "comment": "Comment",
+    "reply": "Add reply",
+    "copy": "Copy",
+    "delete": "Delete",
+    "group": "Group",
+    "ungroup": "Ungroup",
+    "download": "Download",
+    "edit": "Edit",
+    "extract": "Extract",
+    "enterFullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "fit": "Fit",
+    "fitToPage": "Fit to page",
+    "fitToWidth": "Fit to width",
+    "more": "More",
+    "openFile": "Open file",
+    "pagePrev": "Previous page",
+    "pageNext": "Next page",
+    "pageSet": "Set page",
+    "print": "Print",
+    "proceed": "Proceed",
+    "name": "Name",
+    "rename": "Rename",
+    "ok": "OK",
+    "rotate": "Page Orientation",
+    "rotate3D": "Rotate",
+    "rotateClockwise": "Rotate Clockwise",
+    "rotateCounterClockwise": "Rotate Counterclockwise",
+    "save": "Save",
+    "post": "Post",
+    "create": "Create",
+    "showMoreResults": "Show more results",
+    "sign": "Sign",
+    "style": "Style",
+    "submit": "Submit",
+    "zoom": "Zoom",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "zoomSet": "Set zoom",
+    "zoomControls": "Zoom Controls",
+    "draw": "Draw",
+    "type": "Type",
+    "upload": "Upload",
+    "link": "Link",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "fileAttachmentDownload": "Download attached file",
+    "prevResult": "Previous result",
+    "nextResult": "Next result",
+    "prev": "Previous",
+    "next": "Next",
+    "startFormEditing": "Start Form Editing",
+    "exitFormEditing": "Exit Form Editing Mode",
+    "exit": "Exit",
+    "addOption": "Add Option",
+    "formFieldEdit": "Edit Form Field",
+    "viewShortCutKeysFor3D": "View Shortcut Keys",
+    "markAllRead": "Mark all as read",
+    "insertPage": "Page Insertion",
+    "insertBlankPageAbove": "Insert blank page above",
+    "insertBlankPageBelow": "Insert blank page below",
+    "pageManipulation": "Page Manipulation",
+    "replace": "Replace",
+    "showLess": "show less",
+    "showMore": "...more",
+    "chooseFile": "Choose a file",
+    "selectYourOption": "Select your option",
+    "open": "Open",
+    "deselectAll": "Deselect All",
+    "select": "Select",
+    "moveToTop": "Move to top",
+    "moveToBottom": "Move to bottom",
+    "redactPages": "Redact pages",
+    "playAudio": "Play audio",
+    "pauseAudio": "Pause audio",
+    "selectAll": "Select all",
+    "unselect": "Unselect",
+    "addMark": "Add Mark",
+    "viewFile": "View file",
+    "switchLanguage": "Language"
+  },
+  "annotation": {
+    "areaMeasurement": "Area",
+    "arc": "Arc",
+    "arcMeasurement": "Arc Measurement",
+    "arrow": "Arrow",
+    "callout": "Callout",
+    "crop": "Crop Page",
+    "caret": "Caret",
+    "dateFreeText": "Calendar",
+    "formFillCheckmark": "Tick",
+    "formFillCross": "Cross",
+    "distanceMeasurement": "Distance",
+    "countMeasurement": "Count measurement",
+    "ellipse": "Ellipse",
+    "eraser": "Eraser",
+    "fileattachment": "File Attachment",
+    "freehand": "Free Hand",
+    "freeHandHighlight": "Free Hand Highlight",
+    "freetext": "Free Text",
+    "highlight": "Highlight",
+    "image": "Image",
+    "line": "Line",
+    "perimeterMeasurement": "Perimeter",
+    "polygon": "Polygon",
+    "polygonCloud": "Cloud",
+    "polyline": "Polyline",
+    "rectangle": "Rectangle",
+    "redact": "Redact",
+    "formFillDot": "Dot",
+    "signature": "Signature",
+    "squiggly": "Squiggly",
+    "stamp": "Stamp",
+    "stickyNote": "Note",
+    "strikeout": "Strikeout",
+    "underline": "Underline",
+    "custom": "Custom",
+    "rubberStamp": "Rubber Stamp",
+    "note": "Note",
+    "textField": "Text Field",
+    "signatureFormField": "Signature Field",
+    "checkBoxFormField": "Checkbox Field",
+    "radioButtonFormField": "RadioButton Field",
+    "listBoxFormField": "List Box Field",
+    "comboBoxFormField": "Combo Box Field",
+    "link": "Link",
+    "other": "Other",
+    "3D": "3D",
+    "sound": "Sound",
+    "changeView": "Change View"
+  },
+  "rubberStamp": {
+    "Approved": "Approved",
+    "AsIs": "As Is",
+    "Completed": "Completed",
+    "Confidential": "Confidential",
+    "Departmental": "Departmental",
+    "Draft": "Draft",
+    "Experimental": "Experimental",
+    "Expired": "Expired",
+    "Final": "Final",
+    "ForComment": "For Comment",
+    "ForPublicRelease": "For Public Release",
+    "InformationOnly": "Information Only",
+    "NotApproved": "Not Approved",
+    "NotForPublicRelease": "Not For Public Release",
+    "PreliminaryResults": "Preliminary Results",
+    "Sold": "Sold",
+    "TopSecret": "Top Secret",
+    "Void": "Void",
+    "SHSignHere": "Sign Here",
+    "SHWitness": "Witness",
+    "SHInitialHere": "Initial Here",
+    "SHAccepted": "Accepted",
+    "SBRejected": "Rejected"
+  },
+  "component": {
+    "attachmentPanel": "Attachments",
+    "leftPanel": "Panel",
+    "toolsHeader": "Tools",
+    "searchOverlay": "Search",
+    "searchPanel": "Search",
+    "menuOverlay": "Menu",
+    "notesPanel": "Comments",
+    "outlinesPanel": "Outlines",
+    "bookmarksPanel": "Bookmarks",
+    "signaturePanel": "Signatures",
+    "newBookmark": "New Bookmark",
+    "bookmarkPage": "Page",
+    "layersPanel": "Layers",
+    "thumbnailsPanel": "Thumbnails",
+    "toolsButton": "Tools",
+    "redaction": "Redaction",
+    "viewControlsOverlay": "View Controls",
+    "calibration": "Calibration",
+    "zoomOverlay": "Zoom Overlay",
+    "textPopup": "Text Popup",
+    "createStampButton": "Create New Stamp",
+    "filter": "Filter",
+    "pageReplaceModalTitle": "Replace Page",
+    "files": "Files",
+    "editText": "Edit Text",
+    "redactionPanel": "Redaction Panel"
+  },
+  "message": {
+    "toolsOverlayNoPresets": "No Presets",
+    "badDocument": "Failed to load document. The document is either corrupt or not valid.",
+    "customPrintPlaceholder": "e.g. 3, 4-10",
+    "encryptedAttemptsExceeded": "Failed to load encrypted document. Too many attempts.",
+    "encryptedUserCancelled": "Failed to load encrypted document. Password entry cancelled.",
+    "enterPassword": "This document is password protected. Please enter a password",
+    "incorrectPassword": "Incorrect password, attempts left: {{ remainingAttempts }}",
+    "noAnnotations": "Start making annotations to leave a comment.",
+    "noAnnotationsReadOnly": "This document has no annotations.",
+    "noAnnotationsFilter": "Start making annotations and filters will appear here.",
+    "noOutlines": "This document has no outline.",
+    "noAttachments": "This document has no attachments.",
+    "noResults": "No results found.",
+    "numResultsFound": "results found",
+    "notSupported": "That file type is not supported.",
+    "passwordRequired": "Password required",
+    "enterPasswordPlaceholder": "Enter password",
+    "preparingToPrint": "Preparing to print...",
+    "annotationReplyCount": "{{count}} Reply",
+    "annotationReplyCount_plural": "{{count}} Replies",
+    "printTotalPageCount": "Total: {{count}} page",
+    "printTotalPageCount_plural": "Total: {{count}} pages",
+    "processing": "Processing...",
+    "searching": "Searching...",
+    "searchCommentsPlaceholder": "Search comments",
+    "searchDocumentPlaceholder": "Search document",
+    "signHere": "Sign here",
+    "insertTextHere": "Insert text here",
+    "imageSignatureAcceptedFileTypes": "Only {{acceptedFileTypes}} are accepted",
+    "enterMeasurement": "Enter measurement between the two points",
+    "errorEnterMeasurement": "The number you have entered is invalid, you can enter values like 7.5 or 7 1/2",
+    "linkURLorPage": "Link URL or a Page",
+    "warning": "Warning",
+    "enterContentEditingMode": "You are about to enter content editing mode.",
+    "existingAnnotationWarning": "Existing annotations may not match up with the text after it has been edited.",
+    "changesCannotBeUndone": "Any changes made cannot be undone.",
+    "doNotShowAgain": "Do not show me this again",
+    "enterReplacementText": "Enter the text you want to replace",
+    "sortBy": "Sort",
+    "emptyCustomStampInput": "Stamp text cannot be empty",
+    "unpostedComment": "Unposted Comment",
+    "lockedLayer": "Layer is locked",
+    "layerVisibililtyNoChange": "Layer visibililty can't be changed",
+    "untitled": "Untitled",
+    "selectHowToLoadFile": "Select how to load your document",
+    "openFileByUrl": "Open file by URL:",
+    "enterUrlHere": "Enter URL here",
+    "openLocalFile": "Open local file:",
+    "selectFile": "Select file",
+    "selectPageToReplace": "Select the pages in the document you would like to replace with.",
+    "embeddedFiles": "Embedded Files",
+    "pageNum": "Page Number",
+    "error": "Error"
+  },
+  "option": {
+    "type": {
+      "caret": "Caret",
+      "custom": "Custom",
+      "ellipse": "Ellipse",
+      "fileattachment": "File Attachment",
+      "freehand": "Free Hand",
+      "callout": "Callout",
+      "freetext": "Free Text",
+      "line": "Line",
+      "polygon": "Polygon",
+      "polyline": "Polyline",
+      "rectangle": "Rectangle",
+      "redact": "Redact",
+      "signature": "Signature",
+      "stamp": "Stamp",
+      "stickyNote": "Sticky Note",
+      "highlight": "Highlight",
+      "strikeout": "Strikeout",
+      "underline": "Underline",
+      "squiggly": "Squiggly",
+      "3D": "3D",
+      "other": "Other"
+    },
+    "notesOrder": {
+      "dropdownLabel": "Sort Order List",
+      "position": "Position",
+      "time": "Time",
+      "status": "Status",
+      "author": "Author",
+      "type": "Type",
+      "color": "Color",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date"
+    },
+    "toolbarGroup": {
+      "dropdownLabel": "Toolbar Groups",
+      "toolbarGroup-View": "View",
+      "toolbarGroup-Annotate": "Annotate",
+      "toolbarGroup-Shapes": "Shapes",
+      "toolbarGroup-Insert": "Insert",
+      "toolbarGroup-Measure": "Measure",
+      "toolbarGroup-Edit": "Edit",
+      "toolbarGroup-FillAndSign": "Fill and Sign",
+      "toolbarGroup-Forms": "Forms",
+      "toolbarGroup-Redact": "Redact"
+    },
+    "annotationColor": {
+      "StrokeColor": "Stroke",
+      "FillColor": "Fill",
+      "TextColor": "Text"
+    },
+    "colorPalette": {
+      "colorLabel": "Color"
+    },
+    "displayMode": {
+      "layout": "Page Layout",
+      "pageTransition": "Page Transition"
+    },
+    "documentControls": {
+      "placeholder": "1, 3, 5-10",
+      "selectTooltip": "Select multiple pages",
+      "closeTooltip": "Close multiselect"
+    },
+    "outlineControls": {
+      "add": "Add item",
+      "reorder": "Reorder"
+    },
+    "layout": {
+      "cover": "Cover Facing Page",
+      "double": "Double Page",
+      "single": "Single Page"
+    },
+    "mathSymbols": "Math symbols",
+    "notesPanel": {
+      "separator": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "unknown": "Unknown"
+      },
+      "noteContent": {
+        "noName": "(no name)",
+        "noDate": "(no date)"
+      }
+    },
+    "pageTransition": {
+      "continuous": "Continuous Page",
+      "default": "Page by Page",
+      "reader": "Reader"
+    },
+    "print": {
+      "all": "All",
+      "current": "Current Page",
+      "pages": "Pages to print",
+      "specifyPages": "Specify Pages",
+      "view": "Current View",
+      "pageQuality": "Print Quality",
+      "qualityNormal": "Normal",
+      "qualityHigh": "High",
+      "includeAnnotations": "Include annotations",
+      "includeComments": "Include comments",
+      "printSettings": "Print Settings"
+    },
+    "printInfo": {
+      "author": "Author",
+      "subject": "Subject",
+      "date": "Date"
+    },
+    "redaction": {
+      "markForRedaction": "Mark for redaction"
+    },
+    "searchPanel": {
+      "caseSensitive": "Case sensitive",
+      "wholeWordOnly": "Whole word",
+      "wildcard": "Wildcard"
+    },
+    "toolsOverlay": {
+      "currentStamp": "Current Stamp",
+      "currentSignature": "Current Signature",
+      "signatureAltText": "Signature"
+    },
+    "stampOverlay": {
+      "addStamp": "Add New Stamp"
+    },
+    "signatureOverlay": {
+      "addSignature": "Add New Signature"
+    },
+    "signatureModal": {
+      "modalName": "Create New Signature",
+      "dragAndDrop": "Drag & Drop your image here",
+      "or": "Or",
+      "pickImage": "Choose a signature",
+      "selectImage": "Select your image here"
+    },
+    "pageReplacementModal": {
+      "dragAndDrop": "Drag & Drop your file here",
+      "or": "Or",
+      "chooseFile": "Choose a file",
+      "localFile": "Local File",
+      "pageReplaceInputLabel": "Replace Page(s)",
+      "pageReplaceInputFromSource": "with page(s)"
+    },
+    "filterAnnotModal": {
+      "color": "Color",
+      "includeReplies": "Include replies",
+      "filters": "Filters",
+      "user": "User",
+      "type": "Type",
+      "status": "Status"
+    },
+    "state": {
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "set": "Set status:",
+      "setBy": "set by",
+      "none": "None",
+      "marked": "Marked",
+      "unmarked": "Unmarked"
+    },
+    "measurementOverlay": {
+      "scale": "Scale Ratio",
+      "angle": "Angle",
+      "distance": "Distance",
+      "perimeter": "Perimeter",
+      "area": "Area",
+      "distanceMeasurement": "Distance Measurement",
+      "perimeterMeasurement": "Perimeter Measurement",
+      "arcMeasurement": "Arc Measurement",
+      "areaMeasurement": "Area Measurement",
+      "countMeasurement": "Count measurement",
+      "radius": "Radius",
+      "count": "Count",
+      "length": "Length"
+    },
+    "measurementOption": {
+      "scale": "Scale"
+    },
+    "stylePopup": {
+      "textStyle": "Text Style",
+      "colors": "Colors",
+      "invalidFontSize": "Font size must be less than ",
+      "labelText": "Label Text",
+      "labelTextPlaceholder": "Add label text"
+    },
+    "styleOption": {
+      "style": "Style",
+      "solid": "Solid",
+      "cloudy": "Cloudy"
+    },
+    "slider": {
+      "opacity": "Opacity",
+      "thickness": "Stroke",
+      "text": "Text Size"
+    },
+    "shared": {
+      "page": "Page",
+      "precision": "Precision",
+      "enableSnapping": "Enable snapping for measurement tools"
+    },
+    "watermark": {
+      "title": "Watermark",
+      "addWatermark": "Add Watermark",
+      "size": "Size",
+      "location": "Choose a location to edit watermarks",
+      "text": "Text",
+      "style": "Style",
+      "resetAllSettings": "Reset All Settings",
+      "font": "Font",
+      "addNew": "Add New",
+      "locations": {
+        "center": "Center",
+        "topLeft": "Top Left",
+        "topRight": "Top Right",
+        "topCenter": "Top Center",
+        "bottomLeft": "Bottom Left",
+        "bottomRight": "Bottom Right",
+        "bottomCenter": "Bottom Center"
+      }
+    },
+    "thumbnailPanel": {
+      "delete": "Delete",
+      "rotateClockwise": "Clockwise",
+      "rotateCounterClockwise": "Counterclockwise"
+    },
+    "thumbnailsControlOverlay": {
+      "move": "Move pages"
+    },
+    "richText": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikeout": "Strikeout",
+      "alignLeft": "Text align left",
+      "alignRight": "Text align right",
+      "alignCenter": "Text align center",
+      "justifyCenter": "Text justify center",
+      "alignTop": "Align top",
+      "alignMiddle": "Align middle",
+      "alignBottom": "Align bottom"
+    },
+    "customStampModal": {
+      "modalName": "Create New Stamp",
+      "stampText": "Stamp text",
+      "timestampText": "Timestamp text",
+      "Username": "Username",
+      "Date": "Date",
+      "Time": "Time",
+      "fontStyle": "Font style",
+      "dateFormat": "Date format",
+      "month": "Month",
+      "day": "Day",
+      "year": "Year",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "textColor": "Text color",
+      "backgroundColor": "Background color"
+    },
+    "pageRedactModal": {
+      "addMark": "Add Mark",
+      "pageSelection": "Page Selection",
+      "current": "Current Page",
+      "specify": "Specify Pages",
+      "odd": "Odd Pages only",
+      "even": "Even Pages only",
+      "header": "Mark Pages Redaction"
+    },
+    "lineStyleOptions": {
+      "title": "Style"
+    }
+  },
+  "warning": {
+    "deletePage": {
+      "deleteTitle": "Delete Page",
+      "deleteMessage": "Are you sure you want to delete the selected page(s). This can't be undone",
+      "deleteLastPageMessage": "You cannot delete all pages in the document."
+    },
+    "extractPage": {
+      "title": "Extract Page",
+      "message": "Are you sure you want to extract the selected page(s)?",
+      "confirmBtn": "Extract",
+      "secondaryBtn": "Extract and Delete"
+    },
+    "redaction": {
+      "applyTile": "Apply Redaction",
+      "applyMessage": "This action will permanently remove all items selected for redaction. It cannot be undone."
+    },
+    "selectPage": {
+      "selectTitle": "No Pages Selected",
+      "selectMessage": "Please select pages and try again."
+    },
+    "colorPicker": {
+      "deleteTitle": "Delete custom color",
+      "deleteMessage": "Delete the selected custom color? It will be removed from your color palette."
+    }
+  },
+  "shortcut": {
+    "arrow": "(A)",
+    "callout": "(C)",
+    "copy": "(Ctrl C)",
+    "delete": "(Del)",
+    "ellipse": "(O)",
+    "eraser": "(E)",
+    "freehand": "(F)",
+    "freetext": "(T)",
+    "highlight": "(H)",
+    "line": "(L)",
+    "pan": "(P)",
+    "rectangle": "(R)",
+    "rotateClockwise": "(Ctrl Shift +)",
+    "rotateCounterClockwise": "(Ctrl Shift -)",
+    "select": "(Esc)",
+    "signature": "(S)",
+    "squiggly": "(G)",
+    "image": "(I)",
+    "redo": "(Ctrl Shift Z)",
+    "redo_windows": "(Ctrl Y)",
+    "undo": "(Ctrl Z)",
+    "stickyNote": "(N)",
+    "strikeout": "(K)",
+    "underline": "(U)",
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl B)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl U)",
+      "strikeout": "(Ctrl K)"
+    },
+    "rotate3D": "Shift + Drag",
+    "zoom3D": "Shift + Scroll"
+  },
+  "tool": {
+    "pan": "Pan",
+    "select": "Select",
+    "Marquee": "Marquee Zoom",
+    "Link": "Link URL or Page",
+    "Standard": "Standard",
+    "Custom": "Custom"
+  },
+  "link": {
+    "url": "URL",
+    "page": "Page",
+    "enterurl": "Enter URL you would like to link to",
+    "enterpage": "Select the page number you would like to link to",
+    "urlLink": "URL link"
+  },
+  "Model3D": {
+    "add3D": "Add 3D object",
+    "enterurl": "Enter the URL of the 3D object in glTF format",
+    "enterurlOrLocalFile": "Enter the URL or upload a 3D object in glTF format",
+    "formatError": "Only glTF (.glb) format is supported"
+  },
+  "OpenFile": {
+    "enterUrlOrChooseFile": "Enter a URL or choose a file to load into WebViewer",
+    "enterUrl": "Enter file URL",
+    "extension": "File extension",
+    "existingFile": "File is already open",
+    "addTab": "Add Tab"
+  },
+  "datePicker": {
+    "previousMonth": "Previous Month",
+    "nextMonth": "Next Month",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "monthsShort": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "weekdays": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "weekdaysShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "today": "Today",
+    "invalidDateTime": "Invalid Date/Time: Input should match format"
+  },
+  "formField": {
+    "formFieldPopup": {
+      "fieldName": "Field Name",
+      "fieldValue": "Default Value",
+      "readOnly": "Read Only",
+      "multiSelect": "Multi Select",
+      "required": "Required",
+      "multiLine": "Multiline",
+      "apply": "Apply",
+      "cancel": "Cancel",
+      "flags": "Field Flags",
+      "options": "Options",
+      "radioGroups": "Radio buttons with the same Field Name will belong in the same grouping.",
+      "nameRequired": "Field name is required",
+      "size": "Size",
+      "width": "Width",
+      "height": "Height",
+      "invalidField": {
+        "duplicate": "Field Name already exists",
+        "empty": "Field Name cannot be empty"
+      }
+    },
+    "apply": "Apply Fields",
+    "type": "Field Type",
+    "types": {
+      "text": "Text",
+      "signature": "Signature",
+      "checkbox": "Check box",
+      "radio": "Radio button",
+      "listbox": "List box",
+      "combobox": "Combo box"
+    }
+  },
+  "digitalSignatureModal": {
+    "certification": "certification",
+    "Certification": "Certification",
+    "signature": "signature",
+    "Signature": "Signature",
+    "valid": "valid",
+    "invalid": "invalid",
+    "unknown": "unknown",
+    "title": "{{type}} Properties",
+    "header": {
+      "documentIntegrity": "Document Integrity",
+      "identitiesTrust": "Identities & Trust",
+      "generalErrors": "General Errors",
+      "digestStatus": "Digest Status"
+    },
+    "documentPermission": {
+      "noChangesAllowed": "The {{editor}} has specified that no changes are allowed for this document",
+      "formfillingSigningAllowed": "The {{editor}} has specified that Form Fill-in and Signing are allowed for this document. No other changes are permitted.",
+      "annotatingFormfillingSigningAllowed": "The {{editor}} has specified that Form Fill-in, Signing and Commenting are allowed for this document. No other changes are permitted.",
+      "unrestricted": "The {{editor}} has specified that there are no restrictions for this document."
+    },
+    "digestAlgorithm": {
+      "preamble": "The digest algorithm that was used to sign the signature: ",
+      "unknown": "The digest algorithm that was used to sign the signature is unknown."
+    },
+    "trustVerification": {
+      "none": "No detailed trust verification result available.",
+      "current": "Trust verification attempted with respect to current time",
+      "signing": "Trust verification attempted with respect to signing time: {{trustVerificationTime}}",
+      "timestamp": "Trust verification attempted with respect to secure embedded timestamp: {{trustVerificationTime}}"
+    },
+    "signerIdentity": {
+      "preamble": "The signer's identity is ",
+      "valid": "valid.",
+      "unknown": "unknown."
+    },
+    "summaryBox": {
+      "summary": "Digital {{type}} is {{status}}",
+      "signedBy": ", signed by {{name}}"
+    }
+  },
+  "digitalSignatureVerification": {
+    "certifier": "certifier",
+    "certified": "certified",
+    "Certified": "Certified",
+    "signer": "signer",
+    "signed": "signed",
+    "Signed": "Signed",
+    "by": "by",
+    "on": "on",
+    "disallowedChange": "Disallowed Change: {{type}}, objnum: {{objnum}}",
+    "unsignedSignatureField": "Unsigned signature field: {{fieldName}}",
+    "trustVerification": {
+      "current": "Verification time used was the current time",
+      "signing": "Verification time is from the clock on the signer's computer",
+      "timestamp": "Verification time is from the secure timestamp embedded in the document",
+      "verifiedTrust": "Trust verification result: Verified",
+      "noTrustVerification": "No detailed trust verification result available."
+    },
+    "permissionStatus": {
+      "noPermissionsStatus": "No permissions status to report.",
+      "permissionsVerificationDisabled": "Permissions verification has been disabled.",
+      "hasAllowedChanges": "The document has changes that are allowed by the signatures permissions settings.",
+      "invalidatedByDisallowedChanges": "The document has changes that are disallowed by the signatures permissions settings.",
+      "unmodified": "The document has not been modified since it was"
+    },
+    "trustStatus": {
+      "trustVerified": "Established trust in {{verificationType}} successfully.",
+      "untrusted": "Trust could not be established.",
+      "trustVerificationDisabled": "Trust verification has been disabled.",
+      "noTrustStatus": "No trust status to report."
+    },
+    "digestStatus": {
+      "digestInvalid": "The digest is incorrect.",
+      "digestVerified": "The digest is correct.",
+      "digestVerificationDisabled": "Digest verification has been disabled.",
+      "weakDigestAlgorithmButDigestVerifiable": "The digest is correct, but the digest algorithm is weak and not secure.",
+      "noDigestStatus": "No digest status to report.",
+      "unsupportedEncoding": "No installed SignatureHandler was able to recognize the signature's encoding"
+    },
+    "documentStatus": {
+      "noError": "No general error to report.",
+      "corruptFile": "SignatureHandler reported file corruption.",
+      "unsigned": "The signature has not yet been cryptographically signed.",
+      "badByteRanges": "SignatureHandler reports corruption in the ByteRanges in the digital signature.",
+      "corruptCryptographicContents": "SignatureHandler reports corruption in the Contents of the digital signature."
+    },
+    "signatureDetails": {
+      "signatureDetails": "Signature Details",
+      "contactInformation": "Contact Information",
+      "location": "Location",
+      "reason": "Reason",
+      "signingTime": "Signing Time",
+      "noContactInformation": "No contact information provided",
+      "noLocation": "No location provided",
+      "noReason": "No reason provided",
+      "noSigningTime": "No signing time found"
+    },
+    "panelMessages": {
+      "noSignatureFields": "This document has no signature fields",
+      "certificateDownloadError": "Error encountered when trying to download a trusted certificate",
+      "localCertificateError": "There are some issues with reading a local certificate"
+    }
+  },
+  "cropPopUp": {
+    "title": "Pages to Crop",
+    "allPages": "All",
+    "singlePage": "Current Page",
+    "cropDimensions":"Crop Dimensions",
+    "dimensionInput": {
+      "unitOfMeasurement": "Unit",
+      "autoTrim": "Auto-trim"
+    },
+    "cropModal": {
+      "applyTitle": "Apply crop?",
+      "applyMessage": "This action will permanently crop all selected pages selected. It cannot be undone.",
+      "cancelTitle": "Cancel crop?",
+      "cancelMessage": "Are you sure you want to cancel cropping all selected pages?"
+    }
+  },
+  "redactionPanel": {
+    "noMarkedRedactions": "Start redacting by marking text, regions, pages or making a search.",
+    "redactionSearchPlaceholder": "Add by keyword search or patterns",
+    "redactionCounter": "Marked for Redaction",
+    "clearMarked": "Clear",
+    "redactAllMarked": "Redact All",
+    "redactionItem": {
+      "regionRedaction": "Region redaction",
+      "fullPageRedaction": "Full page redaction",
+      "fullVideoFrameRedaction": "Video Redaction",
+      "image": "Image"
+    },
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "searchResults": "Search results",
+    "search": {
+      "creditCards": "Credit Card",
+      "phoneNumbers": "Phone Numbers",
+      "images": "Images",
+      "emails": "Emails",
+      "pattern": "Pattern",
+      "start": "Start making your search"
+    }
+  },
+  "languageModal": {
+    "selectLanguage": "Select language"
+  }
+}

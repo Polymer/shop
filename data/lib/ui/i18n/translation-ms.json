@@ -1,0 +1,833 @@
+{
+  "action": {
+    "add": "Tambah",
+    "apply": "Mohon",
+    "applyAll": "Guna semua",
+    "calendar": "Kalendar",
+    "calibrate": "Kalibrasi",
+    "cancel": "Batal",
+    "clear": "Jelas",
+    "close": "tutup",
+    "undo": "Buat asal",
+    "redo": "sedia",
+    "comment": "Komen",
+    "reply": "Tambah balasan",
+    "copy": "Salinan",
+    "delete": "Padam",
+    "group": "Kumpulan",
+    "ungroup": "Nyahkumpulan",
+    "download": "Muat turun",
+    "edit": "Sunting",
+    "extract": "Ekstrak",
+    "enterFullscreen": "Skrin penuh",
+    "exitFullscreen": "Keluar dari skrin penuh",
+    "fit": "Sesuai",
+    "fitToPage": "Satu mukasurat penuh",
+    "fitToWidth": "Sesuai dengan lebar",
+    "more": "Lagi",
+    "openFile": "Buka fail",
+    "pagePrev": "Halaman sebelumnya",
+    "pageNext": "Muka surat seterusnya",
+    "pageSet": "Tetapkan halaman",
+    "print": "Cetak",
+    "proceed": "Teruskan",
+    "name": "nama",
+    "rename": "Namakan semula",
+    "ok": "okey",
+    "rotate": "Orientasi Halaman",
+    "rotate3D": "Putar",
+    "rotateClockwise": "Putar mengikut arah jam",
+    "rotateCounterClockwise": "Putar lawan jam",
+    "save": "Jimat",
+    "post": "Pos",
+    "create": "Buat",
+    "showMoreResults": "Tunjukkan lebih banyak hasil",
+    "sign": "Tanda",
+    "style": "Gaya",
+    "submit": "Hantar",
+    "zoom": "Zum",
+    "zoomIn": "Mengezum masuk",
+    "zoomOut": "Zum keluar",
+    "zoomSet": "Tetapkan zum",
+    "zoomControls": "Kawalan Zum",
+    "draw": "Lukis",
+    "type": "taip",
+    "upload": "Muat naik",
+    "link": "Pautan",
+    "darkMode": "Mod gelap",
+    "lightMode": "Mod cahaya",
+    "fileAttachmentDownload": "Muat turun fail yang dilampirkan",
+    "prevResult": "Keputusan sebelumnya",
+    "nextResult": "Keputusan seterusnya",
+    "prev": "Sebelumnya",
+    "next": "Seterusnya",
+    "startFormEditing": "Mulakan Pengeditan Borang",
+    "exitFormEditing": "Keluar dari Mod Pengeditan Borang",
+    "exit": "Keluar",
+    "addOption": "Tambah Pilihan",
+    "formFieldEdit": "Edit Medan Borang",
+    "viewShortCutKeysFor3D": "Lihat Kekunci Pintasan",
+    "markAllRead": "Tandai semua sebagai dibaca",
+    "insertPage": "Sisipan Halaman",
+    "insertBlankPageAbove": "Sisipkan halaman kosong di atas",
+    "insertBlankPageBelow": "Sisipkan halaman kosong di bawah",
+    "pageManipulation": "Manipulasi Halaman",
+    "replace": "Gantikan",
+    "showLess": "kurang menunjukkan",
+    "showMore": "... lagi",
+    "chooseFile": "Pilih fail",
+    "selectYourOption": "Pilih pilihan anda",
+    "open": "Buka",
+    "deselectAll": "Nyahpilih Semua",
+    "select": "Pilih",
+    "moveToTop": "Bergerak ke atas",
+    "moveToBottom": "Bergerak ke bawah",
+    "redactPages": "Sunting halaman",
+    "playAudio": "Mainkan audio",
+    "pauseAudio": "jeda audio",
+    "selectAll": "Pilih semua",
+    "unselect": "Nyahpilih",
+    "addMark": "Tambah Mark",
+    "viewFile": "Lihat fail",
+    "switchLanguage": "Bahasa"
+  },
+  "annotation": {
+    "areaMeasurement": "kawasan",
+    "arc": "Arka",
+    "arcMeasurement": "Pengukuran Arka",
+    "arrow": "anak panah",
+    "callout": "Serlahan ciri",
+    "crop": "Halaman Pangkas",
+    "caret": "kekurangan",
+    "dateFreeText": "Kalendar",
+    "formFillCheckmark": "Tandakan",
+    "formFillCross": "Menyeberang",
+    "distanceMeasurement": "Jarak",
+    "countMeasurement": "Kira ukuran",
+    "ellipse": "Ellipse",
+    "eraser": "Pemadam",
+    "fileattachment": "Lampiran Fail",
+    "freehand": "Tangan Bebas",
+    "freeHandHighlight": "Serlahkan Tangan Percuma",
+    "freetext": "Teks Percuma",
+    "highlight": "Serlahkan",
+    "image": "Imej",
+    "line": "Talian",
+    "perimeterMeasurement": "Perimeter",
+    "polygon": "Poligon",
+    "polygonCloud": "awan",
+    "polyline": "Polyline",
+    "rectangle": "segi empat tepat",
+    "redact": "sunting",
+    "formFillDot": "titik",
+    "signature": "Tandatangan",
+    "squiggly": "Dengan berlekuk-lekuk",
+    "stamp": "setem",
+    "stickyNote": "Catatan",
+    "strikeout": "Strikeout",
+    "underline": "Garis bawah",
+    "custom": "Adat",
+    "rubberStamp": "Setem getah",
+    "note": "Catatan",
+    "textField": "Medan Teks",
+    "signatureFormField": "Medan Tandatangan",
+    "checkBoxFormField": "Medan Kotak semak",
+    "radioButtonFormField": "Medan RadioButton",
+    "listBoxFormField": "Medan Kotak Senarai",
+    "comboBoxFormField": "Padang Kotak Kombo",
+    "link": "Pautan",
+    "other": "Lain-lain",
+    "3D": "3D",
+    "sound": "Bunyi"
+  },
+  "rubberStamp": {
+    "Approved": "Diluluskan",
+    "AsIs": "As Is",
+    "Completed": "Selesai",
+    "Confidential": "Sulit",
+    "Departmental": "Jabatan",
+    "Draft": "Draf",
+    "Experimental": "Percubaan",
+    "Expired": "Tamat tempoh",
+    "Final": "Akhir",
+    "ForComment": "Untuk Komen",
+    "ForPublicRelease": "Untuk Siaran Umum",
+    "InformationOnly": "Maklumat Sahaja",
+    "NotApproved": "Tidak diterima",
+    "NotForPublicRelease": "Bukan Untuk Siaran Umum",
+    "PreliminaryResults": "Keputusan Awal",
+    "Sold": "terjual",
+    "TopSecret": "Rahsia sulit",
+    "Void": "batal",
+    "SHSignHere": "Tandatangan di sini",
+    "SHWitness": "saksi",
+    "SHInitialHere": "Inisial Di Sini",
+    "SHAccepted": "Diterima",
+    "SBRejected": "Ditolak"
+  },
+  "component": {
+    "attachmentPanel": "Lampiran",
+    "leftPanel": "Panel",
+    "toolsHeader": "Alatan",
+    "searchOverlay": "Cari",
+    "searchPanel": "Cari",
+    "menuOverlay": "Menu",
+    "notesPanel": "Komen",
+    "outlinesPanel": "Garis besar",
+    "bookmarksPanel": "Penanda buku",
+    "signaturePanel": "Tandatangan",
+    "newBookmark": "Penanda Halaman Baharu",
+    "bookmarkPage": "Halaman",
+    "layersPanel": "Lapisan",
+    "thumbnailsPanel": "Gambar kecil",
+    "toolsButton": "Alatan",
+    "redaction": "Menulis",
+    "viewControlsOverlay": "Lihat Kawalan",
+    "calibration": "Penentukuran",
+    "zoomOverlay": "Tindanan Zum",
+    "textPopup": "Teks Pop Timbul",
+    "createStampButton": "Cipta Setem Baharu",
+    "filter": "Penapis",
+    "pageReplaceModalTitle": "Gantikan Halaman",
+    "files": "Fail",
+    "editText": "Edit Teks",
+    "redactionPanel": "Panel Redaksi"
+  },
+  "message": {
+    "toolsOverlayNoPresets": "Tiada Pratetap",
+    "badDocument": "Gagal memuatkan dokumen. Dokumen itu sama ada rosak atau tidak sah.",
+    "customPrintPlaceholder": "cth. 3, 4-10",
+    "encryptedAttemptsExceeded": "Gagal memuatkan dokumen yang disulitkan. Terlalu banyak percubaan.",
+    "encryptedUserCancelled": "Gagal memuatkan dokumen yang disulitkan. Kemasukan kata laluan dibatalkan.",
+    "enterPassword": "Dokumen ini dilindungi kata laluan. Sila masukkan kata laluan",
+    "incorrectPassword": "Kata laluan salah, percubaan yang tinggal: {{ remainingAttempts }}",
+    "noAnnotations": "Mula membuat anotasi untuk meninggalkan ulasan.",
+    "noAnnotationsReadOnly": "Dokumen ini tidak mempunyai anotasi.",
+    "noAnnotationsFilter": "Mula membuat anotasi dan penapis akan dipaparkan di sini.",
+    "noOutlines": "Dokumen ini tidak mempunyai garis besar.",
+    "noAttachments": "Dokumen ini tidak mempunyai lampiran.",
+    "noResults": "Tiada keputusan dijumpai.",
+    "numResultsFound": "keputusan dijumpai",
+    "notSupported": "Jenis fail itu tidak disokong.",
+    "passwordRequired": "kata laluan diperlukan",
+    "enterPasswordPlaceholder": "Masukkan kata laluan",
+    "preparingToPrint": "Bersedia untuk mencetak...",
+    "annotationReplyCount": "{{count}} Balas",
+    "annotationReplyCount_plural": "{{count}} Balasan",
+    "printTotalPageCount": "Jumlah: {{count}} halaman",
+    "printTotalPageCount_plural": "Jumlah: {{count}} halaman",
+    "processing": "Memproses...",
+    "searching": "Mencari...",
+    "searchCommentsPlaceholder": "Cari komen",
+    "searchDocumentPlaceholder": "Cari dokumen",
+    "signHere": "Tandatangan di sini",
+    "insertTextHere": "Sisipkan teks di sini",
+    "imageSignatureAcceptedFileTypes": "Hanya {{acceptedFileTypes}} diterima",
+    "enterMeasurement": "Masukkan ukuran antara dua titik",
+    "errorEnterMeasurement": "Nombor yang anda masukkan tidak sah, anda boleh memasukkan nilai seperti 7.5 atau 7 1/2",
+    "linkURLorPage": "Pautan URL atau Halaman",
+    "warning": "Amaran",
+    "enterContentEditingMode": "Anda akan memasuki mod penyuntingan kandungan.",
+    "existingAnnotationWarning": "Anotasi sedia ada mungkin tidak sepadan dengan teks selepas ia diedit.",
+    "changesCannotBeUndone": "Sebarang perubahan yang dibuat tidak boleh dibuat asal.",
+    "doNotShowAgain": "Jangan tunjukkan ini kepada saya lagi",
+    "enterReplacementText": "Masukkan teks yang ingin anda gantikan",
+    "sortBy": "Isih",
+    "emptyCustomStampInput": "Teks setem tidak boleh kosong",
+    "unpostedComment": "Komen Tidak Disiarkan",
+    "lockedLayer": "Lapisan dikunci",
+    "layerVisibililtyNoChange": "Keterlihatan lapisan tidak boleh diubah",
+    "untitled": "Tidak bertajuk",
+    "selectHowToLoadFile": "Pilih cara memuatkan dokumen anda",
+    "openFileByUrl": "Buka fail mengikut URL:",
+    "enterUrlHere": "Masukkan URL di sini",
+    "openLocalFile": "Buka fail tempatan:",
+    "selectFile": "Pilih fail",
+    "selectPageToReplace": "Pilih halaman dalam dokumen yang anda ingin gantikan.",
+    "embeddedFiles": "Fail Terbenam",
+    "pageNum": "Mukasurat",
+    "error": "ralat"
+  },
+  "option": {
+    "type": {
+      "caret": "kekurangan",
+      "custom": "Adat",
+      "ellipse": "Ellipse",
+      "fileattachment": "Lampiran Fail",
+      "freehand": "Tangan Bebas",
+      "callout": "Serlahan ciri",
+      "freetext": "Teks Percuma",
+      "line": "Talian",
+      "polygon": "Poligon",
+      "polyline": "Polyline",
+      "rectangle": "segi empat tepat",
+      "redact": "sunting",
+      "signature": "Tandatangan",
+      "stamp": "setem",
+      "stickyNote": "Nota Lekat",
+      "highlight": "Serlahkan",
+      "strikeout": "Strikeout",
+      "underline": "Garis bawah",
+      "squiggly": "Dengan berlekuk-lekuk",
+      "3D": "3D",
+      "other": "Lain-lain"
+    },
+    "notesOrder": {
+      "dropdownLabel": "Isih Senarai Pesanan",
+      "position": "kedudukan",
+      "time": "Masa",
+      "status": "Status",
+      "author": "Pengarang",
+      "type": "taip",
+      "color": "Warna",
+      "createdDate": "Tarikh Dicipta",
+      "modifiedDate": "Tarikh Diubah Suai"
+    },
+    "toolbarGroup": {
+      "dropdownLabel": "Kumpulan Bar Alat",
+      "toolbarGroup-View": "Lihat",
+      "toolbarGroup-Annotate": "Anotasi",
+      "toolbarGroup-Shapes": "bentuk",
+      "toolbarGroup-Insert": "Sisipkan",
+      "toolbarGroup-Measure": "ukur",
+      "toolbarGroup-Edit": "Sunting",
+      "toolbarGroup-FillAndSign": "Isi dan Tandatangani",
+      "toolbarGroup-Forms": "Borang",
+      "toolbarGroup-Redact": "sunting"
+    },
+    "annotationColor": {
+      "StrokeColor": "Strok",
+      "FillColor": "isi",
+      "TextColor": "Teks"
+    },
+    "colorPalette": {
+      "colorLabel": "Warna"
+    },
+    "displayMode": {
+      "layout": "Susun Atur Halaman",
+      "pageTransition": "Peralihan Halaman"
+    },
+    "documentControls": {
+      "placeholder": "1, 3, 5-10",
+      "selectTooltip": "Pilih berbilang halaman",
+      "closeTooltip": "Tutup pilihan berbilang"
+    },
+    "outlineControls": {
+      "add": "Tambah item",
+      "reorder": "Susun semula"
+    },
+    "layout": {
+      "cover": "Muka Depan Muka Depan",
+      "double": "Halaman Berganda",
+      "single": "Halaman Tunggal"
+    },
+    "mathSymbols": "simbol matematik",
+    "notesPanel": {
+      "separator": {
+        "today": "Hari ini",
+        "yesterday": "Semalam",
+        "unknown": "Tidak diketahui"
+      },
+      "noteContent": {
+        "noName": "(tiada nama)",
+        "noDate": "(tiada tarikh)"
+      }
+    },
+    "pageTransition": {
+      "continuous": "Halaman Berterusan",
+      "default": "Halaman demi Halaman",
+      "reader": "Pembaca"
+    },
+    "print": {
+      "all": "Semua",
+      "current": "Muka surat ini",
+      "pages": "Halaman untuk dicetak",
+      "specifyPages": "Tentukan Halaman",
+      "view": "Pandangan Semasa",
+      "pageQuality": "Kualiti Cetakan",
+      "qualityNormal": "Biasalah",
+      "qualityHigh": "tinggi",
+      "includeAnnotations": "Sertakan anotasi",
+      "includeComments": "Sertakan ulasan",
+      "printSettings": "Tetapan Cetak"
+    },
+    "printInfo": {
+      "author": "Pengarang",
+      "subject": "Subjek",
+      "date": "Tarikh"
+    },
+    "redaction": {
+      "markForRedaction": "Tandakan untuk redaksi"
+    },
+    "searchPanel": {
+      "caseSensitive": "Sensitif huruf besar",
+      "wholeWordOnly": "Seluruh perkataan",
+      "wildcard": "Kad bebas"
+    },
+    "toolsOverlay": {
+      "currentStamp": "Setem Semasa",
+      "currentSignature": "Tandatangan Semasa",
+      "signatureAltText": "Tandatangan"
+    },
+    "stampOverlay": {
+      "addStamp": "Tambah Setem Baharu"
+    },
+    "signatureOverlay": {
+      "addSignature": "Tambah Tandatangan Baharu"
+    },
+    "signatureModal": {
+      "modalName": "Cipta Tandatangan Baharu",
+      "dragAndDrop": "Seret & Lepaskan imej anda di sini",
+      "or": "Ataupun",
+      "pickImage": "Pilih tandatangan",
+      "selectImage": "Pilih imej anda di sini"
+    },
+    "pageReplacementModal": {
+      "dragAndDrop": "Seret & Lepaskan fail anda di sini",
+      "or": "Ataupun",
+      "chooseFile": "Pilih fail",
+      "localFile": "Fail Tempatan",
+      "pageReplaceInputLabel": "Gantikan Halaman",
+      "pageReplaceInputFromSource": "dengan halaman"
+    },
+    "filterAnnotModal": {
+      "commentBy": "Komen oleh",
+      "types": "Jenis",
+      "color": "Warna",
+      "includeReplies": "Sertakan Balasan"
+    },
+    "status": {
+      "status": "Status"
+    },
+    "state": {
+      "accepted": "Diterima",
+      "rejected": "Ditolak",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan",
+      "set": "Tetapkan status:",
+      "setBy": "ditetapkan oleh",
+      "none": "tiada",
+      "marked": "Ditanda",
+      "unmarked": "Tidak bertanda"
+    },
+    "measurementOverlay": {
+      "scale": "Nisbah Skala",
+      "angle": "sudut",
+      "distance": "Jarak",
+      "perimeter": "Perimeter",
+      "area": "kawasan",
+      "distanceMeasurement": "Pengukuran Jarak",
+      "perimeterMeasurement": "Pengukuran Perimeter",
+      "arcMeasurement": "Pengukuran Arka",
+      "areaMeasurement": "Pengukuran Kawasan",
+      "countMeasurement": "Kira ukuran",
+      "radius": "Jejari",
+      "count": "Kira",
+      "length": "Panjang"
+    },
+    "measurementOption": {
+      "scale": "Skala"
+    },
+    "stylePopup": {
+      "textStyle": "Gaya Teks",
+      "colors": "Warna",
+      "invalidFontSize": "Saiz fon mestilah kurang daripada",
+      "labelText": "Teks Label",
+      "labelTextPlaceholder": "Tambahkan teks label"
+    },
+    "styleOption": {
+      "style": "Gaya",
+      "solid": "Padat",
+      "cloudy": "Mendung"
+    },
+    "slider": {
+      "opacity": "Kelegapan",
+      "thickness": "Strok",
+      "text": "Saiz Teks"
+    },
+    "shared": {
+      "page": "Halaman",
+      "precision": "Ketepatan",
+      "enableSnapping": "Dayakan menjentik untuk alat ukuran"
+    },
+    "watermark": {
+      "title": "Tera air",
+      "addWatermark": "Tambah Tera Air",
+      "size": "Saiz",
+      "location": "Pilih lokasi untuk mengedit tera air",
+      "text": "Teks",
+      "style": "Gaya",
+      "resetAllSettings": "Tetapkan Semula Semua Tetapan",
+      "font": "buat",
+      "addNew": "Tambah baru",
+      "locations": {
+        "center": "Pusat",
+        "topLeft": "Atas Kiri",
+        "topRight": "Atas Kanan",
+        "topCenter": "Pusat Atas",
+        "bottomLeft": "Dibahagian bawah kiri",
+        "bottomRight": "Bawah Kanan",
+        "bottomCenter": "Pusat Bawah"
+      }
+    },
+    "thumbnailPanel": {
+      "delete": "Padam",
+      "rotateClockwise": "ikut arah jam",
+      "rotateCounterClockwise": "lawan jam"
+    },
+    "thumbnailsControlOverlay": {
+      "move": "Pindahkan halaman"
+    },
+    "richText": {
+      "bold": "berani",
+      "italic": "Italic",
+      "underline": "Garis bawah",
+      "strikeout": "Strikeout",
+      "alignLeft": "Teks dijajarkan ke kiri",
+      "alignRight": "Teks dijajarkan ke kanan",
+      "alignCenter": "Pusat penjajaran teks",
+      "justifyCenter": "Pusat justify teks",
+      "alignTop": "Jajarkan atas",
+      "alignMiddle": "Jajarkan tengah",
+      "alignBottom": "Sejajarkan bahagian bawah"
+    },
+    "customStampModal": {
+      "modalName": "Cipta Setem Baharu",
+      "stampText": "Teks setem",
+      "timestampText": "Teks cap masa",
+      "stampColor": "Warna setem:",
+      "Username": "Nama pengguna",
+      "Date": "Tarikh",
+      "Time": "Masa"
+    },
+    "pageRedactModal": {
+      "addMark": "Tambah Mark",
+      "pageSelection": "Pemilihan Halaman",
+      "current": "Muka surat ini",
+      "specify": "Tentukan Halaman",
+      "odd": "Muka surat ganjil sahaja",
+      "even": "Muka surat genap sahaja",
+      "header": "Tandakan Penyuntingan Halaman"
+    }
+  },
+  "warning": {
+    "deletePage": {
+      "deleteTitle": "Padam Halaman",
+      "deleteMessage": "Adakah anda pasti mahu memadamkan halaman yang dipilih. Ini tidak boleh dibuat asal",
+      "deleteLastPageMessage": "Anda tidak boleh memadam semua halaman dalam dokumen."
+    },
+    "extractPage": {
+      "title": "Ekstrak Halaman",
+      "message": "Adakah anda pasti mahu mengekstrak halaman yang dipilih?",
+      "confirmBtn": "Ekstrak",
+      "secondaryBtn": "Ekstrak dan Padam"
+    },
+    "redaction": {
+      "applyTile": "Terapkan Redaksi",
+      "applyMessage": "Tindakan ini akan mengalih keluar semua item yang dipilih untuk redaksi secara kekal. Ia tidak boleh dibuat asal."
+    },
+    "selectPage": {
+      "selectTitle": "Tiada Halaman Dipilih",
+      "selectMessage": "Sila pilih halaman dan cuba lagi."
+    },
+    "colorPicker": {
+      "deleteTitle": "Padamkan warna tersuai",
+      "deleteMessage": "Padamkan warna tersuai yang dipilih? Ia akan dialih keluar daripada palet warna anda."
+    }
+  },
+  "shortcut": {
+    "arrow": "(A)",
+    "callout": "(C)",
+    "copy": "(Ctrl C)",
+    "delete": "(The)",
+    "ellipse": "(O)",
+    "eraser": "(DAN)",
+    "freehand": "(F)",
+    "freetext": "(T)",
+    "highlight": "(H)",
+    "line": "(saya)",
+    "pan": "(P)",
+    "rectangle": "(R)",
+    "rotateClockwise": "(Ctrl Shift +)",
+    "rotateCounterClockwise": "(Ctrl Shift -)",
+    "select": "(Esc)",
+    "signature": "(S)",
+    "squiggly": "(G)",
+    "image": "(saya)",
+    "redo": "(Ctrl Shift Z)",
+    "redo_windows": "(Ctrl Y)",
+    "undo": "(Ctrl Z)",
+    "stickyNote": "(N)",
+    "strikeout": "(KEPADA)",
+    "underline": "(U)",
+    "zoomIn": "(Ctrl +)",
+    "zoomOut": "(Ctrl -)",
+    "richText": {
+      "bold": "(Ctrl B)",
+      "italic": "(Ctrl I)",
+      "underline": "(Ctrl U)",
+      "strikeout": "(Ctrl K)"
+    },
+    "rotate3D": "Shift + Seret",
+    "zoom3D": "Shift + Tatal"
+  },
+  "tool": {
+    "pan": "kuali",
+    "select": "Pilih",
+    "Marquee": "Zum Marquee",
+    "Link": "Pautkan URL atau Halaman",
+    "Standard": "Standard",
+    "Custom": "Adat"
+  },
+  "link": {
+    "url": "URL",
+    "page": "Halaman",
+    "enterurl": "Masukkan URL yang anda ingin pautkan",
+    "enterpage": "Pilih nombor halaman yang anda ingin pautkan",
+    "urlLink": "pautan URL"
+  },
+  "Model3D": {
+    "add3D": "Tambah objek 3D",
+    "enterurl": "Masukkan URL objek 3D dalam format glTF",
+    "enterurlOrLocalFile": "Masukkan URL atau muat naik objek 3D dalam format glTF",
+    "formatError": "Hanya format glTF (.glb) disokong"
+  },
+  "OpenFile": {
+    "enterUrlOrChooseFile": "Masukkan URL atau pilih fail untuk dimuatkan ke dalam WebViewer",
+    "enterUrl": "Masukkan URL fail",
+    "extension": "Sambungan fail",
+    "existingFile": "Fail sudah dibuka",
+    "addTab": "Tambah Tab"
+  },
+  "datePicker": {
+    "previousMonth": "Bulan lepas",
+    "nextMonth": "Bulan depan",
+    "months": {
+      "0": "Januari",
+      "1": "Februari",
+      "2": "Mac",
+      "3": "April",
+      "4": "Mungkin",
+      "5": "Jun",
+      "6": "Julai",
+      "7": "Ogos",
+      "8": "September",
+      "9": "Oktober",
+      "10": "November",
+      "11": "Disember"
+    },
+    "monthsShort": {
+      "0": "Jan",
+      "1": "Feb",
+      "2": "Laut",
+      "3": "Apr",
+      "4": "Mungkin",
+      "5": "Jun",
+      "6": "Jul",
+      "7": "Ogos",
+      "8": "tujuh",
+      "9": "Okt",
+      "10": "Nov",
+      "11": "Dis"
+    },
+    "weekdays": {
+      "0": "Ahad",
+      "1": "Isnin",
+      "2": "Selasa",
+      "3": "Rabu",
+      "4": "Khamis",
+      "5": "Jumaat",
+      "6": "Sabtu"
+    },
+    "weekdaysShort": {
+      "0": "matahari",
+      "1": "saya",
+      "2": "milik awak",
+      "3": "Rabu",
+      "4": "Kumpul",
+      "5": "Jum",
+      "6": "Sab"
+    },
+    "today": "Hari ini",
+    "invalidDateTime": "Tarikh/Masa Tidak Sah: Input hendaklah sepadan dengan format"
+  },
+  "formField": {
+    "formFieldPopup": {
+      "fieldName": "Nama Medan",
+      "fieldValue": "Nilai asal",
+      "readOnly": "Baca sahaja",
+      "multiSelect": "Pelbagai Pilihan",
+      "required": "Diperlukan",
+      "multiLine": "Berbilang talian",
+      "apply": "Mohon",
+      "cancel": "Batal",
+      "flags": "Bendera Padang",
+      "options": "Pilihan",
+      "radioGroups": "Butang radio dengan Nama Medan yang sama akan tergolong dalam kumpulan yang sama.",
+      "nameRequired": "Nama medan diperlukan",
+      "size": "Saiz",
+      "width": "Lebar",
+      "height": "Ketinggian",
+      "invalidField": {
+        "duplicate": "Nama Medan sudah wujud",
+        "empty": "Nama Medan tidak boleh kosong"
+      }
+    },
+    "apply": "Guna Medan",
+    "type": "Jenis Medan",
+    "types": {
+      "text": "Teks",
+      "signature": "Tandatangan",
+      "checkbox": "Kotak semak",
+      "radio": "Butang radio",
+      "listbox": "Kotak senarai",
+      "combobox": "Kotak kombo"
+    }
+  },
+  "digitalSignatureModal": {
+    "certification": "pensijilan",
+    "Certification": "Pensijilan",
+    "signature": "tandatangan",
+    "Signature": "Tandatangan",
+    "valid": "sah",
+    "invalid": "tidak sah",
+    "unknown": "tidak diketahui",
+    "title": "{{type}} Sifat",
+    "header": {
+      "documentIntegrity": "Integriti Dokumen",
+      "identitiesTrust": "Identiti & Amanah",
+      "generalErrors": "Kesilapan Umum",
+      "digestStatus": "Status Digest"
+    },
+    "documentPermission": {
+      "noChangesAllowed": "{{editor}} telah menyatakan bahawa tiada perubahan dibenarkan untuk dokumen ini",
+      "formfillingSigningAllowed": "{{editor}} telah menyatakan bahawa Pengisian dan Tandatangan Borang dibenarkan untuk dokumen ini. Tiada perubahan lain dibenarkan.",
+      "annotatingFormfillingSigningAllowed": "{{editor}} telah menyatakan bahawa Pengisian Borang, Menandatangani dan Mengulas dibenarkan untuk dokumen ini. Tiada perubahan lain dibenarkan.",
+      "unrestricted": "{{editor}} telah menyatakan bahawa tiada sekatan untuk dokumen ini."
+    },
+    "digestAlgorithm": {
+      "preamble": "Algoritma ringkasan yang digunakan untuk menandatangani tandatangan:",
+      "unknown": "Algoritma ringkasan yang digunakan untuk menandatangani tandatangan tidak diketahui."
+    },
+    "trustVerification": {
+      "none": "Tiada keputusan pengesahan amanah terperinci tersedia.",
+      "current": "Pengesahan amanah dicuba berkenaan dengan masa semasa",
+      "signing": "Pengesahan amanah dicuba berkenaan dengan masa menandatangani: {{trustVerificationTime}}",
+      "timestamp": "Pengesahan amanah dicuba berkenaan dengan cap waktu terbenam yang selamat: {{trustVerificationTime}}"
+    },
+    "signerIdentity": {
+      "preamble": "Identiti penandatangan ialah",
+      "valid": "sah.",
+      "unknown": "tidak diketahui."
+    },
+    "summaryBox": {
+      "summary": "{{jenis}} digital ialah {{status}}",
+      "signedBy": ", ditandatangani oleh {{name}}"
+    }
+  },
+  "digitalSignatureVerification": {
+    "certifier": "memperakui",
+    "certified": "disahkan",
+    "Certified": "Disahkan",
+    "signer": "tanda",
+    "signed": "ditandatangani",
+    "Signed": "Ditandatangani",
+    "by": "oleh",
+    "on": "pada",
+    "disallowedChange": "Perubahan Tidak Dibenarkan: {{type}}, objnum: {{objnum}}",
+    "unsignedSignatureField": "Medan tandatangan yang tidak ditandatangani: {{fieldName}}",
+    "trustVerification": {
+      "current": "Masa pengesahan yang digunakan ialah masa semasa",
+      "signing": "Masa pengesahan adalah dari jam pada komputer penandatangan",
+      "timestamp": "Masa pengesahan adalah daripada cap waktu selamat yang dibenamkan dalam dokumen",
+      "verifiedTrust": "Keputusan pengesahan amanah: Disahkan",
+      "noTrustVerification": "Tiada keputusan pengesahan amanah terperinci tersedia."
+    },
+    "permissionStatus": {
+      "noPermissionsStatus": "Tiada status kebenaran untuk melaporkan.",
+      "permissionsVerificationDisabled": "Pengesahan kebenaran telah dilumpuhkan.",
+      "hasAllowedChanges": "Dokumen mempunyai perubahan yang dibenarkan oleh tetapan kebenaran tandatangan.",
+      "invalidatedByDisallowedChanges": "Dokumen mempunyai perubahan yang tidak dibenarkan oleh tetapan kebenaran tandatangan.",
+      "unmodified": "Dokumen itu tidak diubah suai sejak ia dibuat"
+    },
+    "trustStatus": {
+      "trustVerified": "Mewujudkan kepercayaan dalam {{verificationType}} berjaya.",
+      "untrusted": "Kepercayaan tidak dapat diwujudkan.",
+      "trustVerificationDisabled": "Pengesahan amanah telah dilumpuhkan.",
+      "noTrustStatus": "Tiada status amanah untuk dilaporkan."
+    },
+    "digestStatus": {
+      "digestInvalid": "Pencernaan tidak betul.",
+      "digestVerified": "Hadam betul.",
+      "digestVerificationDisabled": "Pengesahan ringkasan telah dilumpuhkan.",
+      "weakDigestAlgorithmButDigestVerifiable": "Digest adalah betul, tetapi algoritma digest lemah dan tidak selamat.",
+      "noDigestStatus": "Tiada status ringkasan untuk dilaporkan.",
+      "unsupportedEncoding": "Tiada SignatureHandler yang dipasang dapat mengecam pengekodan tandatangan"
+    },
+    "documentStatus": {
+      "noError": "Tiada ralat umum untuk dilaporkan.",
+      "corruptFile": "SignatureHandler melaporkan rasuah fail.",
+      "unsigned": "Tandatangan itu belum lagi ditandatangani secara kriptografi.",
+      "badByteRanges": "SignatureHandler melaporkan rasuah dalam ByteRanges dalam tandatangan digital.",
+      "corruptCryptographicContents": "SignatureHandler melaporkan rasuah dalam Kandungan tandatangan digital."
+    },
+    "signatureDetails": {
+      "signatureDetails": "Butiran Tandatangan",
+      "contactInformation": "Maklumat perhubungan",
+      "location": "Lokasi",
+      "reason": "Sebab",
+      "signingTime": "Masa Menandatangani",
+      "noContactInformation": "Tiada maklumat hubungan diberikan",
+      "noLocation": "Tiada lokasi disediakan",
+      "noReason": "Tiada alasan diberikan",
+      "noSigningTime": "Tiada masa tandatangan ditemui"
+    },
+    "panelMessages": {
+      "noSignatureFields": "Dokumen ini tidak mempunyai medan tandatangan",
+      "certificateDownloadError": "Ralat ditemui semasa cuba memuat turun sijil yang dipercayai",
+      "localCertificateError": "Terdapat beberapa isu dengan membaca sijil tempatan"
+    }
+  },
+  "cropPopUp": {
+    "title": "Halaman untuk Pangkas",
+    "allPages": "Semua",
+    "singlePage": "Muka surat ini",
+    "cropDimensions": "Dimensi Tanaman",
+    "dimensionInput": {
+      "unitOfMeasurement": "Unit",
+      "autoTrim": "Auto-trim"
+    },
+    "cropModal": {
+      "applyTitle": "Gunakan tanaman?",
+      "applyMessage": "Tindakan ini akan memangkas semua halaman yang dipilih yang dipilih secara kekal. Ia tidak boleh dibuat asal.",
+      "cancelTitle": "Batalkan pemangkasan?",
+      "cancelMessage": "Adakah anda pasti mahu membatalkan pemangkasan semua halaman yang dipilih?"
+    }
+  },
+  "redactionPanel": {
+    "noMarkedRedactions": "Mula menyunting dengan menandakan teks, kawasan, halaman atau membuat carian.",
+    "redactionSearchPlaceholder": "Tambahkan mengikut carian kata kunci atau corak",
+    "redactionCounter": "Ditanda untuk Redaksi",
+    "clearMarked": "Jelas",
+    "redactAllMarked": "Redaksi Semua",
+    "redactionItem": {
+      "regionRedaction": "Penyuntingan wilayah",
+      "fullPageRedaction": "Penyuntingan halaman penuh",
+      "image": "Imej"
+    },
+    "expand": "Kembangkan",
+    "collapse": "Runtuh",
+    "searchResults": "Keputusan Carian",
+    "search": {
+      "creditCards": "Kad kredit",
+      "phoneNumbers": "Nombor telefon",
+      "images": "Imej",
+      "emails": "E-mel",
+      "pattern": "Corak",
+      "start": "Mula membuat carian anda"
+    }
+  },
+  "languageModal": {
+    "selectLanguage": "Pilih Bahasa"
+  }
+}
