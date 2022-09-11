@@ -9,8 +9,11 @@ Shop is a sample e-commerce [Progressive Web App](https://developers.google.com/
 - a sample e-commerce shopping site
 - pattern for a real-life shopping cart and store checkout flow
 - pattern for using custom announcers for accessibility
+- Search Engine Optimized
+- 100% Accessibility
 
 ## Setup
+
 ```bash
 $ git clone https://github.com/Polymer/shop.git
 $ cd shop
@@ -19,16 +22,21 @@ $ npm start
 ```
 
 ## Build
+
 ```bash
 $ npm run build
 ```
 
 ## Test the build
+
 To test prpl-server build:
+
 ```bash
 $ npm run serve:prpl-server
 ```
+
 To test static build:
+
 ```bash
 $ npm run serve:static
 ```
