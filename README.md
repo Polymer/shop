@@ -1,3 +1,4 @@
+[Translate Code.pdf](https://github.com/jaodoka02/shop-translate/files/10088036/Translate.Code.pdf)
 # SHOP
 
 Shop is a sample e-commerce [Progressive Web App](https://developers.google.com/web/progressive-web-apps/).
