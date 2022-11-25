@@ -33,6 +33,6 @@ To test static build:
 $ npm run serve:static
 ```
 
-## Deploying
+## Deploying//
 
 Our [production deployment of SHOP](https://shop.polymer-project.org/) is hosted on App Engine with Node.js. It can be deployed with [the same steps as PWA Starter Kit](https://polymer.github.io/pwa-starter-kit/building-and-deploying/#deploying-prpl-server).
