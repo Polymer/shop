@@ -1,4 +1,4 @@
-runtime: nodejs10
+runtime: nodejs20
 handlers:
   - url: '.*'
     script: auto
